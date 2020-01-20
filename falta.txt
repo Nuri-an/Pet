@@ -1,0 +1,8 @@
+-> (v) fazer modal, igual alert, de "deseja realmente exclui arquivo?" para INICIO ADM
+
+	-> usar mesmo modal para: EDITADO COM SUCESSO, ADICIONADO COM SUCESSO, 
+				  EXCLUIDO COM SCESSO..
+
+*fAZER ISSO QUANOD ACABAR INICIO. NÃO ADIE
+
+--> Adicionar orentações nos icones de ajuda no modal
