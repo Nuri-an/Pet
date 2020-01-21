@@ -49,30 +49,45 @@ class DaoGaleria {
             $titulo = $galeria->getTitulo();
             $foto = $galeria->getFoto();
 
-            $stmtNome = $this->conn->prepare("SELECT * FROM galeria WHERE codGaleria = ?");
-            $stmtNome->bindparam(1, $id);
-            $stmtNome->execute();
+            if($foto != ''){ 
+                $stmtNome = $this->conn->prepare("SELECT * FROM galeria WHERE codGaleria = ?");
+                $stmtNome->bindparam(1, $id);
+                $stmtNome->execute();
 
-            while ($rowGaleria = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
+                while ($rowGaleria = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
 
-                $caminho = "../assets/media/galeria/". $rowGaleria['fotoGaleria'];
-                if(file_exists($caminho)){
-                    unlink($caminho);
+                    $caminho = "../assets/media/galeria/". $rowGaleria['fotoGaleria'];
+                    if(file_exists($caminho)){
+                        unlink($caminho);
+                    }
+                }
+
+                $stmt = $this->conn->prepare("UPDATE galeria SET tituloGaleria = ?, fotoGaleria = ? WHERE codGaleria = ? ");
+
+                $stmt->bindparam(1, $titulo);
+                $stmt->bindparam(2, $foto);
+                $stmt->bindparam(3, $id);
+                $stmt->execute();
+
+                if ($stmt->rowCount() > 0) {
+                echo 1;
+                } else {
+                echo 2;
                 }
             }
+            else{
+                $stmt = $this->conn->prepare("UPDATE galeria SET tituloGaleria = ? WHERE codGaleria = ? ");
 
-            $stmt = $this->conn->prepare("UPDATE galeria SET tituloGaleria = ?, fotoGaleria = ? WHERE codGaleria = ? ");
+                $stmt->bindparam(1, $titulo);
+                $stmt->bindparam(2, $id);
+                $stmt->execute();
 
-            $stmt->bindparam(1, $titulo);
-            $stmt->bindparam(2, $foto);
-            $stmt->bindparam(3, $id);
-            $stmt->execute();
+                if ($stmt->rowCount() > 0) {
+                    echo 3;
+                } else {
+                    echo 2;
+                }
 
-
-            if ($stmt->rowCount() > 0) {
-                echo 1;
-            } else {
-                echo 2;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -90,15 +105,14 @@ class DaoGaleria {
             while ($rowGaleria = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
 
                 $caminho = "../assets/media/galeria/". $rowGaleria['fotoGaleria'];
+                if(file_exists($caminho)){
+                    unlink($caminho);
+                }
             }
 
             $stmt = $this->conn->prepare("DELETE FROM galeria WHERE codGaleria = ?");
             $stmt->bindparam(1, $id);
             $stmt->execute();
-
-            if(file_exists($caminho)){
-                unlink($caminho);
-            }
 
             if ($stmt->rowCount() > 0 ) {
                 echo 1;

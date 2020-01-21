@@ -14,7 +14,7 @@ $stmtGaleria = $informacoesDao->runQuery("SELECT * FROM galeria");
 $stmtGaleria->execute();
 ?>
 
-<div class="jumbotron " style="overflow:hidden;">
+<div class="jumbotron " style="overflow:hidden; width:100%; " >
   <div class="container" style="overflow:hidden;">
     <?php while ($rowInformacoes = $stmtInformacoes->fetch(PDO::FETCH_ASSOC)) {
         echo '<h1 class="display-4">' .$rowInformacoes['tituloInfo']. ' </h1>'; 
@@ -27,9 +27,9 @@ $stmtGaleria->execute();
   </div>
 
   <div id="carosel" class="carousel slide" data-ride="carousel" >
-    <div class="carousel-inner" style=" height: 400px; margin-top:150px;">
+    <div class="carousel-inner">
       <div class="carousel-item active">
-        <!--<img src="../assets/media/galeria/imagem_0.png" class="rounded mx-auto img-fluid d-block" alt="3" title="Adicione uma foto"> -->
+        <img src="../assets/media/galeria/imagem_1.jpg" class="rounded mx-auto img-fluid d-block" alt="capa" title="Capa" style=" height: 400px; margin-top:100px;"> 
       </div>
       <?php 
         while ($rowGaleria = $stmtGaleria->fetch(PDO::FETCH_ASSOC)) {
@@ -40,20 +40,21 @@ $stmtGaleria->execute();
           if (($rowGaleria['tituloGaleria'] != '') && (file_exists($arquivo))){
 
             echo '<div class="carousel-item" >
-                    <img src="'. $arquivo .'"  class="rounded mx-auto img-fluid d-block " alt="'. $titulo .'" title="'. $titulo .'">
+                    <img src="'. $arquivo .'"  class="rounded mx-auto img-fluid d-block" style=" height: 400px; margin-top:100px;" data-toggle="tooltip"  alt="'. $titulo .'" title="'. $titulo .'">
                   </div>';
           }
         }
       ?>
       
-    <a class="carousel-control-prev" href="#carosel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <a class="carousel-control-prev" href="#carosel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Anterior</span>
-    </a>
-    <a class="carousel-control-next" href="#carosel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Proximo</span>
-    </a>
+        </a>
+      <a class="carousel-control-next" href="#carosel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Proximo</span>
+      </a>
+    </div>
   </div>
 </div>
 <?php

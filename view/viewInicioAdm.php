@@ -157,7 +157,7 @@ function sublinhado(){
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material tipo">
-                                <label for="extra"> <h5> Conteúdo extra:: </h5></label>
+                                <label for="extra"> <h5> Conteúdo extra:::: </h5></label>
                                 <button type="button" class=""  title="Negrito" onclick="negrito()">
                                     <i class="fa fa-bold" aria-hidden="true"></i>
                                 </button>
@@ -167,11 +167,11 @@ function sublinhado(){
                                 <button type="button" class=""  title="Sublinhado" onclick="sublinhado()">
                                     <i class="fa fa-underline" aria-hidden="true"></i>
                                 </button>
-						        <textarea class="form-control" id="extra" name="extra" rows="50"> </textarea>
+						        <textarea class="form-control" id="extra" name="extra" rows="40"> </textarea>
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="left" title="Ajuda" data-content="As caixas de texto podem ser regulavéis <BR> U">
+                    <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="left" title="Ajuda" data-content="Para adicionar outros títulos e textos utilize o campo de Conteúdo Extra e o seu menu para fazer a formatação. As tags HTML são necessárias, pois a formatação se aplicará ao texto entre elas.">
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                     </button>
                 </form>
@@ -217,7 +217,7 @@ function sublinhado(){
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="left" title="Ajuda" data-content="As caixas de texto podem ser regulavéis <BR> U">
+                    <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="right" title="Ajuda" data-content="É permitido apenas o envio de imagens com as seguintes extensões: .png, .jpg, .jpeg, .JPG, .PNG, .JPEG">
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                     </button>
                 </form>

@@ -24,9 +24,12 @@ function loading(){
   
     dialog.init(function(){
       setTimeout(function(){
-          dialog.find('.bootbox-body').html('Imagem cadastrada com sucesso!');
+        dialog.find('.bootbox-body').html('Verifique na galeria se a imagem foi enviada com sucesso. Caso não apareça confira a extensão do arquivo, e, se persistir, tente novamente mais tarde.');
       }, 3000);
-  });
+    });
+   setTimeout(function(){
+      dialog.modal('hide'); 
+    }, 10000); //10 segundos depois executa
   
 }
 
@@ -42,7 +45,7 @@ function enviarDadosInfo() {
         url: "../controller/ControllerInformacoes.php",
         data: dados,
         success: function (result) {
-          alert(result);
+          //alert(result);
           if (result == 1) {
             dialog.init(function(){
                 dialog.find('.bootbox-body').html('Informações editadas com sucesso!');
@@ -66,41 +69,15 @@ function enviarDadosInfo() {
     return false;
 }
 
-
-function alerta(type, title, button, footer, link){
-    Swal.fire({
-      type: type,
-      showConfirmButton: false,
-      html:
-      '<button id="ok" type="submit" class="btn btn-primary"><i class="fa fa-eye"></i>'+ button +'</button>',
-      title: title,
-      footer: '<a href="'+link+'">'+footer+'</a>'
-    });
-    $("#ok").click(function () {
-      Swal.close();
-    });
-  }
-
-  function Foto(){
-    //var acao = $('#adicionarFoto input[name="acao"]').val();
-    var formulario = document.getElementById('adicionarFoto');
-    formulario.submit();
-    
-
-    formulario.reset();  
-    
-    return false;
-  }
    
 
   function enviarFotoG(){
     
-    var formdata = new FormData($("form[name='adicionarFoto']")[0]);
+  var formdata = new FormData($("form[name='adicionarFoto']")[0]);
   var formulario = document.getElementById('adicionarFoto');
-    $('#verModalFoto').modal('hide');
-    formulario.reset(); 
 
     if(window.FormData){ 
+
       dialog = bootbox.dialog({
         message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
         closeButton: false
@@ -114,7 +91,7 @@ function alerta(type, title, button, footer, link){
         contentType: false,
   
         success: function (result) {
-          alert(result);
+          //alert(result);
 
           if (result == 1) {
             dialog.init(function(){
@@ -123,10 +100,16 @@ function alerta(type, title, button, footer, link){
               setTimeout(function(){
                 dialog.modal('hide'); 
               }, 3000); //3 segundos depois executa
-            atualizarInicio();
           } 
-
-          else {
+          if (result == 3) {
+            dialog.init(function(){
+                dialog.find('.bootbox-body').html('Texto alterado com sucesso!');
+            });
+              setTimeout(function(){
+                dialog.modal('hide'); 
+              }, 3000); //3 segundos depois executa
+          }
+          if(result == 2) {
             dialog.init(function(){
               dialog.find('.bootbox-body').html('Ocorreu um erro no processamento. Tente novamente mais tarde.');
             });
@@ -138,8 +121,12 @@ function alerta(type, title, button, footer, link){
       });
     }
     else{
-      Foto();
+      formulario.submit();
+      loading();
     }
+    atualizarInicio();
+    $('#verModalFoto').modal('hide');
+    formulario.reset();
   }
 
 
@@ -210,26 +197,17 @@ function alerta(type, title, button, footer, link){
     var extraFinal = "";
     var inicio;
     var posic;
-    alert(texto.length);
     while(extra.includes(texto)){
-  
-      alert(extra);
 
       posic = extra.indexOf(texto);
-      alert(posic);
 
       inicio = extra.substring(0, posic);
       extra = extra.substring(posic + texto.length);
 
-      alert(extra);
-
       extraFinal += inicio; 
-
-      alert(extraFinal);
     }
 
     extraFinal += extra;
-    alert(extraFinal);
 
     $('#verEditarInfo').modal('show');
 

@@ -29,7 +29,7 @@ function adicionarFoto() {
     $extension= explode('.', $fileName);
     $fileExtension= end( $extension );
     
-    $extensionsOK['extensoes'] = array('png', 'jpg', 'jpeg', 'gif', 'JPG', 'PNG', 'JPEG');
+    $extensionsOK['extensoes'] = array('png', 'jpg', 'jpeg', 'JPG', 'PNG', 'JPEG');
 
 	//Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
     $newFileName= 'imagem_' . time() . '.' . $fileExtension;
@@ -40,7 +40,7 @@ function adicionarFoto() {
     $destino= $local . $newFileName;
    
     if(array_search($fileExtension, $extensionsOK['extensoes'])=== false){		
-        
+        echo "exensao invalida";
     }
     else{ 
         if(move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName)){
@@ -63,36 +63,40 @@ function atualizarFoto() {
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
 
+    if($_FILES['arquivo']['name'] != ''){ 
 
-    $fileName=$_FILES['arquivo']['name'];
+        $fileName=$_FILES['arquivo']['name'];
     
-    //Faz a verificação da extensao do arquivo
-    $extension= explode('.', $fileName);
-    $fileExtension= end( $extension );
+        //Faz a verificação da extensao do arquivo
+        $extension= explode('.', $fileName);
+        $fileExtension= end( $extension );
     
-    $extensionsOK['extensoes'] = array('png', 'jpg', 'jpeg', 'gif', 'JPG', 'PNG', 'JPEG');
+        $extensionsOK['extensoes'] = array('png', 'jpg', 'jpeg', 'JPG', 'PNG', 'JPEG');
 
-	//Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
-    $newFileName= 'imagem_' . time() . '.' . $fileExtension;
+	    //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
+        $newFileName= 'imagem_' . time() . '.' . $fileExtension;
 
-	//Pasta onde o arquivo vai ser salvo
-    $local='../assets/media/galeria/';
+	    //Pasta onde o arquivo vai ser salvo
+        $local='../assets/media/galeria/';
     
-    $destino= $local . $newFileName;
+        $destino= $local . $newFileName;
    
-    if(array_search($fileExtension, $extensionsOK['extensoes'])=== false){		
-        
-    }
-    else{ 
-        if(move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName)){
-            
-            $Galeria->setFoto($newFileName);
-            $Galeria->setTitulo($titulo);
-            $Galeria->setId($id);
+        if(array_search($fileExtension, $extensionsOK['extensoes'])=== false){		
         
         }
+        else{ 
+            move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName);
+              
+        }
     }
-    $dao->atualizarFoto($Galeria);
+    else{ 
+        $newFileName = '';
+    }
+
+        $Galeria->setFoto($newFileName);
+        $Galeria->setTitulo($titulo);
+        $Galeria->setId($id);
+        $dao->atualizarFoto($Galeria);
 }
 
 
