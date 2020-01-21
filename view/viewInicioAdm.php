@@ -36,7 +36,7 @@ function submit(){
         echo  nl2br($rowInformacoes['subDescricaoInfo']); 
         echo '<br>';
         echo '<br>
-                <div style="display: inline;float: right;">
+                <div style="display: inline;float: right; margin-bottom: 5px;">
                     <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Editar" id="rowEditarInfo" data-id="'. $rowInformacoes['codInfo'] .'" data-tituloP="'. $rowInformacoes['tituloInfo'] .'" data-infoP="'. $rowInformacoes['descricaoInfo'] .'" data-tituloS="'. $rowInformacoes['subTituloInfo'] .'" data-infoS="'. $rowInformacoes['subDescricaoInfo'] .'" onclick="editarInfo()" >
                         <i class="fa fa-pencil"></i>
                     </button>

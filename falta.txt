@@ -1,12 +1,13 @@
 -> (FEITO) fazer modal, igual alert, de "deseja realmente exclui arquivo?" para INICIO ADM
 
-	-> usar mesmo modal para: EDITADO COM SUCESSO, ADICIONADO COM SUCESSO, 
+	-> (FEITO) usar mesmo modal para: EDITADO COM SUCESSO, ADICIONADO COM SUCESSO, 
 				  EXCLUIDO COM SCESSO..
 		^ (FEITO) Em paginas filtradas via ajax foi possivel. 
-		^Em paginas que enviam o form da galeria com action para o ifreme nao foi
+		^ (FEITO) Em paginas que enviam o form da galeria com action para o ifreme nao foi
 
-->Pesquisar como enviar foto, input file, via ajax !!!!!!!!
+-> (FEITO!) Pesquisar como enviar foto, input file, via ajax !!!!!!!!
+
+-> Adicionar orentações nos icones de ajuda no modal
 
 *fAZER ISSO QUANOD ACABAR INICIO. NÃO ADIE
 
---> Adicionar orentações nos icones de ajuda no modal
