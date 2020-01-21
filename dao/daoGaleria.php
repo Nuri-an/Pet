@@ -56,6 +56,9 @@ class DaoGaleria {
             while ($rowGaleria = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
 
                 $caminho = "../assets/media/galeria/". $rowGaleria['fotoGaleria'];
+                if(file_exists($caminho)){
+                    unlink($caminho);
+                }
             }
 
             $stmt = $this->conn->prepare("UPDATE galeria SET tituloGaleria = ?, fotoGaleria = ? WHERE codGaleria = ? ");
@@ -65,10 +68,7 @@ class DaoGaleria {
             $stmt->bindparam(3, $id);
             $stmt->execute();
 
-            if(file_exists($caminho)){
-                unlink($caminho);
-            }
-            
+
             if ($stmt->rowCount() > 0) {
                 echo 1;
             } else {

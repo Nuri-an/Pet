@@ -24,11 +24,7 @@ function adicionarFoto() {
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
 
     $fileName=$_FILES['arquivo']['name'];
-    //$fileName=$_FILES['foto']['name'];
-    //$fileType=$_FILES['foto']['type'];
     
-    //$filenameTemp= explode('.', $foto);
-
 	//Faz a verificação da extensao do arquivo
     $extension= explode('.', $fileName);
     $fileExtension= end( $extension );
@@ -44,9 +40,7 @@ function adicionarFoto() {
     $destino= $local . $newFileName;
    
     if(array_search($fileExtension, $extensionsOK['extensoes'])=== false){		
-        echo "<script type=\"text/javascript\">
-                alert(\"A imagem não foi cadastrada. Extensão inválida!\");
-            </script> ";
+        
     }
     else{ 
         if(move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName)){
@@ -54,21 +48,9 @@ function adicionarFoto() {
             $Galeria->setFoto($newFileName);
             $Galeria->setTitulo($titulo);
         
-            $dao->adicionarFoto($Galeria);
-       
-            echo "<script type=\"text/javascript\">
-                    alert(\"Imagem cadastrada com sucesso.\");
-                </script>";
-        }
-        else{
-            echo "<script type=\"text/javascript\">
-                    alert(\"Houve algum erro ao adicionar a imagem. Informe ao superte do sistema.\");
-                </script>";
         }
     }
-
-    
-     
+    $dao->adicionarFoto($Galeria);
 } 
 
 function atualizarFoto() {
@@ -83,12 +65,8 @@ function atualizarFoto() {
 
 
     $fileName=$_FILES['arquivo']['name'];
-    //$fileName=$_FILES['foto']['name'];
-    //$fileType=$_FILES['foto']['type'];
     
-    //$filenameTemp= explode('.', $foto);
-
-	//Faz a verificação da extensao do arquivo
+    //Faz a verificação da extensao do arquivo
     $extension= explode('.', $fileName);
     $fileExtension= end( $extension );
     
@@ -103,10 +81,7 @@ function atualizarFoto() {
     $destino= $local . $newFileName;
    
     if(array_search($fileExtension, $extensionsOK['extensoes'])=== false){		
-        echo '<script>
-                alert("A imagem não foi cadastrada. Extensão inválida!");
-                alert(echo $fileExtension);
-            </script> ';
+        
     }
     else{ 
         if(move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName)){
@@ -115,18 +90,9 @@ function atualizarFoto() {
             $Galeria->setTitulo($titulo);
             $Galeria->setId($id);
         
-            $dao->atualizarFoto($Galeria);
-       
-            echo "<script type=\"text/javascript\">
-                    loading();
-                </script>";
-        }
-        else{
-            echo "<script type=\"text/javascript\">
-                    alert(\"Houve algum erro ao adicionar a imagem. Informe ao superte do sistema.\");
-                </script>";
         }
     }
+    $dao->atualizarFoto($Galeria);
 }
 
 

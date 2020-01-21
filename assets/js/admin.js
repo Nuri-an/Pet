@@ -86,15 +86,62 @@ function alerta(type, title, button, footer, link){
     var formulario = document.getElementById('adicionarFoto');
     formulario.submit();
     
-    atualizarInicio();
-    
-    $('#verModalFoto').modal('hide');
 
     formulario.reset();  
     
     return false;
   }
    
+
+  function enviarFotoG(){
+    
+    var formdata = new FormData($("form[name='adicionarFoto']")[0]);
+  var formulario = document.getElementById('adicionarFoto');
+    $('#verModalFoto').modal('hide');
+    formulario.reset(); 
+
+    if(window.FormData){ 
+      dialog = bootbox.dialog({
+        message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
+        closeButton: false
+      });
+
+      $.ajax({
+        type: 'POST',
+        url: "../controller/controllerGaleria.php",
+        data: formdata ,
+        processData: false,
+        contentType: false,
+  
+        success: function (result) {
+          alert(result);
+
+          if (result == 1) {
+            dialog.init(function(){
+                dialog.find('.bootbox-body').html('Imagem enviada com sucesso!');
+            });
+              setTimeout(function(){
+                dialog.modal('hide'); 
+              }, 3000); //3 segundos depois executa
+            atualizarInicio();
+          } 
+
+          else {
+            dialog.init(function(){
+              dialog.find('.bootbox-body').html('Ocorreu um erro no processamento. Tente novamente mais tarde.');
+            });
+            setTimeout(function(){
+              dialog.modal('hide'); 
+            }, 3000); //3 segundos depois executa
+          } 
+        }
+      });
+    }
+    else{
+      Foto();
+    }
+  }
+
 
   function excluirFoto(id) {
 

@@ -14,10 +14,7 @@
         <a class="nav-link" href="#">Projetos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Notícias</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
+        <a class="nav-link" href="#">Sair</a>
       </li>
     </ul>
     

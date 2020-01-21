@@ -1,7 +1,11 @@
--> (v) fazer modal, igual alert, de "deseja realmente exclui arquivo?" para INICIO ADM
+-> (FEITO) fazer modal, igual alert, de "deseja realmente exclui arquivo?" para INICIO ADM
 
 	-> usar mesmo modal para: EDITADO COM SUCESSO, ADICIONADO COM SUCESSO, 
 				  EXCLUIDO COM SCESSO..
+		^ (FEITO) Em paginas filtradas via ajax foi possivel. 
+		^Em paginas que enviam o form da galeria com action para o ifreme nao foi
+
+->Pesquisar como enviar foto, input file, via ajax !!!!!!!!
 
 *fAZER ISSO QUANOD ACABAR INICIO. NÃO ADIE
 

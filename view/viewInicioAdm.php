@@ -66,7 +66,7 @@ function submit(){
                         <img src="'. $arquivo .'"  class="rounded mx-auto img-fluid d-block" style=" height: 400px; margin-top:100px;" data-toggle="tooltip" alt="'. $titulo .'" title="Clique para substituir imagem"  id="rowEditarFoto_' . $i . '" data-id="'. $rowGaleria['codGaleria'] .'" data-titulo="'. $rowGaleria['tituloGaleria'] .'" onclick="editarFoto_modal(' . $i . ')">
                         <div class="carousel-caption d-none d-md-block" style="display: inline;float: right; ">
                             <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Excluir imagem" id="rowExcluirFoto_' . $i . '" data-id="'. $rowGaleria['codGaleria'] .'" onclick="excluirFoto(' . $i . ')" >
-                                    <i class="fa fa-trash "></i> '. $rowGaleria['codGaleria'] .' 
+                                    <i class="fa fa-trash "></i> 
                             </button>
                         </div>
                     </div>';
@@ -164,7 +164,7 @@ function submit(){
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" class="form-horizontal" enctype="multipart/form-data" id="adicionarFoto" action="../controller/controllerGaleria.php" target="controlador" >
+                <form method="POST" class="form-horizontal" enctype="multipart/form-data" id="adicionarFoto" name="adicionarFoto" action="../controller/controllerGaleria.php" target="controlador" >
                     <input type="hidden" name="acao" id="acao">
                     <input type="hidden" name="id" id="id">
                     <div class="form-group row">
@@ -180,7 +180,7 @@ function submit(){
                         <div class="col-md-12">
                             <div class="form-material">
                                 <label class="" for="foto"> <h5> Upload: </h5> </label>
-						        <input type="file" class="form-control-file" id="arquivo" name="arquivo"  >
+						        <input type="file" class="form-control-file" id="arquivo" name="arquivo"  accept="image/*">
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@ function submit(){
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" id="btnAdicionarFoto"  onclick="Foto()">
+                <button type="button" class="btn btn-primary" id="btnAdicionarFoto"  onclick="enviarFotoG()">
                     <i class="fa fa-check"></i> Adicionar
                 </button> 
             </div>   
