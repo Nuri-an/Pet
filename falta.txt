@@ -7,7 +7,7 @@
 
 -> (FEITO!) Pesquisar como enviar foto, input file, via ajax !!!!!!!!
 
--> Adicionar orentações nos icones de ajuda no modal
+-> Adicionar orientações nos icones de ajuda no modal
 
 *fAZER ISSO QUANOD ACABAR INICIO. NÃO ADIE
 

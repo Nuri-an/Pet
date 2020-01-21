@@ -76,14 +76,16 @@ class DaoInformacoes {
             $infoP = $Informacoes->getInfoP();
             $tituloS = $Informacoes->getTituloS();
             $infoS = $Informacoes->getInfoS();
+            $extra = $Informacoes->getExtra();
 
-            $stmt = $this->conn->prepare("UPDATE informacoes SET tituloInfo = ?, descricaoInfo = ?, subTituloInfo = ?, subDescricaoInfo = ? WHERE codInfo = ? ");
+            $stmt = $this->conn->prepare("UPDATE informacoes SET tituloInfo = ?, descricaoInfo = ?, subTituloInfo = ?, subDescricaoInfo = ?, extrasInfo = ? WHERE codInfo = ? ");
 
             $stmt->bindparam(1, $tituloP);
             $stmt->bindparam(2, $infoP);
             $stmt->bindparam(3, $tituloS);
             $stmt->bindparam(4, $infoS);
-            $stmt->bindparam(5, $id);
+            $stmt->bindparam(5, $extra);
+            $stmt->bindparam(6, $id);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {

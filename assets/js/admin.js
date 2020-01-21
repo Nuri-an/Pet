@@ -204,8 +204,33 @@ function alerta(type, title, button, footer, link){
     var infoP = $('#rowEditarInfo').attr("data-infoP");
     var tituloS = $('#rowEditarInfo').attr("data-tituloS");
     var infoS = $('#rowEditarInfo').attr("data-infoS");
-
+    var extra = $('#rowEditarInfo').attr("data-extra");
     
+    var texto = "<br />";
+    var extraFinal = "";
+    var inicio;
+    var posic;
+    alert(texto.length);
+    while(extra.includes(texto)){
+  
+      alert(extra);
+
+      posic = extra.indexOf(texto);
+      alert(posic);
+
+      inicio = extra.substring(0, posic);
+      extra = extra.substring(posic + texto.length);
+
+      alert(extra);
+
+      extraFinal += inicio; 
+
+      alert(extraFinal);
+    }
+
+    extraFinal += extra;
+    alert(extraFinal);
+
     $('#verEditarInfo').modal('show');
 
     //$('.modal .modal-dialog .modal-content #nomeP').text("Detalhes do aluno(a) " + nomeAluno);
@@ -214,6 +239,7 @@ function alerta(type, title, button, footer, link){
     $('.modal .modal-dialog .modal-content #infoP').val(infoP);
     $('.modal .modal-dialog .modal-content #tituloS').val(tituloS);
     $('.modal .modal-dialog .modal-content #infoS').val(infoS);
+    $('.modal .modal-dialog .modal-content #extra').val(extraFinal);
   
 }
 

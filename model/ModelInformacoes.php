@@ -5,6 +5,7 @@ class ModelInformacoes{
     private $tituloP;
     private $infoP;
     private $tituloS;
+    private $extra;
 
 
 
@@ -23,6 +24,9 @@ class ModelInformacoes{
     public function getInfoS() {
         return $this->infoS;
     }
+    public function getExtra() {
+        return $this->extra;
+    }
 
     public function setId($id) {
         $this->id = $id;
@@ -38,6 +42,9 @@ class ModelInformacoes{
     }
     public function setInfoS($infoS) {
         $this->infoS = $infoS;
+    }
+    public function setExtra($extra) {
+        $this->extra = $extra;
     }
 }
 ?>

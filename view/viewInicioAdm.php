@@ -9,13 +9,26 @@ $informacoesDao = new DaoInformacoes();
     
 ?>
 
-<script type='text/javascript'>
-function submit(){
-    var formulario = document.getElementById('adicionarImagem-form');
-    formulario.submit();
-  }
 
-
+<script>
+function negrito(){
+    var textarea = document.getElementById("extra");
+    var text = '';
+    var negrito = text.bold();
+    textarea.value += negrito;
+}
+function italico(){
+    var textarea = document.getElementById("extra");
+    var text = '';
+    var italico = text.italics();
+    textarea.value += italico;
+}
+function sublinhado(){
+    var textarea = document.getElementById("extra");
+    var text = '<u> </u>';
+    //var sublinhado = text.underline();
+    textarea.value += text;
+}
 </script>
 <div id="atualiza">
 <div class="jumbotron " style="overflow:hidden; width:100%; " >
@@ -34,10 +47,13 @@ function submit(){
         echo nl2br($rowInformacoes['descricaoInfo']); 
         echo '<p> <b>' .$rowInformacoes['subTituloInfo']. ' </b> </p>'; 
         echo  nl2br($rowInformacoes['subDescricaoInfo']); 
+        echo '<p> <br>';
+        echo $rowInformacoes['extrasInfo'];
+        echo '</p>';
         echo '<br>';
         echo '<br>
                 <div style="display: inline;float: right; margin-bottom: 5px;">
-                    <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Editar" id="rowEditarInfo" data-id="'. $rowInformacoes['codInfo'] .'" data-tituloP="'. $rowInformacoes['tituloInfo'] .'" data-infoP="'. $rowInformacoes['descricaoInfo'] .'" data-tituloS="'. $rowInformacoes['subTituloInfo'] .'" data-infoS="'. $rowInformacoes['subDescricaoInfo'] .'" onclick="editarInfo()" >
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Editar" id="rowEditarInfo" data-id="'. $rowInformacoes['codInfo'] .'" data-tituloP="'. $rowInformacoes['tituloInfo'] .'" data-infoP="'. $rowInformacoes['descricaoInfo'] .'" data-tituloS="'. $rowInformacoes['subTituloInfo'] .'" data-infoS="'. $rowInformacoes['subDescricaoInfo'] .'"  data-extra ="'. $rowInformacoes['extrasInfo'] .'" onclick="editarInfo()" >
                         <i class="fa fa-pencil"></i>
                     </button>
                 </div>' ;   
@@ -134,7 +150,24 @@ function submit(){
                         <div class="col-md-12">
                             <div class="form-material">
                                 <label for="infoS"> <h5> Informações complementares: </h5></label>
-						        <textarea class="form-control" id="infoS" name="infoS" rows="50"> </textarea>
+						        <textarea class="form-control" id="infoS" name="infoS" rows="40"> </textarea>
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div class="form-material tipo">
+                                <label for="extra"> <h5> Conteúdo extra:: </h5></label>
+                                <button type="button" class=""  title="Negrito" onclick="negrito()">
+                                    <i class="fa fa-bold" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class=""  title="Italico" onclick="italico()">
+                                    <i class="fa fa-italic" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class=""  title="Sublinhado" onclick="sublinhado()">
+                                    <i class="fa fa-underline" aria-hidden="true"></i>
+                                </button>
+						        <textarea class="form-control" id="extra" name="extra" rows="50"> </textarea>
                             </div>
                         </div>
                     </div>

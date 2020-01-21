@@ -53,6 +53,7 @@ function atualizarInfo() {
     $infoP = filter_var($_POST["infoP"], FILTER_SANITIZE_STRING);
     $tituloS = filter_var($_POST["tituloS"], FILTER_SANITIZE_STRING);
     $infoS = filter_var($_POST["infoS"], FILTER_SANITIZE_STRING);
+    $extra = nl2br($_POST["extra"]);
 
 
 
@@ -62,6 +63,7 @@ function atualizarInfo() {
     $Informacoes->setInfoP($infoP);
     $Informacoes->setTituloS($tituloS);
     $Informacoes->setInfoS($infoS);
+    $Informacoes->setExtra($extra);
 
 
     $dao->atualizarInformacoes($Informacoes);
