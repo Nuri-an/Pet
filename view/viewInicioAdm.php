@@ -31,7 +31,6 @@ function sublinhado(){
 }
 </script>
 <div id="atualiza">
-<div class="jumbotron " style="overflow:hidden; width:100%; " >
     <div class="container" style="overflow:hidden;" id="corpoInfo">
     <?php 
 
@@ -100,7 +99,6 @@ function sublinhado(){
             <span class="sr-only">Proximo</span>
         </a>
     </div>
-</div>
 </div>
 </div>
 

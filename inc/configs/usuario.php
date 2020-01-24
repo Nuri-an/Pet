@@ -1,29 +1,29 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+  <ul class="navbar-nav mr-auto">
     <li class="nav-item">
-        <a class="nav-link" href="#">Notícias </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Publicações</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-link" href="#">Integrantes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Projetos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Notícias</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
-      </li>
-    </ul>
-    
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar..." aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-    </form>
-  </div>
+      <a class="nav-link" href="#">Notícias </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Publicações</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="viewIntegrantesUser.php">Integrantes</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Projetos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Login</a>
+    </li>
+  </ul>
+  <a href="#">
+    <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #6959CD; cursor: pointer;" title="Página do grupo"></i>
+  </a>
+  &nbsp &nbsp
+  <a href="#">
+    <i class="fa fa-twitter-square fa-2x" aria-hidden="true" style="color: #00BFFF; cursor: pointer;" title="Perfil do grupo"></i>
+  </a>
+</div>
 </nav>
+<div class="jumbotron " style="overflow:hidden; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; margin-top: 0px;">

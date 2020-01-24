@@ -1,3 +1,5 @@
+**INICIO**
+
 -> (FEITO) fazer modal, igual alert, de "deseja realmente exclui arquivo?" para INICIO ADM
 
 	-> (FEITO) usar mesmo modal para: EDITADO COM SUCESSO, ADICIONADO COM SUCESSO, 
@@ -9,5 +11,9 @@
 
 -> (FEITO) Adicionar orientações nos icones de ajuda no modal
 
-*fAZER ISSO QUANOD ACABAR INICIO. NÃO ADIE
+-> Se der, fazer galeria de imagens e galeria de videos. Link para codigos nos favoritos. Utilizar botao para alterar a galeria (Gallery with image filtering); fazer a galeria de videos (Video gallery).
 
+
+**INTEGRANTES**
+
+->perguntar se deseja uma parte de integrantes inativos/antigos. Não faça sem perguntar, pode dar muito trabalho provavelmente desnecessário.

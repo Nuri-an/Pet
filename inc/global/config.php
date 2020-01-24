@@ -15,7 +15,7 @@ $cb                             = new Config('PET - Programa de Educação Tutor
 <?php
 
 
-if (!isset($_SESSION['adm'])){
+if (isset($_SESSION['adm'])){
 
     //Menu do usuario comum
     require '../inc/configs/administrador.php';

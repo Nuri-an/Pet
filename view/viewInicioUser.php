@@ -14,8 +14,7 @@ $stmtGaleria = $informacoesDao->runQuery("SELECT * FROM galeria");
 $stmtGaleria->execute();
 ?>
 
-<div class="jumbotron " style="overflow:hidden; width:100%; " >
-  <div class="container" style="overflow:hidden;">
+<div class="container" style="overflow:hidden;">
     <?php while ($rowInformacoes = $stmtInformacoes->fetch(PDO::FETCH_ASSOC)) {
         echo '<h1 class="display-4">' .$rowInformacoes['tituloInfo']. ' </h1>'; 
         echo '<p class="lead">';
@@ -56,7 +55,7 @@ $stmtGaleria->execute();
       </a>
     </div>
   </div>
-</div>
+
 <?php
 require '../inc/global/head_end.php';
 ?>
