@@ -28,7 +28,7 @@ $stmtGaleria->execute();
   <div id="carosel" class="carousel slide" data-ride="carousel" >
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="../assets/media/galeria/imagem_1.jpg" class="rounded mx-auto img-fluid d-block" alt="capa" title="Capa" style=" height: 400px; margin-top:100px;"> 
+        <img src="../assets/media/galeria/imagem_2.png" class="rounded mx-auto img-fluid d-block" alt="capa" title="Capa" style=" height: 400px; margin-top:100px;"> 
       </div>
       <?php 
         while ($rowGaleria = $stmtGaleria->fetch(PDO::FETCH_ASSOC)) {

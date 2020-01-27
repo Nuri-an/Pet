@@ -1,7 +1,7 @@
 <?php
 
 
-if (isset($_SESSION['adm'])){
+if (!isset($_SESSION['adm'])){
 
     //Inicio para visualizacao - para usuarios comuns
     require 'viewInicioAdm.php';

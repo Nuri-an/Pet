@@ -7,7 +7,7 @@
       <a class="nav-link" href="#">Publicações</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="viewIntegrantesAdm">Integrantes</a>
+      <a class="nav-link" href="viewIntegrantesAdm.php">Integrantes</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Projetos</a>
@@ -25,3 +25,4 @@
   </a>
 </div>
 </nav>
+<div class="jumbotron " style="overflow:hidden; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; margin-top: 0px;">
