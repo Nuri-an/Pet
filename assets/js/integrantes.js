@@ -1,67 +1,75 @@
+$.validator.addMethod("nomeCompleto", function(value, element){
+    if (value.includes(' ')){
+        return true
+    }else{
+        return false
+    }
+}, "Digite o nome completo do integrante")
+
 $(document).ready(function () {
-    $("#atualizar-form").validate({
-        errorClass: 'invalid-feedback animated fadeInDown',
-         errorElement: 'div',
-         errorPlacement: (error, e) => {
-             jQuery(e).parents('.form-group > div').append(error);
-         },
-         highlight: e => {
-             jQuery(e).closest('.form-group').removeClass('is-invalid').addClass('is-invalid');
-         },
-         success: e => {
-             jQuery(e).closest('.form-group').removeClass('is-invalid');
-             jQuery(e).remove();
-         },
-        rules: {
-            nome: {
-                required: true,
-                minWords: 2
+    $('#btnEditarInfo').click(function () {
+        jQuery("#atualizar-form").validate({
+            errorClass: 'invalid-feedback animated fadeInDown',
+            errorElement: 'div',
+            errorPlacement: (error, e) => {
+                jQuery(e).parents('.form-group > div').append(error);
             },
-            email: {
-                email: true
+            highlight: e => {
+                jQuery(e).closest('.form-group').removeClass('is-invalid').addClass('is-invalid');
             },
-            social: {
-                url: true
+            success: e => {
+                jQuery(e).closest('.form-group').removeClass('is-invalid');
+                jQuery(e).remove();
             },
-            cpf: {
-                required: true,
-                cpfBR: true
+            rules: {
+                nome: {
+                    required: true,
+                    nomeCompleto: true
+                },
+                email: {
+                    email: true
+                },
+                social: {
+                    url: true
+                },
+                cpf: {
+                    required: true,
+                    cpfBR: true
+                },
+                dataInicio: {
+                    required: true,
+                    date: true
+                },
+                situacao: {
+                    required: true,
+                },
+                arquivo: {
+                    extension: "jpg|JPG|png|PNG|jpeg|JPEG"
+                }
             },
-            dataInicio: {
-                required: true,
-                dateFA: true
+            messages: {
+                'nome': {
+                    required: 'Por favor, preeencha este campo'
+                },
+                'email': {
+                    email: 'Digite um endereço de email válido',
+                },
+                'social': {
+                    url: 'Digite um link válido',
+                },
+                'cpf': {
+                    required: 'Por favor, preeencha este campo',
+                    cpfBR: 'Digite um cpf válido'
+                },
+                'dataInicio': {
+                    required: 'Por favor, insira a data de entrada do integrante no grupo',
+                },
+                'situacao': {
+                    required: 'Por favor, selecione a situação atual do integrante',
+                }
             },
-            situacao: {
-                required: true,
-            },
-            arquivo:{
-                extension: "jpg|JPG|png|PNG|jpeg|JPEG" 
-            }
-        },
-        messages: {
-            'nome': {
-                required: 'Por favor, preeencha este campo',
-                minWords: 'Digite o nome completo do integrante'
-            },
-            'email': {
-                email: 'Digite um endereço de email válido',
-            },
-            'social': {
-                url: 'Digite um link válido',
-            },
-            'cpf': {
-                required: 'Por favor, preeencha este campo',
-                cpfBR: 'Digite um cpf válido'
-            },
-            'dataInicio': {
-                required: 'Por favor, insira a data de entrada do integrante no grupo',
-            },
-            'situacao': {
-                required: 'Por favor, selecione a situação atual do integrante',
-            }
-        },
-        submitHandler: function () {
-            alert("enta coletando dados do form");
+            submitHandler: function (form) {
+                alert("enta coletando dados do form");
                 var formdata = new FormData($("form[name='atualizar-form']")[0]);
 
                 dialog = bootbox.dialog({
@@ -101,10 +109,11 @@ $(document).ready(function () {
                 $('#modalAtualizar').modal('hide');
                 $('#atualizar-form').trigger("reset");
                 return false;
-        }
-        
+            }
+
+        });
+        alert("entrou");
     });
-    alert("entrou");
 });
 function atualizarInicio() {
 
@@ -132,6 +141,8 @@ function verInformacoes(id) {
     var situacao = $('#rowEditarInformacoes_' + id).attr("data-situacao");
     var social = $('#rowEditarInformacoes_' + id).attr("data-social");
     var foto = $('#rowEditarInformacoes_' + id).attr("data-foto");
+    var acao = "editar";
+    
 
     $('#atualizar-form').trigger("reset");
     $('#modalAtualizar').modal('show');
@@ -139,6 +150,7 @@ function verInformacoes(id) {
     $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
     $("input[name='situacao'][value='" + situacao + "']").prop('checked', true);
 
+    $('.modal .modal-dialog .modal-content #tituloP').text("Edite as informações");
     $('.modal .modal-dialog .modal-content #id').val(idIntegrante);
     $('.modal .modal-dialog .modal-content #nome').val(nome);
     $('.modal .modal-dialog .modal-content #email').val(email);
@@ -146,6 +158,37 @@ function verInformacoes(id) {
     $('.modal .modal-dialog .modal-content #dataInicio').val(dataInicio);
     $('.modal .modal-dialog .modal-content #dataFim').val(dataFim);
     $('.modal .modal-dialog .modal-content #social').val(social);
+    $('.modal .modal-dialog .modal-content #acao').val(acao);
 
 }
 
+
+function newDiscente(){
+
+    var acao = 'adicionar';
+    var tipo = 'discente';
+
+    $("input[name='situacao'][value='Tutor(a)']").prop('disabled', true);
+
+    $('#atualizar-form').trigger("reset");
+    $('#modalAtualizar').modal('show');
+    
+    $('.modal .modal-dialog .modal-content #tituloP').text("Adicione um novo discente ao grupo");
+    $('.modal .modal-dialog .modal-content #acao').val(acao);
+    $('.modal .modal-dialog .modal-content #tipo').val(tipo);
+}
+function newTutores(){
+
+    var acao = 'adicionar';
+    var tipo = 'tutor';
+
+    $("input[name='situacao'][value='Bolsista']").prop('disabled', true);
+    $("input[name='situacao'][value='Voluntário']").prop('disabled', true);
+
+    $('#atualizar-form').trigger("reset");
+    $('#modalAtualizar').modal('show');
+    
+    $('.modal .modal-dialog .modal-content #tituloP').text("Adicione um novo tutor ao grupo");
+    $('.modal .modal-dialog .modal-content #acao').val(acao);
+    $('.modal .modal-dialog .modal-content #tipo').val(tipo);
+}

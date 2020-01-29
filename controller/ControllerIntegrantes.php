@@ -4,7 +4,7 @@ $acao = filter_var($_POST["acao"], FILTER_SANITIZE_STRING);
 
 switch ($acao) {
     case 'adicionar':
-        //adicionarFoto();
+        adicionarInformacoes();
         break;
     case 'editar':
         atualizarInformacoes();
@@ -13,45 +13,60 @@ switch ($acao) {
         //excluirFoto();
         break;
 }
-/*
-function adicionarFoto() {
-    require_once ('../model/ModelGaleria.php');
-    require_once ('../dao/daoGaleria.php');
 
-    $dao = new DaoGaleria();
-    $Galeria = new ModelGaleria();
+function adicionarInformacoes() {
+    require_once ('../model/ModelIntegrantes.php');
+    require_once ('../dao/daoIntegrantes.php');
 
-    $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
-
-    $fileName=$_FILES['arquivo']['name'];
-    
-	//Faz a verificação da extensao do arquivo
-    $extension= explode('.', $fileName);
-    $fileExtension= end( $extension );
-    
-    $extensionsOK['extensoes'] = array('png', 'jpg', 'jpeg', 'JPG', 'PNG', 'JPEG');
-
-	//Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
-    $newFileName= 'imagem_' . time() . '.' . $fileExtension;
-
-	//Pasta onde o arquivo vai ser salvo
-    $local='../assets/media/galeria/';
-    
-    $destino= $local . $newFileName;
+    $dao = new DaoIntegrantes();
+    $Integrante = new ModelIntegrantes();
    
-    if(array_search($fileExtension, $extensionsOK['extensoes'])=== false){		
-        echo "exensao invalida";
+    $nome = filter_var($_POST["nome"], FILTER_SANITIZE_STRING);
+    $cpf = filter_var($_POST["cpf"], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST["email"], FILTER_SANITIZE_STRING);
+    $social = filter_var($_POST["social"], FILTER_SANITIZE_STRING);
+    $dataInicio = filter_var($_POST["dataInicio"], FILTER_SANITIZE_STRING);
+    $dataFim = filter_var($_POST["dataFim"], FILTER_SANITIZE_STRING);
+    $situacao = filter_var($_POST["situacao"], FILTER_SANITIZE_STRING);
+    $tipo = filter_var($_POST["tipo"], FILTER_SANITIZE_STRING);
+
+    if($dataFim == ''){
+        $dataFim = null;
     }
+    
+    if($_FILES['arquivo']['name'] != ''){ 
+
+        $fileName=$_FILES['arquivo']['name'];
+    
+        //Faz a verificação da extensao do arquivo
+        $extension= explode('.', $fileName);
+        $fileExtension= end( $extension );
+    
+
+	    //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
+        $newFileName= 'foto_' . time() . '.' . $fileExtension;
+
+	    //Pasta onde o arquivo vai ser salvo
+        $local='../assets/media/integrantes/';
+   
+        move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName);
+    }
+
     else{ 
-        if(move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName)){
-            
-            $Galeria->setFoto($newFileName);
-            $Galeria->setTitulo($titulo);
-        
-        }
+        $newFileName = '';
     }
-    $dao->adicionarFoto($Galeria);
-} */
+
+        $Integrante->setNome($nome);
+        $Integrante->setEmail($email);
+        $Integrante->setSocial($social);
+        $Integrante->setDataInicio($dataInicio);
+        $Integrante->setDataFIm($dataFim);
+        $Integrante->setSituacao($situacao);
+        $Integrante->setCpf($cpf);
+        $Integrante->setTipo($tipo);
+        $Integrante->setFoto($newFileName);
+        $dao->adicionarInformacoes($Integrante);
+} 
 
 function atualizarInformacoes() {
     require_once ('../model/ModelIntegrantes.php');
@@ -82,24 +97,16 @@ function atualizarInformacoes() {
         $extension= explode('.', $fileName);
         $fileExtension= end( $extension );
     
-        $extensionsOK['extensoes'] = array('png', 'jpg', 'jpeg', 'JPG', 'PNG', 'JPEG');
 
 	    //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
         $newFileName= 'foto_' . time() . '.' . $fileExtension;
 
 	    //Pasta onde o arquivo vai ser salvo
         $local='../assets/media/integrantes/';
-    
-        $destino= $local . $newFileName;
    
-        if(array_search($fileExtension, $extensionsOK['extensoes'])=== false){		
-        
-        }
-        else{ 
-            move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName);
-              
-        }
+        move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName);
     }
+
     else{ 
         $newFileName = '';
     }

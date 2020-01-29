@@ -10,6 +10,7 @@ class ModelIntegrantes{
     private $dataInicio;
     private $dataFim;
     private $situacao;
+    private $tipo;
 
 
 
@@ -40,6 +41,9 @@ class ModelIntegrantes{
     public function getSituacao() {
         return $this->situacao;
     }
+    public function getTipo() {
+        return $this->tipo;
+    }
 
     public function setId($id) {
         $this->id = $id;
@@ -67,6 +71,9 @@ class ModelIntegrantes{
     }
     public function setSituacao($situacao) {
         $this->situacao = $situacao;
+    }
+    public function setTipo($tipo) {
+        $this->tipo = $tipo;
     }
 }
 ?>

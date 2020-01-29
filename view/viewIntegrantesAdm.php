@@ -7,18 +7,13 @@ require_once("../dao/DaoIntegrantes.php");
 
 $integrantesDao = new DaoIntegrantes();
 
-$stmtTutores = $integrantesDao->runQuery("SELECT * FROM integrantes i, tutores t WHERE i.codIntegrante = t.codIntegrante");
-$stmtTutores->execute();
-
-$stmtDiscentes = $integrantesDao->runQuery("SELECT * FROM integrantes i, discentes d WHERE i.codIntegrante = d.codIntegrante");
-$stmtDiscentes->execute();
-
 ?>
 
 <script type="text/javascript" src="../assets/js/plugins/jquery-3.3.1.min.js"> </script>
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/additional-methods.min.js"></script>
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/localization/messages_pt_BR.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/jQuery-Mask/jquery.mask.js"></script>
 <script type="text/javascript" src="../assets/js/integrantes.js"></script>
 
 <style>
@@ -44,7 +39,7 @@ $stmtDiscentes->execute();
 
 <script>
     $(document).ready(function() {
-        $("#cpf").mask("999.999.999-99");
+        $("#cpf").mask("999.999.999-99", {reverse: true});
     });
 
     function abreT(indice) {
@@ -92,6 +87,14 @@ $stmtDiscentes->execute();
 </script>
 
 <div id="atualiza">
+    <?php
+    $stmtTutores = $integrantesDao->runQuery("SELECT * FROM integrantes i, tutores t WHERE i.codIntegrante = t.codIntegrante");
+    $stmtTutores->execute();
+
+    $stmtDiscentes = $integrantesDao->runQuery("SELECT * FROM integrantes i, discentes d WHERE i.codIntegrante = d.codIntegrante");
+    $stmtDiscentes->execute();
+    ?>
+
     <div class="container" style="overflow:hidden;">
         <h2 class="display-4 text-align: center;"> Tutores </h2>
         <div class="card-deck">
@@ -107,12 +110,20 @@ $stmtDiscentes->execute();
             while ($rowTutores = $stmtTutores->fetch(PDO::FETCH_ASSOC)) {
 
                 $newDateT = date('d/m/Y', strtotime($rowTutores['dataInicioIntegrante']));
+                $midia = "../assets/media/integrantes/" . $rowTutores['fotoIntegrante'];
+
+                if (($rowTutores['fotoIntegrante'] != '') && (file_exists($midia))) {
+                    $srcFotoT = $midia;
+                }else{
+                    $srcFotoT = "../assets/media/integrantes/foto_1.jpg";
+                }
+
 
                 echo '
-                <div  style="width: 300px; float: left;">
+                <div  style="width: 300px; float: left; margin-bottom:10px;">
                     <div class="card borda">
                         <div  onclick="abreT(' . $i . ')">
-                            <img class="card-img-top rounded img-fluid d-block" src="../assets/media/integrantes/' . $rowTutores['fotoIntegrante'] . '"  alt="" >
+                            <img class="card-img-top rounded img-fluid d-block" src="'. $srcFotoT .'"  alt="" >
                             <button type="button" class="btn btn-primary" style="margin-right:50%; margin-left:50%;-webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Exluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowTutores['codIntegrante'] . '" onclick="excluirFoto(' . $i . ')">
                                 <i class="fa fa-trash"></i> 
                             </button>
@@ -139,6 +150,14 @@ $stmtDiscentes->execute();
                 $i++;
             }
             ?>
+            <div style="width: 300px; float: left;">
+                <div class="card borda" onclick="newTutores()">
+                    <img class="card-img-top" src="../assets/media/integrantes/foto_0.png" alt="" title="Adicionar novo integrante">
+                    <div id="">
+                        <h5 class="card-title"> &nbsp Adicionar novo tutor(a) </h5>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="container" style="margin-top: 20px;">
@@ -154,12 +173,19 @@ $stmtDiscentes->execute();
             while ($rowDiscentes = $stmtDiscentes->fetch(PDO::FETCH_ASSOC)) {
 
                 $newDateD = date('d/m/Y', strtotime($rowDiscentes['dataInicioIntegrante']));
+                $midia = "../assets/media/integrantes/" . $rowDiscentes['fotoIntegrante'];
+
+                if (($rowDiscentes['fotoIntegrante'] != '') && (file_exists($midia))) {
+                    $srcFotoD = $midia;
+                }else{
+                    $srcFotoD = "../assets/media/integrantes/foto_1.jpg";
+                }
 
                 echo '
-                <div  style="width: 300px; float: left;">
+                <div  style="width: 300px; float: left; margin-bottom:10px;">
                     <div class="card borda">
                         <div class="" onclick="abreD(' . $i . ')">
-                            <img class="card-img-top"  src="../assets/media/integrantes/' . $rowDiscentes['fotoIntegrante'] . '"  alt="" >
+                            <img class="card-img-top"  src="'. $srcFotoD .'"  alt="" >
                             <button type="button" class="btn btn-primary" style="margin-right:50%; margin-left:50%;-webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowDiscentes['codIntegrante'] . '" onclick="excluirFoto(' . $i . ')">
                                 <i class="fa fa-trash"></i> 
                             </button>
@@ -186,6 +212,14 @@ $stmtDiscentes->execute();
                 $i++;
             }
             ?>
+            <div style="width: 300px; float: left;">
+                <div class="card borda" onclick="newDiscente()">
+                    <img class="card-img-top" src="../assets/media/integrantes/foto_0.png" alt="" title="Adicionar novo integrante">
+                    <div id="">
+                        <h5 class="card-title"> &nbsp Adicionar novo discente </h5>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -196,15 +230,16 @@ $stmtDiscentes->execute();
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header  sm-primary">
-                <h3 class="modal-title" id="editarInfoLabel"> Edite as informações </h3>
+                <h3 class="modal-title" id="tituloP">  </h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form method="POST" enctype="multipart/form-data" id="atualizar-form" name="atualizar-form">
-                    <input type="hidden" name="acao" value="editar">
+                    <input type="hidden" name="acao" id="acao">
                     <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="tipo" id="tipo">
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material">
@@ -233,7 +268,7 @@ $stmtDiscentes->execute();
                                 <label for="cpf">
                                     <h5> Cpf *: </h5>
                                 </label>
-                                <input type="text" class="form-control" id="cpf" name="cpf"> </input>
+                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="999.999.999-99"> </input>
                             </div>
                         </div>
                     </div>
@@ -282,7 +317,7 @@ $stmtDiscentes->execute();
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material">
-                                <h5> Situação atual: </h5>
+                                <h5> Situação atual *: </h5>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" value="Tutor(a)" id="situacao1" name="situacao" class="custom-control-input">
                                     <label class="custom-control-label" for="situacao1">Tutor(a)</label>
@@ -298,10 +333,9 @@ $stmtDiscentes->execute();
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="left" title="Ajuda" data-content="Para adicionar outros títulos e textos utilize o campo de Conteúdo Extra e o seu menu para fazer a formatação. As tags HTML são necessárias, pois a formatação se aplicará ao texto entre elas.">
+                    <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="left" title="Ajuda" data-content="Os campos marcados com * são origatórios. É permitido apenas o envio de imagens com as seguintes extensões: .png, .jpg, .jpeg, .JPG, .PNG, .JPEG">
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                     </button>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -309,6 +343,7 @@ $stmtDiscentes->execute();
                     <i class="fa fa-check"></i> Salvar
                 </button>
             </div>
+            </form>
         </div>
     </div>
 </div>

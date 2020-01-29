@@ -21,21 +21,48 @@ class DaoIntegrantes
     }
 
 
-   /* public function adicionarFoto(ModelGaleria $galeria)
+    public function adicionarInformacoes(ModelIntegrantes $integrantes)
     {
         try {
-            $foto = $galeria->getFoto();
-            $titulo = $galeria->getTitulo();
 
+            $nome = $integrantes->getNome();
+            $email = $integrantes->getEmail();
+            $cpf = $integrantes->getCpf();
+            $social = $integrantes->getSocial();
+            $dataInicio = $integrantes->getDataInicio();
+            $dataFim = $integrantes->getDataFim();
+            $situacao = $integrantes->getSituacao();
+            $foto = $integrantes->getFoto();
+            $tipo = $integrantes->getTipo();
 
-            $stmt = $this->conn->prepare("INSERT INTO galeria(fotoGaleria, tituloGaleria) 
-            VALUES (:foto, :titulo)");
+            $stmt = $this->conn->prepare("INSERT INTO integrantes(nomeIntegrante, emailIntegrante, cpfIntegrante, dataInicioIntegrante, dataFimIntegrante, situacaoIntegrante, fotoIntegrante, socialIntegrante)
+           VALUES (:nome, :email, :cpf, :dataInicio, :dataFim, :situacao, :foto, :social)");
 
+            $stmt->bindparam(":nome", $nome);
+            $stmt->bindparam(":email", $email);
+            $stmt->bindparam(":cpf", $cpf);
+            $stmt->bindparam(":dataInicio", $dataInicio);
+            $stmt->bindparam(":dataFim", $dataFim);
+            $stmt->bindparam(":situacao", $situacao);
             $stmt->bindparam(":foto", $foto);
-            $stmt->bindparam(":titulo", $titulo);
+            $stmt->bindparam(":social", $social);
             $stmt->execute();
 
-            if ($stmt->rowCount() > 0) {
+            if ($tipo == 'discente') {
+                $ultimoCod = $this->conn->lastInsertId();
+                $stmt2 = $this->conn->prepare("INSERT INTO discentes(codIntegrante)
+                VALUES (:id)");
+                $stmt2->bindparam(":id", $ultimoCod);
+                $stmt2->execute();
+            } else if ($tipo == 'tutor') {
+                $ultimoCod = $this->conn->lastInsertId();
+                $stmt2 = $this->conn->prepare("INSERT INTO tutores(codIntegrante)
+                VALUES (:id)");
+                $stmt2->bindparam(":id", $ultimoCod);
+                $stmt2->execute();
+            }
+
+            if (($stmt->rowCount() > 0) && ($stmt2->rowCount() > 0)) {
                 echo 1;
             } else {
                 echo 2;
@@ -43,7 +70,7 @@ class DaoIntegrantes
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-    }*/
+    }
 
     public function atualizarInformacoes(ModelIntegrantes $integrantes)
     {
@@ -88,14 +115,14 @@ class DaoIntegrantes
             if ($stmt->rowCount() > 0) {
                 echo 1;
             } else {
-                echo $dataFim;
+                echo 2;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
 
-  /*  public function excluirFoto(ModelGaleria $galeria)
+    /*  public function excluirFoto(ModelGaleria $galeria)
     {
         try {
             $id = $galeria->getId();
