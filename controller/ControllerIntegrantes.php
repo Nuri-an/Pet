@@ -69,6 +69,10 @@ function atualizarInformacoes() {
     $dataInicio = filter_var($_POST["dataInicio"], FILTER_SANITIZE_STRING);
     $dataFim = filter_var($_POST["dataFim"], FILTER_SANITIZE_STRING);
     $situacao = filter_var($_POST["situacao"], FILTER_SANITIZE_STRING);
+
+    if($dataFim == ''){
+        $dataFim = null;
+    }
     
     if($_FILES['arquivo']['name'] != ''){ 
 

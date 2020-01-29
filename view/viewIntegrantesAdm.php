@@ -15,6 +15,12 @@ $stmtDiscentes->execute();
 
 ?>
 
+<script type="text/javascript" src="../assets/js/plugins/jquery-3.3.1.min.js"> </script>
+<script type="text/javascript" src="../assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/jquery-validation/additional-methods.min.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/jquery-validation/localization/messages_pt_BR.js"></script>
+<script type="text/javascript" src="../assets/js/integrantes.js"></script>
+
 <style>
     .borda:hover {
         border: 2px solid #836FFF;
@@ -37,6 +43,10 @@ $stmtDiscentes->execute();
 </style>
 
 <script>
+    $(document).ready(function() {
+        $("#cpf").mask("999.999.999-99");
+    });
+
     function abreT(indice) {
         var conteudo = $('#conteudoT' + indice);
         var primeiroNome = $('#primeiroNomeT' + indice);
@@ -64,6 +74,19 @@ $stmtDiscentes->execute();
             conteudo.addClass('info');
             primeiroNome.show();
 
+        }
+    }
+
+    function nomeFoto() {
+        if ($('#arquivo').val()) {
+            var foto = $('#arquivo').val();
+            var letra = '\\';
+
+            posic = foto.indexOf(letra); //pega a posicao da letra
+            while (foto.includes(letra)) {
+                foto = foto.substring(posic); //exclui da string todas as letras ate a posicao desejada
+            }
+            $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
         }
     }
 </script>
@@ -152,7 +175,7 @@ $stmtDiscentes->execute();
                                 <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;"></i><a href="' . $rowDiscentes['socialIntegrante'] . '"> &nbsp Linkedin</a>
                                 <br />
                                 <i class="fa fa-handshake-o" aria-hidden="true"></i> &nbsp ' . $rowDiscentes['situacaoIntegrante'] . '
-                                <button type="button" class="btn btn-primary" style="margin-left:90%; margin-top: 10px; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Editar" id="rowEditarInformacoes_' . $i . '" data-id="' . $rowDiscentes['codIntegrante'] . '" data-nome="' . $rowDiscentes['nomeIntegrante'] . '" data-cpf="' . $rowDiscentes['cpfIntegrante'] . '" data-email="' . $rowDiscentes['emailIntegrante'] . '"  data-social="' . $rowDiscentes['socialIntegrante'] . '" data-dataInicio="' . $rowDiscentes['dataInicioIntegrante'] . '" data-dataFim="' . $rowDiscentes['dataFimIntegrante'] . '" data-situacao="' . $rowDiscentes['situacaoIntegrante'] . '" onclick="verInformacoes(' .  $i  . ')">
+                                <button type="button" class="btn btn-primary" style="margin-left:90%; margin-top: 10px; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Editar" id="rowEditarInformacoes_' . $i . '" data-id="' . $rowDiscentes['codIntegrante'] . '" data-nome="' . $rowDiscentes['nomeIntegrante'] . '" data-cpf="' . $rowDiscentes['cpfIntegrante'] . '" data-email="' . $rowDiscentes['emailIntegrante'] . '"  data-social="' . $rowDiscentes['socialIntegrante'] . '" data-dataInicio="' . $rowDiscentes['dataInicioIntegrante'] . '" data-dataFim="' . $rowDiscentes['dataFimIntegrante'] . '" data-situacao="' . $rowDiscentes['situacaoIntegrante'] . '" data-foto="' . $rowDiscentes['fotoIntegrante'] . '" onclick="verInformacoes(' .  $i  . ')">
                                     <i class="fa fa-pencil"></i> 
                                 </button>
                             </p>
@@ -179,7 +202,7 @@ $stmtDiscentes->execute();
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" class="form-horizontal" enctype="multipart/form-data" id="atualizar-form" name="atualizar-form">
+                <form method="POST" enctype="multipart/form-data" id="atualizar-form" name="atualizar-form">
                     <input type="hidden" name="acao" value="editar">
                     <input type="hidden" name="id" id="id">
                     <div class="form-group row">
@@ -189,9 +212,6 @@ $stmtDiscentes->execute();
                                     <h5> Nome *: </h5>
                                 </label>
                                 <input type="text" class="form-control" id="nome" name="nome"> </input>
-                                <div class="invalid-tooltip">
-                                    Por favor, digite o nome completo do integrante.
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -213,10 +233,7 @@ $stmtDiscentes->execute();
                                 <label for="cpf">
                                     <h5> Cpf *: </h5>
                                 </label>
-                                <input type="text" class="form-control" wrap="hard" id="cpf" name="cpf"> </input>
-                                <div class="invalid-tooltip">
-                                    Por favor, digite o cpf do integrante.
-                                </div>
+                                <input type="text" class="form-control" id="cpf" name="cpf"> </input>
                             </div>
                         </div>
                     </div>
@@ -227,10 +244,7 @@ $stmtDiscentes->execute();
                                 <label for="dataInicio">
                                     <h5> Data de entrada no grupo *: </h5>
                                 </label>
-                                <input type="date" class="form-control" id="dataInicio" name="dataInicio" required> </input>
-                                <div class="invalid-tooltip">
-                                    Por favor, escolha a data que o integrante entrou no grupo.
-                                </div>
+                                <input type="date" class="form-control" id="dataInicio" name="dataInicio"> </input>
                             </div>
                         </div>
                     </div>
@@ -259,8 +273,8 @@ $stmtDiscentes->execute();
                             <div class="form-material">
                                 <h5> Foto: </h5>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="arquivo" name="arquivo" lang="pt">
-                                    <label class="custom-file-label" for="arquivo"> </label>
+                                    <input type="file" class="custom-file-input" id="arquivo" name="arquivo" lang="pt" onchange="nomeFoto()">
+                                    <label class="custom-file-label" for="arquivo" id="foto"> </label>
                                 </div>
                             </div>
                         </div>
@@ -280,7 +294,6 @@ $stmtDiscentes->execute();
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" value="Voluntário" id="situacao3" name="situacao" class="custom-control-input">
                                     <label class="custom-control-label" for="situacao3">Voluntário</label>
-                                    <div class="invalid-tooltip">Selecione uma situação para o integrante</div>
                                 </div>
                             </div>
                         </div>
@@ -292,7 +305,7 @@ $stmtDiscentes->execute();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" id="btnEditarInfo" onclick="atualizarInformacoes()">
+                <button type="submit" class="btn btn-primary" id="btnEditarInfo">
                     <i class="fa fa-check"></i> Salvar
                 </button>
             </div>
@@ -301,8 +314,6 @@ $stmtDiscentes->execute();
 </div>
 <!-- End -->
 
-
-<script src="../assets/js/integrantes.js"></script>
 
 <?php
 require '../inc/global/head_end.php';

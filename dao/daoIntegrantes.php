@@ -88,7 +88,7 @@ class DaoIntegrantes
             if ($stmt->rowCount() > 0) {
                 echo 1;
             } else {
-                echo 2;
+                echo $dataFim;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
