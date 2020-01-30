@@ -1,7 +1,7 @@
-$.validator.addMethod("nomeCompleto", function(value, element){
-    if (value.includes(' ')){
+$.validator.addMethod("nomeCompleto", function (value, element) {
+    if (value.includes(' ')) {
         return true
-    }else{
+    } else {
         return false
     }
 }, "Digite o nome completo do integrante")
@@ -9,8 +9,8 @@ $.validator.addMethod("nomeCompleto", function(value, element){
 $(document).ready(function () {
     $('#btnEditarInfo').click(function () {
         jQuery("#atualizar-form").validate({
-            errorClass: 'invalid-feedback animated fadeInDown',
-            errorElement: 'div',
+            errorClass: 'invalid-feedback animated fadeInDown',  //elemento de erro tera as seguinter classes
+            errorElement: 'div',         //elemento criado sera uma div
             errorPlacement: (error, e) => {
                 jQuery(e).parents('.form-group > div').append(error);
             },
@@ -115,6 +115,94 @@ $(document).ready(function () {
         alert("entrou");
     });
 });
+
+function excluir(id) {
+    var cod = $('#rowExcluirFoto_' + id).attr("data-id");
+    var tipo = $('#rowExcluirFoto_' + id).attr("data-tipo");
+    bootbox.dialog({
+        title: 'Opções para excluir',
+        message: "<p>Escolha o que você deseja excluir.</p>",
+        buttons: {
+            foto: {
+                label: "Excluir somente foto",
+                className: 'btn-warning',
+                callback: function () {
+                    dialog = bootbox.dialog({
+                        message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
+                        closeButton: false
+                      });
+                      $.ajax({
+                        type: "POST",
+                        url: "../controller/ControllerIntegrantes.php",
+                        data: { acao: "excluirFoto",
+                                id: cod
+                              },
+                        success: function (resultado) {
+                          alert(resultado);
+                          if (resultado == 1) {
+                            dialog.init(function(){
+                              dialog.find('.bootbox-body').html('A foto foi excluída com sucesso!');
+                            });
+                            setTimeout(function(){
+                              dialog.modal('hide'); 
+                            }, 3000); //3 segundos depois executa
+                          }
+            
+                          else{
+                            dialog.init(function(){
+                            dialog.find('.bootbox-body').html('Não foi possível excluir a foto. Tente novamente mais tarde.');
+                        });
+                          setTimeout(function(){
+                            dialog.modal('hide'); 
+                          }, 3000); //3 segundos depois executa
+                          }
+                        }
+                      });
+                    atualizarInicio();
+                }
+            },
+            user: {
+                label: "Excluir integrante",
+                className: 'btn-info',
+                callback: function () {
+                    dialog = bootbox.dialog({
+                        message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
+                        closeButton: false
+                      });
+                      $.ajax({
+                        type: "POST",
+                        url: "../controller/ControllerIntegrantes.php",
+                        data: { acao: "excluirInt",
+                                id: cod,
+                                tipo: tipo
+                              },
+                        success: function (resultado) {
+                          alert(resultado);
+                          if (resultado == 1) {
+                            dialog.init(function(){
+                              dialog.find('.bootbox-body').html('Integrante com sucesso!');
+                            });
+                            setTimeout(function(){
+                              dialog.modal('hide'); 
+                            }, 3000); //3 segundos depois executa
+                          }
+            
+                          else{
+                            dialog.init(function(){
+                            dialog.find('.bootbox-body').html('Não foi possível excluir o integrante. Tente novamente mais tarde.');
+                        });
+                          setTimeout(function(){
+                            dialog.modal('hide'); 
+                          }, 3000); //3 segundos depois executa
+                          }
+                        }
+                      });
+                    atualizarInicio();
+                }
+            }
+        }
+    });
+}
 function atualizarInicio() {
 
     // carrega = #IdDeOndeVaiSerCarregadoOConteudo
@@ -142,7 +230,7 @@ function verInformacoes(id) {
     var social = $('#rowEditarInformacoes_' + id).attr("data-social");
     var foto = $('#rowEditarInformacoes_' + id).attr("data-foto");
     var acao = "editar";
-    
+
 
     $('#atualizar-form').trigger("reset");
     $('#modalAtualizar').modal('show');
@@ -163,32 +251,41 @@ function verInformacoes(id) {
 }
 
 
-function newDiscente(){
+function newDiscente() {
 
     var acao = 'adicionar';
     var tipo = 'discente';
 
     $("input[name='situacao'][value='Tutor(a)']").prop('disabled', true);
+    $("input[name='situacao'][value='Bolsista']").prop('disabled', false);
+    $("input[name='situacao'][value='Voluntário']").prop('disabled', false);
 
     $('#atualizar-form').trigger("reset");
     $('#modalAtualizar').modal('show');
-    
+
     $('.modal .modal-dialog .modal-content #tituloP').text("Adicione um novo discente ao grupo");
     $('.modal .modal-dialog .modal-content #acao').val(acao);
     $('.modal .modal-dialog .modal-content #tipo').val(tipo);
 }
-function newTutores(){
+function newTutores() {
 
     var acao = 'adicionar';
     var tipo = 'tutor';
+    $('#atualizar-form').trigger("reset");
 
+    $("input[name='situacao'][value='Tutor(a)']").prop('disabled', false);
     $("input[name='situacao'][value='Bolsista']").prop('disabled', true);
     $("input[name='situacao'][value='Voluntário']").prop('disabled', true);
 
-    $('#atualizar-form').trigger("reset");
     $('#modalAtualizar').modal('show');
-    
+
     $('.modal .modal-dialog .modal-content #tituloP').text("Adicione um novo tutor ao grupo");
     $('.modal .modal-dialog .modal-content #acao').val(acao);
     $('.modal .modal-dialog .modal-content #tipo').val(tipo);
+}
+
+function openNewModal() {
+    //fecha o elemento erro na validação
+    var feedback = $(".invalid-feedback");
+    feedback.hide();
 }

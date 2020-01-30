@@ -97,13 +97,8 @@ $integrantesDao = new DaoIntegrantes();
 
     <div class="container" style="overflow:hidden;">
         <h2 class="display-4 text-align: center;"> Tutores </h2>
-        <div class="card-deck">
-            <?php
-            if ($stmtTutores->rowCount() == 0) {
-                echo '<small class="text-muted" style="font-size:30;"><i>Não há</i></small> ';
-            }
-            ?>
-            <!--/.Controls-->
+        <hr> </hr>
+        <div class="card-deck" style="width: 100%; justify-content: center; align-items: center;">
             <?php
             $i = 1;
 
@@ -123,8 +118,8 @@ $integrantesDao = new DaoIntegrantes();
                 <div  style="width: 300px; float: left; margin-bottom:10px;">
                     <div class="card borda">
                         <div  onclick="abreT(' . $i . ')">
-                            <img class="card-img-top rounded img-fluid d-block" src="'. $srcFotoT .'"  alt="" >
-                            <button type="button" class="btn btn-primary" style="margin-right:50%; margin-left:50%;-webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Exluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowTutores['codIntegrante'] . '" onclick="excluirFoto(' . $i . ')">
+                            <img class="card-img-top mx-auto rounded img-fluid d-block" src="'. $srcFotoT .'"  alt="" style= style="height:250px;" >
+                            <button type="button" class="btn btn-primary" style="margin-right:50%; margin-left:50%;-webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Exluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowTutores['codIntegrante'] . '"  data-tipo="tutor" onclick="excluir(' . $i . ')">
                                 <i class="fa fa-trash"></i> 
                             </button>
                             <div id="primeiroNomeT' . $i . '" >
@@ -150,7 +145,7 @@ $integrantesDao = new DaoIntegrantes();
                 $i++;
             }
             ?>
-            <div style="width: 300px; float: left;">
+            <div style="width: 300px; float: left;" id="modalTutores">
                 <div class="card borda" onclick="newTutores()">
                     <img class="card-img-top" src="../assets/media/integrantes/foto_0.png" alt="" title="Adicionar novo integrante">
                     <div id="">
@@ -160,15 +155,10 @@ $integrantesDao = new DaoIntegrantes();
             </div>
         </div>
     </div>
-    <div class="container" style="margin-top: 20px;">
+    <div class="container" style="margin-top: 30px; ">
         <h2 class="display-4 text-align: center;"> Discentes </h2>
-        <div class="card-deck">
-            <?php
-            if ($stmtDiscentes->rowCount() == 0) {
-                echo '<small class="text-muted" style="font-size:30;"><i>Não há</i></small> ';
-            }
-            ?>
-
+        <hr> </hr>
+        <div class="card-deck" style="width: 100%; justify-content: center; align-items: center;">
             <?php
             while ($rowDiscentes = $stmtDiscentes->fetch(PDO::FETCH_ASSOC)) {
 
@@ -185,8 +175,8 @@ $integrantesDao = new DaoIntegrantes();
                 <div  style="width: 300px; float: left; margin-bottom:10px;">
                     <div class="card borda">
                         <div class="" onclick="abreD(' . $i . ')">
-                            <img class="card-img-top"  src="'. $srcFotoD .'"  alt="" >
-                            <button type="button" class="btn btn-primary" style="margin-right:50%; margin-left:50%;-webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowDiscentes['codIntegrante'] . '" onclick="excluirFoto(' . $i . ')">
+                            <img class="card-img-top mx-auto rounded img-fluid d-block"  src="'. $srcFotoD .'"  alt="" style="height:250px;" >
+                            <button type="button" class="btn btn-primary" style="margin-right:50%; margin-left:50%;-webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowDiscentes['codIntegrante'] . '"  data-tipo="discente" onclick="excluir(' . $i . ')">
                                 <i class="fa fa-trash"></i> 
                             </button>
                             <div id="primeiroNomeD' . $i . '" >
@@ -231,7 +221,7 @@ $integrantesDao = new DaoIntegrantes();
         <div class="modal-content">
             <div class="modal-header  sm-primary">
                 <h3 class="modal-title" id="tituloP">  </h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="openNewModal()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -338,7 +328,7 @@ $integrantesDao = new DaoIntegrantes();
                     </button>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
                 <button type="submit" class="btn btn-primary" id="btnEditarInfo">
                     <i class="fa fa-check"></i> Salvar
                 </button>

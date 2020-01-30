@@ -122,25 +122,28 @@ class DaoIntegrantes
         }
     }
 
-    /*  public function excluirFoto(ModelGaleria $galeria)
+    public function excluirFoto(ModelIntegrantes $integrantes)
     {
         try {
-            $id = $galeria->getId();
+            //update user where idprof
+            $id = $integrantes->getId();
+            $foto = $integrantes->getFoto();
 
-            $stmtNome = $this->conn->prepare("SELECT * FROM galeria WHERE codGaleria = ?");
+            $stmtNome = $this->conn->prepare("SELECT * FROM integrantes WHERE codIntegrante = ?");
             $stmtNome->bindparam(1, $id);
             $stmtNome->execute();
 
-            while ($rowGaleria = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
+            while ($rowIntegrante = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
 
-                $caminho = "../assets/media/galeria/" . $rowGaleria['fotoGaleria'];
+                $caminho = "../assets/media/integrantes/" . $rowIntegrante['fotoIntegrante'];
                 if (file_exists($caminho)) {
                     unlink($caminho);
                 }
             }
 
-            $stmt = $this->conn->prepare("DELETE FROM galeria WHERE codGaleria = ?");
-            $stmt->bindparam(1, $id);
+            $stmt = $this->conn->prepare("UPDATE integrantes SET fotoIntegrante = ? WHERE codIntegrante = ?");
+            $stmt->bindparam(1, $foto);
+            $stmt->bindparam(2, $id);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
@@ -151,5 +154,51 @@ class DaoIntegrantes
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-    }*/
+    }
+
+
+    public function excluirIntegrante(ModelIntegrantes $integrantes)
+    {
+        try {
+            //update user where idprof
+            $id = $integrantes->getId();
+            $tipo = $integrantes->getTipo();
+
+            if ($tipo == 'discente') {
+                $stmtAux = $this->conn->prepare("SELECT codDiscente FROM discentes WHERE codIntegrante = ?");
+                $stmtAux->bindparam(1, $id);
+                $stmtAux->execute();
+                while ($rowAuxiliar = $stmtAux->fetch(PDO::FETCH_ASSOC)) {
+                    $idAux = $rowAuxiliar['codDiscente'];
+                }
+                $stmt2 = $this->conn->prepare("DELETE FROM discentes WHERE codDiscente = ?");
+                $stmt2->bindparam(1, $idAux);
+                $stmt2->execute();
+            } else if ($tipo == 'tutor') {
+                $stmtAux = $this->conn->prepare("SELECT codTutor FROM tutores WHERE codIntegrante = ?");
+                $stmtAux->bindparam(1, $id);
+                $stmtAux->execute();
+                while ($rowAuxiliar = $stmtAux->fetch(PDO::FETCH_ASSOC)) {
+                    $idAux = $rowAuxiliar['codTutor'];
+                }
+                $stmt2 = $this->conn->prepare("DELETE FROM tutores WHERE codTutor = ?");
+                $stmt2->bindparam(1, $idAux);
+                $stmt2->execute();
+            }
+
+            if ($stmt2->rowCount() > 0) {
+                $stmt = $this->conn->prepare("DELETE FROM integrantes WHERE codIntegrante = ?");
+                $stmt->bindparam(1, $id);
+                $stmt->execute();
+
+                if ($stmt->rowCount() > 0) {
+                    echo 1;
+                }
+            } else {
+                echo 2;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
