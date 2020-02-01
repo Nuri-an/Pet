@@ -1,6 +1,6 @@
 <?php
 
-class ModelInformacoes{
+class ModelInicio{
     private $id;
     private $tituloP;
     private $infoP;

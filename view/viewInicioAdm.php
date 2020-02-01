@@ -4,14 +4,19 @@ require '../inc/global/banner.php';
 require '../inc/global/head_start.php';
 require '../inc/global/config.php';
 
-require_once("../dao/DaoInformacoes.php");
+require_once("../dao/daoInicio.php");
 
-$informacoesDao = new DaoInformacoes();
+$informacoesDao = new DaoInicio();
 
 ?>
 
 <link rel="stylesheet" href="../assets/css/inicio.css">
 
+<script type="text/javascript" src="../assets/js/plugins/jquery-3.3.1.min.js"> </script>
+<script type="text/javascript" src="../assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/jquery-validation/additional-methods.min.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/jquery-validation/localization/messages_pt_BR.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/jQuery-Mask/jquery.mask.js"></script>
 <script type="text/javascript" src="../assets/js/inicio.js"></script>
 
 <div id="atualiza" style="margin-top: 20px; margin-bottom: 20px;">
@@ -91,7 +96,7 @@ $informacoesDao = new DaoInformacoes();
         <div class="modal-content">
             <div class="modal-header  sm-primary">
                 <h3 class="modal-title" id="editarInfoLabel"> Edite as informações </h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="openNewModal()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -164,14 +169,14 @@ $informacoesDao = new DaoInformacoes();
                     <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="left" title="Ajuda" data-content="Para adicionar outros títulos e textos utilize o campo de Conteúdo Extra e o seu menu para fazer a formatação. As tags HTML são necessárias, pois a formatação se aplicará ao texto entre elas.">
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                     </button>
-                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" id="btnEditarInfo" onclick="enviarDadosInfo()">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
+                <button type="submit" class="btn btn-primary" id="btnEditarInfo" >
                     <i class="fa fa-check"></i> Salvar
                 </button>
             </div>
+                </form>
         </div>
 
     </div>
@@ -182,12 +187,12 @@ $informacoesDao = new DaoInformacoes();
         <div class="modal-content">
             <div class="modal-header  sm-primary">
                 <h3 class="modal-title" id="nomeP"> </h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="openNewModal()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" class="form-horizontal" enctype="multipart/form-data" id="adicionarFoto" name="adicionarFoto" action="../controller/controllerGaleria.php" target="controlador">
+                <form method="POST" class="form-horizontal" enctype="multipart/form-data" id="adicionarFoto" name="adicionarFoto">
                     <input type="hidden" name="acao" id="acao">
                     <input type="hidden" name="id" id="id">
                     <div class="form-group row">
@@ -204,25 +209,25 @@ $informacoesDao = new DaoInformacoes();
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material">
-                                    <h5> Upload: </h5>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="arquivo" name="arquivo" lang="pt" onchange="nomeFoto()">
-                                        <label class="custom-file-label" for="arquivo" id="foto"> </label>
-                                    </div>
+                                <h5> Upload: </h5>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="arquivo" name="arquivo" lang="pt" onchange="nomeFoto()">
+                                    <label class="custom-file-label" for="arquivo" id="foto"> </label>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="right" title="Ajuda" data-content="É permitido apenas o envio de imagens com as seguintes extensões: .png, .jpg, .jpeg, .JPG, .PNG, .JPEG">
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                     </button>
-                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" id="btnAdicionarFoto" onclick="enviarFotoG()">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
+                <button type="submit" class="btn btn-primary" id="btnAdicionarFoto">
                     <i class="fa fa-check"></i> Adicionar
                 </button>
             </div>
+            </form>
         </div>
     </div>
 </div>

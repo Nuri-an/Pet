@@ -50,208 +50,172 @@ function sublinhado() {
 
 function nomeFoto() {
   if ($('#arquivo').val()) {
-      var foto = $('#arquivo').val();
-      var letra = '\\';
+    var foto = $('#arquivo').val();
+    var letra = '\\';
 
-      posic = foto.indexOf(letra); //pega a posicao da letra
-      while (foto.includes(letra)) {
-          foto = foto.substring(posic); //exclui da string todas as letras ate a posicao desejada
-      }
-      $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
+    posic = foto.indexOf(letra); //pega a posicao da letra
+    while (foto.includes(letra)) {
+      foto = foto.substring(posic); //exclui da string todas as letras ate a posicao desejada
+    }
+    $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
   }
 }
 
 $(document).ready(function () {
-  $('#btnAdicionarFoto').click(function () {
-      jQuery("#adicionarFoto").validate({
-          focusInvalid: true,
-          errorClass: 'invalid-feedback animated fadeInDown',
-          errorElement: 'div',
-          errorPlacement: (error, e) => {
-              jQuery(e).parents('.form-group > div').append(error);
-          },
-          highlight: e => {
-              jQuery(e).closest('.form-group').removeClass('is-invalid').addClass('is-invalid');
-          },
-          success: e => {
-              jQuery(e).closest('.form-group').removeClass('is-invalid');
-              jQuery(e).remove();
-          },
-          rules: {
-              'titulo': {
-                  required: true
-              },
-              'arquivo': {
-                  extension: "jpg|JPG|png|PNG|jpeg|JPEG"
-              }
-          },
-          messages: {
-              'titulo': {
-                  required: 'Por favor, preeencha este campo'
-              }
-          },
-          submitHandler: function (form) {
-              alert("enta coletando dados do form");
-              var formdata = new FormData($("form[name='adicionarFoto']")[0]);
+  $('#btnEditarInfo').click(function () {
+    jQuery("#editarInfo-form").validate({
+      focusInvalid: true,
+      errorClass: 'invalid-feedback animated fadeInDown',
+      errorElement: 'div',
+      errorPlacement: (error, e) => {
+        jQuery(e).parents('.form-group > div').append(error);
+      },
+      highlight: e => {
+        jQuery(e).closest('.form-group').removeClass('is-invalid').addClass('is-invalid');
+      },
+      success: e => {
+        jQuery(e).closest('.form-group').removeClass('is-invalid');
+        jQuery(e).remove();
+      },
+      rules: {
+        'tituloP': {
+          required: true
+        },
+        'infoP': {
+          required: true
+        }
+      },
+      messages: {
+        'tituloP': {
+          required: 'Por favor, preeencha este campo'
+        },
+        'infoP': {
+          required: 'Por favor, preeencha este campo',
+        }
+      },
+      submitHandler: function (form) {
+        alert("enta coletando dados do form");
+        var dados = $('#editarInfo-form').serializeArray();
+        alert(dados);
+        dialog = bootbox.dialog({
+          message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
+          closeButton: false
+        });
 
-              dialog = bootbox.dialog({
-                  message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
-                  closeButton: false
+        $.ajax({
+          type: 'POST',
+          url: "../controller/ControllerInicio.php",
+          data: dados,
+
+          success: function (result) {
+            alert(result);
+
+            if (result == 1) {
+              dialog.init(function () {
+                dialog.find('.bootbox-body').html('Informações atualizadas com sucesso!');
               });
-
-              $.ajax({
-                  type: 'POST',
-                  url: "../controller/ControllerInformacoes.php",
-                  data: formdata,
-                  processData: false,
-                  contentType: false,
-
-                  success: function (result) {
-                      alert(result);
-
-                      if (result == 1) {
-                          dialog.init(function () {
-                              dialog.find('.bootbox-body').html('Imagem enviada com sucesso!');
-                          });
-                          setTimeout(function () {
-                              dialog.modal('hide');
-                          }, 3000); //3 segundos depois executa
-                      }
-                      else {
-                          dialog.init(function () {
-                              dialog.find('.bootbox-body').html('Ocorreu um erro no processamento. Tente novamente mais tarde.');
-                          });
-                          setTimeout(function () {
-                              dialog.modal('hide');
-                          }, 3000); //3 segundos depois executa
-                      }
-                  }
+              setTimeout(function () {
+                dialog.modal('hide');
+              }, 3000); //3 segundos depois executa
+            }
+            else {
+              dialog.init(function () {
+                dialog.find('.bootbox-body').html('Ocorreu um erro no processamento. Tente novamente mais tarde.');
               });
-              atualizarInicio();
-              $('#verModalFoto').modal('hide');
-              $('#adicionarFoto').trigger("reset");
-              return false;
+              setTimeout(function () {
+                dialog.modal('hide');
+              }, 3000); //3 segundos depois executa
+            }
           }
+        });
+        atualizarInicio();
+        $('#verEditarInfo').modal('hide');
+        $('#editarInfo-form').trigger("reset");
+        return false;
+      }
 
-      });
-      alert("entrou");
+    });
+    alert("entrou");
   });
 });
 
+$(document).ready(function () {
+  $('#btnAdicionarFoto').click(function () {
+    jQuery("#adicionarFoto").validate({
+      focusInvalid: true,
+      errorClass: 'invalid-feedback animated fadeInDown',
+      errorElement: 'div',
+      errorPlacement: (error, e) => {
+        jQuery(e).parents('.form-group > div').append(error);
+      },
+      highlight: e => {
+        jQuery(e).closest('.form-group').removeClass('is-invalid').addClass('is-invalid');
+      },
+      success: e => {
+        jQuery(e).closest('.form-group').removeClass('is-invalid');
+        jQuery(e).remove();
+      },
+      rules: {
+        'titulo': {
+          required: false
+        },
+        'arquivo': {
+          extension: "jpg|JPG|png|PNG|jpeg|JPEG"
+        }
+      },
+      messages: {
+        'titulo': {
+          required: 'Por favor, preeencha este campo'
+        }
+      },
+      submitHandler: function (form) {
+        alert("enta coletando dados do form");
+        var formdata = new FormData($("form[name='adicionarFoto']")[0]);
 
-function loading() {
-
-  var dialog = bootbox.dialog({
-    message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
-    closeButton: false
-  });
-
-  dialog.init(function () {
-    setTimeout(function () {
-      dialog.find('.bootbox-body').html('Verifique na galeria se a imagem foi enviada com sucesso. Caso não apareça confira a extensão do arquivo, e, se persistir, tente novamente mais tarde.');
-    }, 3000);
-  });
-  setTimeout(function () {
-    dialog.modal('hide');
-  }, 10000); //10 segundos depois executa
-
-}
-
-function enviarDadosInfo() {
-  var dados = $('#editarInfo-form').serializeArray();
-  $('#verEditarInfo').modal('hide');
-  dialog = bootbox.dialog({
-    message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
-    closeButton: false
-  });
-  $.ajax({
-    type: "POST",
-    url: "../controller/ControllerInformacoes.php",
-    data: dados,
-    success: function (result) {
-      //alert(result);
-      if (result == 1) {
-        dialog.init(function () {
-          dialog.find('.bootbox-body').html('Informações editadas com sucesso!');
+        dialog = bootbox.dialog({
+          message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
+          closeButton: false
         });
-        setTimeout(function () {
-          dialog.modal('hide');
-        }, 3000); //3 segundos depois executa
+
+        $.ajax({
+          type: 'POST',
+          url: "../controller/ControllerInicio.php",
+          data: formdata,
+          processData: false,
+          contentType: false,
+
+          success: function (result) {
+            alert(result);
+
+            if (result == 1) {
+              dialog.init(function () {
+                dialog.find('.bootbox-body').html('Imagem enviada com sucesso!');
+              });
+              setTimeout(function () {
+                dialog.modal('hide');
+              }, 3000); //3 segundos depois executa
+            }
+            else {
+              dialog.init(function () {
+                dialog.find('.bootbox-body').html('Ocorreu um erro no processamento. Tente novamente mais tarde.');
+              });
+              setTimeout(function () {
+                dialog.modal('hide');
+              }, 3000); //3 segundos depois executa
+            }
+          }
+        });
         atualizarInicio();
+        $('#verModalFoto').modal('hide');
+        $('#adicionarFoto').trigger("reset");
+        return false;
       }
-      else {
-        dialog.init(function () {
-          dialog.find('.bootbox-body').html('Não foi possivel editar as informações. Tente novamente mais tarde.');
-        });
-        setTimeout(function () {
-          dialog.modal('hide');
-        }, 3000); //3 segundos depois executa
 
-      }
-    }
+    });
+    alert("entrou");
   });
-  return false;
-}
+});
 
-
-
-function enviarFotoG() {
-
-  var formdata = new FormData($("form[name='adicionarFoto']")[0]);
-  var formulario = document.getElementById('adicionarFoto');
-
-  if (window.FormData) {
-
-    dialog = bootbox.dialog({
-      message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
-      closeButton: false
-    });
-
-    $.ajax({
-      type: 'POST',
-      url: "../controller/controllerGaleria.php",
-      data: formdata,
-      processData: false,
-      contentType: false,
-
-      success: function (result) {
-        //alert(result);
-
-        if (result == 1) {
-          dialog.init(function () {
-            dialog.find('.bootbox-body').html('Imagem enviada com sucesso!');
-          });
-          setTimeout(function () {
-            dialog.modal('hide');
-          }, 3000); //3 segundos depois executa
-        }
-        if (result == 3) {
-          dialog.init(function () {
-            dialog.find('.bootbox-body').html('Texto alterado com sucesso!');
-          });
-          setTimeout(function () {
-            dialog.modal('hide');
-          }, 3000); //3 segundos depois executa
-        }
-        if (result == 2) {
-          dialog.init(function () {
-            dialog.find('.bootbox-body').html('Ocorreu um erro no processamento. Tente novamente mais tarde.');
-          });
-          setTimeout(function () {
-            dialog.modal('hide');
-          }, 3000); //3 segundos depois executa
-        }
-      }
-    });
-  }
-  else {
-    formulario.submit();
-    loading();
-  }
-  atualizarInicio();
-  $('#verModalFoto').modal('hide');
-  formulario.reset();
-}
 
 
 function excluirFoto(id) {
@@ -277,7 +241,7 @@ function excluirFoto(id) {
         });
         $.ajax({
           type: "POST",
-          url: "../controller/controllerGaleria.php",
+          url: "../controller/ControllerInicio.php",
           data: {
             acao: "excluir",
             id: id
@@ -350,6 +314,7 @@ function adicionarFoto_modal() {
 
   var acao = 'adicionar';
 
+  $('#adicionarFoto').trigger("reset");
   $('#verModalFoto').modal('show');
   $('.modal .modal-dialog .modal-content #nomeP').text("Adicione uma imagem à galeria");
   $('.modal .modal-dialog .modal-content #acao').val(acao);
@@ -362,8 +327,9 @@ function editarFoto_modal(id) {
   var foto = $('#rowEditarFoto_' + id).attr("data-foto");
   var acao = 'editarF';
 
+  $('#adicionarFoto').trigger("reset");
   $('#verModalFoto').modal('show');
-  
+
   $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
 
   $('.modal .modal-dialog .modal-content #nomeP').text("Substitua a imagem ou altere seu título");
@@ -371,5 +337,11 @@ function editarFoto_modal(id) {
   $('.modal .modal-dialog .modal-content  #titulo').val(titulo);
   $('.modal .modal-dialog .modal-content  #acao').val(acao);
 
+}
 
+
+function openNewModal() {
+  //fecha o elemento erro na validação
+  var feedback = $(".invalid-feedback");
+  feedback.hide();
 }

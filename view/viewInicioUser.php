@@ -4,9 +4,9 @@ require '../inc/global/banner.php';
 require '../inc/global/head_start.php';
 require '../inc/global/config.php';
 
-require_once("../dao/DaoInformacoes.php");   
+require_once("../dao/daoInicio.php");   
 
-$informacoesDao = new DaoInformacoes();
+$informacoesDao = new DaoInicio();
 
 $stmtInformacoes = $informacoesDao->runQuery("SELECT * FROM informacoes");
 $stmtInformacoes->execute();

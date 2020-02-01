@@ -20,9 +20,9 @@ switch ($acao) {
 
 function atualizarInfo()
 {
-    require_once('../model/ModelInformacoes.php');
-    require_once('../dao/DaoInformacoes.php');
-    $dao = new DaoInformacoes();
+    require_once('../model/ModelInicio.php');
+    require_once('../dao/daoInicio.php');
+    $dao = new DaoInicio();
 
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
@@ -34,7 +34,7 @@ function atualizarInfo()
 
 
 
-    $Informacoes = new ModelInformacoes();
+    $Informacoes = new ModelInicio();
     $Informacoes->setId($id);
     $Informacoes->setTituloP($tituloP);
     $Informacoes->setInfoP($infoP);
@@ -49,11 +49,11 @@ function atualizarInfo()
 
 function adicionarFoto()
 {
-    require_once('../model/ModelInformacoes.php');
-    require_once('../dao/DaoInformacoes.php');
+    require_once('../model/ModelInicio.php');
+    require_once('../dao/daoInicio.php');
 
-    $dao = new DaoInformacoes();
-    $Galeria = new ModelInformacoes();
+    $dao = new DaoInicio();
+    $Galeria = new ModelInicio();
 
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
 
@@ -85,11 +85,11 @@ function adicionarFoto()
 
 
 function atualizarFoto() {
-    require_once('../model/ModelInformacoes.php');
-    require_once('../dao/DaoInformacoes.php');
+    require_once('../model/ModelInicio.php');
+    require_once('../dao/daoInicio.php');
 
-    $dao = new DaoInformacoes();
-    $Galeria = new ModelInformacoes();
+    $dao = new DaoInicio();
+    $Galeria = new ModelInicio();
    
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
@@ -126,11 +126,11 @@ function atualizarFoto() {
 
 
 function excluirFoto() {
-    require_once('../model/ModelInformacoes.php');
-    require_once('../dao/DaoInformacoes.php');
+    require_once('../model/ModelInicio.php');
+    require_once('../dao/daoInicio.php');
 
-    $dao = new DaoInformacoes();
-    $Galeria = new ModelInformacoes();
+    $dao = new DaoInicio();
+    $Galeria = new ModelInicio();
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
 

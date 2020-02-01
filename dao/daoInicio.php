@@ -2,7 +2,7 @@
 
 require_once('../database/Database.php');
 
-class DaoInformacoes
+class DaoInicio
 {
 
     private $conn;
@@ -20,7 +20,7 @@ class DaoInformacoes
         return $stmt;
     }
 
-    public function atualizarInformacoes(ModelInformacoes $Informacoes)
+    public function atualizarInformacoes(ModelInicio $Informacoes)
     {
         try {
             //update user where idprof
@@ -51,7 +51,7 @@ class DaoInformacoes
         }
     }
 
-    public function atualizarFoto(ModelInformacoes $galeria)
+    public function atualizarFoto(ModelInicio $galeria)
     {
         try {
             //update user where idprof
@@ -103,7 +103,7 @@ class DaoInformacoes
     }
 
 
-    public function adicionarFoto(ModelInformacoes $galeria)
+    public function adicionarFoto(ModelInicio $galeria)
     {
         try {
             $foto = $galeria->getFoto();
@@ -130,7 +130,7 @@ class DaoInformacoes
     }
 
     
-    public function excluirFoto(ModelInformacoes $galeria) {
+    public function excluirFoto(ModelInicio $galeria) {
         try {
             $id = $galeria->getId();
 
