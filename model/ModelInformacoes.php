@@ -6,6 +6,8 @@ class ModelInformacoes{
     private $infoP;
     private $tituloS;
     private $extra;
+    private $titulo;
+    private $foto;
 
 
 
@@ -27,6 +29,12 @@ class ModelInformacoes{
     public function getExtra() {
         return $this->extra;
     }
+    public function getTitulo() {
+        return $this->titulo;
+    }
+    public function getFoto() {
+        return $this->foto;
+    }
 
     public function setId($id) {
         $this->id = $id;
@@ -45,6 +53,12 @@ class ModelInformacoes{
     }
     public function setExtra($extra) {
         $this->extra = $extra;
+    }
+    public function setTitulo($titulo) {
+        $this->titulo = $titulo;
+    }
+    public function setFoto($foto) {
+        $this->foto = $foto;
     }
 }
 ?>

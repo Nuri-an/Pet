@@ -1,3 +1,4 @@
+<?php require 'loader.html' ?>
 <?php
 require '../inc/global/banner.php';
 require '../inc/global/head_start.php';
@@ -15,58 +16,9 @@ $stmtDiscentes->execute();
 
 ?>
 
-<style>
-    .borda:hover {
-        border: 2px solid #836FFF;
-    }
+<link rel="stylesheet" href="../assets/css/integrantes.css">
 
-    .info {
-        display: none;
-    }
-
-    .nome {
-        display: block;
-    }
-
-    @media (min-width: 768px) {
-        .carousel-multi-item-2> {
-            width: 25%;
-            max-width: 100%;
-        }
-    }
-</style>
-
-<script>
-    function abreT(indice) {
-        var conteudo = $('#conteudoT' + indice);
-        var primeiroNome = $('#primeiroNomeT' + indice);
-        if (conteudo.hasClass('info')) {
-            $("#carouselTutores").carousel('pause');
-            conteudo.removeClass('info');
-            primeiroNome.hide();
-        } else {
-            $("#carouselTutores").carousel('cycle');
-            conteudo.addClass('info');
-            primeiroNome.show();
-
-        }
-    }
-
-    function abreD(indice) {
-        var conteudo = $('#conteudoD' + indice);
-        var primeiroNome = $('#primeiroNomeD' + indice);
-        if (conteudo.hasClass('info')) {
-            $("#carouselDiscentes").carousel('pause');
-            conteudo.removeClass('info');
-            primeiroNome.hide();
-        } else {
-            $("#carouselDiscentes").carousel('cycle');
-            conteudo.addClass('info');
-            primeiroNome.show();
-
-        }
-    }
-</script>
+<script type="text/javascript" src="../assets/js/integrantes.js"></script>
 
 <div class="container" style="overflow:hidden;">
     <h2 class="display-4 text-align: center;"> Tutores </h2>

@@ -1,3 +1,4 @@
+<?php require 'loader.html' ?>
 <?php
 require '../inc/global/banner.php';
 require '../inc/global/head_start.php';
@@ -9,6 +10,8 @@ $integrantesDao = new DaoIntegrantes();
 
 ?>
 
+<link rel="stylesheet" href="../assets/css/integrantes.css">
+
 <script type="text/javascript" src="../assets/js/plugins/jquery-3.3.1.min.js"> </script>
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/additional-methods.min.js"></script>
@@ -16,75 +19,6 @@ $integrantesDao = new DaoIntegrantes();
 <script type="text/javascript" src="../assets/js/plugins/jQuery-Mask/jquery.mask.js"></script>
 <script type="text/javascript" src="../assets/js/integrantes.js"></script>
 
-<style>
-    .borda:hover {
-        border: 2px solid #836FFF;
-    }
-
-    .info {
-        display: none;
-    }
-
-    .nome {
-        display: block;
-    }
-
-    @media (min-width: 768px) {
-        .carousel-multi-item-2> {
-            width: 25%;
-            max-width: 100%;
-        }
-    }
-</style>
-
-<script>
-    $(document).ready(function() {
-        $("#cpf").mask("999.999.999-99", {reverse: true});
-    });
-
-    function abreT(indice) {
-        var conteudo = $('#conteudoT' + indice);
-        var primeiroNome = $('#primeiroNomeT' + indice);
-        if (conteudo.hasClass('info')) {
-            $("#carouselTutores").carousel('pause');
-            conteudo.removeClass('info');
-            primeiroNome.hide();
-        } else {
-            $("#carouselTutores").carousel('cycle');
-            conteudo.addClass('info');
-            primeiroNome.show();
-
-        }
-    }
-
-    function abreD(indice) {
-        var conteudo = $('#conteudoD' + indice);
-        var primeiroNome = $('#primeiroNomeD' + indice);
-        if (conteudo.hasClass('info')) {
-            $("#carouselDiscentes").carousel('pause');
-            conteudo.removeClass('info');
-            primeiroNome.hide();
-        } else {
-            $("#carouselDiscentes").carousel('cycle');
-            conteudo.addClass('info');
-            primeiroNome.show();
-
-        }
-    }
-
-    function nomeFoto() {
-        if ($('#arquivo').val()) {
-            var foto = $('#arquivo').val();
-            var letra = '\\';
-
-            posic = foto.indexOf(letra); //pega a posicao da letra
-            while (foto.includes(letra)) {
-                foto = foto.substring(posic); //exclui da string todas as letras ate a posicao desejada
-            }
-            $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
-        }
-    }
-</script>
 
 <div id="atualiza">
     <?php
@@ -97,7 +31,8 @@ $integrantesDao = new DaoIntegrantes();
 
     <div class="container" style="overflow:hidden;">
         <h2 class="display-4 text-align: center;"> Tutores </h2>
-        <hr> </hr>
+        <hr>
+        </hr>
         <div class="card-deck" style="width: 100%; justify-content: center; align-items: center;">
             <?php
             $i = 1;
@@ -109,7 +44,7 @@ $integrantesDao = new DaoIntegrantes();
 
                 if (($rowTutores['fotoIntegrante'] != '') && (file_exists($midia))) {
                     $srcFotoT = $midia;
-                }else{
+                } else {
                     $srcFotoT = "../assets/media/integrantes/foto_1.jpg";
                 }
 
@@ -118,7 +53,7 @@ $integrantesDao = new DaoIntegrantes();
                 <div  style="width: 300px; float: left; margin-bottom:10px;">
                     <div class="card borda">
                         <div  onclick="abreT(' . $i . ')">
-                            <img class="card-img-top mx-auto rounded img-fluid d-block" src="'. $srcFotoT .'"  alt="" style= style="height:250px;" >
+                            <img class="card-img-top mx-auto rounded img-fluid d-block" src="' . $srcFotoT . '"  alt="" style= style="height:250px;" >
                             <button type="button" class="btn btn-primary" style="margin-right:50%; margin-left:50%;-webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Exluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowTutores['codIntegrante'] . '"  data-tipo="tutor" onclick="excluir(' . $i . ')">
                                 <i class="fa fa-trash"></i> 
                             </button>
@@ -157,7 +92,8 @@ $integrantesDao = new DaoIntegrantes();
     </div>
     <div class="container" style="margin-top: 30px; ">
         <h2 class="display-4 text-align: center;"> Discentes </h2>
-        <hr> </hr>
+        <hr>
+        </hr>
         <div class="card-deck" style="width: 100%; justify-content: center; align-items: center;">
             <?php
             while ($rowDiscentes = $stmtDiscentes->fetch(PDO::FETCH_ASSOC)) {
@@ -167,15 +103,15 @@ $integrantesDao = new DaoIntegrantes();
 
                 if (($rowDiscentes['fotoIntegrante'] != '') && (file_exists($midia))) {
                     $srcFotoD = $midia;
-                }else{
+                } else {
                     $srcFotoD = "../assets/media/integrantes/foto_1.jpg";
                 }
 
                 echo '
                 <div  style="width: 300px; float: left; margin-bottom:10px;">
-                    <div class="card borda">
+                    <div class="card borda" >
                         <div class="" onclick="abreD(' . $i . ')">
-                            <img class="card-img-top mx-auto rounded img-fluid d-block"  src="'. $srcFotoD .'"  alt="" style="height:250px;" >
+                            <img class="card-img-top mx-auto rounded img-fluid d-block"  src="' . $srcFotoD . '"  alt="" style="height:250px;" >
                             <button type="button" class="btn btn-primary" style="margin-right:50%; margin-left:50%;-webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowDiscentes['codIntegrante'] . '"  data-tipo="discente" onclick="excluir(' . $i . ')">
                                 <i class="fa fa-trash"></i> 
                             </button>
@@ -202,7 +138,7 @@ $integrantesDao = new DaoIntegrantes();
                 $i++;
             }
             ?>
-            <div style="width: 300px; float: left;">
+            <div style="width: 300px; float: left;" id="ultima">
                 <div class="card borda" onclick="newDiscente()">
                     <img class="card-img-top" src="../assets/media/integrantes/foto_0.png" alt="" title="Adicionar novo integrante">
                     <div id="">
@@ -220,7 +156,7 @@ $integrantesDao = new DaoIntegrantes();
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header  sm-primary">
-                <h3 class="modal-title" id="tituloP">  </h3>
+                <h3 class="modal-title" id="tituloP"> </h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="openNewModal()">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -337,6 +273,7 @@ $integrantesDao = new DaoIntegrantes();
         </div>
     </div>
 </div>
+
 <!-- End -->
 
 

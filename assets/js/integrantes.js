@@ -1,3 +1,65 @@
+
+    $(document).ready(function() {
+        $(".nav-link").click(function() {
+            $('body').css('overflowY', 'hidden');
+            $('#loader').show();
+        });
+
+
+        $('#loader').slideUp(1000);
+        $('body').css('overflowY', 'auto');
+    });
+
+
+    $(document).ready(function() {
+        $("#cpf").mask("999.999.999-99", {
+            reverse: true
+        });
+    });
+
+    function abreT(indice) {
+        var conteudo = $('#conteudoT' + indice);
+        var primeiroNome = $('#primeiroNomeT' + indice);
+        if (conteudo.hasClass('info')) {
+            $("#carouselTutores").carousel('pause');
+            conteudo.removeClass('info');
+            primeiroNome.hide();
+        } else {
+            $("#carouselTutores").carousel('cycle');
+            conteudo.addClass('info');
+            primeiroNome.show();
+
+        }
+    }
+
+    function abreD(indice) {
+        var conteudo = $('#conteudoD' + indice);
+        var primeiroNome = $('#primeiroNomeD' + indice);
+        if (conteudo.hasClass('info')) {
+            $("#carouselDiscentes").carousel('pause');
+            conteudo.removeClass('info');
+            primeiroNome.hide();
+        } else {
+            $("#carouselDiscentes").carousel('cycle');
+            conteudo.addClass('info');
+            primeiroNome.show();
+
+        }
+    }
+
+    function nomeFoto() {
+        if ($('#arquivo').val()) {
+            var foto = $('#arquivo').val();
+            var letra = '\\';
+
+            posic = foto.indexOf(letra); //pega a posicao da letra
+            while (foto.includes(letra)) {
+                foto = foto.substring(posic); //exclui da string todas as letras ate a posicao desejada
+            }
+            $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
+        }
+    }
+
 $.validator.addMethod("nomeCompleto", function (value, element) {
     if (value.includes(' ')) {
         return true
@@ -6,11 +68,13 @@ $.validator.addMethod("nomeCompleto", function (value, element) {
     }
 }, "Digite o nome completo do integrante")
 
+
 $(document).ready(function () {
     $('#btnEditarInfo').click(function () {
         jQuery("#atualizar-form").validate({
-            errorClass: 'invalid-feedback animated fadeInDown',  //elemento de erro tera as seguinter classes
-            errorElement: 'div',         //elemento criado sera uma div
+            focusInvalid: true,
+            errorClass: 'invalid-feedback animated fadeInDown',
+            errorElement: 'div',
             errorPlacement: (error, e) => {
                 jQuery(e).parents('.form-group > div').append(error);
             },
@@ -22,28 +86,28 @@ $(document).ready(function () {
                 jQuery(e).remove();
             },
             rules: {
-                nome: {
+                'nome': {
                     required: true,
                     nomeCompleto: true
                 },
-                email: {
+                'email': {
                     email: true
                 },
-                social: {
+                'social': {
                     url: true
                 },
-                cpf: {
+                'cpf': {
                     required: true,
                     cpfBR: true
                 },
-                dataInicio: {
+                'dataInicio': {
                     required: true,
                     date: true
                 },
-                situacao: {
+                'situacao': {
                     required: true,
                 },
-                arquivo: {
+                'arquivo': {
                     extension: "jpg|JPG|png|PNG|jpeg|JPEG"
                 }
             },
@@ -130,34 +194,35 @@ function excluir(id) {
                     dialog = bootbox.dialog({
                         message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
                         closeButton: false
-                      });
-                      $.ajax({
+                    });
+                    $.ajax({
                         type: "POST",
                         url: "../controller/ControllerIntegrantes.php",
-                        data: { acao: "excluirFoto",
-                                id: cod
-                              },
+                        data: {
+                            acao: "excluirFoto",
+                            id: cod
+                        },
                         success: function (resultado) {
-                          alert(resultado);
-                          if (resultado == 1) {
-                            dialog.init(function(){
-                              dialog.find('.bootbox-body').html('A foto foi excluída com sucesso!');
-                            });
-                            setTimeout(function(){
-                              dialog.modal('hide'); 
-                            }, 3000); //3 segundos depois executa
-                          }
-            
-                          else{
-                            dialog.init(function(){
-                            dialog.find('.bootbox-body').html('Não foi possível excluir a foto. Tente novamente mais tarde.');
-                        });
-                          setTimeout(function(){
-                            dialog.modal('hide'); 
-                          }, 3000); //3 segundos depois executa
-                          }
+                            alert(resultado);
+                            if (resultado == 1) {
+                                dialog.init(function () {
+                                    dialog.find('.bootbox-body').html('A foto foi excluída com sucesso!');
+                                });
+                                setTimeout(function () {
+                                    dialog.modal('hide');
+                                }, 3000); //3 segundos depois executa
+                            }
+
+                            else {
+                                dialog.init(function () {
+                                    dialog.find('.bootbox-body').html('Não foi possível excluir a foto. Tente novamente mais tarde.');
+                                });
+                                setTimeout(function () {
+                                    dialog.modal('hide');
+                                }, 3000); //3 segundos depois executa
+                            }
                         }
-                      });
+                    });
                     atualizarInicio();
                 }
             },
@@ -168,35 +233,36 @@ function excluir(id) {
                     dialog = bootbox.dialog({
                         message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
                         closeButton: false
-                      });
-                      $.ajax({
+                    });
+                    $.ajax({
                         type: "POST",
                         url: "../controller/ControllerIntegrantes.php",
-                        data: { acao: "excluirInt",
-                                id: cod,
-                                tipo: tipo
-                              },
+                        data: {
+                            acao: "excluirInt",
+                            id: cod,
+                            tipo: tipo
+                        },
                         success: function (resultado) {
-                          alert(resultado);
-                          if (resultado == 1) {
-                            dialog.init(function(){
-                              dialog.find('.bootbox-body').html('Integrante com sucesso!');
-                            });
-                            setTimeout(function(){
-                              dialog.modal('hide'); 
-                            }, 3000); //3 segundos depois executa
-                          }
-            
-                          else{
-                            dialog.init(function(){
-                            dialog.find('.bootbox-body').html('Não foi possível excluir o integrante. Tente novamente mais tarde.');
-                        });
-                          setTimeout(function(){
-                            dialog.modal('hide'); 
-                          }, 3000); //3 segundos depois executa
-                          }
+                            alert(resultado);
+                            if (resultado == 1) {
+                                dialog.init(function () {
+                                    dialog.find('.bootbox-body').html('Integrante com sucesso!');
+                                });
+                                setTimeout(function () {
+                                    dialog.modal('hide');
+                                }, 3000); //3 segundos depois executa
+                            }
+
+                            else {
+                                dialog.init(function () {
+                                    dialog.find('.bootbox-body').html('Não foi possível excluir o integrante. Tente novamente mais tarde.');
+                                });
+                                setTimeout(function () {
+                                    dialog.modal('hide');
+                                }, 3000); //3 segundos depois executa
+                            }
                         }
-                      });
+                    });
                     atualizarInicio();
                 }
             }
@@ -283,6 +349,7 @@ function newTutores() {
     $('.modal .modal-dialog .modal-content #acao').val(acao);
     $('.modal .modal-dialog .modal-content #tipo').val(tipo);
 }
+
 
 function openNewModal() {
     //fecha o elemento erro na validação

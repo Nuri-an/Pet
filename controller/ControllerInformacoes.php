@@ -3,50 +3,27 @@
 $acao = filter_var($_POST["acao"], FILTER_SANITIZE_STRING);
 
 switch ($acao) {
-    case 'adicionar':
-        adicionarAluno();
-        break;
     case 'editar':
         atualizarInfo();
         break;
+    case 'adicionar':
+        adicionarFoto();
+        break;
+    case 'editarF':
+        atualizarFoto();
+        break;
     case 'excluir':
-        deletarAluno();
+        excluirFoto();
         break;
 }
-/*
-function adicionarAluno() {
-    require_once ('../model/ModelAluno.php');
-    require_once ('../dao/DaoAluno.php');
-    $dao = new DaoAluno();
-
-    $nome = filter_var($_POST["nome"], FILTER_SANITIZE_STRING);
-    $cpf = filter_var($_POST["cpf"], FILTER_SANITIZE_STRING);
-    $data = filter_var($_POST["data"], FILTER_SANITIZE_STRING);
-    $email = filter_var($_POST["email"], FILTER_SANITIZE_STRING);
-    $senha = filter_var($_POST["senha"], FILTER_SANITIZE_STRING);
-    $idc = filter_var($_POST["idC"], FILTER_SANITIZE_STRING);
 
 
-
-
-    $Aluno = new ModelAluno();
-    $Aluno->setNomeAluno($nome);
-    $Aluno->setCpfAluno($cpf);
-    $Aluno->setDataAluno($data);
-    $Aluno->setEmailAluno($email);
-    $Aluno->setSenhaAluno($senha);
-    $Aluno->setIdCurso($idc);
-
-
-    $dao->adicionarAluno($Aluno);
-    
-} */
-
-function atualizarInfo() {
-    require_once ('../model/ModelInformacoes.php');
-    require_once ('../dao/DaoInformacoes.php');
+function atualizarInfo()
+{
+    require_once('../model/ModelInformacoes.php');
+    require_once('../dao/DaoInformacoes.php');
     $dao = new DaoInformacoes();
-   
+
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
     $tituloP = filter_var($_POST["tituloP"], FILTER_SANITIZE_STRING);
@@ -70,23 +47,95 @@ function atualizarInfo() {
 }
 
 
+function adicionarFoto()
+{
+    require_once('../model/ModelInformacoes.php');
+    require_once('../dao/DaoInformacoes.php');
 
-/*function deletarAluno() {
-    require_once ('../model/ModelAluno.php');
-    require_once ('../dao/DaoAluno.php');
+    $dao = new DaoInformacoes();
+    $Galeria = new ModelInformacoes();
 
-    $dao = new DaoAluno();
-    $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
+    $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
 
-    $Aluno = new ModelAluno();
-    $Aluno->setIdAluno($id);
+    if ($_FILES['arquivo']['name'] != '') {
+        $fileName = $_FILES['arquivo']['name'];
+
+        //Faz a verificação da extensao do arquivo
+        $extension = explode('.', $fileName);
+        $fileExtension = end($extension);
+
+        //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
+        $newFileName = 'imagem_' . time() . '.' . $fileExtension;
+
+        //Pasta onde o arquivo vai ser salvo
+        $local = '../assets/media/galeria/';
+
+        move_uploaded_file($_FILES['arquivo']['tmp_name'], $local . $newFileName);
+
+    } else {
+        $newFileName = '';
+    }
+
+    $Galeria->setFoto($newFileName);
+    $Galeria->setTitulo($titulo);
 
 
-    $dao->excluirAluno($Aluno);
+    $dao->adicionarFoto($Galeria);
 }
 
-*/
+
+function atualizarFoto() {
+    require_once('../model/ModelInformacoes.php');
+    require_once('../dao/DaoInformacoes.php');
+
+    $dao = new DaoInformacoes();
+    $Galeria = new ModelInformacoes();
+   
+
+    $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
+    $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
+
+    if($_FILES['arquivo']['name'] != ''){ 
+
+        $fileName=$_FILES['arquivo']['name'];
+    
+        //Faz a verificação da extensao do arquivo
+        $extension= explode('.', $fileName);
+        $fileExtension= end( $extension );
+
+	    //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
+        $newFileName= 'imagem_' . time() . '.' . $fileExtension;
+
+	    //Pasta onde o arquivo vai ser salvo
+        $local='../assets/media/galeria/';
+    
+        $destino= $local . $newFileName;
+   
+         move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName);
+              
+    }
+    else{ 
+        $newFileName = '';
+    }
+
+        $Galeria->setFoto($newFileName);
+        $Galeria->setTitulo($titulo);
+        $Galeria->setId($id);
+        $dao->atualizarFoto($Galeria);
+}
 
 
+function excluirFoto() {
+    require_once('../model/ModelInformacoes.php');
+    require_once('../dao/DaoInformacoes.php');
 
-?>
+    $dao = new DaoInformacoes();
+    $Galeria = new ModelInformacoes();
+
+    $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
+
+    $Galeria->setId($id);
+
+
+    $dao->excluirFoto($Galeria);
+}

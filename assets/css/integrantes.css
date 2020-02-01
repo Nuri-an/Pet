@@ -1,0 +1,16 @@
+
+    .borda:hover {
+        border: 2px solid #836FFF;
+    }
+
+    .info {
+        display: none;
+    }
+
+    .nome {
+        display: block;
+    }
+
+    body {
+        overflow-y: hidden;
+    }

@@ -1,3 +1,4 @@
+<?php require 'loader.html' ?>
 <?php
 require '../inc/global/banner.php';
 require '../inc/global/head_start.php';
@@ -13,6 +14,10 @@ $stmtInformacoes->execute();
 $stmtGaleria = $informacoesDao->runQuery("SELECT * FROM galeria");
 $stmtGaleria->execute();
 ?>
+
+<link rel="stylesheet" href="../assets/css/inicio.css">
+
+<script type="text/javascript" src="../assets/js/inicio.js"></script>
 
 <div class="container" style="overflow:hidden;">
     <?php while ($rowInformacoes = $stmtInformacoes->fetch(PDO::FETCH_ASSOC)) {

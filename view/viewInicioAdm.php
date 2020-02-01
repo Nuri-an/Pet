@@ -1,3 +1,4 @@
+<?php require 'loader.html' ?>
 <?php
 require '../inc/global/banner.php';
 require '../inc/global/head_start.php';
@@ -9,29 +10,10 @@ $informacoesDao = new DaoInformacoes();
 
 ?>
 
+<link rel="stylesheet" href="../assets/css/inicio.css">
 
-<script>
-    function negrito() {
-        var textarea = document.getElementById("extra");
-        var text = '';
-        var negrito = text.bold();
-        textarea.value += negrito;
-    }
+<script type="text/javascript" src="../assets/js/inicio.js"></script>
 
-    function italico() {
-        var textarea = document.getElementById("extra");
-        var text = '';
-        var italico = text.italics();
-        textarea.value += italico;
-    }
-
-    function sublinhado() {
-        var textarea = document.getElementById("extra");
-        var text = '<u> </u>';
-        //var sublinhado = text.underline();
-        textarea.value += text;
-    }
-</script>
 <div id="atualiza" style="margin-top: 20px; margin-bottom: 20px;">
     <div class="container" style="overflow:hidden;" id="corpoInfo">
         <?php
@@ -80,7 +62,7 @@ $informacoesDao = new DaoInformacoes();
                 if (($rowGaleria['fotoGaleria'] != '') && (file_exists($arquivo))) {
 
                     echo '<div class="carousel-item" >
-                        <img src="' . $arquivo . '"  class="rounded mx-auto img-fluid d-block" style=" height: 400px; margin-top:100px;" data-toggle="tooltip" alt="' . $titulo . '" title="Clique para substituir imagem"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" data-titulo="' . $rowGaleria['tituloGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
+                        <img src="' . $arquivo . '"  class="rounded mx-auto img-fluid d-block" style=" height: 400px; margin-top:100px;" data-toggle="tooltip" alt="' . $titulo . '" title="Clique para substituir imagem"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" data-titulo="' . $rowGaleria['tituloGaleria'] . '" data-foto="' . $rowGaleria['fotoGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
                         <button type="button" class="btn btn-primary" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir imagem" id="rowExcluirFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" onclick="excluirFoto(' . $i . ')" >
                             <i class="fa fa-trash "></i> 
                         </button>
@@ -222,10 +204,11 @@ $informacoesDao = new DaoInformacoes();
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material">
-                                <label class="" for="foto">
                                     <h5> Upload: </h5>
-                                </label>
-                                <input type="file" class="form-control-file" id="arquivo" name="arquivo" accept="image/*">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="arquivo" name="arquivo" lang="pt" onchange="nomeFoto()">
+                                        <label class="custom-file-label" for="arquivo" id="foto"> </label>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -245,18 +228,6 @@ $informacoesDao = new DaoInformacoes();
 </div>
 
 <!-- END Normal Modal -->
-<script>
-    function tamanhoDinamico() {
-
-        $("textarea").bind("input", function(e) {
-            while ($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
-                $(this).height($(this).height() + 1);
-            };
-        });
-    }
-</script>
-<script src="../assets/js/admin.js"></script>
-
 <?php
 //$cb->get_js('/js/admin.js');
 require '../inc/global/head_end.php';
