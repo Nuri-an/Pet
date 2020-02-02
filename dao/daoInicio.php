@@ -51,31 +51,31 @@ class DaoInicio
         }
     }
 
-    public function atualizarFoto(ModelInicio $galeria)
+    public function atualizarMidia(ModelInicio $galeria)
     {
         try {
             //update user where idprof
             $id = $galeria->getId();
             $titulo = $galeria->getTitulo();
-            $foto = $galeria->getFoto();
+            $midia = $galeria->getMidia();
 
-            if ($foto != '') {
+            if ($midia != '') {
                 $stmtNome = $this->conn->prepare("SELECT * FROM galeria WHERE codGaleria = ?");
                 $stmtNome->bindparam(1, $id);
                 $stmtNome->execute();
 
                 while ($rowGaleria = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
 
-                    $caminho = "../assets/media/galeria/" . $rowGaleria['fotoGaleria'];
+                    $caminho = "../assets/media/galeria/" . $rowGaleria['midiaGaleria'];
                     if (file_exists($caminho)) {
                         unlink($caminho);
                     }
                 }
 
-                $stmt = $this->conn->prepare("UPDATE galeria SET tituloGaleria = ?, fotoGaleria = ? WHERE codGaleria = ? ");
+                $stmt = $this->conn->prepare("UPDATE galeria SET tituloGaleria = ?, midiaGaleria = ? WHERE codGaleria = ? ");
 
                 $stmt->bindparam(1, $titulo);
-                $stmt->bindparam(2, $foto);
+                $stmt->bindparam(2, $midia);
                 $stmt->bindparam(3, $id);
                 $stmt->execute();
 
@@ -103,18 +103,18 @@ class DaoInicio
     }
 
 
-    public function adicionarFoto(ModelInicio $galeria)
+    public function adicionarMidia(ModelInicio $galeria)
     {
         try {
-            $foto = $galeria->getFoto();
+            $midia = $galeria->getMidia();
             $titulo = $galeria->getTitulo();
 
 
-            if ($foto != '') {
-                $stmt = $this->conn->prepare("INSERT INTO galeria(fotoGaleria, tituloGaleria) 
-                                                VALUES (:foto, :titulo)");
+            if ($midia != '') {
+                $stmt = $this->conn->prepare("INSERT INTO galeria(midiaGaleria, tituloGaleria) 
+                                                VALUES (:midia, :titulo)");
 
-                $stmt->bindparam(":foto", $foto);
+                $stmt->bindparam(":midia", $midia);
                 $stmt->bindparam(":titulo", $titulo);
                 $stmt->execute();
 
@@ -130,7 +130,7 @@ class DaoInicio
     }
 
     
-    public function excluirFoto(ModelInicio $galeria) {
+    public function excluirMidia(ModelInicio $galeria) {
         try {
             $id = $galeria->getId();
 
@@ -140,7 +140,7 @@ class DaoInicio
 
             while ($rowGaleria = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
 
-                $caminho = "../assets/media/galeria/". $rowGaleria['fotoGaleria'];
+                $caminho = "../assets/media/galeria/". $rowGaleria['midiaGaleria'];
                 if(file_exists($caminho)){
                     unlink($caminho);
                 }

@@ -6,14 +6,17 @@ switch ($acao) {
     case 'editar':
         atualizarInfo();
         break;
-    case 'adicionar':
+    case 'adicionarF':
         adicionarFoto();
         break;
+    case 'adicionarV':
+        adicionarVideo();
+        break;
     case 'editarF':
-        atualizarFoto();
+        atualizarMidia();
         break;
     case 'excluir':
-        excluirFoto();
+        excluirMidia();
         break;
 }
 
@@ -76,15 +79,52 @@ function adicionarFoto()
         $newFileName = '';
     }
 
-    $Galeria->setFoto($newFileName);
+    $Galeria->setMidia($newFileName);
     $Galeria->setTitulo($titulo);
 
 
-    $dao->adicionarFoto($Galeria);
+    $dao->adicionarMidia($Galeria);
 }
 
+function adicionarVideo()
+{
+    require_once('../model/ModelInicio.php');
+    require_once('../dao/daoInicio.php');
 
-function atualizarFoto() {
+    $dao = new DaoInicio();
+    $Galeria = new ModelInicio();
+
+    $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
+
+    if (($_FILES['video']['name'] != '') && ($_FILES['video']['error'] == 0)) {
+        $fileName = $_FILES['video']['name'];
+
+        //Faz a verificação da extensao do arquivo
+        $extension = explode('.', $fileName);
+        $fileExtension = end($extension);
+
+        //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
+        $newFileName = 'video_' . time() . '.' . $fileExtension;
+
+        echo 'erros ' . var_dump($_FILES['video']) . ' ';
+    
+        //Pasta onde o arquivo vai ser salvo
+        $local = '../assets/media/galeria/';
+
+        move_uploaded_file($_FILES['video']['tmp_name'], $local . $newFileName);
+
+    } else {
+        $newFileName = '';
+    }
+
+    $Galeria->setMidia($newFileName);
+    $Galeria->setTitulo($titulo);
+
+
+    $dao->adicionarMidia($Galeria);
+}
+
+function atualizarMidia() {
     require_once('../model/ModelInicio.php');
     require_once('../dao/daoInicio.php');
 
@@ -118,14 +158,14 @@ function atualizarFoto() {
         $newFileName = '';
     }
 
-        $Galeria->setFoto($newFileName);
+        $Galeria->setMidia($newFileName);
         $Galeria->setTitulo($titulo);
         $Galeria->setId($id);
-        $dao->atualizarFoto($Galeria);
+        $dao->atualizarMidia($Galeria);
 }
 
 
-function excluirFoto() {
+function excluirMidia() {
     require_once('../model/ModelInicio.php');
     require_once('../dao/daoInicio.php');
 
@@ -137,5 +177,5 @@ function excluirFoto() {
     $Galeria->setId($id);
 
 
-    $dao->excluirFoto($Galeria);
+    $dao->excluirMidia($Galeria);
 }

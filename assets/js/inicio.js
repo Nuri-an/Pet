@@ -51,34 +51,50 @@ function sublinhado() {
 
 
 function nomeFoto() {
-  if ($('#arquivo').val()) {
-    var foto = $('#arquivo').val();
-    var letra = '\\';
+  var letra = '\\';
 
-    posic = foto.indexOf(letra); //pega a posicao da letra
-    while (foto.includes(letra)) {
-      foto = foto.substring(posic); //exclui da string todas as letras ate a posicao desejada
+  if ($('#foto').val()) {
+    var midia = $('#foto').val();
+
+    posic = midia.indexOf(letra); //pega a posicao da letra
+    while (midia.includes(letra)) {
+      midia = midia.substring(posic); //exclui da string todas as letras ate a posicao desejada
     }
-    $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
+    $('#divFoto .col-md-12 .form-material .custom-file #midia').html(midia);
+  }
+  if ($('#video').val()) {
+    var midia = $('#video').val();
+    alert(midia);
+    posic = midia.indexOf(letra); //pega a posicao da letra
+    while (midia.includes(letra)) {
+      midia = midia.substring(posic); //exclui da string todas as letras ate a posicao desejada
+    }
+    $('#divVideo .col-md-12 .form-material .custom-file #midia').html(midia);
   }
 }
 
-function escolheGaleria(tipo){
-  if(tipo == 'f'){
+function escolheGaleria(tipo) {
+  if (tipo == 'f') {
     $('#caroselVideo').hide();
     $('#caroselFoto').show();
   }
 
-  if(tipo == 'v'){
+  if (tipo == 'v') {
     $('#caroselFoto').hide();
     $('#caroselVideo').show();
     $("#caroselVideo").carousel('cycle');
   }
 }
 
-function controles(){
+function controles(comando) {
   var vid = document.getElementById("videoG");
-vid.controls = true;
+  if (comando == 'abre') {
+    vid.controls = true;
+  }
+  else {
+    vid.controls = false;
+  }
+
 }
 
 $(document).ready(function () {
@@ -159,6 +175,15 @@ $(document).ready(function () {
   });
 });
 
+
+$.validator.addMethod("size", function (value, element) {
+  if (element.files[0].size < 8388608) {
+      return true
+  } else {
+      return false
+  }
+}), 
+
 $(document).ready(function () {
   $('#btnAdicionarFoto').click(function () {
     jQuery("#adicionarFoto").validate({
@@ -177,15 +202,22 @@ $(document).ready(function () {
       },
       rules: {
         'titulo': {
-          required: false
+          required: true
         },
-        'arquivo': {
+        'foto': {
           extension: "jpg|JPG|png|PNG|jpeg|JPEG"
+        },
+        'video': {
+          extension: "avi|mp4|flv|wmv",
+          size: true
         }
       },
       messages: {
         'titulo': {
           required: 'Por favor, preeencha este campo'
+        },
+        'video': {
+          size: 'O tamanho do arquivo selecionado exede o permitido (8,3MB)!'
         }
       },
       submitHandler: function (form) {
@@ -332,12 +364,28 @@ function editarInfo() {
 
 function adicionarFoto_modal() {
 
-  var acao = 'adicionar';
+  var acao = 'adicionarF';
 
   $('#adicionarFoto').trigger("reset");
+  $('#divFoto').show();
+  $('#divVideo').hide();
   $('#verModalFoto').modal('show');
   $('.modal .modal-dialog .modal-content #nomeP').text("Adicione uma imagem à galeria");
   $('.modal .modal-dialog .modal-content #acao').val(acao);
+
+}
+
+function adicionarVideo_modal(){
+
+  var acao = 'adicionarV';
+
+  $('#adicionarFoto').trigger("reset");
+  $('#divFoto').hide();
+  $('#divVideo').show();
+  $('#verModalFoto').modal('show');
+  $('.modal .modal-dialog .modal-content #nomeP').text("Adicione um vídeo à galeria");
+  $('.modal .modal-dialog .modal-content #acao').val(acao);
+
 
 }
 

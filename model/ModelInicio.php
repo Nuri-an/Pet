@@ -7,7 +7,7 @@ class ModelInicio{
     private $tituloS;
     private $extra;
     private $titulo;
-    private $foto;
+    private $midia;
 
 
 
@@ -32,8 +32,8 @@ class ModelInicio{
     public function getTitulo() {
         return $this->titulo;
     }
-    public function getFoto() {
-        return $this->foto;
+    public function getMidia() {
+        return $this->midia;
     }
 
     public function setId($id) {
@@ -57,8 +57,8 @@ class ModelInicio{
     public function setTitulo($titulo) {
         $this->titulo = $titulo;
     }
-    public function setFoto($foto) {
-        $this->foto = $foto;
+    public function setMidia($midia) {
+        $this->midia = $midia;
     }
 }
 ?>
