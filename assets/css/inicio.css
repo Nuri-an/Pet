@@ -2,3 +2,7 @@
     body {
         overflow-y: hidden;
     }
+    
+    .menuAtivo {
+        border-bottom: 2px solid #fff;
+    }

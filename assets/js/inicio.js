@@ -20,9 +20,11 @@ $(document).ready(function () {
     $('#loader').show();
   });
 
-
   $('#loader').slideUp(1000);
   $('body').css('overflowY', 'auto');
+
+  $("#inicio").addClass('menuAtivo');
+  $("#inicio").addClass('text-white');
 });
 
 
@@ -59,6 +61,24 @@ function nomeFoto() {
     }
     $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
   }
+}
+
+function escolheGaleria(tipo){
+  if(tipo == 'f'){
+    $('#caroselVideo').hide();
+    $('#caroselFoto').show();
+  }
+
+  if(tipo == 'v'){
+    $('#caroselFoto').hide();
+    $('#caroselVideo').show();
+    $("#caroselVideo").carousel('cycle');
+  }
+}
+
+function controles(){
+  var vid = document.getElementById("videoG");
+vid.controls = true;
 }
 
 $(document).ready(function () {

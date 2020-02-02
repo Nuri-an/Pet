@@ -6,7 +6,7 @@ require '../inc/global/config.php';
 
 require_once("../dao/daoInicio.php");
 
-$informacoesDao = new DaoInicio();
+$inicioDao = new DaoInicio();
 
 ?>
 
@@ -23,11 +23,14 @@ $informacoesDao = new DaoInicio();
     <div class="container" style="overflow:hidden;" id="corpoInfo">
         <?php
 
-        $stmtInformacoes = $informacoesDao->runQuery("SELECT * FROM informacoes");
+        $stmtInformacoes = $inicioDao->runQuery("SELECT * FROM informacoes");
         $stmtInformacoes->execute();
 
-        $stmtGaleria = $informacoesDao->runQuery("SELECT * FROM galeria");
+        $stmtGaleria = $inicioDao->runQuery("SELECT * FROM galeria WHERE fotoGaleria LIKE 'imagem%'");
         $stmtGaleria->execute();
+
+        $stmtGaleriaV = $inicioDao->runQuery("SELECT * FROM galeria WHERE fotoGaleria LIKE 'video%'");
+        $stmtGaleriaV->execute();
 
         while ($rowInformacoes = $stmtInformacoes->fetch(PDO::FETCH_ASSOC)) {
             echo '<h1 class="display-4">' . $rowInformacoes['tituloInfo'] . ' </h1>';
@@ -49,13 +52,19 @@ $informacoesDao = new DaoInicio();
         ?>
     </div>
 
-    <iframe src="../controller/controllerGaleria.php" name="controlador" style="display: none;"> </iframe>
+    <hr>
+    </hr>
 
-    <div id="carosel" class="carousel slide" data-ride="carousel">
+    <div class=" text-center" style="margin-top:30px;" role="group" aria-label="Exemplo básico">
+        <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('f')">Fotos</button>
+        <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('v')">Vídeos</button>
+    </div>
+
+    <div id="caroselFoto" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <!-- <form id="adicionarImagem-form" action="../controller/controllerGaleria.php"  method="POST" encyte="multipart/form-data">-->
-                <img src="../assets/media/galeria/imagem_0.png" class="rounded mx-auto img-fluid d-block " style=" height: 400px; margin-top:100px; cursor: pointer;" alt="Adicione uma foto" title="Adicione uma foto" onclick="adicionarFoto_modal()">
+                <img src="../assets/media/galeria/imagem_0.png" class="rounded mx-auto img-fluid d-block " style=" height: 400px; margin-top:30px; cursor: pointer;" alt="Adicione uma foto" title="Adicione uma foto" onclick="adicionarFoto_modal()">
             </div>
             <?php
             $i = 1;
@@ -67,7 +76,7 @@ $informacoesDao = new DaoInicio();
                 if (($rowGaleria['fotoGaleria'] != '') && (file_exists($arquivo))) {
 
                     echo '<div class="carousel-item" >
-                        <img src="' . $arquivo . '"  class="rounded mx-auto img-fluid d-block" style=" height: 400px; margin-top:100px;" data-toggle="tooltip" alt="' . $titulo . '" title="Clique para substituir imagem"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" data-titulo="' . $rowGaleria['tituloGaleria'] . '" data-foto="' . $rowGaleria['fotoGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
+                        <img src="' . $arquivo . '"  class="rounded mx-auto img-fluid d-block" style=" height: 400px; margin-top:30px;" data-toggle="tooltip" alt="' . $titulo . '" title="Clique para substituir imagem"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" data-titulo="' . $rowGaleria['tituloGaleria'] . '" data-foto="' . $rowGaleria['fotoGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
                         <button type="button" class="btn btn-primary" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir imagem" id="rowExcluirFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" onclick="excluirFoto(' . $i . ')" >
                             <i class="fa fa-trash "></i> 
                         </button>
@@ -77,11 +86,53 @@ $informacoesDao = new DaoInicio();
             }
             ?>
 
-            <a class="carousel-control-prev" href="#carosel" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#caroselFoto" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Anterior</span>
             </a>
-            <a class="carousel-control-next" href="#carosel" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#caroselFoto" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Proximo</span>
+            </a>
+        </div>
+    </div>
+
+    <div id="caroselVideo" class="carousel slide" data-ride="carousel" style="display:none;">
+        <div class="carousel-inner">
+            <div class="carousel-item active" >
+                <!-- <form id="adicionarImagem-form" action="../controller/controllerGaleria.php"  method="POST" encyte="multipart/form-data">-->
+                <img src="../assets/media/galeria/imagem_0.png" class="rounded mx-auto img-fluid d-block " style=" height: 400px; margin-top:30px; cursor: pointer;" alt="Adicione uma foto" title="Adicione uma foto" onclick="adicionarFoto_modal()">
+            </div>
+            <?php
+            $i = 1;
+            while ($rowGaleriaV = $stmtGaleriaV->fetch(PDO::FETCH_ASSOC)) {
+
+                $titulo = $rowGaleriaV['tituloGaleria'];
+                $arquivo = "../assets/media/galeria/" . $rowGaleriaV['fotoGaleria'];
+
+                if (($rowGaleriaV['fotoGaleria'] != '') && (file_exists($arquivo))) {
+
+                    echo '<div class="carousel-item " align="center"  onMouseOver="controles()">
+                    <video src="' . $arquivo . '" id="videoG" class="embed-responsive-item" align="middle"style=" height: 400px; width: auto; margin-top:30px; " data-toggle="tooltip" alt="' . $titulo . '" title="Clique para substituir imagem"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleriaV['codGaleria'] . '" data-titulo="' . $rowGaleriaV['tituloGaleria'] . '" data-foto="' . $rowGaleriaV['fotoGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
+                        <object>
+                        <embed src="' . $arquivo . '" type="application/x-shockwave-flash" 
+                        allowfullscreen="true" allowscriptaccess="always" autoplay="true">  		
+                      </object>
+                        </video>
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir imagem" id="rowExcluirFoto_' . $i . '" data-id="' . $rowGaleriaV['codGaleria'] . '" onclick="excluirFoto(' . $i . ')" >
+                            <i class="fa fa-trash "></i> 
+                    </button>
+                    </div>';
+                    $i++;
+                }
+            }
+            ?>
+
+            <a class="carousel-control-prev" href="#caroselVideo" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#caroselVideo" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Proximo</span>
             </a>
@@ -172,11 +223,11 @@ $informacoesDao = new DaoInicio();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
-                <button type="submit" class="btn btn-primary" id="btnEditarInfo" >
+                <button type="submit" class="btn btn-primary" id="btnEditarInfo">
                     <i class="fa fa-check"></i> Salvar
                 </button>
             </div>
-                </form>
+            </form>
         </div>
 
     </div>

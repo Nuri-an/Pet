@@ -10,8 +10,7 @@
 
   <title>PET - Programa de Educação Tutorial</title>
 
-  <link rel="icon" type="image/png" href="../assets/media/logo.png" />
-  <link rel="shortcut icon" href="../assets/media/logo.png" type="image/png" />
+  <link rel="shortcut icon" href="../assets/media/logo.png" type="image/x-png" />
 
   <!-- Locais -->
   <link href="../assets/css/plugins/bootstrap/bootstrap.min.css" rel="stylesheet">

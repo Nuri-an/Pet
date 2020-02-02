@@ -8,13 +8,13 @@
 
         $('#loader').slideUp(1000);
         $('body').css('overflowY', 'auto');
-    });
 
-
-    $(document).ready(function() {
         $("#cpf").mask("999.999.999-99", {
             reverse: true
         });
+
+        $("#integrantes").addClass('menuAtivo');
+        $("#integrantes").addClass('text-white');
     });
 
     function abreT(indice) {
