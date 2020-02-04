@@ -16,7 +16,6 @@ $inicioDao = new DaoInicio();
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/additional-methods.min.js"></script>
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/localization/messages_pt_BR.js"></script>
-<script type="text/javascript" src="../assets/js/plugins/jQuery-Mask/jquery.mask.js"></script>
 <script type="text/javascript" src="../assets/js/inicio.js"></script>
 
 <div id="atualiza" style="margin-top: 20px; margin-bottom: 20px;">
@@ -31,6 +30,9 @@ $inicioDao = new DaoInicio();
 
         $stmtGaleriaV = $inicioDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'video%'");
         $stmtGaleriaV->execute();
+        
+        $stmtGaleriaVE = $inicioDao->runQuery("SELECT * FROM galeria WHERE urlGaleria is not null");
+        $stmtGaleriaVE->execute();
 
         while ($rowInformacoes = $stmtInformacoes->fetch(PDO::FETCH_ASSOC)) {
             echo '<h1 class="display-4">' . $rowInformacoes['tituloInfo'] . ' </h1>';
@@ -77,7 +79,7 @@ $inicioDao = new DaoInicio();
 
                     echo '<div class="carousel-item" >
                         <img src="' . $arquivo . '"  class="rounded mx-auto img-fluid d-block" style=" height: 400px; margin-top:30px;" data-toggle="tooltip" alt="' . $titulo . '" title="Clique para substituir imagem"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" data-titulo="' . $rowGaleria['tituloGaleria'] . '" data-foto="' . $rowGaleria['midiaGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
-                        <button type="button" class="btn btn-primary" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir imagem" id="rowExcluirFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" onclick="excluirFoto(' . $i . ')" >
+                        <button type="button" class="btn btn-primary" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir imagem" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
                             <i class="fa fa-trash "></i> 
                         </button>
                     </div>';
@@ -99,12 +101,11 @@ $inicioDao = new DaoInicio();
 
     <div id="caroselVideo" class="carousel slide" data-ride="carousel" style="display:none;">
         <div class="carousel-inner">
-            <div class="carousel-item active" >
+            <div class="carousel-item active">
                 <!-- <form id="adicionarImagem-form" action="../controller/controllerGaleria.php"  method="POST" encyte="multipart/form-data">-->
                 <img src="../assets/media/galeria/video_0.png" class="rounded mx-auto img-fluid d-block " style=" height: 400px; margin-top:30px; cursor: pointer;" alt="Adicione uma foto" title="Adicione uma foto" onclick="adicionarVideo_modal()">
             </div>
             <?php
-            $i = 1;
             while ($rowGaleriaV = $stmtGaleriaV->fetch(PDO::FETCH_ASSOC)) {
 
                 $titulo = $rowGaleriaV['tituloGaleria'];
@@ -112,22 +113,48 @@ $inicioDao = new DaoInicio();
 
                 if (($rowGaleriaV['midiaGaleria'] != '') && (file_exists($arquivo))) {
 
-                    echo '<div class="carousel-item " align="center"  onMouseOver="controles("abre")" onMouseOut="controles("fecha")">
-                    <video class="embed-responsive-item" type="video/' . explode('.', $rowGaleriaV['midiaGaleria'])[1] . '" src="' . $arquivo . '" 
-                        id="videoG" align="middle"style=" height: 400px; width: auto; margin-top:30px; " data-toggle="tooltip" alt="' . $titulo . '" 
-                        title="Clique para substituir imagem"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleriaV['codGaleria'] . '" data-titulo="' . $rowGaleriaV['tituloGaleria'] . '" data-video="' . $rowGaleriaV['midiaGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
-                        <object>
-                        <embed src="' . $arquivo . '" type="application/x-shockwave-flash" 
-                        allowfullscreen="true" allowscriptaccess="always" autoplay="true">  		
-                      </object>
-                        </video>
-                    <button type="button" class="btn btn-secundary" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir imagem" id="rowExcluirFoto_' . $i . '" data-id="' . $rowGaleriaV['codGaleria'] . '" onclick="excluirFoto(' . $i . ')" >
+                    echo '<div class="carousel-item " align="center"  >
+                    <video class="embed-responsive-item" type="video/' . explode('.', $rowGaleriaV['midiaGaleria'])[1] . '" src="' . $arquivo . '"  onclick=controles("' . $i . '","pause") 
+                        id="videoG_' . $i . '" align="middle"style=" height: 400px;  width: 100%; margin-top:30px; " data-toggle="tooltip" alt="' . $titulo . '" >
+                    </video>
+                    <div id="buttons" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
+                        <button type="button" class="btn btn-primary" data-toggle="tooltip"  title="Excluir vídeo" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleriaV['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
                             <i class="fa fa-trash "></i> 
-                    </button>
-                    <img class="rounded mx-auto img-fluid d-block " src="../assets/media/galeria/player.png" title="Play" style="cursor: pointer; height: 100px; position:absolute; left:50%; top: 50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
-                    </div>';
-                    $i++;
+                        </button>
+                        <button type="button" class="btn btn-primary" data-toggle="tooltip"  title="Clique para substituir vídeo"  id="rowEditarVideo_' . $i . '" data-id="' . $rowGaleriaV['codGaleria'] . '" data-titulo="' . $rowGaleriaV['tituloGaleria'] . '" data-video="' . $rowGaleriaV['midiaGaleria'] . '" data-link="' . $rowGaleriaV['urlGaleria'] . '" onclick="editarVideo_modal(' . $i . ')" >
+                            <i class="fa fa-pencil "></i> 
+                        </button>
+                    </div>
+                    <div  id="playV_' . $i . '">
+                        <img class="rounded mx-auto img-fluid d-block " src="../assets/media/galeria/player.png" title="Play" onclick=controles("' . $i . '","play") style="cursor: pointer; height: 100px; position:absolute; left:50%; top: 50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
+                    </div>
+                        </div>';
                 }
+                $i++;
+            }
+            
+            while ($rowGaleriaVE = $stmtGaleriaVE->fetch(PDO::FETCH_ASSOC)) {
+
+                $titulo = $rowGaleriaVE['tituloGaleria'];
+
+                if ($rowGaleriaVE['urlGaleria'] != '') {
+                    echo '<div class="carousel-item " align="center">
+                        <embed  src="https://www.youtube.com/embed/' . explode('=', $rowGaleriaVE['urlGaleria'])[1] . '"  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen 
+                            onclick=controles("' . $i . '","pause") id="videoG_' . $i . '" style=" height: 400px; width: 100%; margin-top:30px;" alt="Youtube - ' . $titulo . '" />
+                    <div id="buttons" style="position:absolute; left:50%; bottom: 30px; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
+                        <button type="button" class="btn btn-primary" data-toggle="tooltip"  title="Excluir vídeo" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" > 
+                            <i class="fa fa-trash "></i> 
+                        </button>
+                        <button type="button" class="btn btn-primary" data-toggle="tooltip"  title="Clique para substituir vídeo"  id="rowEditarVideo_' . $i . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" data-titulo="' . $rowGaleriaVE['tituloGaleria'] . '" data-video="' . $rowGaleriaVE['midiaGaleria'] . '" onclick="editarVideo_modal(' . $i . ')" >
+                            <i class="fa fa-pencil "></i> 
+                        </button>
+                    </div>
+                    <div style=" text-align:center;">
+                        <h5> Conheça nosso canal no Youtube! </h5>
+                    </div>
+                        </div>';
+                }
+                $i++;
             }
             ?>
 
@@ -245,15 +272,15 @@ $inicioDao = new DaoInicio();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form method="POST" class="form-horizontal" enctype="multipart/form-data" id="adicionarFoto" name="adicionarFoto">
+            <form method="POST" class="form-horizontal" enctype="multipart/form-data" id="adicionarFoto" name="adicionarFoto">
+                <div class="modal-body">
                     <input type="hidden" name="acao" id="acao">
                     <input type="hidden" name="id" id="id">
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material">
                                 <label class="" for="titulo">
-                                    <h5> Título da imagem: </h5>
+                                    <h5> Título: </h5>
                                 </label>
                                 <input type="text" class="form-control" id="titulo" name="titulo"> </input>
                             </div>
@@ -276,22 +303,34 @@ $inicioDao = new DaoInicio();
                             <div class="form-material">
                                 <h5> Upload: </h5>
                                 <div class="custom-file">
+                                <div id="delet" style="border-left:10px;"><i class="fa fa-times" aria-hidden="true"></i></div>
                                     <input type="file" class="custom-file-input" id="video" name="video" lang="pt" onchange="nomeFoto()">
                                     <label class="custom-file-label" for="arquivo" id="midia"> </label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="right" title="Ajuda" data-content="É permitido apenas o envio de imagens com as seguintes extensões: .png, .jpg, .jpeg, .JPG, .PNG, .JPEG">
+                    <hr>
+                    <div class="form-group row" id="divUrl">
+                        <div class="col-md-12">
+                            <div class="form-material">
+                                <label for="videoLink">
+                                    <h5> Vídeo externo (link): </h5>
+                                </label>
+                                <input type="text" class="form-control" id="videoLink" name="videoLink"> </input>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="right" title="Ajuda" data-content="É permitido apenas o envio de vídeos com qualidade igual ou inferior a 360p contendo as seguintes extensões: .avi, .mp4, .flv, .wmv, .ogv, .webm">
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                     </button>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
-                <button type="submit" class="btn btn-primary" id="btnAdicionarFoto">
-                    <i class="fa fa-check"></i> Adicionar
-                </button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
+                    <button type="submit" class="btn btn-primary" id="btnAdicionarMidia">
+                        <i class="fa fa-check"></i> Adicionar
+                    </button>
+                </div>
             </form>
         </div>
     </div>

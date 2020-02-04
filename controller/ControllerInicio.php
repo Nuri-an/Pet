@@ -13,7 +13,10 @@ switch ($acao) {
         adicionarVideo();
         break;
     case 'editarF':
-        atualizarMidia();
+        atualizarFoto();
+        break;
+    case 'editarV':
+        atualizarVideo();
         break;
     case 'excluir':
         excluirMidia();
@@ -59,6 +62,7 @@ function adicionarFoto()
     $Galeria = new ModelInicio();
 
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
+    $link = filter_var($_POST["videoLink"], FILTER_SANITIZE_STRING);
 
     if ($_FILES['arquivo']['name'] != '') {
         $fileName = $_FILES['arquivo']['name'];
@@ -81,6 +85,7 @@ function adicionarFoto()
 
     $Galeria->setMidia($newFileName);
     $Galeria->setTitulo($titulo);
+    $Galeria->setLink($link);
 
 
     $dao->adicionarMidia($Galeria);
@@ -95,6 +100,7 @@ function adicionarVideo()
     $Galeria = new ModelInicio();
 
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
+    $link = filter_var($_POST["videoLink"], FILTER_SANITIZE_STRING);
 
     if (($_FILES['video']['name'] != '') && ($_FILES['video']['error'] == 0)) {
         $fileName = $_FILES['video']['name'];
@@ -116,15 +122,16 @@ function adicionarVideo()
     } else {
         $newFileName = '';
     }
-
+    
     $Galeria->setMidia($newFileName);
     $Galeria->setTitulo($titulo);
+    $Galeria->setLink($link);
 
 
     $dao->adicionarMidia($Galeria);
 }
 
-function atualizarMidia() {
+function atualizarFoto() {
     require_once('../model/ModelInicio.php');
     require_once('../dao/daoInicio.php');
 
@@ -134,6 +141,7 @@ function atualizarMidia() {
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
+    $link = filter_var($_POST["videoLink"], FILTER_SANITIZE_STRING);
 
     if($_FILES['arquivo']['name'] != ''){ 
 
@@ -160,10 +168,53 @@ function atualizarMidia() {
 
         $Galeria->setMidia($newFileName);
         $Galeria->setTitulo($titulo);
+        $Galeria->setLink($link);
         $Galeria->setId($id);
+
         $dao->atualizarMidia($Galeria);
 }
 
+function atualizarVideo()
+{
+    require_once('../model/ModelInicio.php');
+    require_once('../dao/daoInicio.php');
+
+    $dao = new DaoInicio();
+    $Galeria = new ModelInicio();
+
+    $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
+    $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
+    $link = filter_var($_POST["videoLink"], FILTER_SANITIZE_STRING);
+
+    if (($_FILES['video']['name'] != '') && ($_FILES['video']['error'] == 0)) {
+        $fileName = $_FILES['video']['name'];
+
+        //Faz a verificação da extensao do arquivo
+        $extension = explode('.', $fileName);
+        $fileExtension = end($extension);
+
+        //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
+        $newFileName = 'video_' . time() . '.' . $fileExtension;
+
+        echo 'erros ' . var_dump($_FILES['video']) . ' ';
+    
+        //Pasta onde o arquivo vai ser salvo
+        $local = '../assets/media/galeria/';
+
+        move_uploaded_file($_FILES['video']['tmp_name'], $local . $newFileName);
+
+    } else {
+        $newFileName = '';
+    }
+
+    $Galeria->setId($id);
+    $Galeria->setMidia($newFileName);
+    $Galeria->setTitulo($titulo);
+    $Galeria->setLink($link);
+
+
+    $dao->atualizarMidia($Galeria);
+}
 
 function excluirMidia() {
     require_once('../model/ModelInicio.php');

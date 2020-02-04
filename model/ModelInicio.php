@@ -8,6 +8,7 @@ class ModelInicio{
     private $extra;
     private $titulo;
     private $midia;
+    private $link;
 
 
 
@@ -35,6 +36,9 @@ class ModelInicio{
     public function getMidia() {
         return $this->midia;
     }
+    public function getLink() {
+        return $this->link;
+    }
 
     public function setId($id) {
         $this->id = $id;
@@ -59,6 +63,9 @@ class ModelInicio{
     }
     public function setMidia($midia) {
         $this->midia = $midia;
+    }
+    public function setLink($link) {
+        $this->link = $link;
     }
 }
 ?>

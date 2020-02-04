@@ -58,8 +58,9 @@ class DaoInicio
             $id = $galeria->getId();
             $titulo = $galeria->getTitulo();
             $midia = $galeria->getMidia();
+            $link = $galeria->getLink();
 
-            if ($midia != '') {
+            if (($midia != '') || ($link != '')) {
                 $stmtNome = $this->conn->prepare("SELECT * FROM galeria WHERE codGaleria = ?");
                 $stmtNome->bindparam(1, $id);
                 $stmtNome->execute();
@@ -72,11 +73,12 @@ class DaoInicio
                     }
                 }
 
-                $stmt = $this->conn->prepare("UPDATE galeria SET tituloGaleria = ?, midiaGaleria = ? WHERE codGaleria = ? ");
+                $stmt = $this->conn->prepare("UPDATE galeria SET tituloGaleria = ?, midiaGaleria = ?, urlGaleria = ? WHERE codGaleria = ? ");
 
                 $stmt->bindparam(1, $titulo);
                 $stmt->bindparam(2, $midia);
-                $stmt->bindparam(3, $id);
+                $stmt->bindparam(3, $link);
+                $stmt->bindparam(4, $id);
                 $stmt->execute();
 
                 if ($stmt->rowCount() > 0) {
@@ -92,7 +94,7 @@ class DaoInicio
                 $stmt->execute();
 
                 if ($stmt->rowCount() > 0) {
-                    echo 3;
+                    echo 1;
                 } else {
                     echo 2;
                 }
@@ -108,14 +110,16 @@ class DaoInicio
         try {
             $midia = $galeria->getMidia();
             $titulo = $galeria->getTitulo();
+            $link = $galeria->getLink();
 
 
-            if ($midia != '') {
-                $stmt = $this->conn->prepare("INSERT INTO galeria(midiaGaleria, tituloGaleria) 
-                                                VALUES (:midia, :titulo)");
+            if (($midia != '') || ($link != '')) {
+                $stmt = $this->conn->prepare("INSERT INTO galeria(midiaGaleria, tituloGaleria, urlGaleria) 
+                                                VALUES (:midia, :titulo, :link)");
 
                 $stmt->bindparam(":midia", $midia);
                 $stmt->bindparam(":titulo", $titulo);
+                $stmt->bindparam(":link", $link);
                 $stmt->execute();
 
                 if ($stmt->rowCount() > 0) {

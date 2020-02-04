@@ -5,20 +5,20 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link h5" href='index.php'>Início </a>
+        <a class="nav-link h5" id="inicio" href='index.php'>Início </a>
       </li>
     <li class="nav-item">
-      <a class="nav-link h5" href="#">Notícias </a>
+      <a class="nav-link h5" id="noticias" href="#">Notícias </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link h5" href="#">Publicações</a>
+      <a class="nav-link h5" id="publicacoes" href="#">Publicações</a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link h5" href="viewIntegrantesUser.php">Integrantes</a>
+      <a class="nav-link h5" id="integrantes" href="viewIntegrantesUser.php">Integrantes</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link h5" href="#">Projetos</a>
+      <a class="nav-link h5" id="projetos" href="#">Projetos</a>
     </li>
     <li class="nav-item">
       <a class="nav-link h5" href="#">Login</a>

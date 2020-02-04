@@ -25,6 +25,7 @@ $(document).ready(function () {
 
   $("#inicio").addClass('menuAtivo');
   $("#inicio").addClass('text-white');
+
 });
 
 
@@ -69,7 +70,7 @@ function nomeFoto() {
     while (midia.includes(letra)) {
       midia = midia.substring(posic); //exclui da string todas as letras ate a posicao desejada
     }
-    $('#divVideo .col-md-12 .form-material .custom-file #midia').html(midia);
+    $('#divVideo .col-md-12 .form-material .custom-file #midia').html('<div><i class="fa fa-times" aria-hidden="true" style="cursor: pointer;" onclick="delet()"></i> &nbsp' + midia + '</div>');
   }
 }
 
@@ -86,15 +87,24 @@ function escolheGaleria(tipo) {
   }
 }
 
-function controles(comando) {
-  var vid = document.getElementById("videoG");
-  if (comando == 'abre') {
-    vid.controls = true;
+function controles(id, situacao) {
+  var vid = $("#videoG_" + id);
+  if (situacao.includes('play')) {
+    $("#playV_" + id).hide();
+    vid.trigger('play');
+    $("#caroselVideo").carousel('pause');
   }
   else {
-    vid.controls = false;
+    vid.trigger('pause');
+    $("#playV_" + id).show();
+    $("#caroselVideo").carousel('cycle');
   }
 
+}
+
+function delet(){
+    $('#divVideo .col-md-12 .form-material .custom-file #midia').html('<div><i class="fa fa-times" aria-hidden="true" style="cursor: pointer;" onclick="delet()"></i></div>');
+    $('#video').val('');
 }
 
 $(document).ready(function () {
@@ -177,104 +187,141 @@ $(document).ready(function () {
 
 
 $.validator.addMethod("size", function (value, element) {
-  if (element.files[0].size < 8388608) {
+  if (value != '') {
+    if (element.files[0].size <= 8388608) {
       return true
-  } else {
+    } else {
       return false
+    }
+  }else{
+    return true
   }
-}), 
-
-$(document).ready(function () {
-  $('#btnAdicionarFoto').click(function () {
-    jQuery("#adicionarFoto").validate({
-      focusInvalid: true,
-      errorClass: 'invalid-feedback animated fadeInDown',
-      errorElement: 'div',
-      errorPlacement: (error, e) => {
-        jQuery(e).parents('.form-group > div').append(error);
-      },
-      highlight: e => {
-        jQuery(e).closest('.form-group').removeClass('is-invalid').addClass('is-invalid');
-      },
-      success: e => {
-        jQuery(e).closest('.form-group').removeClass('is-invalid');
-        jQuery(e).remove();
-      },
-      rules: {
-        'titulo': {
-          required: true
-        },
-        'foto': {
-          extension: "jpg|JPG|png|PNG|jpeg|JPEG"
-        },
-        'video': {
-          extension: "avi|mp4|flv|wmv",
-          size: true
-        }
-      },
-      messages: {
-        'titulo': {
-          required: 'Por favor, preeencha este campo'
-        },
-        'video': {
-          size: 'O tamanho do arquivo selecionado exede o permitido (8,3MB)!'
-        }
-      },
-      submitHandler: function (form) {
-        alert("enta coletando dados do form");
-        var formdata = new FormData($("form[name='adicionarFoto']")[0]);
-
-        dialog = bootbox.dialog({
-          message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
-          closeButton: false
-        });
-
-        $.ajax({
-          type: 'POST',
-          url: "../controller/ControllerInicio.php",
-          data: formdata,
-          processData: false,
-          contentType: false,
-
-          success: function (result) {
-            alert(result);
-
-            if (result == 1) {
-              dialog.init(function () {
-                dialog.find('.bootbox-body').html('Imagem enviada com sucesso!');
-              });
-              setTimeout(function () {
-                dialog.modal('hide');
-              }, 3000); //3 segundos depois executa
-            }
-            else {
-              dialog.init(function () {
-                dialog.find('.bootbox-body').html('Ocorreu um erro no processamento. Tente novamente mais tarde.');
-              });
-              setTimeout(function () {
-                dialog.modal('hide');
-              }, 3000); //3 segundos depois executa
-            }
-          }
-        });
-        atualizarInicio();
-        $('#verModalFoto').modal('hide');
-        $('#adicionarFoto').trigger("reset");
-        return false;
-      }
-
-    });
-    alert("entrou");
-  });
+});
+$.validator.addMethod("noLink", function (value, element) {
+  if (value != '') {
+    var link = $('#videoLink');
+    if (link.val() == '') {
+      return true
+    } else {
+      return false
+    }
+  }else{
+    return true
+  }
+});
+$.validator.addMethod("noVideo", function (value, element) {
+  if (value != '') {
+    var video = $('#video')
+    if (video.val() == '') {
+      return true
+    } else {
+      return false
+    }
+  }else{
+    return true
+  }
 });
 
+  $(document).ready(function () {
+    $('#btnAdicionarMidia').click(function () {
+      jQuery("#adicionarFoto").validate({
+        focusInvalid: true,
+        errorClass: 'invalid-feedback animated fadeInDown',
+        errorElement: 'div',
+        errorPlacement: (error, e) => {
+          jQuery(e).parents('.form-group > div').append(error);
+        },
+        highlight: e => {
+          jQuery(e).closest('.form-group').removeClass('is-invalid').addClass('is-invalid');
+        },
+        success: e => {
+          jQuery(e).closest('.form-group').removeClass('is-invalid');
+          jQuery(e).remove();
+        },
+        rules: {
+          'titulo': {
+            required: true
+          },
+          'foto': {
+            extension: "jpg|JPG|png|PNG|jpeg|JPEG"
+          },
+          'video': {
+            extension: "avi|mp4|flv|wmv|ogv|webm",
+            size: true,
+            noLink: true
+          },
+          'videoLink': {
+            url: true,
+            noVideo: true
+          }
+        },
+        messages: {
+          'titulo': {
+            required: 'Por favor, preeencha este campo.'
+          },
+          'video': {
+            size: 'O tamanho do arquivo selecionado exede o permitido (8,3MB)!',
+            noLink: 'Por favor, escolha entre um vídeo externo ou um upload.'
+          },
+          'videoLink':{
+            noVideo: 'Por favor, escolha entre um vídeo externo ou um upload.'
+          }
+        },
+        submitHandler: function (form) {
+          alert("enta coletando dados do form");
+          var formdata = new FormData($("form[name='adicionarFoto']")[0]);
+
+          dialog = bootbox.dialog({
+            message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
+            closeButton: false
+          });
+
+          $.ajax({
+            type: 'POST',
+            url: "../controller/ControllerInicio.php",
+            data: formdata,
+            processData: false,
+            contentType: false,
+
+            success: function (result) {
+              alert(result);
+
+              if (result == 1) {
+                dialog.init(function () {
+                  dialog.find('.bootbox-body').html('Envio completado com sucesso!');
+                });
+                setTimeout(function () {
+                  dialog.modal('hide');
+                }, 3000); //3 segundos depois executa
+              }
+              else {
+                dialog.init(function () {
+                  dialog.find('.bootbox-body').html('Ocorreu um erro no processamento. Tente novamente mais tarde.');
+                });
+                setTimeout(function () {
+                  dialog.modal('hide');
+                }, 3000); //3 segundos depois executa
+              }
+            }
+          });
+          atualizarInicio();
+          $('#verModalFoto').modal('hide');
+          $('#adicionarFoto').trigger("reset");
+          return false;
+        }
+
+      });
+      alert("entrou");
+    });
+  });
 
 
-function excluirFoto(id) {
 
-  var id = $('#rowExcluirFoto_' + id).attr("data-id");
+function excluirMidia(id) {
+
+  var id = $('#rowExcluirMidia_' + id).attr("data-id");
   bootbox.confirm({
-    message: "Você realmente deseja excluir essa foto da galeria ?",
+    message: "Você realmente deseja excluir essa midia da galeria ?",
     buttons: {
       confirm: {
         label: 'Sim',
@@ -302,7 +349,7 @@ function excluirFoto(id) {
             //alert(resultado);
             if (resultado == 1) {
               dialog.init(function () {
-                dialog.find('.bootbox-body').html('A foto foi excluída com sucesso!');
+                dialog.find('.bootbox-body').html('Excluída com sucesso!');
               });
               setTimeout(function () {
                 dialog.modal('hide');
@@ -312,7 +359,7 @@ function excluirFoto(id) {
 
             else {
               dialog.init(function () {
-                dialog.find('.bootbox-body').html('Não foi possível excluir a foto. Tente novamente mais tarde.');
+                dialog.find('.bootbox-body').html('Não foi possível excluir. Tente novamente mais tarde.');
               });
               setTimeout(function () {
                 dialog.modal('hide');
@@ -362,26 +409,32 @@ function editarInfo() {
 
 }
 
+
+
 function adicionarFoto_modal() {
 
   var acao = 'adicionarF';
 
   $('#adicionarFoto').trigger("reset");
+  $('#divFoto .col-md-12 .form-material .custom-file #midia').html("");
   $('#divFoto').show();
   $('#divVideo').hide();
+  $('#divUrl').hide();
   $('#verModalFoto').modal('show');
   $('.modal .modal-dialog .modal-content #nomeP').text("Adicione uma imagem à galeria");
   $('.modal .modal-dialog .modal-content #acao').val(acao);
 
 }
 
-function adicionarVideo_modal(){
+function adicionarVideo_modal() {
 
   var acao = 'adicionarV';
 
-  $('#adicionarFoto').trigger("reset");
+  $('#adicionarFoto').trigger('reset');
+  $('#divVideo .col-md-12 .form-material .custom-file #midia').html('<div><i class="fa fa-times" aria-hidden="true" style="cursor: pointer;" onclick="delet()"></i></div>');
   $('#divFoto').hide();
   $('#divVideo').show();
+  $('#divUrl').show();
   $('#verModalFoto').modal('show');
   $('.modal .modal-dialog .modal-content #nomeP').text("Adicione um vídeo à galeria");
   $('.modal .modal-dialog .modal-content #acao').val(acao);
@@ -398,7 +451,11 @@ function editarFoto_modal(id) {
   $('#adicionarFoto').trigger("reset");
   $('#verModalFoto').modal('show');
 
-  $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
+  $('#divFoto').show();
+  $('#divVideo').hide();
+  $('#divUrl').hide();
+
+  $('#divFoto .col-md-12 .form-material .custom-file #midia').html(foto);
 
   $('.modal .modal-dialog .modal-content #nomeP').text("Substitua a imagem ou altere seu título");
   $('.modal .modal-dialog .modal-content #adicionarFoto #id').val(cod);
@@ -407,6 +464,29 @@ function editarFoto_modal(id) {
 
 }
 
+
+function editarVideo_modal(id) {
+  var cod = $('#rowEditarVideo_' + id).attr("data-id");
+  var titulo = $('#rowEditarVideo_' + id).attr("data-titulo");
+  var video = $('#rowEditarVideo_' + id).attr("data-video");
+  var link = $('#rowEditarVideo_' + id).attr("data-link");
+  var acao = 'editarV';
+
+  $('#adicionarFoto').trigger('reset');
+  $('#verModalFoto').modal('show');
+  $('#divFoto').hide();
+  $('#divVideo').show();
+  $('#divUrl').show();
+
+  $('#divVideo .col-md-12 .form-material .custom-file #midia').html('<div><i class="fa fa-times" aria-hidden="true" style="cursor: pointer;" onclick="delet()"></i> &nbsp' + video + '</div>');
+
+  $('.modal .modal-dialog .modal-content #nomeP').text("Substitua o vídeo ou altere seu título");
+  $('.modal .modal-dialog .modal-content #adicionarFoto #id').val(cod);
+  $('.modal .modal-dialog .modal-content  #titulo').val(titulo);
+  $('.modal .modal-dialog .modal-content  #videoLink').val(link);
+  $('.modal .modal-dialog .modal-content  #acao').val(acao);
+
+}
 
 function openNewModal() {
   //fecha o elemento erro na validação
