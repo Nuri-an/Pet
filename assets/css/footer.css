@@ -1,0 +1,90 @@
+.footer{
+    float: left;
+    width: 100vw;
+    background-color: black;
+    opacity: 0.5;
+    border-top: 20px solid white;
+    padding: 20px;
+    margin: 0px;
+}
+
+@media only screen and (min-width: 560px){
+    
+    .endereco{
+        align-items: center;
+    }
+
+    .adress{
+        float: left;
+        margin-left: 100px;
+        margin-bottom: 50px;
+    }
+
+    .home{
+        float: left;
+        margin-left: 100px;
+        margin-bottom: 50px;
+    }
+
+    .phone{
+        float: left;
+        margin-left: 100px;
+        margin-bottom: 50px;
+
+    }
+    .email{
+        float: left;
+        margin-left: 100px;
+        margin-bottom: 50px;
+
+    }
+
+    .desenvolvedor{
+        width: 100%;
+        margin-top: 5px;
+        margin-right: 0px;
+        text-align: center;
+        float: left;
+    }
+
+    .versao{
+        margin: 0px
+    }
+}
+
+@media only screen and (max-width: 559px){
+    
+    .home{
+        margin-top: 20px;
+    }
+    .phone{
+        margin-top: 20px;
+    }
+    .email{
+        margin-top: 20px;
+    }
+    .desenvolvedor{
+        width: 100%;
+        margin-top: 10px;
+        margin-right: 0px;
+        text-align: center;
+    }
+
+    .versao{
+        margin: 0px
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+
+    .desenvolvedor{
+        width: 100%;
+        float: left;
+        text-align: center;
+        margin-top: -10px;
+    }
+
+    .versao{
+        margin-top: 20px;
+    }
+}

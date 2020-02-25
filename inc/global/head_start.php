@@ -28,6 +28,7 @@
   <style type="text/css">
     body {
       overflow-x: hidden;
+      overflow-y: hidden;
     }
   </style>
 
@@ -37,4 +38,7 @@
 <body>
   <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
   <script src="../assets/js/plugins/google/apis/jquery.min.js"></script>
+  <div id="loader" class="text-center" style="height: 100vh; width: 100vw; display:block; background-color:#ADD8E6;">
+    <div class="spinner-grow text-info" style="width: 10rem; height: 10rem;  margin-top:40vh;" role="status"></div>
+</div>
   

@@ -1,5 +1,8 @@
 
     $(document).ready(function() {
+        $("#integrantes").addClass('menuAtivo');
+        $("#integrantes").addClass('text-white');
+        
         $(".nav-link").click(function() {
             $('body').css('overflowY', 'hidden');
             $('#loader').show();
@@ -13,37 +16,31 @@
             reverse: true
         });
 
-        $("#integrantes").addClass('menuAtivo');
-        $("#integrantes").addClass('text-white');
     });
 
     function abreT(indice) {
         var conteudo = $('#conteudoT' + indice);
-        var primeiroNome = $('#primeiroNomeT' + indice);
+        var foto = $('#fotoT' + indice);
         if (conteudo.hasClass('info')) {
-            $("#carouselTutores").carousel('pause');
-            conteudo.removeClass('info');
-            primeiroNome.hide();
+            conteudo.hide();
+            foto.show();
         } else {
-            $("#carouselTutores").carousel('cycle');
-            conteudo.addClass('info');
-            primeiroNome.show();
+            foto.hide();
+            conteudo.show();
 
         }
     }
 
     function abreD(indice) {
         var conteudo = $('#conteudoD' + indice);
-        var primeiroNome = $('#primeiroNomeD' + indice);
+        var foto = $('#fotoD' + indice);
         if (conteudo.hasClass('info')) {
-            $("#carouselDiscentes").carousel('pause');
+            foto.slideUp();
             conteudo.removeClass('info');
-            primeiroNome.hide();
         } else {
-            $("#carouselDiscentes").carousel('cycle');
+            conteudo.slideDown();
+            foto.show();
             conteudo.addClass('info');
-            primeiroNome.show();
-
         }
     }
 

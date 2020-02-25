@@ -15,6 +15,10 @@ function atualizarInicio() {
 }
 
 $(document).ready(function () {
+  
+  $("#inicio").addClass('menuAtivo');
+  $("#inicio").addClass('text-white');
+
   $(".nav-link").click(function () {
     $('body').css('overflowY', 'hidden');
     $('#loader').show();
@@ -22,10 +26,6 @@ $(document).ready(function () {
 
   $('#loader').slideUp(1000);
   $('body').css('overflowY', 'auto');
-
-  $("#inicio").addClass('menuAtivo');
-  $("#inicio").addClass('text-white');
-
 });
 
 

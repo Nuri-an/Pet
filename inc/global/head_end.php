@@ -1,3 +1,6 @@
+<?php
+require 'footer.php';
+?>
 <!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessário -->
 
   <!-- Externos -->
@@ -12,6 +15,5 @@
             $('[data-toggle="popover"]').popover()
         })
     </script>
-    <div>
 </body>
 </html>

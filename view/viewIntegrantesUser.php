@@ -1,26 +1,28 @@
-<?php require 'loader.html' ?>
 <?php
-require '../inc/global/banner.php';
 require '../inc/global/head_start.php';
+require '../inc/global/banner.php';
 require '../inc/global/config.php';
 
-require_once("../dao/DaoInformacoes.php");
+require_once("../dao/daoIntegrantes.php");
 
-$informacoesDao = new DaoInformacoes();
-
-$stmtTutores = $informacoesDao->runQuery("SELECT * FROM integrantes i, tutores t WHERE i.codIntegrante = t.codIntegrante");
-$stmtTutores->execute();
-
-$stmtDiscentes = $informacoesDao->runQuery("SELECT * FROM integrantes i, discentes d WHERE i.codIntegrante = d.codIntegrante");
-$stmtDiscentes->execute();
-
+$integrantesDao = new DaoIntegrantes();
 ?>
 
 <link rel="stylesheet" href="../assets/css/integrantes.css">
 
 <script type="text/javascript" src="../assets/js/integrantes.js"></script>
 
-<div class="container" style="overflow:hidden;">
+<?php
+$stmtTutores = $integrantesDao->runQuery("SELECT * FROM integrantes i, tutores t WHERE i.codIntegrante = t.codIntegrante");
+$stmtTutores->execute();
+
+$stmtDiscentes = $integrantesDao->runQuery("SELECT * FROM integrantes i, discentes d WHERE i.codIntegrante = d.codIntegrante");
+$stmtDiscentes->execute();
+
+?>
+
+
+<div class="container">
     <h2 class="display-4 text-align: center;"> Tutores </h2>
     <hr>
     </hr>
@@ -48,14 +50,14 @@ $stmtDiscentes->execute();
 
             echo '
                 <div  style="width: 300px; float: left; margin-bottom:10px;">
-                    <div class="card borda">
-                        <div  onclick="abreT(' . $i . ')">
+                    <div class="card borda" onclick="abreT(' . $i . ')">
+                        <div id="fotoT' . $i . '">
                             <img class="card-img-top mx-auto rounded img-fluid d-block" src="' . $srcFotoT . '"  alt="" style= style="height:250px;" >
-                            <div id="primeiroNomeT' . $i . '" >
+                            <div>
                                 <h5 class="card-title"> &nbsp ' . explode(' ', $rowTutores['nomeIntegrante'])[0] . ' </h5>
                             </div>
                         </div>
-                        <div class="card-body info" id="conteudoT' . $i . '">
+                        <div id="conteudoT' . $i . '">
                             <h5 class="card-title">' . $rowTutores['nomeIntegrante'] . '</h5>
                             <p>
                                 <i class="fa fa-address-card-o"></i>&nbsp ' . $rowTutores['emailIntegrante'] . '
@@ -63,8 +65,10 @@ $stmtDiscentes->execute();
                                 <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;"></i><a href="' . $rowTutores['socialIntegrante'] . '"> &nbsp Linkedin</a>
                                 <br />
                                 <i class="fa fa-handshake-o" aria-hidden="true"></i> &nbsp ' . $rowTutores['situacaoIntegrante'] . '
-                                </p>
-                            <p class="card-text"><small class="text-muted">Ativo desde ' . $newDateT . '</small></p>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">Ativo desde ' . $newDateT . '</small>
+                            </p>
                         </div>
                     </div>
                 </div>';
@@ -97,15 +101,15 @@ $stmtDiscentes->execute();
             }
 
             echo '
-                <div  style="width: 300px; float: left; margin-bottom:10px;">
-                    <div class="card borda">
-                        <div class="" onclick="abreD(' . $i . ')">
+                <div  style="width: 300px; float: left; margin-bottom:30px; margim-left:50px;">
+                    <div class="card borda" onclick="abreD(' . $i . ')" style="height:300px;" >
+                        <div id="fotoD' . $i . '">
                             <img class="card-img-top mx-auto rounded img-fluid d-block"  src="' . $srcFotoD . '"  alt="" style="height:250px;" >
-                            <div id="primeiroNomeD' . $i . '" >
+                            <div style="margin-top:5px;">
                                 <h5 class="card-title"> &nbsp ' . explode(' ', $rowDiscentes['nomeIntegrante'])[0] . ' </h5>
                             </div>
                         </div>
-                        <div class="card-body info" id="conteudoD' . $i . '">
+                        <div class="info container" id="conteudoD' . $i . '"  style="margin-top:70px;">
                             <h5 class="card-title">' . $rowDiscentes['nomeIntegrante'] . '</h5>
                             <p>
                                 <i class="fa fa-address-card-o"></i>&nbsp ' . $rowDiscentes['emailIntegrante'] . '
@@ -114,7 +118,9 @@ $stmtDiscentes->execute();
                                 <br />
                                 <i class="fa fa-handshake-o" aria-hidden="true"></i> &nbsp ' . $rowDiscentes['situacaoIntegrante'] . '
                                 </p>
-                            <p class="card-text"><small class="text-muted">Ativo desde ' . $newDateD . '</small></p>
+                            <p class="card-text">
+                                <small class="text-muted">Ativo desde ' . $newDateD . '</small>
+                            </p>
                         </div>
                     </div>
                 </div>';
@@ -123,6 +129,7 @@ $stmtDiscentes->execute();
         ?>
     </div>
 </div>
+    </div>
 <?php
 require '../inc/global/head_end.php';
 ?>
