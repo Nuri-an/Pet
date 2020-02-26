@@ -2,7 +2,7 @@
     $(document).ready(function() {
         $("#integrantes").addClass('menuAtivo');
         $("#integrantes").addClass('text-white');
-        
+
         $(".nav-link").click(function() {
             $('body').css('overflowY', 'hidden');
             $('#loader').show();
@@ -22,12 +22,12 @@
         var conteudo = $('#conteudoT' + indice);
         var foto = $('#fotoT' + indice);
         if (conteudo.hasClass('info')) {
-            conteudo.hide();
-            foto.show();
+            foto.slideUp();
+            conteudo.removeClass('info');
         } else {
-            foto.hide();
-            conteudo.show();
-
+            conteudo.slideDown();
+            foto.show();
+            conteudo.addClass('info');
         }
     }
 
@@ -300,6 +300,17 @@ function verInformacoes(id) {
 
     $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
     $("input[name='situacao'][value='" + situacao + "']").prop('checked', true);
+
+    if(situacao == 'Tutor(a)'){
+        $("input[name='situacao'][value='Bolsista']").prop('disabled', true);
+        $("input[name='situacao'][value='Voluntário']").prop('disabled', true);
+        $("input[name='situacao'][value='Tutor(a)']").prop('disabled', false);
+    }
+    else if(situacao != 'Tutor(a)'){
+        $("input[name='situacao'][value='Bolsista']").prop('disabled', false);
+        $("input[name='situacao'][value='Voluntário']").prop('disabled', false);
+        $("input[name='situacao'][value='Tutor(a)']").prop('disabled', true);
+    }
 
     $('.modal .modal-dialog .modal-content #tituloP').text("Edite as informações");
     $('.modal .modal-dialog .modal-content #id').val(idIntegrante);

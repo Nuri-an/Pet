@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" id="navbar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar" style=" width: 100vw;">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -34,4 +34,4 @@
   </div>
 </nav>
 
-<div class="jumbotron" id="corpo" style="overflow:hidden; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; margin-top: 0px;">
+<div class="jumbotron mobile ">

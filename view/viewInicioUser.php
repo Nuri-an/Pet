@@ -39,15 +39,15 @@ $inicioDao = new DaoInicio(); ?>
 </hr>
 
 <div class="container" style="overflow:hidden;">
-  <div class=" text-center" role="group" aria-label="Exemplo básico">
+  <div class=" text-center" role="group" aria-label="Exemplo básico" style="margin-top:20px;">
     <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('f')">Galeria de Fotos</button>
     <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('v')">Galeria de Vídeos</button>
   </div>
 
   <div id="caroselFoto" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="../assets/media/galeria/imagem_2.png" class="rounded mx-auto img-fluid d-block" alt="capa" title="Capa" style=" height: 400px; margin-top:100px;">
+      <div class="carousel-item active" >
+        <img src="../assets/media/galeria/imagem_2.png" class="rounded mx-auto img-fluid d-block" alt="capa" title="Capa" style=" height: 400px; margin-top:30px;">
       </div>
       <?php
       while ($rowGaleria = $stmtGaleria->fetch(PDO::FETCH_ASSOC)) {
@@ -57,7 +57,7 @@ $inicioDao = new DaoInicio(); ?>
 
         if (($rowGaleria['tituloGaleria'] != '') && (file_exists($arquivo))) {
 
-          echo '<div class="carousel-item" >
+          echo '<div class="carousel-item">
                     <img src="' . $arquivo . '"  class="rounded mx-auto img-fluid d-block" style=" height: 400px; margin-top:30px;" data-toggle="tooltip"  alt="' . $titulo . '" title="' . $titulo . '">
                   </div>';
         }
@@ -89,9 +89,9 @@ $inicioDao = new DaoInicio(); ?>
 
         if (($rowGaleriaV['midiaGaleria'] != '') && (file_exists($arquivo))) {
 
-          echo '<div class="carousel-item " align="center"  >
+          echo '<div class="carousel-item " align="center" style=" height: 400px; width: 100%; margin-top:30px;" >
                     <video class="embed-responsive-item" type="video/' . explode('.', $rowGaleriaV['midiaGaleria'])[1] . '" src="' . $arquivo . '"  onclick=controles("' . $i . '","pause") 
-                        id="videoG_' . $i . '" align="middle"style=" height: 400px;  width: 100%; margin-top:30px; " data-toggle="tooltip" alt="' . $titulo . '" >
+                        id="videoG_' . $i . '" align="middle"style=" height: 400px;  width: 100%;" data-toggle="tooltip" alt="' . $titulo . '" >
                     </video>
                     <div  id="playV_' . $i . '">
                         <img class="rounded mx-auto img-fluid d-block " src="../assets/media/galeria/player.png" title="Play" onclick=controles("' . $i . '","play") style="cursor: pointer; height: 100px; position:absolute; left:50%; top: 50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
@@ -106,13 +106,13 @@ $inicioDao = new DaoInicio(); ?>
         $titulo = $rowGaleriaVE['tituloGaleria'];
 
         if ($rowGaleriaVE['urlGaleria'] != '') {
-          echo '<div class="carousel-item " align="center">
-                        <embed  src="https://www.youtube.com/embed/' . explode('=', $rowGaleriaVE['urlGaleria'])[1] . '"  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen 
-                            onclick=controles("' . $i . '","pause") id="videoG_' . $i . '" style=" height: 400px; width: 100%; margin-top:30px;" alt="Youtube - ' . $titulo . '" />
+          echo '<div class="carousel-item " align="center" style=" height: 400px; width: 100%; margin-top:30px;">
+                    <embed  src="https://www.youtube.com/embed/' . explode('=', $rowGaleriaVE['urlGaleria'])[1] . '"  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen 
+                       onclick=controles("' . $i . '","pause") id="videoG_' . $i . '" style=" height: 340px; width: 100%;" alt="Youtube - ' . $titulo . '" />
                     <div style=" text-align:center;">
                         <h5> Conheça nosso canal no Youtube! </h5>
                     </div>
-                        </div>';
+                </div>';
         }
         $i++;
       }

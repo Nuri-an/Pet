@@ -1,7 +1,6 @@
-<?php require 'loader.html' ?>
 <?php
-require '../inc/global/banner.php';
 require '../inc/global/head_start.php';
+require '../inc/global/banner.php';
 require '../inc/global/config.php';
 
 require_once("../dao/daoInicio.php");
@@ -335,7 +334,7 @@ $inicioDao = new DaoInicio();
         </div>
     </div>
 </div>
-
+        </div>
 <!-- END Normal Modal -->
 <?php
 //$cb->get_js('/js/admin.js');

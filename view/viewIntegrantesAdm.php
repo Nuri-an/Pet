@@ -1,7 +1,6 @@
-<?php require 'loader.html' ?>
 <?php
-require '../inc/global/banner.php';
 require '../inc/global/head_start.php';
+require '../inc/global/banner.php';
 require '../inc/global/config.php';
 
 require_once("../dao/DaoIntegrantes.php");
@@ -28,12 +27,11 @@ $integrantesDao = new DaoIntegrantes();
     $stmtDiscentes = $integrantesDao->runQuery("SELECT * FROM integrantes i, discentes d WHERE i.codIntegrante = d.codIntegrante");
     $stmtDiscentes->execute();
     ?>
-
-    <div class="container" style="overflow:hidden;">
-        <h2 class="display-4 text-align: center;"> Tutores </h2>
-        <hr>
-        </hr>
-        <div class="card-deck" style="width: 100%; justify-content: center; align-items: center;">
+ <!-- 355 - 575 -->
+    <div class="container">
+        <h2 class="display-4" style="text-align: center;"> Tutores </h2>
+        <hr></hr>
+        <div class="card-deck" style="width: 100%; justify-content: center; align-items: center; float: left;">
             <?php
             $i = 1;
 
@@ -50,18 +48,18 @@ $integrantesDao = new DaoIntegrantes();
 
 
                 echo '
-                <div  style="width: 300px; float: left; margin-bottom:10px;">
-                    <div class="card borda">
-                        <div  onclick="abreT(' . $i . ')">
-                            <img class="card-img-top mx-auto rounded img-fluid d-block" src="' . $srcFotoT . '"  alt="" style= style="height:250px;" >
-                            <button type="button" class="btn btn-primary" style="margin-right:50%; margin-left:50%;-webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Exluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowTutores['codIntegrante'] . '"  data-tipo="tutor" onclick="excluir(' . $i . ')">
+                <div class="card-integrante">
+                    <div class="card borda card-foto" onclick="abreT(' . $i . ')">
+                        <div id="fotoT' . $i . '">
+                            <img class="card-img-top mx-auto rounded img-fluid d-block" src="' . $srcFotoT . '" >
+                            <button type="button" class="btn btn-primary excluir-button" title="Exluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowTutores['codIntegrante'] . '"  data-tipo="tutor" onclick="excluir(' . $i . ')">
                                 <i class="fa fa-trash"></i> 
                             </button>
-                            <div id="primeiroNomeT' . $i . '" >
+                            <div style="margin-top: 5px;">
                                 <h5 class="card-title"> &nbsp ' . explode(' ', $rowTutores['nomeIntegrante'])[0] . ' </h5>
                             </div>
                         </div>
-                        <div class="card-body info" id="conteudoT' . $i . '">
+                        <div class="info container" id="conteudoT' . $i . '" style="margin-top:70px;">
                             <h5 class="card-title">' . $rowTutores['nomeIntegrante'] . '</h5>
                             <p>
                                 <i class="fa fa-address-card-o"></i>&nbsp ' . $rowTutores['emailIntegrante'] . '
@@ -73,17 +71,19 @@ $integrantesDao = new DaoIntegrantes();
                                     <i class="fa fa-pencil"></i> 
                                 </button>
                             </p>
-                            <p class="card-text"><small class="text-muted">Ativo desde ' . $newDateT . '</small></p>
+                            <p class="card-text">
+                                <small class="text-muted">Ativo desde ' . $newDateT . '</small>
+                            </p>
                         </div>
                     </div>
                 </div>';
                 $i++;
             }
             ?>
-            <div style="width: 300px; float: left;" id="modalTutores">
-                <div class="card borda" onclick="newTutores()">
-                    <img class="card-img-top" src="../assets/media/integrantes/foto_0.png" alt="" title="Adicionar novo integrante">
-                    <div id="">
+            <div class="card-integrante" id="modalTutores">
+                <div class="card borda card-foto" onclick="newTutores()">
+                    <img class="card-img-top" src="../assets/media/integrantes/foto_0.png" alt="" title="Adicionar novo integrante" >
+                    <div style="margin-top: 5px;">
                         <h5 class="card-title"> &nbsp Adicionar novo tutor(a) </h5>
                     </div>
                 </div>
@@ -91,9 +91,8 @@ $integrantesDao = new DaoIntegrantes();
         </div>
     </div>
     <div class="container" style="margin-top: 30px; ">
-        <h2 class="display-4 text-align: center;"> Discentes </h2>
+        <h2 class="display-4" style="text-align: center;"> Alunos </h2>
         <hr>
-        </hr>
         <div class="card-deck" style="width: 100%; justify-content: center; align-items: center;">
             <?php
             while ($rowDiscentes = $stmtDiscentes->fetch(PDO::FETCH_ASSOC)) {
@@ -108,18 +107,18 @@ $integrantesDao = new DaoIntegrantes();
                 }
 
                 echo '
-                <div  style="width: 300px; float: left; margin-bottom:10px;">
-                    <div class="card borda" >
-                        <div class="" onclick="abreD(' . $i . ')">
-                            <img class="card-img-top mx-auto rounded img-fluid d-block"  src="' . $srcFotoD . '"  alt="" style="height:250px;" >
-                            <button type="button" class="btn btn-primary" style="margin-right:50%; margin-left:50%;-webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowDiscentes['codIntegrante'] . '"  data-tipo="discente" onclick="excluir(' . $i . ')">
+                <div  class="card-integrante">
+                    <div class="card borda card-foto" onclick="abreD(' . $i . ')">
+                        <div id="fotoD' . $i . '">
+                            <img class="card-img-top mx-auto rounded img-fluid d-block"  src="' . $srcFotoD . '"  >
+                            <button type="button" class="btn btn-primary" style="margin-top: 5px; margin-right: 5px; float: right;" title="Excluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowDiscentes['codIntegrante'] . '"  data-tipo="discente" onclick="excluir(' . $i . ')">
                                 <i class="fa fa-trash"></i> 
                             </button>
-                            <div id="primeiroNomeD' . $i . '" >
+                            <div style="margin-top: 5px;">
                                 <h5 class="card-title"> &nbsp ' . explode(' ', $rowDiscentes['nomeIntegrante'])[0] . ' </h5>
                             </div>
                         </div>
-                        <div class="card-body info" id="conteudoD' . $i . '">
+                        <div class="info container" id="conteudoD' . $i . '"  style="margin-top:70px;">
                             <h5 class="card-title">' . $rowDiscentes['nomeIntegrante'] . '</h5>
                             <p>
                                 <i class="fa fa-address-card-o"></i>&nbsp ' . $rowDiscentes['emailIntegrante'] . '
@@ -131,23 +130,27 @@ $integrantesDao = new DaoIntegrantes();
                                     <i class="fa fa-pencil"></i> 
                                 </button>
                             </p>
-                            <p class="card-text"><small class="text-muted">Ativo desde ' . $newDateD . '</small></p>
+                            <p class="card-text">
+                                <small class="text-muted">Ativo desde ' . $newDateD . '</small>
+                            </p>
                         </div>
                     </div>
                 </div>';
                 $i++;
             }
             ?>
-            <div style="width: 300px; float: left;" id="ultima">
-                <div class="card borda" onclick="newDiscente()">
+            <div class="card-integrante"  id="ultima">
+                <div class="card borda card-foto" onclick="newDiscente()">
                     <img class="card-img-top" src="../assets/media/integrantes/foto_0.png" alt="" title="Adicionar novo integrante">
-                    <div id="">
+                    <div style="margin-top: 5px;">
                         <h5 class="card-title"> &nbsp Adicionar novo discente </h5>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<br> <br>
 </div>
 
 <!-- Normal Modal -->
@@ -273,7 +276,6 @@ $integrantesDao = new DaoIntegrantes();
         </div>
     </div>
 </div>
-
 <!-- End -->
 
 

@@ -29,6 +29,8 @@
     body {
       overflow-x: hidden;
       overflow-y: hidden;
+      margin:0; 
+      height: 100%;
     }
   </style>
 

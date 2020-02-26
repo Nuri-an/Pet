@@ -23,7 +23,7 @@ $stmtDiscentes->execute();
 
 
 <div class="container">
-    <h2 class="display-4 text-align: center;"> Tutores </h2>
+    <h2 class="display-4" style="text-align: center;"> Tutores </h2>
     <hr>
     </hr>
     <div class="card-deck" style="width: 100%; justify-content: center; align-items: center;">
@@ -49,15 +49,15 @@ $stmtDiscentes->execute();
 
 
             echo '
-                <div  style="width: 300px; float: left; margin-bottom:10px;">
-                    <div class="card borda" onclick="abreT(' . $i . ')">
+                <div class="card-integrante">
+                    <div class="card borda card-foto" onclick="abreT(' . $i . ')">
                         <div id="fotoT' . $i . '">
-                            <img class="card-img-top mx-auto rounded img-fluid d-block" src="' . $srcFotoT . '"  alt="" style= style="height:250px;" >
-                            <div>
+                            <img class="card-img-top mx-auto rounded img-fluid d-block" src="' . $srcFotoT . '">
+                            <div style="margin-top:5px;">
                                 <h5 class="card-title"> &nbsp ' . explode(' ', $rowTutores['nomeIntegrante'])[0] . ' </h5>
                             </div>
                         </div>
-                        <div id="conteudoT' . $i . '">
+                        <div class="info container" id="conteudoT' . $i . '" style="margin-top:70px;">
                             <h5 class="card-title">' . $rowTutores['nomeIntegrante'] . '</h5>
                             <p>
                                 <i class="fa fa-address-card-o"></i>&nbsp ' . $rowTutores['emailIntegrante'] . '
@@ -77,10 +77,9 @@ $stmtDiscentes->execute();
         ?>
     </div>
 </div>
-<div class="container" style="margin-top: 20px;">
-    <h2 class="display-4 text-align: center;"> Discentes </h2>
-    <hr>
-    </hr>
+<div class="container" style="margin-top: 30px;">
+    <h2 class="display-4" style="text-align: center;"> Alunos </h2>
+    <hr ></hr>
     <div class="card-deck" style="width: 100%; justify-content: center; align-items: center;">
         <?php
         if ($stmtDiscentes->rowCount() == 0) {
@@ -101,10 +100,10 @@ $stmtDiscentes->execute();
             }
 
             echo '
-                <div  style="width: 300px; float: left; margin-bottom:30px; margim-left:50px;">
-                    <div class="card borda" onclick="abreD(' . $i . ')" style="height:300px;" >
+                <div class="card-integrante">
+                    <div class="card borda card-foto" onclick="abreD(' . $i . ')">
                         <div id="fotoD' . $i . '">
-                            <img class="card-img-top mx-auto rounded img-fluid d-block"  src="' . $srcFotoD . '"  alt="" style="height:250px;" >
+                            <img class="card-img-top mx-auto rounded img-fluid d-block"  src="' . $srcFotoD . '">
                             <div style="margin-top:5px;">
                                 <h5 class="card-title"> &nbsp ' . explode(' ', $rowDiscentes['nomeIntegrante'])[0] . ' </h5>
                             </div>
@@ -129,7 +128,8 @@ $stmtDiscentes->execute();
         ?>
     </div>
 </div>
-    </div>
+<br> <br>
+</div>
 <?php
 require '../inc/global/head_end.php';
 ?>

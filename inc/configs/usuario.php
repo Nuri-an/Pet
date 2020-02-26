@@ -33,4 +33,4 @@
     </a>
   </div>
 </nav>
-<div class="jumbotron " style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; margin-top: 0px; width: 100vw; height: 100%;">
+<div class="jumbotron mobile">
