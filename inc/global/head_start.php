@@ -31,6 +31,7 @@
       overflow-y: hidden;
       margin:0; 
       height: 100%;
+      background-color: #e9ecef;
     }
   </style>
 

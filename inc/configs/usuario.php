@@ -8,7 +8,7 @@
         <a class="nav-link h5" id="inicio" href='index.php'>Início </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link h5" id="noticias" href="#">Notícias </a>
+        <a class="nav-link h5" id="noticias" href="viewNoticiasUser.php">Notícias </a>
       </li>
       <li class="nav-item">
         <a class="nav-link h5" id="publicacoes" href="#">Publicações</a>
