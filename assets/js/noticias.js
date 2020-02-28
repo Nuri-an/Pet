@@ -1,26 +1,41 @@
 $(document).ready(function () {
-  
-    $("#noticias").addClass('menuAtivo');
-    $("#noticias").addClass('text-white');
-  
-    $(".nav-link").click(function () {
-      $('body').css('overflowY', 'hidden');
-      $('#loader').show();
-    });
-  
-    $('#loader').slideUp(1000);
-    $('body').css('overflowY', 'auto');
+  var quantidadePg = 3; //quantidade de registro por página
+  var pagina = 1; //página inicial
+
+  listarNoticiasIn(pagina, quantidadePg); //Chamar a função para listar os registros
+  listarNoticiasEx(pagina, quantidadePg); //Chamar a função para listar os registros
+
+  $("#noticias").addClass('menuAtivo');
+  $("#noticias").addClass('text-white');
+
+  $(".nav-link").click(function () {
+    $('body').css('overflowY', 'hidden');
+    $('#loader').show();
   });
 
-  function lerMais(id){
-    var titulo = $('#rowLerMais_' + id).attr("data-titulo");
-    var descricao = $('#rowLerMais_' + id).attr("data-descricao");
-    var midia = $('#rowLerMais_' + id).attr("data-midia");
+  $('#loader').slideUp(1000);
+  $('body').css('overflowY', 'auto');
+});
 
-    $('#lerMais').modal('show');
 
-    $('.modal .modal-dialog .modal-content .modal-body .row #midia').attr('src', midia);
-    $('.modal .modal-dialog .modal-content .modal-header #titulo').text(titulo);
-    $('.modal .modal-dialog .modal-content .modal-body .row #descricao').text(descricao);
+function listarNoticiasIn(pagina, quantidadePg) {
+  var dados = {
+    paginaIn: pagina,
+    quantidadePgIn: quantidadePg
+  }
+  $.post('noticiasInternas.php', dados , function(retorna){
+    //Subtitui o valor no seletor id="externas"
+    $("#internas").html(retorna);
+  });
+}
 
+function listarNoticiasEx(pagina, quantidadePg) {
+  var dados = {
+    pagina: pagina,
+    quantidadePg: quantidadePg
+  }
+  $.post('noticiasExternas.php', dados , function(retorna){
+    //Subtitui o valor no seletor id="externas"
+    $("#externas").html(retorna);
+  });
 }
