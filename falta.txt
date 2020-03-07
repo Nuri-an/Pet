@@ -21,14 +21,15 @@
 
 **NOTICIAS**
 
-->falta fazer a parte administrativa
+->fazer a parte administrativa
 ->fazer upload de imagem unica e orientar para verificar restante na galeria (em inicio) vendo o atributo title com o nome da noticia
 
 
 **PUBLICAÇOES**
 
-->fazer com tabela booststrap e implementacao de dados igual em noticias (com paginaçao)
-->falta parte comum e  administrativa
+->(FEITO)fazer com tabela booststrap e implementacao de dados igual em noticias (com paginaçao)
+->(FEITO)falta parte comum
+->fazer a parte administrativa
 
 
 **PROJETOS**
@@ -38,7 +39,7 @@
 
 **LOGIN**
 
-->fazer pagina sem menu e banner, em uma div container jumbotron e fundo azul (ou branco mesmo se nao combinar).
+->(FEITO)fazer pagina sem menu e banner, em uma div container jumbotron e fundo azul (ou branco mesmo se nao combinar).
 ->*link com possibilidade de "solicitar acesso?", onde sao preenchidos os dados e envidado um email quando for aceito pelo administrador atual.
 	->administrador atual não recebe email sobre solicitacao de acesso.
 	*para isso será necessario aba com uma lista e solicitaçoes na parte administrativa. Caso dê muito trabalho, deixa pra lá

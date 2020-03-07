@@ -1,6 +1,3 @@
-<?php
-require 'footer.php';
-?>
 <!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessário -->
 
   <!-- Externos -->

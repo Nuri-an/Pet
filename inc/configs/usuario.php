@@ -11,7 +11,7 @@
         <a class="nav-link h5" id="noticias" href="viewNoticiasUser.php">Notícias </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link h5" id="publicacoes" href="#">Publicações</a>
+        <a class="nav-link h5" id="publicacoes" href="viewPublicacoesUser.php">Publicações</a>
       </li>
       <li class="nav-item">
         <a class="nav-link h5" id="integrantes" href="viewIntegrantesUser.php">Integrantes</a>
@@ -20,7 +20,7 @@
         <a class="nav-link h5" id="projetos" href="#">Projetos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link h5" href="#">Login</a>
+        <a class="nav-link h5" id="login" href="viewLogin.php">Login</a>
       </li>
     </ul>
   </div>

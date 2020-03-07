@@ -90,7 +90,7 @@ echo '<nav aria-label="Page navigation" style="margin-bottom: 100px;">
                     </li>';
             }
         }
-        if($pagina == $totalPgIn){ 
+        if(($pagina == $totalPgIn) || ($pagina > $totalPgIn)){ 
             echo '<li class="page-item disabled">
                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Última</a>
                 </li>';

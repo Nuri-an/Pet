@@ -130,5 +130,6 @@ $inicioDao = new DaoInicio(); ?>
 </div>
     </div>
 <?php
+require '../inc/global/footer.php';
 require '../inc/global/head_end.php';
 ?>

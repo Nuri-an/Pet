@@ -338,5 +338,6 @@ $inicioDao = new DaoInicio();
 <!-- END Normal Modal -->
 <?php
 //$cb->get_js('/js/admin.js');
+require '../inc/global/footer.php';
 require '../inc/global/head_end.php';
 ?>
