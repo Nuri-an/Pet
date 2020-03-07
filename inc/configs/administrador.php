@@ -20,7 +20,7 @@
         <a class="nav-link h5" id="projetos" >Projetos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link h5" href="#" >Sair</a>
+        <a class="nav-link h5" href="../controller/controllerLogin.php?acao=logout" id="btnlogout" >Sair</a>
       </li>
     </ul>
   </div>
