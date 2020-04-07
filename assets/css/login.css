@@ -1,0 +1,27 @@
+body {
+    overflow-y: hidden;
+}
+
+.menuAtivo {
+    border-bottom: 2px solid #fff;
+}
+
+.fundo{
+    height:90vh; 
+    width: 40vw; 
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+    background-color: #fff;
+}
+
+@media only screen and (max-width: 598px){
+    .fundo{
+        height:90vh; 
+        width: 90vw; 
+        margin-top: 20px; 
+        margin-bottom: 20px; 
+        margin-right: 20px; 
+        margin-left: 20px;
+        background-color: #fff;
+    }
+}

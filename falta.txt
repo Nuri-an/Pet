@@ -1,0 +1,45 @@
+**INICIO**
+
+-> (FEITO) fazer modal, igual alert, de "deseja realmente exclui arquivo?" para INICIO ADM
+
+	-> (FEITO) usar mesmo modal para: EDITADO COM SUCESSO, ADICIONADO COM SUCESSO, 
+				  EXCLUIDO COM SCESSO..
+		^ (FEITO) Em paginas filtradas via ajax foi possivel. 
+		^ (FEITO) Em paginas que enviam o form da galeria com action para o ifreme nao foi
+
+-> (FEITO!) Pesquisar como enviar foto, input file, via ajax !!!!!!!!
+
+-> (FEITO) Adicionar orientações nos icones de ajuda no modal
+
+-> (FEITO) Se der, fazer galeria de imagens e galeria de videos. Link para codigos nos favoritos. Utilizar botao para alterar a galeria (Gallery with image filtering); fazer a galeria de videos (Video gallery).
+
+
+**INTEGRANTES**
+
+->perguntar se deseja uma parte de integrantes inativos/antigos. Não faça sem perguntar, pode dar muito trabalho provavelmente desnecessário.
+
+
+**NOTICIAS**
+
+->fazer a parte administrativa
+->fazer upload de imagem unica e orientar para verificar restante na galeria (em inicio) vendo o atributo title com o nome da noticia
+
+
+**PUBLICAÇOES**
+
+->(FEITO)fazer com tabela booststrap e implementacao de dados igual em noticias (com paginaçao)
+->(FEITO)falta parte comum
+->fazer a parte administrativa
+
+
+**PROJETOS**
+
+-> Sem ideia
+
+
+**LOGIN**
+
+->(FEITO)fazer pagina sem menu e banner, em uma div container jumbotron e fundo azul (ou branco mesmo se nao combinar).
+->*link com possibilidade de "solicitar acesso?", onde sao preenchidos os dados e envidado um email quando for aceito pelo administrador atual.
+	->administrador atual não recebe email sobre solicitacao de acesso.
+	*para isso será necessario aba com uma lista e solicitaçoes na parte administrativa. Caso dê muito trabalho, deixa pra lá
