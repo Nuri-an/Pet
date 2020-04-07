@@ -47,7 +47,11 @@ $inicioDao = new DaoInicio(); ?>
   <div id="caroselFoto" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active" >
+<<<<<<< HEAD
         <img src="../assets/media/galeria/imagem_2.png" class="rounded mx-auto img-fluid d-block carouselItemFoto" alt="capa" title="Capa">
+=======
+        <img src="../assets/media/galeria/imagem_2.png" class="rounded mx-auto img-fluid d-block" alt="capa" title="Capa" style=" height: 400px; margin-top:30px;">
+>>>>>>> e9111380f06c02f3c445003019b3eb39a06a1853
       </div>
       <?php
       while ($rowGaleria = $stmtGaleria->fetch(PDO::FETCH_ASSOC)) {
@@ -58,11 +62,19 @@ $inicioDao = new DaoInicio(); ?>
         if (($rowGaleria['tituloGaleria'] != '') && (file_exists($arquivo))) {
 
           echo '<div class="carousel-item">
+<<<<<<< HEAD
                     <img src="' . $arquivo . '"  class="rounded mx-auto img-fluid d-block carouselItemFoto"  data-toggle="tooltip"  alt="' . $titulo . '" title="' . $titulo . '">
                   </div>';
         }
       }
       ?> 
+=======
+                    <img src="' . $arquivo . '"  class="rounded mx-auto img-fluid d-block" style=" height: 400px; margin-top:30px;" data-toggle="tooltip"  alt="' . $titulo . '" title="' . $titulo . '">
+                  </div>';
+        }
+      }
+      ?>
+>>>>>>> e9111380f06c02f3c445003019b3eb39a06a1853
 
       <a class="carousel-control-prev" href="#caroselFoto" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

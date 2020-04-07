@@ -33,14 +33,22 @@ while ($rowNoticiasEx = $stmtNoticiasEx->fetch(PDO::FETCH_ASSOC)) {
     } else {
         $srcMidiaEx = "";
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> e9111380f06c02f3c445003019b3eb39a06a1853
     echo '
                 <h2 class="display-5" style="">' . $rowNoticiasEx['tituloNoticia'] . ' </h2>
                 <div class="row">
                     <div class="col-10 text-truncate lead " id="descricaoCurtaEx_' . $i . '">
                     ' . $rowNoticiasEx['descricaoNoticia'] . '
                     </div>
+<<<<<<< HEAD
                     <div class="col-15 lead " style="display: none; margin-left: 15px; margin-right: 15px;" id="descricaoGrandeEx_' . $i . '">
+=======
+                    <div class="col-15 lead " style="display: none;" id="descricaoGrandeEx_' . $i . '">
+>>>>>>> e9111380f06c02f3c445003019b3eb39a06a1853
                     ' . nl2br($rowNoticiasEx['descricaoNoticia']) . '
                     </div>
                 </div>
