@@ -33,7 +33,6 @@
       height: 100%;
       background-color: #e9ecef;
     }
-
     @media only screen and (max-width: 768px){
       #banner{
         display: none;

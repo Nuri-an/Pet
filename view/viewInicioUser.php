@@ -62,7 +62,7 @@ $inicioDao = new DaoInicio(); ?>
                   </div>';
         }
       }
-      ?>
+      ?> 
 
       <a class="carousel-control-prev" href="#caroselFoto" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -68,6 +68,7 @@ $inicioDao = new DaoInicio();
                 <img src="../assets/media/galeria/imagem_00.png" class="rounded mx-auto img-fluid d-block carouselItemFoto" style="cursor: pointer;" alt="Adicione uma foto" title="Adicione uma foto" onclick="adicionarFoto_modal()">
             </div>
             <?php
+            
             $i = 1;
             while ($rowGaleria = $stmtGaleria->fetch(PDO::FETCH_ASSOC)) {
 

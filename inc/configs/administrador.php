@@ -6,7 +6,7 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" id="inicio" href='index.php'> <font size="4"> Início </font> </a>
-      </li>
+      </li>  
       <li class="nav-item">
         <a class="nav-link" id="noticias"> <font size="4"> Notícias </font> </a>
       </li>

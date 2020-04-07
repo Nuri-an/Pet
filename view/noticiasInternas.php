@@ -54,7 +54,7 @@ while ($rowNoticiasEx = $stmtNoticiasIn->fetch(PDO::FETCH_ASSOC)) {
                     </button>
                     <button type="button" style="display: none;" class="btn btn-primary"  id="rowLerMenosIn_' . $i . '" onclick="lerMenosIn(' . $i . ')">
                         Ler menos
-                    </button>
+                    </button> 
                 </div>
                 <hr>
                 <br><br>';

@@ -33,7 +33,7 @@ while ($rowNoticiasEx = $stmtNoticiasEx->fetch(PDO::FETCH_ASSOC)) {
     } else {
         $srcMidiaEx = "";
     }
-
+    
     echo '
                 <h2 class="display-5" style="">' . $rowNoticiasEx['tituloNoticia'] . ' </h2>
                 <div class="row">
