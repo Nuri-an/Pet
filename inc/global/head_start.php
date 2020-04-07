@@ -33,14 +33,11 @@
       height: 100%;
       background-color: #e9ecef;
     }
-<<<<<<< HEAD
     @media only screen and (max-width: 768px){
       #banner{
         display: none;
       }
     }
-=======
->>>>>>> e9111380f06c02f3c445003019b3eb39a06a1853
   </style>
 
 

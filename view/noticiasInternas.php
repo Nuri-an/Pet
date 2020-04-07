@@ -40,11 +40,7 @@ while ($rowNoticiasEx = $stmtNoticiasIn->fetch(PDO::FETCH_ASSOC)) {
                     <div class="col-10 text-truncate lead " id="descricaoCurtaIn_' . $i . '">
                     ' . $rowNoticiasEx['descricaoNoticia'] . '
                     </div>
-<<<<<<< HEAD
                     <div class="col-15 lead " style="display: none; margin-left: 15px; margin-right: 15px;" id="descricaoGrandeIn_' . $i . '">
-=======
-                    <div class="col-15 lead " style="display: none;" id="descricaoGrandeIn_' . $i . '">
->>>>>>> e9111380f06c02f3c445003019b3eb39a06a1853
                     ' . nl2br($rowNoticiasEx['descricaoNoticia']) . '
                     </div>
                 </div>
@@ -58,11 +54,7 @@ while ($rowNoticiasEx = $stmtNoticiasIn->fetch(PDO::FETCH_ASSOC)) {
                     </button>
                     <button type="button" style="display: none;" class="btn btn-primary"  id="rowLerMenosIn_' . $i . '" onclick="lerMenosIn(' . $i . ')">
                         Ler menos
-<<<<<<< HEAD
                     </button> 
-=======
-                    </button>
->>>>>>> e9111380f06c02f3c445003019b3eb39a06a1853
                 </div>
                 <hr>
                 <br><br>';
@@ -115,11 +107,7 @@ echo '<nav aria-label="Page navigation" style="margin-bottom: 100px;">
 <script type="text/javascript">
 
 function lerMaisIn(id) {
-<<<<<<< HEAD
   var div = $('#descricaoCurtaIn_' + id);
-=======
-  var div = $('#descricaoCurtIn_' + id);
->>>>>>> e9111380f06c02f3c445003019b3eb39a06a1853
   var newDiv = $('#descricaoGrandeIn_' + id);
   var botao = $('#rowLerMaisIn_' + id);
   var newBotao = $('#rowLerMenosIn_' + id);
@@ -132,11 +120,7 @@ function lerMaisIn(id) {
   imagem.show();
 }
 
-<<<<<<< HEAD
 function lerMenosIn(id) {
-=======
-function lerMenos(id) {
->>>>>>> e9111380f06c02f3c445003019b3eb39a06a1853
   var div = $('#descricaoCurtaIn_' + id);
   var newDiv = $('#descricaoGrandeIn_' + id);
   var botao = $('#rowLerMaisIn_' + id);

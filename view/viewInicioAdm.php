@@ -65,16 +65,10 @@ $inicioDao = new DaoInicio();
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <!-- <form id="adicionarImagem-form" action="../controller/controllerGaleria.php"  method="POST" encyte="multipart/form-data">-->
-<<<<<<< HEAD
                 <img src="../assets/media/galeria/imagem_00.png" class="rounded mx-auto img-fluid d-block carouselItemFoto" style="cursor: pointer;" alt="Adicione uma foto" title="Adicione uma foto" onclick="adicionarFoto_modal()">
             </div>
             <?php
             
-=======
-                <img src="../assets/media/galeria/imagem_00.png" class="rounded mx-auto img-fluid d-block " style=" height: 400px; margin-top:30px; cursor: pointer;" alt="Adicione uma foto" title="Adicione uma foto" onclick="adicionarFoto_modal()">
-            </div>
-            <?php
->>>>>>> e9111380f06c02f3c445003019b3eb39a06a1853
             $i = 1;
             while ($rowGaleria = $stmtGaleria->fetch(PDO::FETCH_ASSOC)) {
 
@@ -84,11 +78,7 @@ $inicioDao = new DaoInicio();
                 if (($rowGaleria['midiaGaleria'] != '') && (file_exists($arquivo))) {
 
                     echo '<div class="carousel-item" >
-<<<<<<< HEAD
                         <img src="' . $arquivo . '"  class="rounded mx-auto img-fluid d-block carouselItemFoto" data-toggle="tooltip" alt="' . $titulo . '" title="Clique para substituir imagem"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" data-titulo="' . $rowGaleria['tituloGaleria'] . '" data-foto="' . $rowGaleria['midiaGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
-=======
-                        <img src="' . $arquivo . '"  class="rounded mx-auto img-fluid d-block" style=" height: 400px; margin-top:30px;" data-toggle="tooltip" alt="' . $titulo . '" title="Clique para substituir imagem"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" data-titulo="' . $rowGaleria['tituloGaleria'] . '" data-foto="' . $rowGaleria['midiaGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
->>>>>>> e9111380f06c02f3c445003019b3eb39a06a1853
                         <button type="button" class="btn btn-primary" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir imagem" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
                             <i class="fa fa-trash "></i> 
                         </button>

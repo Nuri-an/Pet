@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar" style=" width: 100vw;">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -26,35 +25,6 @@
     </ul>
   </div>
   <div style="float:rigth; opacity:1; margin-right: 10px;">
-=======
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar" style=" width: 100vw;">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link h5" id="inicio" href='index.php'>Início </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link h5" id="noticias" href="viewNoticiasUser.php">Notícias </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link h5" id="publicacoes" href="viewPublicacoesUser.php">Publicações</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link h5" id="integrantes" href="viewIntegrantesUser.php">Integrantes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link h5" id="projetos" href="#">Projetos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link h5" id="login" href="viewLogin.php">Login</a>
-      </li>
-    </ul>
-  </div>
-  <div style="float:rigth; opacity:1;">
->>>>>>> e9111380f06c02f3c445003019b3eb39a06a1853
     <a href="#">
       <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #6959CD; cursor: pointer;" title="Página do grupo"></i>
     </a>
