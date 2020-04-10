@@ -23,31 +23,40 @@ $totalPgIn = ceil($rowTotalNoticiasIn['numResult'] / $quantidadePg);
 <?php
 $i = 1;
 
-while ($rowNoticiasEx = $stmtNoticiasIn->fetch(PDO::FETCH_ASSOC)) {
+while ($rowNoticiasIn = $stmtNoticiasIn->fetch(PDO::FETCH_ASSOC)) {
 
-    $newDateEx = date('d/m/Y', strtotime($rowNoticiasEx['dataNoticia']));
-    $midia = "../assets/media/noticias/" . $rowNoticiasEx['midiaNoticia'];
-
-    if (($rowNoticiasEx['midiaNoticia'] != '') && (file_exists($midia))) {
-        $srcMidiaEx = '<img class="card-img-top mx-auto rounded img-fluid d-block" src="'. $midia .'" style="height: 200px; position: center; width: auto;" name="midia">';
+    if ($rowNoticiasIn['dataNoticia'] != '0000-00-00') {
+        $newDateIn = date('d/m/Y', strtotime($rowNoticiasIn['dataNoticia']));
     } else {
-        $srcMidiaEx = "";
+        $newDateIn = 'dd/mm/aaaa';
+    }
+    $midia = "../assets/media/noticias/" . $rowNoticiasIn['midiaNoticia'];
+
+    if (($rowNoticiasIn['midiaNoticia'] != '') && (file_exists($midia))) {
+        $srcMidiaIn = '<img class="card-img-top mx-auto rounded img-fluid d-block" src="' . $midia . '" style="height: 200px; position: center; width: auto;" name="midia">';
+    } else {
+        $srcMidiaIn = "";
     }
 
     echo '
-                <h2 class="display-5" style="">' . $rowNoticiasEx['tituloNoticia'] . ' </h2>
+                <h2 class="display-5" style="">' . $rowNoticiasIn['tituloNoticia'] . ' </h2>
                 <div class="row">
                     <div class="col-10 text-truncate lead " id="descricaoCurtaIn_' . $i . '">
-                    ' . $rowNoticiasEx['descricaoNoticia'] . '
+                    ' . $rowNoticiasIn['descricaoNoticia'] . '
                     </div>
                     <div class="col-15 lead " style="display: none; margin-left: 15px; margin-right: 15px;" id="descricaoGrandeIn_' . $i . '">
-                    ' . nl2br($rowNoticiasEx['descricaoNoticia']) . '
+                    ' . nl2br($rowNoticiasIn['descricaoNoticia']) . '
                     </div>
                 </div>
                 <div align="center" id="midiaIn_' . $i . '" style="display: none; width: 100%; margin-top: 10px;">
-                    ' . $srcMidiaEx . '
+                    ' . $srcMidiaIn . '
                 </div>
-                <footer class="blockquote-footer  text-right" style="margin-right:90px;"> Publicado em: ' . $newDateEx . '</footer>
+                <footer class="blockquote-footer  text-right" style="margin-right:90px;"> Publicado em: ' . $newDateIn . '</footer>
+                <div class="editar" style="float: left; margin-bottom: 5px; display: none;">
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Editar" id="rowEditarNoticiaIn_' . $i . '" data-id="' . $rowNoticiasIn['codNoticia'] . '"  data-titulo="' . $rowNoticiasIn['tituloNoticia'] . '" data-descricao="' . $rowNoticiasIn['descricaoNoticia'] . '" data-midia="' . $rowNoticiasIn['midiaNoticia'] . '" data-data="' . $rowNoticiasIn['dataNoticia'] . '" onclick="editar_modal_in(' . $i . ')" >
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </div>
                 <div style="display: inline; float: right; margin-bottom: 5px;">
                     <button type="button" class="btn btn-primary"  id="rowLerMaisIn_' . $i . '" onclick="lerMaisIn(' . $i . ')">
                         Ler mais
@@ -56,81 +65,57 @@ while ($rowNoticiasEx = $stmtNoticiasIn->fetch(PDO::FETCH_ASSOC)) {
                         Ler menos
                     </button> 
                 </div>
-                <hr>
+                <hr class="rows">
                 <br><br>';
-                $i++;
+    $i++;
 }
-echo '<nav aria-label="Page navigation" style="margin-bottom: 100px;">
+
+echo '<button type="button" onclick="adicionar_modal_in()" class="btn btn-primary" style="border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
+        <i class="fa fa-plus" aria-hidden="true" ></i>
+    </button>';
+
+
+echo '<nav aria-label="Page navigation" style="margin-bottom: 100px; margin-top: 50px">
         <ul class="pagination justify-content-center">';
-        if($pagina == 1){ 
-            echo '<li class="page-item disabled">
+if ($pagina == 1) {
+    echo '<li class="page-item disabled">
                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Primeira</a>
                 </li>';
-        }else{ 
-            echo '<li class="page-item">
-                    <a class="page-link" href="#internas" onclick="listarNoticiasEx(1, '. $quantidadePg .')">Primeira</a>
+} else {
+    echo '<li class="page-item">
+                    <a class="page-link" href="#internas" onclick="listarNoticiasEx(1, ' . $quantidadePg . ')">Primeira</a>
                 </li>';
-        }
-        
-        for($pagAnt = $pagina - 2; $pagAnt < $pagina; $pagAnt++){
-            if($pagAnt >= 1){
-                echo  '<li class="page-item">
-                        <a class="page-link" href="#internas" onclick="listarNoticiasEx('. $pagAnt .', '. $quantidadePg .')">'. $pagAnt .'</a>
+}
+
+for ($pagAnt = $pagina - 2; $pagAnt < $pagina; $pagAnt++) {
+    if ($pagAnt >= 1) {
+        echo  '<li class="page-item">
+                        <a class="page-link" href="#internas" onclick="listarNoticiasEx(' . $pagAnt . ', ' . $quantidadePg . ')">' . $pagAnt . '</a>
                       </li>';
-            }
-        }
-        echo '<li class="page-item active">
-                <a class="page-link" href="#internas" onclick="listarNoticiasEx('. $pagina .', '. $quantidadePg .')">'. $pagina .'</a>
+    }
+}
+echo '<li class="page-item active">
+                <a class="page-link" href="#internas" onclick="listarNoticiasEx(' . $pagina . ', ' . $quantidadePg . ')">' . $pagina . '</a>
             </li>';
 
-        for ($pagDep = $pagina + 1; $pagDep < $pagina + 3; $pagDep++) {
-            if($pagDep <= $totalPgIn){
-                echo '<li class="page-item">
-                        <a class="page-link" href="#internas" onclick="listarNoticiasEx('. $pagDep .', '. $quantidadePg .')">'. $pagDep .'</a>
+for ($pagDep = $pagina + 1; $pagDep < $pagina + 3; $pagDep++) {
+    if ($pagDep <= $totalPgIn) {
+        echo '<li class="page-item">
+                        <a class="page-link" href="#internas" onclick="listarNoticiasEx(' . $pagDep . ', ' . $quantidadePg . ')">' . $pagDep . '</a>
                     </li>';
-            }
-        }
-        if(($pagina == $totalPgIn) || ($pagina > $totalPgIn)){ 
-            echo '<li class="page-item disabled">
+    }
+}
+if (($pagina == $totalPgIn) || ($pagina > $totalPgIn)) {
+    echo '<li class="page-item disabled">
                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Última</a>
                 </li>';
-        }else{
-            echo '<li class="page-item">
-                    <a class="page-link" href="#internas"  onclick="listarNoticiasEx('. $totalPgIn .', '. $quantidadePg .')">Última</a>
+} else {
+    echo '<li class="page-item">
+                    <a class="page-link" href="#internas"  onclick="listarNoticiasEx(' . $totalPgIn . ', ' . $quantidadePg . ')">Última</a>
                 </li>';
-        }
-        echo '</ul>
+}
+echo '</ul>
     </nav>';
+
 ?>
 
-
-<script type="text/javascript">
-
-function lerMaisIn(id) {
-  var div = $('#descricaoCurtaIn_' + id);
-  var newDiv = $('#descricaoGrandeIn_' + id);
-  var botao = $('#rowLerMaisIn_' + id);
-  var newBotao = $('#rowLerMenosIn_' + id);
-  var imagem = $('#midiaIn_' + id);
-
-  div.hide();
-  newDiv.show();
-  botao.hide();
-  newBotao.show();
-  imagem.show();
-}
-
-function lerMenosIn(id) {
-  var div = $('#descricaoCurtaIn_' + id);
-  var newDiv = $('#descricaoGrandeIn_' + id);
-  var botao = $('#rowLerMaisIn_' + id);
-  var newBotao = $('#rowLerMenosIn_' + id);
-  var imagem = $('#midiaIn_' + id);
-
-  newDiv.hide();
-  div.show();
-  newBotao.hide();
-  botao.show();
-  imagem.hide();
-}
-</script>

@@ -1,123 +1,120 @@
 <?php
-/*
+
 $acao = filter_var($_POST["acao"], FILTER_SANITIZE_STRING);
 
 switch ($acao) {
     case 'adicionar':
-        adicionarFoto();
+        adicionarNoticia();
         break;
     case 'editar':
-        atualizarFoto();
+        atualizarNoticia();
         break;
     case 'excluir':
-        excluirFoto();
+        excluirNoticia();
         break;
 }
 
-function adicionarFoto() {
-    require_once ('../model/ModelGaleria.php');
-    require_once ('../dao/daoGaleria.php');
+function adicionarNoticia()
+{
+    require_once('../model/ModelNoticias.php');
+    require_once('../dao/daoNoticias.php');
 
-    $dao = new DaoGaleria();
-    $Galeria = new ModelGaleria();
+    $dao = new DaoNoticias();
+    $Noticia = new ModelNoticias();
 
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
+    $descricao = filter_var($_POST["descricao"], FILTER_SANITIZE_STRING);
+    $data = filter_var($_POST["data"], FILTER_SANITIZE_STRING);
+    $localN = filter_var($_POST["localNoticia"], FILTER_SANITIZE_STRING);
 
-    $fileName=$_FILES['arquivo']['name'];
-    
-	//Faz a verificação da extensao do arquivo
-    $extension= explode('.', $fileName);
-    $fileExtension= end( $extension );
-    
-    $extensionsOK['extensoes'] = array('png', 'jpg', 'jpeg', 'JPG', 'PNG', 'JPEG');
+    if ($_FILES['arquivo']['name'] != '') {
 
-	//Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
-    $newFileName= 'imagem_' . time() . '.' . $fileExtension;
+        $fileName = $_FILES['arquivo']['name'];
 
-	//Pasta onde o arquivo vai ser salvo
-    $local='../assets/media/galeria/';
-    
-    $destino= $local . $newFileName;
-   
-    if(array_search($fileExtension, $extensionsOK['extensoes'])=== false){		
-        echo "exensao invalida";
+        //Faz a verificação da extensao do arquivo
+        $extension = explode('.', $fileName);
+        $fileExtension = end($extension);
+
+
+        //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
+        $newFileName = 'midia_' . time() . '.' . $fileExtension;
+
+        //Pasta onde o arquivo vai ser salvo
+        $local = '../assets/media/noticias/';
+
+        move_uploaded_file($_FILES['arquivo']['tmp_name'], $local . $newFileName);
+    } else {
+        $newFileName = '';
     }
-    else{ 
-        if(move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName)){
-            
-            $Galeria->setFoto($newFileName);
-            $Galeria->setTitulo($titulo);
-        
-        }
-    }
-    $dao->adicionarFoto($Galeria);
-} 
+    $Noticia->setMidia($newFileName);
+    $Noticia->setTitulo($titulo);
+    $Noticia->setDescricao($descricao);
+    $Noticia->setData($data);
+    $Noticia->setLocal($localN);
 
-function atualizarFoto() {
-    require_once ('../model/ModelGaleria.php');
-    require_once ('../dao/daoGaleria.php');
-    $dao = new DaoGaleria();
-    $Galeria = new ModelGaleria();
-   
+
+    $dao->adicionarNoticia($Noticia);
+}
+
+function atualizarNoticia()
+{
+    require_once('../model/ModelNoticias.php');
+    require_once('../dao/daoNoticias.php');
+
+    $dao = new DaoNoticias();
+    $Noticia = new ModelNoticias();
+
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
+    $descricao = filter_var($_POST["descricao"], FILTER_SANITIZE_STRING);
+    $data = filter_var($_POST["data"], FILTER_SANITIZE_STRING);
+    $localN = filter_var($_POST["local"], FILTER_SANITIZE_STRING);
 
-    if($_FILES['arquivo']['name'] != ''){ 
+    if ($_FILES['arquivo']['name'] != '') {
 
-        $fileName=$_FILES['arquivo']['name'];
-    
+        $fileName = $_FILES['arquivo']['name'];
+
         //Faz a verificação da extensao do arquivo
-        $extension= explode('.', $fileName);
-        $fileExtension= end( $extension );
-    
-        $extensionsOK['extensoes'] = array('png', 'jpg', 'jpeg', 'JPG', 'PNG', 'JPEG');
+        $extension = explode('.', $fileName);
+        $fileExtension = end($extension);
 
-	    //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
-        $newFileName= 'imagem_' . time() . '.' . $fileExtension;
 
-	    //Pasta onde o arquivo vai ser salvo
-        $local='../assets/media/galeria/';
-    
-        $destino= $local . $newFileName;
-   
-        if(array_search($fileExtension, $extensionsOK['extensoes'])=== false){		
-        
-        }
-        else{ 
-            move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName);
-              
-        }
-    }
-    else{ 
+        //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
+        $newFileName = 'midia_' . time() . '.' . $fileExtension;
+
+        //Pasta onde o arquivo vai ser salvo
+        $local = '../assets/media/noticias/';
+
+        move_uploaded_file($_FILES['arquivo']['tmp_name'], $local . $newFileName);
+    } else {
         $newFileName = '';
     }
 
-        $Galeria->setFoto($newFileName);
-        $Galeria->setTitulo($titulo);
-        $Galeria->setId($id);
-        $dao->atualizarFoto($Galeria);
+    $Noticia->setMidia($newFileName);
+    $Noticia->setTitulo($titulo);
+    $Noticia->setDescricao($descricao);
+    $Noticia->setData($data);
+    $Noticia->setLocal($localN);
+    $Noticia->setId($id);
+
+    $dao->atualizarNoticia($Noticia);
 }
 
 
 
-function excluirFoto() {
-    require_once ('../model/ModelGaleria.php');
-    require_once ('../dao/daoGaleria.php');
+function excluirNoticia()
+{
+    require_once('../model/ModelNoticias.php');
+    require_once('../dao/daoNoticias.php');
 
-    $dao = new DaoGaleria();
+    $dao = new DaoNoticias();
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
 
-    $Galeria = new ModelGaleria();
-    $Galeria->setId($id);
+    $Noticia = new ModelNoticias();
+    $Noticia->setId($id);
 
 
-    $dao->excluirFoto($Galeria);
+    $dao->excluirNoticia($Noticia);
 }
-
-*/
-
-
-
-?>

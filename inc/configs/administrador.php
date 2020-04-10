@@ -8,7 +8,7 @@
         <a class="nav-link" id="inicio" href='index.php'> <font size="4"> Início </font> </a>
       </li>  
       <li class="nav-item">
-        <a class="nav-link" id="noticias"> <font size="4"> Notícias </font> </a>
+        <a class="nav-link" id="noticias" href='viewNoticiasAdm.php'> <font size="4"> Notícias </font> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="publicacoes"> <font size="4"> Publicações </font> </a>
@@ -18,6 +18,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" id="projetos" > <font size="4"> Projetos </font> </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="projetos" > <font size="4"> Administradores </font> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../controller/controllerLogin.php?acao=logout" id="btnlogout" > <font size="4"> Sair </font> </a>

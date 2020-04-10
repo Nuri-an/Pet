@@ -48,6 +48,11 @@ while ($rowNoticiasEx = $stmtNoticiasEx->fetch(PDO::FETCH_ASSOC)) {
                     ' . $srcMidiaEx . '
                 </div>
                 <footer class="blockquote-footer  text-right" style="margin-right:90px;"> Publicado em: ' . $newDateEx . '</footer>
+                <div class="editar" style="float: left; margin-bottom: 5px; display: none;">
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Editar" id="rowEditarNoticiaEx_'. $i .'" data-id="'. $rowNoticiasEx['codNoticia'] .'"  data-titulo="'. $rowNoticiasEx['tituloNoticia'] .'" data-descricao="'. $rowNoticiasEx['descricaoNoticia'] .'" data-midia="'. $rowNoticiasEx['midiaNoticia'] .'" data-data="'. $rowNoticiasEx['dataNoticia'] .'" onclick="editar_modal_ex('. $i .')" >
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </div>
                 <div style="display: inline; float: right; margin-bottom: 5px;">
                     <button type="button" class="btn btn-primary"  id="rowLerMaisEx_' . $i . '" onclick="lerMaisEx(' . $i . ')">
                         Ler mais
@@ -56,11 +61,16 @@ while ($rowNoticiasEx = $stmtNoticiasEx->fetch(PDO::FETCH_ASSOC)) {
                         Ler menos
                     </button>
                 </div>
-                <hr>
+                <hr class="rows">
                 <br><br>';
                 $i++;
 }
-echo '<nav aria-label="Page navigation">
+echo '<button type="button" onclick="adicionar_modal_ex()" class="btn btn-primary" style="border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
+        <i class="fa fa-plus" aria-hidden="true" ></i>
+    </button>';
+
+
+echo '<nav aria-label="Page navigation" style="margin-top: 50px">
         <ul class="pagination justify-content-center">';
         if($pagina == 1){ 
             echo '<li class="page-item disabled">
@@ -103,34 +113,3 @@ echo '<nav aria-label="Page navigation">
     </nav>';
 ?>
 
-
-<script type="text/javascript">
-
-function lerMaisEx(id) {
-  var div = $('#descricaoCurtaEx_' + id);
-  var newDiv = $('#descricaoGrandeEx_' + id);
-  var botao = $('#rowLerMaisEx_' + id);
-  var newBotao = $('#rowLerMenosEx_' + id);
-  var imagem = $('#midiaEx_' + id);
-
-  div.hide();
-  newDiv.show();
-  botao.hide();
-  newBotao.show();
-  imagem.show();
-}
-
-function lerMenosEx(id) {
-  var div = $('#descricaoCurtaEx_' + id);
-  var newDiv = $('#descricaoGrandeEx_' + id);
-  var botao = $('#rowLerMaisEx_' + id);
-  var newBotao = $('#rowLerMenosEx_' + id);
-  var imagem = $('#midiaEx_' + id);
-
-  newDiv.hide();
-  div.show();
-  newBotao.hide();
-  botao.show();
-  imagem.hide();
-}
-</script>

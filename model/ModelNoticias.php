@@ -1,11 +1,12 @@
 <?php
 
-class ModelGaleria{
+class ModelNoticias{
     private $id;
     private $titulo;
     private $descricao;
     private $midia;
     private $local;
+    private $data;
 
 
 
@@ -24,6 +25,9 @@ class ModelGaleria{
     public function getLocal() {
         return $this->local;
     }
+    public function getData() {
+        return $this->data;
+    }
 
 
     public function setId($id) {
@@ -40,6 +44,9 @@ class ModelGaleria{
     }
     public function setLocal($local) {
         $this->local = $local;
+    }
+    public function setData($data) {
+        $this->data = $data;
     }
 }
 ?>

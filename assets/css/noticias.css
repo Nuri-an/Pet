@@ -5,7 +5,7 @@ body {
 .menuAtivo {
     border-bottom: 2px solid #fff;
 }
-hr{
+.rows{
 	height: 5px;
 	border: 0;
 	box-shadow: 0 5px 5px -5px #8c8b8b inset;

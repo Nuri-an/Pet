@@ -15,36 +15,10 @@ require '../inc/global/config.php';
 
 <br>
 
-<div id="internas">
-    <?php
-    /*$i = 1;
+<div id="internas"></div>
 
-    while ($rowNoticiasIn = $stmtNoticiasIn->fetch(PDO::FETCH_ASSOC)) {
+<div id="externas"></div>
 
-        //$newDateT = date('d/m/Y', strtotime($rowTutores['dataInicioIntegrante']));
-
-        echo '
-                <h2 class="display-5" style="">' . $rowNoticiasIn['tituloNoticia'] . '
-                <div class="row">
-                    <div class="col-10 text-truncate lead">
-                    ' . $rowNoticiasIn['descricaoNoticia'] . '
-                    </div>
-                </div>
-                <div style="display: inline; float: right; margin-bottom: 5px;">
-                    <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Editar">
-                        Ler mais
-                    </button>
-                </div>
-                <hr>
-                <br><br>';
-    }*/
-    ?>
-</div>
-
-<div id="externas">
-
-    
-</div>
 </div>
 
 <?php
