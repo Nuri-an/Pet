@@ -104,7 +104,7 @@ require '../inc/global/config.php';
                     </button>
                 </div>
                 </form>
-                <div  style="width: 30%; float: left; margin: 15px; margin-right: 0px;">
+                <div style="width: 30%; float: left; margin: 15px; margin-right: 0px;">
                     <form class="form-horizontal" id="excluirNoticias-form" name="excluirNoticias-form" method="POST">
                         <input type="hidden" name="acao" id="acao" value="excluir">
                         <input type="hidden" name="id" id="id">
@@ -190,6 +190,26 @@ require '../inc/global/config.php';
 
 </div>
 
+<script>
+    $(document).ready(function() {
+        $.get("noticiasInternas.php", function() {
+            var divEditar = $('.editar');
+
+            divEditar.show();
+
+            $('li').addClass('paginacao');
+        });
+
+        $.get("noticiasExternas.php", function() {
+            var divEditar = $('.editar');
+
+            divEditar.show();
+            
+            $('li').addClass('paginacao');
+        });
+    });
+
+</script>
 
 <?php
 require '../inc/global/footer.php';

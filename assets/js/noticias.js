@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 });
 
-function atualizar(){
+function atualizar() {
   var quantidadePg = 3; //quantidade de registro por página
   var pagina = 1; //página inicial
 
@@ -21,59 +21,62 @@ function atualizar(){
   listarNoticiasEx(pagina, quantidadePg);
 }
 
-$('viewNoticiasAdm.php').ready(function () {
-  $.get("noticiasInternas.php", function () {
-    var divEditar = $('.editar');
-
-    divEditar.show();
-  });
-
-  $.get("noticiasExternas.php", function () {
-    var divEditar = $('.editar');
-
-    divEditar.show();
-  });
-
-});
 
 
 function listarNoticiasIn(pagina, quantidadePg) {
+    if ($("li").hasClass('paginacao')) {
+      classe = 1;
+    }
+    
   var dados = {
     paginaIn: pagina,
     quantidadePgIn: quantidadePg
   }
+
   $.post('noticiasInternas.php', dados, function (retorna) {
     //Subtitui o valor no seletor id="externas"
     $("#internas").html(retorna);
+
+    alert(classe);
+    if (classe == 1) {
+      $.get("noticiasInternas.php", function () {
+        var divEditar = $('.editar');
+
+        divEditar.show();
+        
+        $('li').addClass('paginacao');
+      });
+    }
   });
 
-  $('viewNoticiasAdm.php').ready(function () {
-    $.get("noticiasInternas.php", function () {
-      var divEditar = $('.editar');
-
-      divEditar.show();
-    });
-  });
 }
 
 function listarNoticiasEx(pagina, quantidadePg) {
+    if ($("li").hasClass('paginacao')) {
+      classe = 1;
+    }
+
   var dados = {
     pagina: pagina,
     quantidadePg: quantidadePg
   }
+
   $.post('noticiasExternas.php', dados, function (retorna) {
     //Subtitui o valor no seletor id="externas"
     $("#externas").html(retorna);
+    
+    alert(classe);
+    if (classe == 1) {
+      $.get("noticiasExternas.php", function () {
+        var divEditar = $('.editar');
+
+        divEditar.show();
+        
+        $('li').addClass('paginacao');
+      });
+    }
   });
 
-  $('viewNoticiasAdm.php').ready(function () {
-    $.get("noticiasExternas.php", function () {
-      var divEditar = $('.editar');
-
-      divEditar.show();
-    });
-
-  });
 }
 
 

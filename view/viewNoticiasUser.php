@@ -21,6 +21,19 @@ require '../inc/global/config.php';
 
 </div>
 
+<script>
+    $(document).ready(function() {
+        $.get("noticiasInternas.php", function() {
+            $('li').removeClass('paginacao');
+        });
+
+        $.get("noticiasExternas.php", function() {
+            $('li').removeClass('paginacao');
+        });
+    });
+
+</script>
+
 <?php
 require '../inc/global/footer.php';
 require '../inc/global/head_end.php';

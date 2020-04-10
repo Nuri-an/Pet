@@ -65,9 +65,11 @@ while ($rowNoticiasEx = $stmtNoticiasEx->fetch(PDO::FETCH_ASSOC)) {
                 <br><br>';
                 $i++;
 }
-echo '<button type="button" onclick="adicionar_modal_ex()" class="btn btn-primary" style="border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
-        <i class="fa fa-plus" aria-hidden="true" ></i>
-    </button>';
+echo '<div class="editar" style="display: none;">
+        <button type="button" onclick="adicionar_modal_ex()" class="btn btn-primary" style="border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
+            <i class="fa fa-plus" aria-hidden="true" ></i>
+        </button>
+    </div>';
 
 
 echo '<nav aria-label="Page navigation" style="margin-top: 50px">
@@ -112,4 +114,5 @@ echo '<nav aria-label="Page navigation" style="margin-top: 50px">
         echo '</ul>
     </nav>';
 ?>
+
 
