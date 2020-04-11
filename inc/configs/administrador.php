@@ -17,7 +17,7 @@
         <a class="nav-link" id="integrantes" href='viewIntegrantesAdm.php' > <font size="4"> Integrantes </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="projetos" > <font size="4"> Projetos </font> </a>
+        <a class="nav-link" id="projetos"  href='viewProjetosAdm.php' > <font size="4"> Projetos </font> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="projetos" > <font size="4"> Administradores </font> </a>

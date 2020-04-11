@@ -112,7 +112,7 @@ require '../inc/global/config.php';
                                 <label class="" for="descricao">
                                     <h5> Citação referente a publicação: </h5>
                                 </label>
-                                <textarea class="form-control" id="descricao" name="descricao" rows="3">  </textarea>
+                                <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
                             </div>
                         </div>
                     </div>

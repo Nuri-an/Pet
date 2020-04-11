@@ -54,7 +54,7 @@ require '../inc/global/config.php';
                                 <label class="" for="descricao">
                                     <h5> Descrição: </h5>
                                 </label>
-                                <textarea class="form-control" id="descricao" name="descricao" rows="10">  </textarea>
+                                <textarea class="form-control" id="descricao" name="descricao" rows="10"></textarea>
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@ require '../inc/global/config.php';
                                 <label class="" for="descricao">
                                     <h5> Descrição: </h5>
                                 </label>
-                                <textarea class="form-control" id="descricao" name="descricao">  </textarea>
+                                <textarea class="form-control" id="descricao" name="descricao"></textarea>
                             </div>
                         </div>
                     </div>
@@ -165,6 +165,7 @@ require '../inc/global/config.php';
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material">
@@ -184,7 +185,6 @@ require '../inc/global/config.php';
             </div>
             </form>
         </div>
-
     </div>
 </div>
 
@@ -204,11 +204,10 @@ require '../inc/global/config.php';
             var divEditar = $('.editar');
 
             divEditar.show();
-            
+
             $('li').addClass('paginacao');
         });
     });
-
 </script>
 
 <?php

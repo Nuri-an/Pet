@@ -165,11 +165,11 @@ $(document).ready(function () {
                                 dialog.modal('hide');
                             }, 3000); //3 segundos depois executa
                         }
+                        atualizar();
                     }
                 });
                 $('#verAdicionarPublicacoes').modal('hide');
                 $('#adicionarPublicacoes-form').trigger("reset");
-                atualizar();
                 return false;
             }
         });
@@ -251,11 +251,11 @@ $(document).ready(function () {
                   dialog.modal('hide');
                 }, 3000); //3 segundos depois executa
               }
+              atualizar();
             }
           });
           $('#verEditarPublicacoes').modal('hide');
           $('#editarPublicacoes-form').trigger("reset");
-          atualizar();
           return false;
         }
   

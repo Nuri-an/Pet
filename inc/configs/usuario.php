@@ -17,7 +17,7 @@
         <a class="nav-link" id="integrantes" href="viewIntegrantesUser.php"> <font size="4"> Integrantes </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="projetos" href="#"> <font size="4"> Projetos </font> </a>
+        <a class="nav-link" id="projetos" href="viewProjetosUser.php"> <font size="4"> Projetos </font> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="login" href="viewLogin.php"> <font size="4"> Login </font> </a>

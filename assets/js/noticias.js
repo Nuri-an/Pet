@@ -24,10 +24,10 @@ function atualizar() {
 
 
 function listarNoticiasIn(pagina, quantidadePg) {
-    if ($("li").hasClass('paginacao')) {
-      classe = 1;
-    }
-    
+  if ($("li").hasClass('paginacao')) {
+    classe = 1;
+  }
+
   var dados = {
     paginaIn: pagina,
     quantidadePgIn: quantidadePg
@@ -43,7 +43,7 @@ function listarNoticiasIn(pagina, quantidadePg) {
         var divEditar = $('.editar');
 
         divEditar.show();
-        
+
         $('li').addClass('paginacao');
       });
     }
@@ -52,9 +52,9 @@ function listarNoticiasIn(pagina, quantidadePg) {
 }
 
 function listarNoticiasEx(pagina, quantidadePg) {
-    if ($("li").hasClass('paginacao')) {
-      classe = 1;
-    }
+  if ($("li").hasClass('paginacao')) {
+    classe = 1;
+  }
 
   var dados = {
     pagina: pagina,
@@ -64,14 +64,14 @@ function listarNoticiasEx(pagina, quantidadePg) {
   $.post('noticiasExternas.php', dados, function (retorna) {
     //Subtitui o valor no seletor id="externas"
     $("#externas").html(retorna);
-    
+
     alert(classe);
     if (classe == 1) {
       $.get("noticiasExternas.php", function () {
         var divEditar = $('.editar');
 
         divEditar.show();
-        
+
         $('li').addClass('paginacao');
       });
     }
@@ -270,10 +270,10 @@ $(document).ready(function () {
         jQuery(e).remove();
       },
       rules: {
-        'titulo': {
+        'descricao': {
           required: true
         },
-        'descricao': {
+        'titulo': {
           required: true
         },
         'arquivo': {
@@ -286,11 +286,11 @@ $(document).ready(function () {
         }
       },
       messages: {
-        'titulo': {
-          required: 'Por favor, preeencha este campo'
-        },
         'descricao': {
           required: 'Por favor, preeencha este campo',
+        },
+        'titulo': {
+          required: 'Por favor, preeencha este campo'
         },
         'arquivo': {
           required: 'Por favor, preeencha este campo',
@@ -335,11 +335,11 @@ $(document).ready(function () {
                 dialog.modal('hide');
               }, 3000); //3 segundos depois executa
             }
+            atualizar();
           }
         });
         $('#verAdicionarNoticias').modal('hide');
         $('#adicionarNoticias-form').trigger("reset");
-        atualizar();
         return false;
       }
 
@@ -437,11 +437,11 @@ $(document).ready(function () {
                 dialog.modal('hide');
               }, 3000); //3 segundos depois executa
             }
+            atualizar();
           }
         });
         $('#verEditarNoticias').modal('hide');
         $('#editarNoticas-form').trigger("reset");
-        atualizar();
         return false;
       }
 
