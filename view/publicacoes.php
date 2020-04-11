@@ -48,7 +48,7 @@ $totalPg = ceil($rowTotalPublicacoesAno['numResult'] / $quantidadePg);
 <?php
 
 if ($stmtPublicacoes->rowCount() == 0) {
-    echo '<div class = "container" style="margin-bottom: 20px;">
+    echo '<div class = "container" style="margin-bottom: 20px;" id="semPubicacoes">
             <small class="text-muted " style="font-size:50; ">
                 <i>Ainda não há publicações no ano de ' . $ano . '</i>
             </small> 
@@ -61,9 +61,12 @@ if ($stmtPublicacoes->rowCount() == 0) {
                 <th scope="col">Ano</th>
                 <th scope="col">Publicação</th>
                 <th scope="col">Link</th>
+                <th scope="col"> <div class="editar" style="display: none;" > Editar </div> </th>
             </tr>
         </thead>
         <tbody>';
+
+        $i=1;
 
     while ($rowPublicacoes = $stmtPublicacoes->fetch(PDO::FETCH_ASSOC)) {
 
@@ -76,16 +79,34 @@ if ($stmtPublicacoes->rowCount() == 0) {
             <th scope="row">' . $ano . '</th>
             <td>' . $rowPublicacoes['descricaoPublicacao'] . '</td>
             <td> <a href="' . $link . '" target = _blank> <i class="fa fa-external-link" aria-hidden="true">  </i> </a> </td>
+            <td>
+                <a  class="editar" style="cursor: pointer; float: left; margin-bottom: 5px; display: none;" title="Editar" id="rowEditarPublicacao_'. $i .'" data-id="'. $rowPublicacoes['codPublicacao'] .'"  data-data="'. $rowPublicacoes['dataPublicacao'] .'" data-descricao="'. $rowPublicacoes['descricaoPublicacao'] .'" data-link="'. $rowPublicacoes['linkPublicacao'] .'" onclick="editar_modal('. $i .')">
+                    <i class="fa fa-pencil text-primary"></i>
+                </a>
+            </td>
+                
         </tr>';
+
+        $i++;
     }
 
     echo '</tbody>
+        <tfoot>
+        <tr>
+                <th scope="col" coslpan = "4" >   
+        <div class="editar" style="display: none; margin-top: 20px;">
+                <button type="button" onclick="adicionar_modal()" class="btn btn-primary" style="border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
+                    <i class="fa fa-plus" aria-hidden="true" ></i>
+                </button>
+            </div></th> 
+        </tfoot>
     </table>';
 }
+
 ?>
 
 <?php
-echo '<nav aria-label="Page navigation" class="container" style="margin-bottom: 100px;">
+echo '<nav aria-label="Page navigation" class="container" style="margin-bottom: 100px; margin-top:50px;">
         <ul class="pagination justify-content-center">';
 if ($pagina == 1) {
     echo '<li class="page-item disabled">

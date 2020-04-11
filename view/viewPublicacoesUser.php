@@ -8,14 +8,18 @@ require '../inc/global/config.php';
 
 <script type="text/javascript" src="../assets/js/publicacoes.js"></script>
 
-<div id="corpo">
-
-
-</div>
-
-
+<div id="corpo"> </div>
 
 </div>
+
+<script>
+    $(document).ready(function() {
+        $.get("publicacoes.php", function() {
+            $('li').removeClass('paginacao');
+        });
+    });
+
+</script>
 
 <?php
 require '../inc/global/footer.php';

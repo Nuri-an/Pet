@@ -11,7 +11,7 @@
         <a class="nav-link" id="noticias" href='viewNoticiasAdm.php'> <font size="4"> Notícias </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="publicacoes"> <font size="4"> Publicações </font> </a>
+        <a class="nav-link" id="publicacoes" href='viewPublicacoesAdm.php' > <font size="4"> Publicações </font> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="integrantes" href='viewIntegrantesAdm.php' > <font size="4"> Integrantes </font> </a>
