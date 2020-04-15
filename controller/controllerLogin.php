@@ -9,6 +9,15 @@ switch ($acao) {
     case 'cadastrar':
         cadastrarAdm();
         break;
+    case 'gerarCod':
+        codSenha();
+        break;
+    case 'validaCod':
+        validaCodSenha();
+        break;
+    case 'redefinir':
+        redefinirSenha();
+        break;
 }
 
 function logarAdm()
@@ -30,6 +39,65 @@ function logarAdm()
 
 function cadastrarAdm()
 {
+    require_once('../model/ModelLogin.php');
+    require_once('../dao/daoLogin.php');
+
+    $dao = new DaoLogin();
+    $Login = new ModelLogin();
+
+    $nome = filter_var($_POST["nome"], FILTER_SANITIZE_STRING);
+    $cpf = filter_var($_POST["cpf"], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST["email"], FILTER_SANITIZE_STRING);
+    $tipo = filter_var($_POST["situacao"], FILTER_SANITIZE_STRING);
+    $senha = filter_var($_POST["senhaAdm"], FILTER_SANITIZE_STRING);
+
+    $Login->setNome($nome);
+    $Login->setEmail($email);
+    $Login->setCpf($cpf);
+    $Login->setTipo($tipo);
+    $Login->setSenha($senha);
+    $dao->adicionarLogin($Login);
+}
+
+function codSenha()
+{
+    require_once('../model/ModelLogin.php');
+    require_once('../dao/daoLogin.php');
+
+    $dao = new DaoLogin();
+    $Login = new ModelLogin();
+
+    $id = filter_var($_POST["id"], FILTER_SANITIZE_STRING);
+
+    $Login->setId($id);
+    $dao->sendMail($Login);
+}
+
+function validaCodSenha()
+{
+    require_once('../model/ModelLogin.php');
+    require_once('../dao/daoLogin.php');
+
+    $dao = new DaoLogin();
+    $Login = new ModelLogin();
+
+    $codigo = filter_var($_POST["codigo"], FILTER_SANITIZE_STRING);
+
+    $Login->setCodigo($codigo);
+    $dao->validaCod($Login);
+}
+function redefinirSenha()
+{
+    require_once('../model/ModelLogin.php');
+    require_once('../dao/daoLogin.php');
+
+    $dao = new DaoLogin();
+    $Login = new ModelLogin();
+
+    $senha = filter_var($_POST["newSenha"], FILTER_SANITIZE_STRING);
+
+    $Login->setSenha($senha);
+    $dao->redefinirSenha($Login);
 }
 
 if (isset($_GET['acao'])) {

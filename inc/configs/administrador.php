@@ -20,7 +20,7 @@
         <a class="nav-link" id="projetos"  href='viewProjetosAdm.php' > <font size="4"> Projetos </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="projetos" > <font size="4"> Administradores </font> </a>
+        <a class="nav-link" id="administradores" href='viewAdministradores.php' > <font size="4"> Administradores </font> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../controller/controllerLogin.php?acao=logout" id="btnlogout" > <font size="4"> Sair </font> </a>

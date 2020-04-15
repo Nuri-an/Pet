@@ -6,7 +6,7 @@ body {
     border-bottom: 2px solid #fff;
 }
 
-.fundo{
+.fundoLogin{
     height:90vh; 
     width: 40vw; 
     margin-top: 20px; 
@@ -14,9 +14,26 @@ body {
     background-color: #fff;
 }
 
+.fundoCadastro{
+    height:auto; 
+    width: 60vw; 
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    background-color: #fff;
+}
 @media only screen and (max-width: 598px){
-    .fundo{
+    .fundoLogin{
         height:90vh; 
+        width: 90vw; 
+        margin-top: 20px; 
+        margin-bottom: 20px; 
+        margin-right: 20px; 
+        margin-left: 20px;
+        background-color: #fff;
+    }
+
+    .fundoCadastro{
+        height:auto; 
         width: 90vw; 
         margin-top: 20px; 
         margin-bottom: 20px; 
