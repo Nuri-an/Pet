@@ -37,7 +37,7 @@ function listarNoticiasIn(pagina, quantidadePg) {
     //Subtitui o valor no seletor id="externas"
     $("#internas").html(retorna);
 
-    alert(classe);
+    //alert(classe);
     if (classe == 1) {
       $.get("noticiasInternas.php", function () {
         var divEditar = $('.editar');
@@ -65,7 +65,7 @@ function listarNoticiasEx(pagina, quantidadePg) {
     //Subtitui o valor no seletor id="externas"
     $("#externas").html(retorna);
 
-    alert(classe);
+    //alert(classe);
     if (classe == 1) {
       $.get("noticiasExternas.php", function () {
         var divEditar = $('.editar');
@@ -300,7 +300,7 @@ $(document).ready(function () {
         }
       },
       submitHandler: function (form) {
-        alert("enta coletando dados do form");
+        //alert("enta coletando dados do form");
         var formdata = new FormData($("form[name='adicionarNoticias-form']")[0]);
 
 
@@ -317,7 +317,7 @@ $(document).ready(function () {
           contentType: false,
 
           success: function (result) {
-            alert(result);
+            //alert(result);
 
             if (result == 1) {
               dialog.init(function () {
@@ -344,7 +344,7 @@ $(document).ready(function () {
       }
 
     });
-    alert("entrou");
+    //alert("entrou");
   });
 });
 
@@ -402,7 +402,7 @@ $(document).ready(function () {
         }
       },
       submitHandler: function (form) {
-        alert("enta coletando dados do form");
+        //alert("enta coletando dados do form");
         var formdata = new FormData($("form[name='editarNoticias-form']")[0]);
 
 
@@ -419,7 +419,7 @@ $(document).ready(function () {
           contentType: false,
 
           success: function (result) {
-            alert(result);
+            //alert(result);
 
             if ((result == 1) || (result == 3)) {
               dialog.init(function () {
@@ -446,7 +446,7 @@ $(document).ready(function () {
       }
 
     });
-    alert("entrou");
+    //alert("entrou");
   });
 });
 
@@ -455,7 +455,7 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#btnExcluirNoticia').click(function () {
     var dados = $('#excluirNoticias-form').serializeArray();
-    alert(dados);
+    //alert(dados);
     $('#verEditarNoticias').modal('hide');
     bootbox.confirm({
       message: "Você realmente deseja excluir essa notícia ?",
@@ -483,7 +483,7 @@ $(document).ready(function () {
             data: dados,
 
             success: function (resultado) {
-              alert(resultado);
+              //alert(resultado);
               if (resultado == 1) {
                 dialog.init(function () {
                   dialog.find('.bootbox-body').html('Excluída com sucesso!');

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 15-Abr-2020 às 20:24
+-- Generation Time: 20-Abr-2020 às 18:00
 -- Versão do servidor: 5.6.15-log
 -- PHP Version: 5.5.8
 
@@ -94,8 +94,6 @@ CREATE TABLE IF NOT EXISTS `galeria` (
 --
 
 INSERT INTO `galeria` (`codGaleria`, `tituloGaleria`, `midiaGaleria`, `urlGaleria`) VALUES
-(107, '15:01', 'video_1580666469.mp4', NULL),
-(106, 'milley', 'video_1580664293.mp4', NULL),
 (105, '14:23', 'video_1580664212.mp4', NULL),
 (104, '14:20', 'video_1580664042.mp4', NULL),
 (103, 'm', 'video_1580663876.mp4', NULL),
@@ -107,25 +105,9 @@ INSERT INTO `galeria` (`codGaleria`, `tituloGaleria`, `midiaGaleria`, `urlGaleri
 (97, '13:08', 'video_1580659737.mp4', NULL),
 (98, '13:10', 'video_1580659813.mp4', NULL),
 (95, 'n', 'imagem_1580658388.mp4', NULL),
-(94, '', 'imagem_1580657258.jpeg', NULL),
-(93, '', '', 'https://www.youtube.com/watch?v=0GY_PqHC_kI'),
-(92, 'teste galeria', 'imagem_1580523111.jpeg', NULL),
-(91, 'sla', 'imagem_1580061370.jpg', NULL),
 (90, 'Florianópolis - evento startups', 'imagem_1579639977.jpg', NULL),
-(85, 'Show de membros. Todos os recursos foram doados', 'imagem_1579637035.jpg', NULL),
-(84, 'projeto desenvolvido', 'imagem_1579640413.PNG', NULL),
 (89, 'Workshop SP', 'imagem_1579639902.png', NULL),
-(82, '', 'imagem_1579636619.png', NULL),
-(81, 'teste1', 'imagem_1579636313.jpg', NULL),
-(75, '', 'imagem_1579569333.PNG', NULL),
-(76, 'teto e chao', 'imagem_1579568990.png', NULL),
-(77, '', 'imagem_1579635293.jpeg', NULL),
-(78, '', 'imagem_1579639671.jpg', NULL),
-(79, 'editar teste 1', 'imagem_1579638766.jpg', NULL),
-(80, '', 'imagem_1579636195.jpeg', NULL),
-(108, 'sei la', 'video_1580773248.mp4', ''),
 (109, 'video yt', '', 'https://www.youtube.com/watch?v=dGIuBvhymQs'),
-(110, 'kkk', 'video_1580833853.webm', ''),
 (112, 'mp4', 'video_1580835417.mp4', ''),
 (113, 'infraestrutura ti', '', 'https://www.youtube.com/watch?v=-WnQ6X2oSwU'),
 (114, 'teste', '', 'https://www.youtube.com/watch?v=quSLB3dz-OM');
@@ -180,14 +162,13 @@ CREATE TABLE IF NOT EXISTS `integrantes` (
 INSERT INTO `integrantes` (`codIntegrante`, `nomeIntegrante`, `emailIntegrante`, `cpfIntegrante`, `dataInicioIntegrante`, `dataFimIntegrante`, `situacaoIntegrante`, `fotoIntegrante`, `socialIntegrante`, `senhaIntegrante`) VALUES
 (1, 'Alessandra Martins Coelho', 'alessandracoelho@gmail.com', '151.712.956-70', '2018-11-06', NULL, 'Tutor(a)', 'foto_1580218033.jpg', 'https://www.facebook.com/alessandra.m.coelho.7', ''),
 (2, 'Davidson Lucas de Souza', 'd@email.com', '151.712.956-70', '2020-01-31', NULL, 'Voluntário', 'foto_1580322804.jpg', 'https://linkedin.com.br/davidson', ''),
-(3, 'Bunda Fedida', 'f@gmail.com', '151.712.956-70', '2018-02-22', NULL, 'Bolsista', 'foto_3.jpg', '', ''),
+(3, 'Fábio Junior Barbosa', 'f@gmail.com', '151.712.956-70', '2018-02-22', NULL, 'Bolsista', 'foto_3.jpg', '', ''),
 (4, 'Fernando Lucas de Lima Martins', 'fl@gmail.com', '', '2015-05-02', NULL, 'Bolsista', 'foto_4.jpg', NULL, ''),
 (6, 'Jesus Felipe Candian Silva', NULL, '111.111.111-10', '2011-07-31', NULL, 'Bolsista', 'foto_6.jpg', NULL, ''),
 (7, 'Leonardo Antônio Almeida de Souza', NULL, '111.111.111-10', '2000-03-04', NULL, 'Bolsista', 'foto_7.jpg', NULL, ''),
 (8, 'Luana da Mercês Oliveira', 'l@gmail.com', '111.111.111-10', '2017-12-02', NULL, 'Bolsista', 'foto_8.jpg', NULL, ''),
 (9, 'Luiza Rosa de Moura', 'lr@gmail.com', '111.111.111-10', '2019-08-05', NULL, 'Bolsista', 'foto_9.jpg', NULL, ''),
-(11, 'Nurian Mariana Jéssica Luí­s Silveira e etc', 'nuriancoelho@hotmail.com', '151.712.956-70', '2020-01-01', NULL, 'Administrador', 'foto_1580328536.jpg', '', 'coelho123'),
-(20, '', '', '', '2020-02-06', NULL, 'Administrador', NULL, NULL, ''),
+(11, 'Nurian Coelho', 'nuriancoelho@hotmail.com', '151.712.956-70', '2020-01-01', NULL, 'Administrador', '', '', 'coelho123'),
 (17, 'Nurian Maria Amancio Coelho', 'nuriancoelho@hotmail.com', '151.712.956-70', '2020-01-01', NULL, 'Voluntário', 'foto_1586467908.jpg', '', ''),
 (19, 'Nunda Xavier', 'nunda@gmail.com', '855.432.416-15', '2020-04-15', NULL, 'Administrador', NULL, NULL, 'coelho123'),
 (22, 'Adm 2', 'nuriancoelho@hotmail.com', '23395239071', '2020-04-15', NULL, 'Administrador', NULL, NULL, '123456'),
@@ -255,10 +236,8 @@ INSERT INTO `projetos` (`codProjeto`, `tituloProjeto`, `descricaoProjeto`, `anoP
 (2, 'IF 3D', 'desenvolvimento de um ambiente 3D com a plataforma Unity[1] que reflita todo Campus Rio Pomba, incluindo salas de aula, laboratórios, áreas de plantio e criação de animais. O desenvolvimento deste ambiente está dividido em duas partes, a primeira modela o ambiente externo (áreas abertas, prédios, quadras) e a segunda modela a parte interna dos prédios, quadras, laboratórios, dentre outros ambientes.', 2015, NULL, NULL, NULL),
 (3, 'Frigote', 'Frigote é um jogo desenvolvido na Unity que têm como objetivo simular uma fazenda e suas funções, de modo que alunos da Zootecnia possam aprender sobre sua área de forma divertida. Em primeiro momento, desenvolvemos um cenário para o frango de corte, onde é possível frangos desde a fase inicial como pintinho até a fase adulta, na qual ele já pode ser vendido. O jogo também é composto de um quiz relacionado a criação do frango, para que o jogador possa fixar esses conteúdos.', 2015, '', NULL, NULL),
 (6, 'Interação Real em Mundo Digital: Realidade Virtual + Kinect', '  Este projeto, desenvolvido na plataforma Unity, permite que qualquer pessoa com um dispositivo móvel que possua suporte para Realidade Virtual, Microsoft Kinect e criatividade possa desenvolver suas próprias experiências em Realidade Virtual. Os dados de rastreamento de posição do corpo capitados pelo Kinect são enviados para o jogador, e através do WiFi utilizando um servidor Unet(servidor Multiplayer da Unity Engine), todos os dados são recebidos no dispositivo móvel obtendo, assim, uma maior imersão no mundo virtual.', 2016, '', NULL, NULL),
-(12, 'Nascimento', '   ', 2020, NULL, NULL, NULL),
 (13, 'Interação Real em Mundo Digital: Realidade Virtual + GPS', '  Algo que não é explorado atualmente é a interação de Realidade Virtual com GPS, ou seja, é a capacidade de você poder andar em um ambiente virtual a medida em que se desloca em um ambiente real. Há inúmeras aplicações que encaixam com esse tema, as opções de desenvolvimento são vastas e ainda não são exploradas , o que faz com que cada pesquisa sobre ele seja de grande importância. Com base nisso, este projeto entra para desenvolver as ferramentas necessárias para a exploração desse tema.', 2016, '', NULL, NULL),
-(15, 'Treinamento Mental com VR para ganho de rendimento na Natação', '  Você já pensou em melhorar seu desempenho em seu esporte favorito sem sair de casa? Essa é uma proposta do nosso grupo LAMIF juntamente com o Departamento Acadêmico de Educação Física. Desenvolver um jogo que utiliza realidade virtual para simular o ambiente real de treinamento, com intuído de investigar as possíveis aplicações desta ferramenta no dia a dia de treino do atleta. Com isto buscamos obter melhorias no rendimento do mesmo sem o desgaste físico dos treinamentos habituais.', 2020, '', NULL, NULL),
-(23, 'meu deus', 'socorro', 2020, '', '', 'O filho do homem');
+(15, 'Treinamento Mental com VR para ganho de rendimento na Natação', '  Você já pensou em melhorar seu desempenho em seu esporte favorito sem sair de casa? Essa é uma proposta do nosso grupo LAMIF juntamente com o Departamento Acadêmico de Educação Física. Desenvolver um jogo que utiliza realidade virtual para simular o ambiente real de treinamento, com intuído de investigar as possíveis aplicações desta ferramenta no dia a dia de treino do atleta. Com isto buscamos obter melhorias no rendimento do mesmo sem o desgaste físico dos treinamentos habituais.', 2020, '', NULL, NULL);
 
 -- --------------------------------------------------------
 

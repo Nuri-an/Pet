@@ -1,5 +1,6 @@
 <?php
-session_start();
+if ( session_status() !== PHP_SESSION_ACTIVE ){
+session_start(); }
 if (!isset($_SESSION['adm_session'])){ header("Location: viewInicioUser.php"); }
 require '../inc/global/head_start.php';
 require '../inc/global/banner.php';

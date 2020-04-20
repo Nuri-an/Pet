@@ -54,7 +54,7 @@ $(document).ready(function () {
                 }
             },
             submitHandler: function (form) {
-                alert("está coletando dados do form");
+                //alert("está coletando dados do form");
                 var dados = $('#logar-form').serializeArray();
                 dialog = bootbox.dialog({
                     message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
@@ -67,7 +67,7 @@ $(document).ready(function () {
                     data: dados,
 
                     success: function (result) {
-                        alert(result);
+                        //alert(result);
 
                         if (result == 0) {
                             dialog.init(function () {
@@ -181,7 +181,7 @@ $(document).ready(function () {
                 }
             },
             submitHandler: function (form) {
-                alert("está coletando dados do form");
+                //alert("está coletando dados do form");
                 var dados = $('#logar-form').serializeArray();
                 dialog = bootbox.dialog({
                     message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
@@ -194,7 +194,7 @@ $(document).ready(function () {
                     data: dados,
 
                     success: function (result) {
-                        alert(result);
+                        //alert(result);
 
                         if (result == 2) {
                             dialog.init(function () {
@@ -260,7 +260,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#btnValidaCod').click(function () {
         $('#codHelp').hide();
-        alert('clicou');
+        //alert('clicou');
         jQuery("#ValidaCod-form").validate({
             focusInvalid: true,
             errorClass: 'invalid-feedback animated fadeInDown',
@@ -286,13 +286,13 @@ $(document).ready(function () {
                 }
             },
             submitHandler: function (form) {
-                alert('coletando dados');
+                //alert('coletando dados');
                 dialog = bootbox.dialog({
                     message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Validando...</p>',
                     closeButton: false
                 });
                 var dados = $('#ValidaCod-form').serializeArray();
-                alert(dados);
+                //alert(dados);
                 $.ajax({
                     type: "POST",
                     url: "../controller/ControllerLogin.php",
@@ -313,7 +313,7 @@ $(document).ready(function () {
                                 dialog.modal('hide');
                             }, 2000); //3 segundos depois executa
                         }
-                        alert(cod);
+                        //alert(cod);
                     }
                 });
             }
@@ -370,7 +370,7 @@ $(document).ready(function () {
                     data: dados,
 
                     success: function (cod) {
-                        alert(cod);
+                        //alert(cod);
                         if (cod == 1) {
                             dialog.init(function () {
                                 dialog.find('.bootbox-body').html('Senha alterada com sucesso');
@@ -470,7 +470,7 @@ $(document).ready(function () {
                     },
                     callback: function (result) {
                         if (result) {
-                            alert("enta coletando dados do form");
+                            //alert("enta coletando dados do form");
                             var dados = $('#Cadastro-form').serializeArray();
 
                             dialog = bootbox.dialog({
@@ -484,7 +484,7 @@ $(document).ready(function () {
                                 data: dados,
 
                                 success: function (result) {
-                                    alert(result);
+                                    //alert(result);
 
                                     if (result == 1) {
                                         dialog.init(function () {
@@ -512,6 +512,6 @@ $(document).ready(function () {
                 return false;
             }
         });
-        alert("entrou");
+        //alert("entrou");
     });
 });

@@ -39,7 +39,7 @@ function listarProjetos(pagina, quantidadePg, ano) {
         //Subtitui o valor no seletor id="externas"
         $("#corpo").html(retorna);
 
-        alert(classe);
+       // alert(classe);
         if (classe == 1) {
             $.get("projetos.php", function () {
                 var divEditar = $('.editar');
@@ -84,7 +84,7 @@ function editar_modal(id) {
         var publicacao = $('#rowEditarProjetos_' + id).attr("data-publicacao");
         var parceria = $('#rowEditarProjetos_' + id).attr("data-parceria");
         //var acao = 'editarF';
-alert(publicacao);
+//alert(publicacao);
 
         $('#Projetos-form').trigger("reset");
         $('#excluirProjeto').show();
@@ -180,7 +180,7 @@ $(document).ready(function () {
                 }
             },
             submitHandler: function (form) {
-                alert("enta coletando dados do form");
+                //alert("enta coletando dados do form");
                 var formdata = new FormData($("form[name='Projetos-form']")[0]);
 
                 dialog = bootbox.dialog({
@@ -196,7 +196,7 @@ $(document).ready(function () {
                     contentType: false,
 
                     success: function (result) {
-                        alert(result);
+                        //(result);
 
                         if ((result == 1) || (result == 3)) {
                             dialog.init(function () {
@@ -223,7 +223,7 @@ $(document).ready(function () {
                 return false;
             }
         });
-        alert("entrou");
+        //alert("entrou");
     });
 });
 
@@ -258,7 +258,7 @@ $(document).ready(function () {
               data: dados,
   
               success: function (resultado) {
-                alert(resultado);
+                //alert(resultado);
                 if (resultado == 1) {
                   dialog.init(function () {
                     dialog.find('.bootbox-body').html('Excluído com sucesso!');

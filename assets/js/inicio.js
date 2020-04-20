@@ -69,7 +69,7 @@ function nomeFoto() {
   }
   if ($('#video').val()) {
     var midia = $('#video').val();
-    alert(midia);
+    //alert(midia);
     posic = midia.indexOf(letra); //pega a posicao da letra
     while (midia.includes(letra)) {
       midia = midia.substring(posic); //exclui da string todas as letras ate a posicao desejada
@@ -144,9 +144,9 @@ $(document).ready(function () {
         }
       },
       submitHandler: function (form) {
-        alert("enta coletando dados do form");
+        //alert("enta coletando dados do form");
         var dados = $('#editarInfo-form').serializeArray();
-        alert(dados);
+        //alert(dados);
         dialog = bootbox.dialog({
           message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
           closeButton: false
@@ -158,7 +158,7 @@ $(document).ready(function () {
           data: dados,
 
           success: function (result) {
-            alert(result);
+            //alert(result);
 
             if (result == 1) {
               dialog.init(function () {
@@ -185,7 +185,7 @@ $(document).ready(function () {
       }
 
     });
-    alert("entrou");
+    //alert("entrou");
   });
 });
 
@@ -272,7 +272,7 @@ $(document).ready(function () {
         }
       },
       submitHandler: function (form) {
-        alert("enta coletando dados do form");
+        //alert("enta coletando dados do form");
         var formdata = new FormData($("form[name='adicionarFoto']")[0]);
 
         dialog = bootbox.dialog({
@@ -288,7 +288,7 @@ $(document).ready(function () {
           contentType: false,
 
           success: function (result) {
-            alert(result);
+            //alert(result);
 
             if (result == 1) {
               dialog.init(function () {
@@ -315,7 +315,7 @@ $(document).ready(function () {
       }
 
     });
-    alert("entrou");
+    //alert("entrou");
   });
 });
 

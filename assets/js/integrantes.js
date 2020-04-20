@@ -130,7 +130,7 @@ $(document).ready(function () {
                 }
             },
             submitHandler: function (form) {
-                alert("enta coletando dados do form");
+                //alert("enta coletando dados do form");
                 var formdata = new FormData($("form[name='atualizar-form']")[0]);
 
                 dialog = bootbox.dialog({
@@ -146,7 +146,7 @@ $(document).ready(function () {
                     contentType: false,
 
                     success: function (result) {
-                        alert(result);
+                        //alert(result);
 
                         if (result == 1) {
                             dialog.init(function () {
@@ -173,7 +173,7 @@ $(document).ready(function () {
             }
 
         });
-        alert("entrou");
+        //alert("entrou");
     });
 });
 
@@ -200,7 +200,7 @@ function excluir(id) {
                             id: cod
                         },
                         success: function (resultado) {
-                            alert(resultado);
+                            //alert(resultado);
                             if (resultado == 1) {
                                 dialog.init(function () {
                                     dialog.find('.bootbox-body').html('A foto foi excluída com sucesso!');
@@ -240,7 +240,7 @@ function excluir(id) {
                             tipo: tipo
                         },
                         success: function (resultado) {
-                            alert(resultado);
+                            //alert(resultado);
                             if (resultado == 1) {
                                 dialog.init(function () {
                                     dialog.find('.bootbox-body').html('Integrante com sucesso!');

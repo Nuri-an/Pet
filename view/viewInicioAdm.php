@@ -1,6 +1,10 @@
 <?php
-session_start();
-if (!isset($_SESSION['adm_session'])){ header("Location: viewInicioUser.php"); }
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+if (!isset($_SESSION['adm_session'])) {
+    header("Location: viewInicioUser.php");
+}
 require '../inc/global/head_start.php';
 require '../inc/global/banner.php';
 require '../inc/global/config.php';
@@ -31,7 +35,7 @@ $inicioDao = new DaoInicio();
 
         $stmtGaleriaV = $inicioDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'video%'");
         $stmtGaleriaV->execute();
-        
+
         $stmtGaleriaVE = $inicioDao->runQuery("SELECT * FROM galeria WHERE urlGaleria is not null");
         $stmtGaleriaVE->execute();
 
@@ -70,7 +74,7 @@ $inicioDao = new DaoInicio();
                 <img src="../assets/media/galeria/imagem_00.png" class="rounded mx-auto img-fluid d-block carouselItemFoto" style="cursor: pointer;" alt="Adicione uma foto" title="Adicione uma foto" onclick="adicionarFoto_modal()">
             </div>
             <?php
-            
+
             $i = 1;
             while ($rowGaleria = $stmtGaleria->fetch(PDO::FETCH_ASSOC)) {
 
@@ -134,7 +138,7 @@ $inicioDao = new DaoInicio();
                 }
                 $i++;
             }
-            
+
             while ($rowGaleriaVE = $stmtGaleriaVE->fetch(PDO::FETCH_ASSOC)) {
 
                 $titulo = $rowGaleriaVE['tituloGaleria'];
@@ -174,6 +178,7 @@ $inicioDao = new DaoInicio();
 
 <!-- Normal Modal -->
 
+</div>
 <div class="modal" id="verEditarInfo" role="dialog" data-backdrop="static" aria-labelledby="moda-normal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
@@ -305,7 +310,7 @@ $inicioDao = new DaoInicio();
                             <div class="form-material">
                                 <h5> Upload: </h5>
                                 <div class="custom-file">
-                                <div id="delet" style="border-left:10px;"><i class="fa fa-times" aria-hidden="true"></i></div>
+                                    <div id="delet" style="border-left:10px;"><i class="fa fa-times" aria-hidden="true"></i></div>
                                     <input type="file" class="custom-file-input" id="video" name="video" lang="pt" onchange="nomeFoto()">
                                     <label class="custom-file-label" for="arquivo" id="midia"> </label>
                                 </div>
@@ -337,7 +342,6 @@ $inicioDao = new DaoInicio();
         </div>
     </div>
 </div>
-        </div>
 <!-- END Normal Modal -->
 <?php
 //$cb->get_js('/js/admin.js');

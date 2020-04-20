@@ -39,7 +39,7 @@ function listarPublicacoes(pagina, quantidadePg, ano) {
         //Subtitui o valor no seletor id="externas"
         $("#corpo").html(retorna);
 
-        alert(classe);
+        //alert(classe);
         if (classe == 1) {
             $.get("publicacoes.php", function () {
                 var divEditar = $('.editar');
@@ -133,7 +133,7 @@ $(document).ready(function () {
                 }
             },
             submitHandler: function (form) {
-                alert("enta coletando dados do form");
+                //alert("enta coletando dados do form");
                 var dados = $('#adicionarPublicacoes-form').serializeArray();
 
                 dialog = bootbox.dialog({
@@ -147,7 +147,7 @@ $(document).ready(function () {
                     data: dados,
 
                     success: function (result) {
-                        alert(result);
+                        //alert(result);
 
                         if (result == 1) {
                             dialog.init(function () {
@@ -173,7 +173,7 @@ $(document).ready(function () {
                 return false;
             }
         });
-        alert("entrou");
+        //alert("entrou");
     });
 });
 
@@ -218,7 +218,7 @@ $(document).ready(function () {
           }
         },
         submitHandler: function (form) {
-          alert("enta coletando dados do form");
+          //alert("enta coletando dados do form");
           var dados = $('#editarPublicacoes-form').serializeArray();
 
   
@@ -233,7 +233,7 @@ $(document).ready(function () {
             data: dados,
   
             success: function (result) {
-              alert(result);
+              //alert(result);
   
               if ((result == 1) || (result == 3)) {
                 dialog.init(function () {
@@ -260,7 +260,7 @@ $(document).ready(function () {
         }
   
       });
-      alert("entrou");
+      //alert("entrou");
     });
   });
 
@@ -294,7 +294,7 @@ $(document).ready(function () {
               data: dados,
   
               success: function (resultado) {
-                alert(resultado);
+                //alert(resultado);
                 if (resultado == 1) {
                   dialog.init(function () {
                     dialog.find('.bootbox-body').html('Excluída com sucesso!');

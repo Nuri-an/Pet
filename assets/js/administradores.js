@@ -67,7 +67,6 @@ function aceitarAdm(id) {
                     },
 
                     success: function (resultado) {
-                        alert(resultado);
                         if (resultado == 2)  {
                             dialog.init(function () {
                                 dialog.find('.bootbox-body').html('Não foi possível aceitar a solicitação. Tente novamente mais tarde.');
@@ -126,7 +125,6 @@ function cancelarAdm(id) {
                     },
 
                     success: function (resultado) {
-                        alert(resultado);
                         if (resultado == 2) {
                             dialog.init(function () {
                                 dialog.find('.bootbox-body').html('Não foi possível cancelar a solicitação. Tente novamente mais tarde.');
