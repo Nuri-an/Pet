@@ -37,20 +37,6 @@
         width: 100%;  
         padding-bottom: 0px;
     }
-
-    @media only screen and (min-width: 355px) and (max-width: 575px){
-
-        .mobile{
-            height: 4200px;
-        }
-    }
-
-    @media only screen and (min-width: 155px) and (max-width: 335px){
-
-        .mobile{
-            height: 3600px;
-        }
-    }
     
     .card-integrante{
         width: 300px; 
@@ -116,5 +102,20 @@
             margin-top: 5px; 
             margin-right: 5px; 
             float: top;
+        }
+    }
+
+    
+    @media only screen and (max-width: 768px){
+        .card-foto img{
+            height:auto;
+        }
+
+        .card-foto {
+            height: auto;
+        }
+
+        .container{
+            margin-bottom: 70px;
         }
     }

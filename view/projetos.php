@@ -25,7 +25,7 @@ $totalPg = ceil($rowTotalProjetosAno['numResult'] / $quantidadePg);
 ?>
 
 <div class="btn-group" style="margin-bottom: 30px; padding-left: 15px; margin-left: auto;">
-    <button type="button" class="btn btn-info">Selecionar o ano</button>
+    <button type="button" class="btn btn-info">Selecionar o ano do projeto</button>
     <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="sr-only">Toggle Dropdown</span>
     </button>
@@ -43,8 +43,6 @@ $totalPg = ceil($rowTotalProjetosAno['numResult'] / $quantidadePg);
         ?>
     </div>
 </div>
-
-<h2 class="display-4" style="text-align: center;"> Projetos desenvolvidos no grupo PET </h2>
 
 <hr>
 

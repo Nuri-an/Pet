@@ -14,10 +14,16 @@
         <a class="nav-link" id="publicacoes" href='viewPublicacoesAdm.php' > <font size="4"> Publicações </font> </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" id="projetos"  href='viewProjetosAdm.php' > <font size="4"> Projetos </font> </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" id="integrantes" href='viewIntegrantesAdm.php' > <font size="4"> Integrantes </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="projetos"  href='viewProjetosAdm.php' > <font size="4"> Projetos </font> </a>
+        <a class="nav-link" id="links" href="#"> <font size="4"> Links úteis </font> </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="downloads" href="#"> <font size="4"> Downloads </font> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="administradores" href='viewAdministradores.php' > <font size="4"> Administradores </font> </a>
@@ -27,7 +33,7 @@
       </li>
     </ul>
   </div>
-  <div style="float:rigth;">
+  <div style="float:rigth; opacity:1; margin-right: 10px;">
     <a href="#">
       <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #6959CD; cursor: pointer;" title="Página do grupo"></i>
     </a>
@@ -37,4 +43,4 @@
   </div>
 </nav>
 
-<div class="jumbotron mobile ">
+<div class="jumbotron mobile " style="min-height: 100vh;">

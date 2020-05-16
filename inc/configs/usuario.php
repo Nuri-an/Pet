@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar" style=" width: 100vw;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar" style=" width: 100vw;">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button> 
@@ -14,10 +14,16 @@
         <a class="nav-link" id="publicacoes" href="viewPublicacoesUser.php"> <font size="4"> Publicações </font> </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" id="projetos" href="viewProjetosUser.php"> <font size="4"> Projetos </font> </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" id="integrantes" href="viewIntegrantesUser.php"> <font size="4"> Integrantes </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="projetos" href="viewProjetosUser.php"> <font size="4"> Projetos </font> </a>
+        <a class="nav-link" id="downloads" href="viewDownloadsUser.php"> <font size="4"> Downloads </font> </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="links" href="#"> <font size="4"> Links úteis </font> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="login" href="viewLogin.php"> <font size="4"> Login </font> </a>
@@ -33,4 +39,4 @@
     </a>
   </div>
 </nav>
-<div class="jumbotron mobile">
+<div class="jumbotron mobile" style="min-height: 100vh;">

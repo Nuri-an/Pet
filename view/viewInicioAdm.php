@@ -59,10 +59,10 @@ $inicioDao = new DaoInicio();
         ?>
     </div>
 
-    <hr>
+    <hr class="line">
     </hr>
 
-    <div class=" text-center" style="margin-top:30px;" role="group" aria-label="Exemplo básico">
+    <div class=" text-center" style="margin-top:30px; margin-bottom:30px;" role="group" aria-label="Exemplo básico">
         <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('f')">Galeria de Fotos</button>
         <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('v')">Galeria de Vídeos</button>
     </div>
@@ -109,7 +109,7 @@ $inicioDao = new DaoInicio();
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <!-- <form id="adicionarImagem-form" action="../controller/controllerGaleria.php"  method="POST" encyte="multipart/form-data">-->
-                <img src="../assets/media/galeria/video_0.png" class="rounded mx-auto img-fluid d-block " style=" height: 400px; margin-top:30px; cursor: pointer;" alt="Adicione uma foto" title="Adicione uma foto" onclick="adicionarVideo_modal()">
+                <img src="../assets/media/galeria/video_0.png" class="rounded mx-auto img-fluid d-block carouselItemVideo" style="width: auto;" alt="Adicione um video" title="Adicione um video" onclick="adicionarVideo_modal()">
             </div>
             <?php
             while ($rowGaleriaV = $stmtGaleriaV->fetch(PDO::FETCH_ASSOC)) {
@@ -119,11 +119,15 @@ $inicioDao = new DaoInicio();
 
                 if (($rowGaleriaV['midiaGaleria'] != '') && (file_exists($arquivo))) {
 
-                    echo '<div class="carousel-item " align="center"  >
-                    <video class="embed-responsive-item" type="video/' . explode('.', $rowGaleriaV['midiaGaleria'])[1] . '" src="' . $arquivo . '"  onclick=controles("' . $i . '","pause") 
-                        id="videoG_' . $i . '" align="middle"style=" height: 400px;  width: 100%; margin-top:30px; " data-toggle="tooltip" alt="' . $titulo . '" >
+                    echo '<div class="carousel-item carouselItemVideo" align="center"  >
+                    <video class="embed-responsive-item carouselItemVideoSrc" type="video/' . explode('.', $rowGaleriaV['midiaGaleria'])[1] . '" src="' . $arquivo . '"  onclick=controles("' . $i . '","pause") 
+                        id="videoG_' . $i . '" align="middle" data-toggle="tooltip" alt="' . $titulo . '" >
                     </video>
-                    <div id="buttons" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
+                    <div  id="playV_' . $i . '">
+                        <img class="rounded mx-auto img-fluid d-block " src="../assets/media/galeria/player.png" title="Play" onclick=controles("' . $i . '","play") style="cursor: pointer; height: 100px; position:absolute; left:50%; top: 50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
+                    </div>
+                    <div style=" text-align:center;">
+                    <div id="buttons" style="bottom: 0%;">
                         <button type="button" class="btn btn-primary" data-toggle="tooltip"  title="Excluir vídeo" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleriaV['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
                             <i class="fa fa-trash "></i> 
                         </button>
@@ -131,10 +135,8 @@ $inicioDao = new DaoInicio();
                             <i class="fa fa-pencil "></i> 
                         </button>
                     </div>
-                    <div  id="playV_' . $i . '">
-                        <img class="rounded mx-auto img-fluid d-block " src="../assets/media/galeria/player.png" title="Play" onclick=controles("' . $i . '","play") style="cursor: pointer; height: 100px; position:absolute; left:50%; top: 50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
-                    </div>
-                        </div>';
+                </div>
+                </div>';
                 }
                 $i++;
             }
@@ -144,10 +146,12 @@ $inicioDao = new DaoInicio();
                 $titulo = $rowGaleriaVE['tituloGaleria'];
 
                 if ($rowGaleriaVE['urlGaleria'] != '') {
-                    echo '<div class="carousel-item " align="center">
-                        <embed  src="https://www.youtube.com/embed/' . explode('=', $rowGaleriaVE['urlGaleria'])[1] . '"  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen 
-                            onclick=controles("' . $i . '","pause") id="videoG_' . $i . '" style=" height: 400px; width: 100%; margin-top:30px;" alt="Youtube - ' . $titulo . '" />
-                    <div id="buttons" style="position:absolute; left:50%; bottom: 30px; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
+                    echo '<div class="carousel-item carouselItemVideo" align="center">
+                        <embed class="carouselItemVideoYt" src="https://www.youtube.com/embed/' . explode('=', $rowGaleriaVE['urlGaleria'])[1] . '"  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen 
+                            onclick=controles("' . $i . '","pause") id="videoG_' . $i . '" alt="Youtube - ' . $titulo . '" />
+                    <div style=" text-align:center;">
+                        <h5> Conheça nosso canal no Youtube! </h5>
+                        <div id="buttons" style="bottom: 30px;">
                         <button type="button" class="btn btn-primary" data-toggle="tooltip"  title="Excluir vídeo" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" > 
                             <i class="fa fa-trash "></i> 
                         </button>
@@ -155,8 +159,6 @@ $inicioDao = new DaoInicio();
                             <i class="fa fa-pencil "></i> 
                         </button>
                     </div>
-                    <div style=" text-align:center;">
-                        <h5> Conheça nosso canal no Youtube! </h5>
                     </div>
                         </div>';
                 }
