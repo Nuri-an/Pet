@@ -5,7 +5,7 @@ class ModelNoticias{
     private $titulo;
     private $descricao;
     private $midia;
-    private $local;
+    private $resumo;
     private $data;
 
 
@@ -22,8 +22,8 @@ class ModelNoticias{
     public function getMidia() {
         return $this->midia;
     }
-    public function getLocal() {
-        return $this->local;
+    public function getResumo() {
+        return $this->resumo;
     }
     public function getData() {
         return $this->data;
@@ -42,8 +42,8 @@ class ModelNoticias{
     public function setMidia($midia) {
         $this->midia = $midia;
     }
-    public function setLocal($local) {
-        $this->local = $local;
+    public function setResumo($resumo) {
+        $this->resumo = $resumo;
     }
     public function setData($data) {
         $this->data = $data;

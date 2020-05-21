@@ -4,6 +4,7 @@ $(document).ready(function () {
   $("#noticias").addClass('text-white');
 
   $(".nav-link").click(function () {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
     $('body').css('overflowY', 'hidden');
     $('#loader').show();
   });
@@ -14,16 +15,15 @@ $(document).ready(function () {
 });
 
 function atualizar() {
-  var quantidadePg = 3; //quantidade de registro por página
+  var quantidadePg = 7; //quantidade de registro por página
   var pagina = 1; //página inicial
 
-  listarNoticiasIn(pagina, quantidadePg); //Chamar a função para listar os registros
-  listarNoticiasEx(pagina, quantidadePg);
+  listarNoticias(pagina, quantidadePg); //Chamar a função para listar os registros
 }
 
 
 
-function listarNoticiasIn(pagina, quantidadePg) {
+function listarNoticias(pagina, quantidadePg) {
   if ($("li").hasClass('paginacao')) {
     classe = 1;
   }
@@ -33,41 +33,13 @@ function listarNoticiasIn(pagina, quantidadePg) {
     quantidadePgIn: quantidadePg
   }
 
-  $.post('noticiasInternas.php', dados, function (retorna) {
+  $.post('noticias.php', dados, function (retorna) {
     //Subtitui o valor no seletor id="externas"
-    $("#internas").html(retorna);
+    $("#corpo").html(retorna);
 
     //alert(classe);
     if (classe == 1) {
-      $.get("noticiasInternas.php", function () {
-        var divEditar = $('.editar');
-
-        divEditar.show();
-
-        $('li').addClass('paginacao');
-      });
-    }
-  });
-
-}
-
-function listarNoticiasEx(pagina, quantidadePg) {
-  if ($("li").hasClass('paginacao')) {
-    classe = 1;
-  }
-
-  var dados = {
-    pagina: pagina,
-    quantidadePg: quantidadePg
-  }
-
-  $.post('noticiasExternas.php', dados, function (retorna) {
-    //Subtitui o valor no seletor id="externas"
-    $("#externas").html(retorna);
-
-    //alert(classe);
-    if (classe == 1) {
-      $.get("noticiasExternas.php", function () {
+      $.get("noticias.php", function () {
         var divEditar = $('.editar');
 
         divEditar.show();
@@ -80,87 +52,54 @@ function listarNoticiasEx(pagina, quantidadePg) {
 }
 
 
+function lerMais(id) {
+  var botao = $('#rowLerMais_' + id);
+  var newBotao = $('#rowLerMenos_' + id);
+  var midia = $('#collapseMidia_' + id);
+  var resumo = $('#collapseResumo_' + id);
 
-function lerMaisEx(id) {
-  var div = $('#descricaoCurtaEx_' + id);
-  var newDiv = $('#descricaoGrandeEx_' + id);
-  var botao = $('#rowLerMaisEx_' + id);
-  var newBotao = $('#rowLerMenosEx_' + id);
-  var imagem = $('#midiaEx_' + id);
-
-  div.hide();
-  newDiv.show();
+  midia.removeClass('float-left');
+  midia.addClass('mx-auto');
+  midia.addClass('d-block');
+  resumo.hide();
   botao.hide();
   newBotao.show();
-  imagem.show();
 }
 
-function lerMenosEx(id) {
-  var div = $('#descricaoCurtaEx_' + id);
-  var newDiv = $('#descricaoGrandeEx_' + id);
-  var botao = $('#rowLerMaisEx_' + id);
-  var newBotao = $('#rowLerMenosEx_' + id);
-  var imagem = $('#midiaEx_' + id);
+function lerMenos(id) {
+  var botao = $('#rowLerMais_' + id);
+  var newBotao = $('#rowLerMenos_' + id);
+  var midia = $('#collapseMidia_' + id);
+  var resumo = $('#collapseResumo_' + id);
 
-  newDiv.hide();
-  div.show();
+  midia.removeClass('mx-auto');
+  midia.removeClass('d-block');
+  midia.addClass('float-left');
+  resumo.show();
   newBotao.hide();
   botao.show();
-  imagem.hide();
 }
 
 
-function lerMaisIn(id) {
-  var div = $('#descricaoCurtaIn_' + id);
-  var newDiv = $('#descricaoGrandeIn_' + id);
-  var botao = $('#rowLerMaisIn_' + id);
-  var newBotao = $('#rowLerMenosIn_' + id);
-  var imagem = $('#midiaIn_' + id);
-
-  div.hide();
-  newDiv.show();
-  botao.hide();
-  newBotao.show();
-  imagem.show();
-}
-
-function lerMenosIn(id) {
-  var div = $('#descricaoCurtaIn_' + id);
-  var newDiv = $('#descricaoGrandeIn_' + id);
-  var botao = $('#rowLerMaisIn_' + id);
-  var newBotao = $('#rowLerMenosIn_' + id);
-  var imagem = $('#midiaIn_' + id);
-
-  newDiv.hide();
-  div.show();
-  newBotao.hide();
-  botao.show();
-  imagem.hide();
-}
-
-
-function editar_modal_ex(id) {
+function editar_modal(id) {
   $.get("viewNoticiasAdm.php", function () {
 
-    var cod = $('#rowEditarNoticiaEx_' + id).attr("data-id");
-    var titulo = $('#rowEditarNoticiaEx_' + id).attr("data-titulo");
-    var descricao = $('#rowEditarNoticiaEx_' + id).attr("data-descricao");
-    var midia = $('#rowEditarNoticiaEx_' + id).attr("data-midia");
-    var data = $('#rowEditarNoticiaEx_' + id).attr("data-data");
+    var cod = $('#rowEditarNoticia_' + id).attr("data-id");
+    var titulo = $('#rowEditarNoticia_' + id).attr("data-titulo");
+    var descricao = $('#rowEditarNoticia_' + id).attr("data-descricao");
+    var resumo = $('#rowEditarNoticia_' + id).attr("data-resumo");
+    var midia = $('#rowEditarNoticia_' + id).attr("data-midia");
+    var data = $('#rowEditarNoticia_' + id).attr("data-data");
     //var acao = 'editarF';
-
 
     $('#editarNoticias-form').trigger("reset");
     $('#verEditarNoticias').modal('show');
-
-    //alert(data);
-    $("input[name='local'][value='Interna']").prop('checked', false);
-    $("input[name='local'][value='Externa']").prop('checked', true);
 
     $('.modal .modal-dialog .modal-content #editarNoticias-form #id').val(cod);
     $('.modal .modal-dialog .modal-content #excluirNoticias-form #id').val(cod);
     $('.modal .modal-dialog .modal-content  #titulo').val(titulo);
     $('.modal .modal-dialog .modal-content  #descricao').val(descricao);
+    $('.modal .modal-dialog .modal-content  #resumo').val(resumo);
     $('.modal .modal-dialog .modal-content .custom-file #midia').html(midia);
     $('.modal .modal-dialog .modal-content  #data').val(data);
 
@@ -168,53 +107,8 @@ function editar_modal_ex(id) {
 }
 
 
-function editar_modal_in(id) {
+function adicionar_modal() {
   $.get("viewNoticiasAdm.php", function () {
-
-    var cod = $('#rowEditarNoticiaIn_' + id).attr("data-id");
-    var titulo = $('#rowEditarNoticiaIn_' + id).attr("data-titulo");
-    var descricao = $('#rowEditarNoticiaIn_' + id).attr("data-descricao");
-    var midia = $('#rowEditarNoticiaIn_' + id).attr("data-midia");
-    var data = $('#rowEditarNoticiaIn_' + id).attr("data-data");
-    //var acao = 'editarF';
-
-    $('#editarNoticias-form').trigger("reset");
-    $('#verEditarNoticias').modal('show');
-
-    //alert(data);
-
-    $("input[name='local'][value='Interna']").prop('checked', true);
-    $("input[name='local'][value='Externa']").prop('checked', false);
-
-    $('.modal .modal-dialog .modal-content #editarNoticias-form #id').val(cod);
-    $('.modal .modal-dialog .modal-content #excluirNoticias-form #id').val(cod);
-    $('.modal .modal-dialog .modal-content  #titulo').val(titulo);
-    $('.modal .modal-dialog .modal-content  #descricao').val(descricao);
-    $('.modal .modal-dialog .modal-content .custom-file #midia').html(midia);
-    $('.modal .modal-dialog .modal-content  #data').val(data);
-
-  });
-}
-
-
-function adicionar_modal_ex() {
-  $.get("viewNoticiasAdm.php", function () {
-
-    var local = 'Externa';
-
-    $('#adicionarNoticias-form').trigger("reset");
-    $('.modal .modal-dialog .modal-content .custom-file #arquivo').html('');
-    $('#verAdicionarNoticias').modal('show');
-
-
-    $('.modal .modal-dialog .modal-content #adicionarNoticias-form #localNoticia').val(local);
-  });
-}
-
-function adicionar_modal_in() {
-  $.get("viewNoticiasAdm.php", function () {
-
-    var local = 'Interna';
 
     $('#adicionarNoticias-form').trigger("reset");
     $('#adicionarNoticias-form .form-group .col-md-12 .form-material .custom-file #arquivo').html('');
@@ -270,10 +164,13 @@ $(document).ready(function () {
         jQuery(e).remove();
       },
       rules: {
+        'titulo': {
+          required: true
+        },
         'descricao': {
           required: true
         },
-        'titulo': {
+        'resumo': {
           required: true
         },
         'arquivo': {
@@ -286,10 +183,13 @@ $(document).ready(function () {
         }
       },
       messages: {
+        'titulo': {
+          required: 'Por favor, preeencha este campo'
+        },
         'descricao': {
           required: 'Por favor, preeencha este campo',
         },
-        'titulo': {
+        'resumo': {
           required: 'Por favor, preeencha este campo'
         },
         'arquivo': {
@@ -372,6 +272,9 @@ $(document).ready(function () {
         'descricao': {
           required: true
         },
+        'resumo': {
+          required: true
+        },
         'arquivo': {
           required: false,
           extension: "jpg|JPG|png|PNG|jpeg|JPEG"
@@ -390,6 +293,9 @@ $(document).ready(function () {
         },
         'descricao': {
           required: 'Por favor, preeencha este campo',
+        },
+        'resumo': {
+          required: 'Por favor, preeencha este campo'
         },
         'arquivo': {
           required: 'Por favor, preeencha este campo',

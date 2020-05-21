@@ -8,26 +8,14 @@ require '../inc/global/config.php';
 
 <script type="text/javascript" src="../assets/js/noticias.js"></script>
 
-<div class=" text-center" style="margin-bottom:30px;" role="group" aria-label="Exemplo básico">
-    <a class="btn btn-outline-info h5" href="#internas">Notícias internas</a>
-    <a class="btn btn-outline-info h5" href="#externas">Notícias externas</a>
-</div>
+<div id="corpo"></div>
 
-<br>
-
-<div id="internas"></div>
-
-<div id="externas"></div>
 
 </div>
 
 <script>
     $(document).ready(function() {
-        $.get("noticiasInternas.php", function() {
-            $('li').removeClass('paginacao');
-        });
-
-        $.get("noticiasExternas.php", function() {
+        $.get("noticias.php", function() {
             $('li').removeClass('paginacao');
         });
     });

@@ -5,10 +5,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" id="inicio" href='index.php'> <font size="4"> Início </font> </a>
+        <a class="nav-link" id="noticias" href='index.php'> <font size="4"> Início </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="noticias" href="viewNoticiasUser.php"> <font size="4"> Notícias </font> </a>
+        <a class="nav-link" id="sobre" href="viewSobreUser.php"> <font size="4"> Sobre </font> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="publicacoes" href="viewPublicacoesUser.php"> <font size="4"> Publicações </font> </a>
@@ -23,9 +23,6 @@
         <a class="nav-link" id="downloads" href="viewDownloadsUser.php"> <font size="4"> Downloads </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="links" href="#"> <font size="4"> Links úteis </font> </a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" id="login" href="viewLogin.php"> <font size="4"> Login </font> </a>
       </li>
     </ul>
@@ -35,7 +32,7 @@
       <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #6959CD; cursor: pointer;" title="Página do grupo"></i>
     </a>
     <a href="#">
-      <i class="fa fa-twitter-square fa-2x" aria-hidden="true" style="color: #00BFFF; cursor: pointer; margin-left:10px;" title="Perfil do grupo"></i>
+      <i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #6959CD; cursor: pointer; margin-left:10px;" title="Perfil do grupo"></i>
     </a>
   </div>
 </nav>

@@ -5,10 +5,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" id="inicio" href='index.php'> <font size="4"> Início </font> </a>
+        <a class="nav-link" id="noticias" href='index.php'> <font size="4"> Início </font> </a>
       </li>  
       <li class="nav-item">
-        <a class="nav-link" id="noticias" href='viewNoticiasAdm.php'> <font size="4"> Notícias </font> </a>
+        <a class="nav-link" id="sobre" href='viewSobreAdm.php'> <font size="4"> Sobre </font> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="publicacoes" href='viewPublicacoesAdm.php' > <font size="4"> Publicações </font> </a>
@@ -20,10 +20,7 @@
         <a class="nav-link" id="integrantes" href='viewIntegrantesAdm.php' > <font size="4"> Integrantes </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="links" href="#"> <font size="4"> Links úteis </font> </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="downloads" href="#"> <font size="4"> Downloads </font> </a>
+        <a class="nav-link" id="downloads" href="viewDownloadsAdm.php"> <font size="4"> Downloads </font> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="administradores" href='viewAdministradores.php' > <font size="4"> Administradores </font> </a>
@@ -38,7 +35,7 @@
       <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #6959CD; cursor: pointer;" title="Página do grupo"></i>
     </a>
     <a href="#">
-      <i class="fa fa-twitter-square fa-2x" aria-hidden="true" style="color: #00BFFF; cursor: pointer; margin-left:10px;" title="Perfil do grupo"></i>
+      <i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #6959CD; cursor: pointer; margin-left:10px;" title="Perfil do grupo"></i>
     </a>
   </div>
 </nav>

@@ -4,6 +4,7 @@ $(document).ready(function () {
     $("#publicacoes").addClass('text-white');
 
     $(".nav-link").click(function () {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
         $('body').css('overflowY', 'hidden');
         $('#loader').show();
     });

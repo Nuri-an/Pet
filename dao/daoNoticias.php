@@ -27,17 +27,17 @@ class DaoNoticias
             $titulo = $noticia->getTitulo();
             $descricao = $noticia->getDescricao();
             $data = $noticia->getData();
-            $local = $noticia->getLocal();
+            $resumo = $noticia->getResumo();
 
 
-            $stmt = $this->conn->prepare("INSERT INTO noticias(midiaNoticia, tituloNoticia, descricaoNoticia, dataNoticia, localNoticia) 
-            VALUES (:midia, :titulo, :descricao, :dataN, :localN)");
+            $stmt = $this->conn->prepare("INSERT INTO noticias(midiaNoticia, tituloNoticia, descricaoNoticia, dataNoticia, resumoNoticia) 
+            VALUES (:midia, :titulo, :descricao, :dataN, :resumo)");
 
             $stmt->bindparam(":midia", $midia);
             $stmt->bindparam(":titulo", $titulo);
             $stmt->bindparam(":descricao", $descricao);
             $stmt->bindparam(":dataN", $data);
-            $stmt->bindparam(":localN", $local);
+            $stmt->bindparam(":resumo", $resumo);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
@@ -58,7 +58,7 @@ class DaoNoticias
             $titulo = $noticia->getTitulo();
             $descricao = $noticia->getDescricao();
             $data = $noticia->getData();
-            $local = $noticia->getLocal();
+            $resumo = $noticia->getResumo();
             $id = $noticia->getId();
 
             if ($midia != '') {
@@ -74,13 +74,13 @@ class DaoNoticias
                     }
                 }
 
-                $stmt = $this->conn->prepare("UPDATE noticias SET tituloNoticia = ?, midiaNoticia = ?, descricaoNoticia = ?, dataNoticia = ?, localNoticia =? WHERE codNoticia = ? ");
+                $stmt = $this->conn->prepare("UPDATE noticias SET tituloNoticia = ?, midiaNoticia = ?, descricaoNoticia = ?, dataNoticia = ?, resumoNoticia =? WHERE codNoticia = ? ");
 
                 $stmt->bindparam(1, $titulo);
                 $stmt->bindparam(2, $midia);
                 $stmt->bindparam(3, $descricao);
                 $stmt->bindparam(4, $data);
-                $stmt->bindparam(5, $local);
+                $stmt->bindparam(5, $resumo);
                 $stmt->bindparam(6, $id);
                 $stmt->execute();
 
@@ -90,12 +90,12 @@ class DaoNoticias
                     echo 2;
                 }
             } else {
-                $stmt = $this->conn->prepare("UPDATE noticias SET tituloNoticia = ?, descricaoNoticia = ?, dataNoticia = ?, localNoticia =? WHERE codNoticia = ? ");
+                $stmt = $this->conn->prepare("UPDATE noticias SET tituloNoticia = ?, descricaoNoticia = ?, dataNoticia = ?, resumoNoticia =? WHERE codNoticia = ? ");
 
                 $stmt->bindparam(1, $titulo);
                 $stmt->bindparam(2, $descricao);
                 $stmt->bindparam(3, $data);
-                $stmt->bindparam(4, $local);
+                $stmt->bindparam(4, $resumo);
                 $stmt->bindparam(5, $id);
                 $stmt->execute();
 

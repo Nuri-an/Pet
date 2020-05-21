@@ -143,7 +143,7 @@ function atualizarFoto() {
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
     $link = filter_var($_POST["videoLink"], FILTER_SANITIZE_STRING);
 
-    if($_FILES['arquivo']['name'] != ''){ 
+    if((isset($_FILES['arquivo']['name'])) && ($_FILES['arquivo']['name'] != '')){ 
 
         $fileName=$_FILES['arquivo']['name'];
     

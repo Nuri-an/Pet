@@ -15,17 +15,7 @@ require '../inc/global/config.php';
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/localization/messages_pt_BR.js"></script>
 <script type="text/javascript" src="../assets/js/noticias.js"></script>
 
-
-<div class=" text-center" style="margin-bottom:30px;" role="group" aria-label="Exemplo básico">
-    <a class="btn btn-outline-info h5" href="#internas">Notícias internas</a>
-    <a class="btn btn-outline-info h5" href="#externas">Notícias externas</a>
-</div>
-
-<br>
-
-<div id="internas"></div>
-
-<div id="externas"></div>
+<div id="corpo"></div>
 
 <div class="modal" id="verEditarNoticias" role="dialog" data-backdrop="static" aria-labelledby="moda-normal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
@@ -47,6 +37,17 @@ require '../inc/global/config.php';
                                     <h5> Título: </h5>
                                 </label>
                                 <input type="text" class="form-control" id="titulo" name="titulo"> </input>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div class="form-material">
+                                <label class="" for="descricao">
+                                    <h5> Resumo da notícia: </h5>
+                                </label>
+                                <textarea class="form-control" id="resumo" name="resumo"></textarea>
                             </div>
                         </div>
                     </div>
@@ -134,7 +135,6 @@ require '../inc/global/config.php';
             <div class="modal-body">
                 <form class="form-horizontal" id="adicionarNoticias-form" name="adicionarNoticias-form" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="acao" value="adicionar">
-                    <input type="hidden" name="localNoticia" id="localNoticia">
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material">
@@ -142,6 +142,17 @@ require '../inc/global/config.php';
                                     <h5> Título: </h5>
                                 </label>
                                 <input type="text" class="form-control" id="titulo" name="titulo"> </input>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div class="form-material">
+                                <label class="" for="descricao">
+                                    <h5> Resumo da notícia: </h5>
+                                </label>
+                                <textarea class="form-control" id="resumo" name="resumo"></textarea>
                             </div>
                         </div>
                     </div>
@@ -195,15 +206,7 @@ require '../inc/global/config.php';
 
 <script>
     $(document).ready(function() {
-        $.get("noticiasInternas.php", function() {
-            var divEditar = $('.editar');
-
-            divEditar.show();
-
-            $('li').addClass('paginacao');
-        });
-
-        $.get("noticiasExternas.php", function() {
+        $.get("noticias.php", function() {
             var divEditar = $('.editar');
 
             divEditar.show();

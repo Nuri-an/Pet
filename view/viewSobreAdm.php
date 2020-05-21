@@ -23,103 +23,104 @@ $inicioDao = new DaoInicio();
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/localization/messages_pt_BR.js"></script>
 <script type="text/javascript" src="../assets/js/inicio.js"></script>
 
-<div id="atualiza" style="margin-top: 20px; margin-bottom: 20px;">
-    <div class="container" style="overflow:hidden;" id="corpoInfo">
-        <?php
+<div style="margin-top: 20px; margin-bottom: 20px;">
+    <div id="atualiza">
+        <div class="container" style="overflow:hidden;" id="corpoInfo">
+            <?php
 
-        $stmtInformacoes = $inicioDao->runQuery("SELECT * FROM informacoes");
-        $stmtInformacoes->execute();
+            $stmtInformacoes = $inicioDao->runQuery("SELECT * FROM informacoes");
+            $stmtInformacoes->execute();
 
-        $stmtGaleria = $inicioDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'imagem%'");
-        $stmtGaleria->execute();
+            $stmtGaleria = $inicioDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'imagem%'");
+            $stmtGaleria->execute();
 
-        $stmtGaleriaV = $inicioDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'video%'");
-        $stmtGaleriaV->execute();
+            $stmtGaleriaV = $inicioDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'video%'");
+            $stmtGaleriaV->execute();
 
-        $stmtGaleriaVE = $inicioDao->runQuery("SELECT * FROM galeria WHERE urlGaleria is not null");
-        $stmtGaleriaVE->execute();
+            $stmtGaleriaVE = $inicioDao->runQuery("SELECT * FROM galeria WHERE urlGaleria is not null");
+            $stmtGaleriaVE->execute();
 
-        while ($rowInformacoes = $stmtInformacoes->fetch(PDO::FETCH_ASSOC)) {
-            echo '<h1 class="display-4">' . $rowInformacoes['tituloInfo'] . ' </h1>';
-            echo '<p class="lead">';
-            echo nl2br($rowInformacoes['descricaoInfo']);
-            echo '<p> <b>' . $rowInformacoes['subTituloInfo'] . ' </b> </p>';
-            echo  nl2br($rowInformacoes['subDescricaoInfo']);
-            echo '<p> <br>';
-            echo $rowInformacoes['extrasInfo'];
-            echo '</p>';
-            echo '<br>';
-            echo '<br>
+            while ($rowInformacoes = $stmtInformacoes->fetch(PDO::FETCH_ASSOC)) {
+                echo '<h1 class="display-4">' . $rowInformacoes['tituloInfo'] . ' </h1>';
+                echo '<p class="lead">';
+                echo nl2br($rowInformacoes['descricaoInfo']);
+                echo '<p> <b>' . $rowInformacoes['subTituloInfo'] . ' </b> </p>';
+                echo  nl2br($rowInformacoes['subDescricaoInfo']);
+                echo '<p> <br>';
+                echo $rowInformacoes['extrasInfo'];
+                echo '</p>';
+                echo '<br>';
+                echo '<br>
                 <div style="display: inline;float: right; margin-bottom: 5px;">
                     <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Editar" id="rowEditarInfo" data-id="' . $rowInformacoes['codInfo'] . '" data-tituloP="' . $rowInformacoes['tituloInfo'] . '" data-infoP="' . $rowInformacoes['descricaoInfo'] . '" data-tituloS="' . $rowInformacoes['subTituloInfo'] . '" data-infoS="' . $rowInformacoes['subDescricaoInfo'] . '"  data-extra ="' . $rowInformacoes['extrasInfo'] . '" onclick="editarInfo()" >
                         <i class="fa fa-pencil"></i>
                     </button>
                 </div>';
-        }
-        ?>
-    </div>
+            }
+            ?>
+        </div>
 
-    <hr class="line">
-    </hr>
+        <hr class="line">
+        </hr>
 
-    <div class=" text-center" style="margin-top:30px; margin-bottom:30px;" role="group" aria-label="Exemplo básico">
-        <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('f')">Galeria de Fotos</button>
-        <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('v')">Galeria de Vídeos</button>
-    </div>
+        <div class=" text-center" style="margin-top:30px; margin-bottom:30px;" role="group" aria-label="Exemplo básico">
+            <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('f')">Galeria de Fotos</button>
+            <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('v')">Galeria de Vídeos</button>
+        </div>
 
-    <div id="caroselFoto" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <!-- <form id="adicionarImagem-form" action="../controller/controllerGaleria.php"  method="POST" encyte="multipart/form-data">-->
-                <img src="../assets/media/galeria/imagem_00.png" class="rounded mx-auto img-fluid d-block carouselItemFoto" style="cursor: pointer;" alt="Adicione uma foto" title="Adicione uma foto" onclick="adicionarFoto_modal()">
-            </div>
-            <?php
+        <div id="caroselFoto" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <!-- <form id="adicionarImagem-form" action="../controller/controllerGaleria.php"  method="POST" encyte="multipart/form-data">-->
+                    <img src="../assets/media/galeria/imagem_00.png" class="rounded mx-auto img-fluid d-block carouselItemFoto" style="cursor: pointer;" alt="Adicione uma foto" title="Adicione uma foto" onclick="adicionarFoto_modal()">
+                </div>
+                <?php
 
-            $i = 1;
-            while ($rowGaleria = $stmtGaleria->fetch(PDO::FETCH_ASSOC)) {
+                $i = 1;
+                while ($rowGaleria = $stmtGaleria->fetch(PDO::FETCH_ASSOC)) {
 
-                $titulo = $rowGaleria['tituloGaleria'];
-                $arquivo = "../assets/media/galeria/" . $rowGaleria['midiaGaleria'];
+                    $titulo = $rowGaleria['tituloGaleria'];
+                    $arquivo = "../assets/media/galeria/" . $rowGaleria['midiaGaleria'];
 
-                if (($rowGaleria['midiaGaleria'] != '') && (file_exists($arquivo))) {
+                    if (($rowGaleria['midiaGaleria'] != '') && (file_exists($arquivo))) {
 
-                    echo '<div class="carousel-item" >
+                        echo '<div class="carousel-item" >
                         <img src="' . $arquivo . '"  class="rounded mx-auto img-fluid d-block carouselItemFoto" data-toggle="tooltip" alt="' . $titulo . '" title="Clique para substituir imagem"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" data-titulo="' . $rowGaleria['tituloGaleria'] . '" data-foto="' . $rowGaleria['midiaGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
                         <button type="button" class="btn btn-primary" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir imagem" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
                             <i class="fa fa-trash "></i> 
                         </button>
                     </div>';
-                    $i++;
+                        $i++;
+                    }
                 }
-            }
-            ?>
+                ?>
 
-            <a class="carousel-control-prev" href="#caroselFoto" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#caroselFoto" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Proximo</span>
-            </a>
-        </div>
-    </div>
-
-    <div id="caroselVideo" class="carousel slide" data-ride="carousel" style="display:none;">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <!-- <form id="adicionarImagem-form" action="../controller/controllerGaleria.php"  method="POST" encyte="multipart/form-data">-->
-                <img src="../assets/media/galeria/video_0.png" class="rounded mx-auto img-fluid d-block carouselItemVideo" style="width: auto;" alt="Adicione um video" title="Adicione um video" onclick="adicionarVideo_modal()">
+                <a class="carousel-control-prev" href="#caroselFoto" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#caroselFoto" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Proximo</span>
+                </a>
             </div>
-            <?php
-            while ($rowGaleriaV = $stmtGaleriaV->fetch(PDO::FETCH_ASSOC)) {
+        </div>
 
-                $titulo = $rowGaleriaV['tituloGaleria'];
-                $arquivo = "../assets/media/galeria/" . $rowGaleriaV['midiaGaleria'];
+        <div id="caroselVideo" class="carousel slide" data-ride="carousel" style="display:none;">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <!-- <form id="adicionarImagem-form" action="../controller/controllerGaleria.php"  method="POST" encyte="multipart/form-data">-->
+                    <img src="../assets/media/galeria/video_0.png" class="rounded mx-auto img-fluid d-block carouselItemVideo" style="width: auto;" alt="Adicione um video" title="Adicione um video" onclick="adicionarVideo_modal()">
+                </div>
+                <?php
+                while ($rowGaleriaV = $stmtGaleriaV->fetch(PDO::FETCH_ASSOC)) {
 
-                if (($rowGaleriaV['midiaGaleria'] != '') && (file_exists($arquivo))) {
+                    $titulo = $rowGaleriaV['tituloGaleria'];
+                    $arquivo = "../assets/media/galeria/" . $rowGaleriaV['midiaGaleria'];
 
-                    echo '<div class="carousel-item carouselItemVideo" align="center"  >
+                    if (($rowGaleriaV['midiaGaleria'] != '') && (file_exists($arquivo))) {
+
+                        echo '<div class="carousel-item carouselItemVideo" align="center"  >
                     <video class="embed-responsive-item carouselItemVideoSrc" type="video/' . explode('.', $rowGaleriaV['midiaGaleria'])[1] . '" src="' . $arquivo . '"  onclick=controles("' . $i . '","pause") 
                         id="videoG_' . $i . '" align="middle" data-toggle="tooltip" alt="' . $titulo . '" >
                     </video>
@@ -137,16 +138,16 @@ $inicioDao = new DaoInicio();
                     </div>
                 </div>
                 </div>';
+                    }
+                    $i++;
                 }
-                $i++;
-            }
 
-            while ($rowGaleriaVE = $stmtGaleriaVE->fetch(PDO::FETCH_ASSOC)) {
+                while ($rowGaleriaVE = $stmtGaleriaVE->fetch(PDO::FETCH_ASSOC)) {
 
-                $titulo = $rowGaleriaVE['tituloGaleria'];
+                    $titulo = $rowGaleriaVE['tituloGaleria'];
 
-                if ($rowGaleriaVE['urlGaleria'] != '') {
-                    echo '<div class="carousel-item carouselItemVideo" align="center">
+                    if ($rowGaleriaVE['urlGaleria'] != '') {
+                        echo '<div class="carousel-item carouselItemVideo" align="center">
                         <embed class="carouselItemVideoYt" src="https://www.youtube.com/embed/' . explode('=', $rowGaleriaVE['urlGaleria'])[1] . '"  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen 
                             onclick=controles("' . $i . '","pause") id="videoG_' . $i . '" alt="Youtube - ' . $titulo . '" />
                     <div style=" text-align:center;">
@@ -161,19 +162,20 @@ $inicioDao = new DaoInicio();
                     </div>
                     </div>
                         </div>';
+                    }
+                    $i++;
                 }
-                $i++;
-            }
-            ?>
+                ?>
 
-            <a class="carousel-control-prev" href="#caroselVideo" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#caroselVideo" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Proximo</span>
-            </a>
+                <a class="carousel-control-prev" href="#caroselVideo" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#caroselVideo" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Proximo</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -330,7 +332,7 @@ $inicioDao = new DaoInicio();
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="right" title="Ajuda" data-content="É permitido apenas o envio de vídeos com qualidade igual ou inferior a 360p contendo as seguintes extensões: .avi, .mp4, .flv, .wmv, .ogv, .webm">
+                    <button type="button" class="btn btn-lg btn-danger" id="ajuda" data-continer="body" data-toggle="popover" data-placement="right" title="Ajuda">
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                     </button>
                 </div>

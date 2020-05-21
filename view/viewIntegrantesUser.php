@@ -47,6 +47,17 @@ $stmtDiscentes->execute();
                 $srcFotoT = "../assets/media/integrantes/foto_1.jpg";
             }
 
+            if (empty($rowTutores['socialIntegrante'])) {
+                $emailTutor = '<a class="font-weight-normal" style="cursor: pointer;"> E-mail</a>';
+            } else {
+                $emailTutor = '<a target="_blank" class="text-decoration-none text-body text-break" href="mailto:' . $rowTutores['emailIntegrante'] . '"> '. $rowTutores['emailIntegrante'] .'</a>';
+            }
+
+            if (empty($rowTutores['socialIntegrante'])) {
+                $socialTutores = '<a  class="text-primary" style="cursor: pointer;"> &nbsp Linkedin</a>';
+            } else {
+                $socialTutores = '<a target="_blank" href="' . $rowTutores['socialIntegrante'] . '"> &nbsp Linkedin</a>';
+            }
 
             echo '
                 <div class="card-integrante">
@@ -60,9 +71,9 @@ $stmtDiscentes->execute();
                         <div class="info container" id="conteudoT' . $i . '" style="margin-top:70px;">
                             <h5 class="card-title">' . $rowTutores['nomeIntegrante'] . '</h5>
                             <p>
-                                <i class="fa fa-address-card-o"></i>&nbsp ' . $rowTutores['emailIntegrante'] . '
+                                <i class="fa fa-address-card-o"></i>&nbsp ' . $emailTutor . '
                                 <br />
-                                <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;"></i><a href="' . $rowTutores['socialIntegrante'] . '"> &nbsp Linkedin</a>
+                                <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;">' . $socialTutores . '
                                 <br />
                                 <i class="fa fa-handshake-o" aria-hidden="true"></i> &nbsp ' . $rowTutores['situacaoIntegrante'] . '
                             </p>
@@ -98,6 +109,18 @@ $stmtDiscentes->execute();
             } else {
                 $srcFotoD = "../assets/media/integrantes/foto_1.jpg";
             }
+                
+            if (empty($rowDiscentes['socialIntegrante'])) {
+                $emailDiscente = '<a class="font-weight-normal" style="cursor: pointer;"> E-mail</a>';
+            } else {
+                $emailDiscente = '<a target="_blank" class="text-decoration-none text-body" href="mailto:' . $rowDiscentes['emailIntegrante'] . '"> '. $rowDiscentes['emailIntegrante'] .'</a>';
+            }
+            
+            if (empty($rowDiscentes['socialIntegrante'])) {
+                $socialDiscente = '<a class="text-primary" style="cursor: pointer;"> &nbsp Linkedin</a>';
+            } else {
+                $socialDiscente = '<a target="_blank"  class="text-decoration-none" href="' . $rowDiscentes['socialIntegrante'] . '"> &nbsp Linkedin</a>';
+            }
 
             echo '
                 <div class="card-integrante">
@@ -111,9 +134,9 @@ $stmtDiscentes->execute();
                         <div class="info container" id="conteudoD' . $i . '"  style="margin-top:70px;">
                             <h5 class="card-title">' . $rowDiscentes['nomeIntegrante'] . '</h5>
                             <p>
-                                <i class="fa fa-address-card-o"></i>&nbsp ' . $rowDiscentes['emailIntegrante'] . '
+                                <i class="fa fa-address-card-o"></i>&nbsp ' . $emailDiscente . '
                                 <br />
-                                <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;"></i><a href="' . $rowDiscentes['socialIntegrante'] . '"> &nbsp Linkedin</a>
+                                <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;"></i>' . $socialDiscente . '
                                 <br />
                                 <i class="fa fa-handshake-o" aria-hidden="true"></i> &nbsp ' . $rowDiscentes['situacaoIntegrante'] . '
                                 </p>

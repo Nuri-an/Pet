@@ -4,6 +4,7 @@
         $("#integrantes").addClass('text-white');
 
         $(".nav-link").click(function() {
+            $("html, body").animate({ scrollTop: 0 }, "slow");
             $('body').css('overflowY', 'hidden');
             $('#loader').show();
         });
@@ -94,7 +95,6 @@ $(document).ready(function () {
                     url: true
                 },
                 'cpf': {
-                    required: true,
                     cpfBR: true
                 },
                 'dataInicio': {
@@ -119,7 +119,6 @@ $(document).ready(function () {
                     url: 'Digite um link válido',
                 },
                 'cpf': {
-                    required: 'Por favor, preeencha este campo',
                     cpfBR: 'Digite um cpf válido'
                 },
                 'dataInicio': {
@@ -150,7 +149,7 @@ $(document).ready(function () {
 
                         if (result == 1) {
                             dialog.init(function () {
-                                dialog.find('.bootbox-body').html('Dados alterados com sucesso!');
+                                dialog.find('.bootbox-body').html('Operação realizada com sucesso!');
                             });
                             setTimeout(function () {
                                 dialog.modal('hide');
@@ -164,9 +163,9 @@ $(document).ready(function () {
                                 dialog.modal('hide');
                             }, 3000); //3 segundos depois executa
                         }
+                        atualizarInicio();
                     }
                 });
-                atualizarInicio();
                 $('#modalAtualizar').modal('hide');
                 $('#atualizar-form').trigger("reset");
                 return false;
@@ -218,9 +217,9 @@ function excluir(id) {
                                     dialog.modal('hide');
                                 }, 3000); //3 segundos depois executa
                             }
+                            atualizarInicio();
                         }
                     });
-                    atualizarInicio();
                 }
             },
             user: {
@@ -243,7 +242,7 @@ function excluir(id) {
                             //alert(resultado);
                             if (resultado == 1) {
                                 dialog.init(function () {
-                                    dialog.find('.bootbox-body').html('Integrante com sucesso!');
+                                    dialog.find('.bootbox-body').html('Integrante excluído com sucesso!');
                                 });
                                 setTimeout(function () {
                                     dialog.modal('hide');
@@ -258,28 +257,16 @@ function excluir(id) {
                                     dialog.modal('hide');
                                 }, 3000); //3 segundos depois executa
                             }
+                            atualizarInicio();
                         }
                     });
-                    atualizarInicio();
                 }
             }
         }
     });
 }
 function atualizarInicio() {
-
-    // carrega = #IdDeOndeVaiSerCarregadoOConteudo
-    var carrega = $('#atualiza');
-
-    //load(' ArquivoQueVaiSerCarregado.php #IdDaDivDoArquivoQueVAiSerCarregada')
-    carrega.load('viewIntegrantesAdm.php #atualiza'); // carrega todo o conteúdo da div# do arquivo
-
-
-    /******  Extrasss - Apagar Furamente *****/
-    //load( 'arquivo.php', { 'cidades[]': ['Curitiba', 'Manaus'] } ); // carrega o arquivo e passa dados para o servidor
-    //load( 'meu-arquivo.json', minha_funcao ) // carrega o arquivo e executa minha_funcao
-    /*****************/
-
+    $("#atualiza").load('viewIntegrantesAdm.php #atualiza');
 }
 
 function verInformacoes(id) {

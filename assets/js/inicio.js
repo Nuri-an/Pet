@@ -1,16 +1,5 @@
 function atualizarInicio() {
-
-  // carrega = #IdDeOndeVaiSerCarregadoOConteudo
-  var carrega = $('#atualiza');
-
-  //load(' ArquivoQueVaiSerCarregado.php #IdDaDivDoArquivoQueVAiSerCarregada')
-  carrega.load('viewInicioAdm.php #atualiza'); // carrega todo o conteúdo da div# do arquivo
-
-
-  /******  Extrasss - Apagar Furamente *****/
-  //load( 'arquivo.php', { 'cidades[]': ['Curitiba', 'Manaus'] } ); // carrega o arquivo e passa dados para o servidor
-  //load( 'meu-arquivo.json', minha_funcao ) // carrega o arquivo e executa minha_funcao
-  /*****************/
+  $("#atualiza").load('viewInicioAdm.php #atualiza');
 
 }
 
@@ -20,6 +9,7 @@ $(document).ready(function () {
   $("#inicio").addClass('text-white');
 
   $(".nav-link").click(function () {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
     $('body').css('overflowY', 'hidden');
     $('#loader').show();
   });
@@ -167,6 +157,7 @@ $(document).ready(function () {
               setTimeout(function () {
                 dialog.modal('hide');
               }, 3000); //3 segundos depois executa
+            atualizarInicio();
             }
             else {
               dialog.init(function () {
@@ -178,7 +169,6 @@ $(document).ready(function () {
             }
           }
         });
-        atualizarInicio();
         $('#verEditarInfo').modal('hide');
         $('#editarInfo-form').trigger("reset");
         return false;
@@ -292,7 +282,7 @@ $(document).ready(function () {
 
             if (result == 1) {
               dialog.init(function () {
-                dialog.find('.bootbox-body').html('Envio completado com sucesso!');
+                dialog.find('.bootbox-body').html('Operação ralizada com sucesso!');
               });
               setTimeout(function () {
                 dialog.modal('hide');
@@ -306,9 +296,9 @@ $(document).ready(function () {
                 dialog.modal('hide');
               }, 3000); //3 segundos depois executa
             }
+          atualizarInicio();
           }
         });
-        atualizarInicio();
         $('#verModalFoto').modal('hide');
         $('#adicionarFoto').trigger("reset");
         return false;
@@ -427,6 +417,7 @@ function adicionarFoto_modal() {
   $('#verModalFoto').modal('show');
   $('.modal .modal-dialog .modal-content #nomeP').text("Adicione uma imagem à galeria");
   $('.modal .modal-dialog .modal-content #acao').val(acao);
+  $( "#ajuda" ).attr( 'data-content','É permitido apenas o envio de imagens contendo as seguintes extensões: .jpg, .png e .jpeg');
 
 }
 
@@ -442,7 +433,7 @@ function adicionarVideo_modal() {
   $('#verModalFoto').modal('show');
   $('.modal .modal-dialog .modal-content #nomeP').text("Adicione um vídeo à galeria");
   $('.modal .modal-dialog .modal-content #acao').val(acao);
-
+  $( "#ajuda" ).attr( 'data-content','É permitido apenas o envio de vídeos com qualidade igual ou inferior a 360p contendo as seguintes extensões: .avi, .mp4, .flv, .wmv, .ogv, .webm');
 
 }
 
@@ -465,6 +456,7 @@ function editarFoto_modal(id) {
   $('.modal .modal-dialog .modal-content #adicionarFoto #id').val(cod);
   $('.modal .modal-dialog .modal-content  #titulo').val(titulo);
   $('.modal .modal-dialog .modal-content  #acao').val(acao);
+  $( "#ajuda" ).attr( 'data-content','É permitido apenas o envio de imagens contendo as seguintes extensões: .jpg, .png e .jpeg');
 
 }
 
@@ -489,6 +481,7 @@ function editarVideo_modal(id) {
   $('.modal .modal-dialog .modal-content  #titulo').val(titulo);
   $('.modal .modal-dialog .modal-content  #videoLink').val(link);
   $('.modal .modal-dialog .modal-content  #acao').val(acao);
+  $( "#ajuda" ).attr( 'data-content','É permitido apenas o envio de vídeos com qualidade igual ou inferior a 360p contendo as seguintes extensões: .avi, .mp4, .flv, .wmv, .ogv, .webm');
 
 }
 

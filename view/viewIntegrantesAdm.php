@@ -27,7 +27,7 @@ $integrantesDao = new DaoIntegrantes();
     $stmtTutores = $integrantesDao->runQuery("SELECT * FROM integrantes i, tutores t WHERE i.codIntegrante = t.codIntegrante");
     $stmtTutores->execute();
 
-    $stmtDiscentes = $integrantesDao->runQuery("SELECT * FROM integrantes i, discentes d WHERE i.codIntegrante = d.codIntegrante");
+    $stmtDiscentes = $integrantesDao->runQuery("SELECT * FROM integrantes i, discentes d WHERE i.codIntegrante = d.codIntegrante ORDER BY nomeIntegrante");
     $stmtDiscentes->execute();
     ?>
  <!-- 355 - 575 -->
@@ -37,7 +37,7 @@ $integrantesDao = new DaoIntegrantes();
         <div class="card-deck" style="width: 100%; justify-content: center; align-items: center; float: left;">
             <?php
             $i = 1;
-
+            
             while ($rowTutores = $stmtTutores->fetch(PDO::FETCH_ASSOC)) {
 
                 $newDateT = date('d/m/Y', strtotime($rowTutores['dataInicioIntegrante']));
@@ -49,6 +49,17 @@ $integrantesDao = new DaoIntegrantes();
                     $srcFotoT = "../assets/media/integrantes/foto_1.jpg";
                 }
 
+                if (empty($rowTutores['socialIntegrante'])) {
+                    $emailTutor = '<a class="font-weight-normal" style="cursor: pointer;"> E-mail</a>';
+                } else {
+                    $emailTutor = '<a target="_blank" class="text-decoration-none text-body text-break" href="mailto:' . $rowTutores['emailIntegrante'] . '"> '. $rowTutores['emailIntegrante'] .'</a>';
+                }
+
+                if (empty($rowTutores['socialIntegrante'])) {
+                    $socialTutores = '<a  class="text-primary" style="cursor: pointer;"> &nbsp Linkedin</a>';
+                } else {
+                    $socialTutores = '<a target="_blank" href="' . $rowTutores['socialIntegrante'] . '"> &nbsp Linkedin</a>';
+                }
 
                 echo '
                 <div class="card-integrante">
@@ -65,9 +76,9 @@ $integrantesDao = new DaoIntegrantes();
                         <div class="info container" id="conteudoT' . $i . '" style="margin-top:70px;">
                             <h5 class="card-title">' . $rowTutores['nomeIntegrante'] . '</h5>
                             <p>
-                                <i class="fa fa-address-card-o"></i>&nbsp ' . $rowTutores['emailIntegrante'] . '
+                                <i class="fa fa-address-card-o"></i>&nbsp ' . $emailTutor . '
                                 <br />
-                                <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;"></i><a href="' . $rowTutores['socialIntegrante'] . '"> &nbsp Linkedin</a>
+                                <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;"></i>' . $socialTutores . '
                                 <br />
                                 <i class="fa fa-handshake-o" aria-hidden="true"></i> &nbsp ' . $rowTutores['situacaoIntegrante'] . '
                                 <button type="button" class="btn btn-primary" style="margin-left:90%; margin-top: 10px; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Editar" id="rowEditarInformacoes_' . $i . '" data-id="' . $rowTutores['codIntegrante'] . '" data-nome="' . $rowTutores['nomeIntegrante'] . '" data-cpf="' . $rowTutores['cpfIntegrante'] . '" data-email="' . $rowTutores['emailIntegrante'] . '"  data-social="' . $rowTutores['socialIntegrante'] . '" data-dataInicio="' . $rowTutores['dataInicioIntegrante'] . '" data-dataFim="' . $rowTutores['dataFimIntegrante'] . '" data-situacao="' . $rowTutores['situacaoIntegrante'] . '" onclick="verInformacoes(' . $i . ')">
@@ -108,6 +119,18 @@ $integrantesDao = new DaoIntegrantes();
                 } else {
                     $srcFotoD = "../assets/media/integrantes/foto_1.jpg";
                 }
+                
+                if (empty($rowDiscentes['socialIntegrante'])) {
+                    $emailDiscente = '<a class="font-weight-normal" style="cursor: pointer;"> E-mail</a>';
+                } else {
+                    $emailDiscente = '<a target="_blank" class="text-decoration-none text-body" href="mailto:' . $rowDiscentes['emailIntegrante'] . '"> '. $rowDiscentes['emailIntegrante'] .'</a>';
+                }
+                
+                if (empty($rowDiscentes['socialIntegrante'])) {
+                    $socialDiscente = '<a class="text-primary" style="cursor: pointer;"> &nbsp Linkedin</a>';
+                } else {
+                    $socialDiscente = '<a target="_blank"  class="text-decoration-none" href="' . $rowDiscentes['socialIntegrante'] . '"> &nbsp Linkedin</a>';
+                }
 
                 echo '
                 <div  class="card-integrante">
@@ -124,9 +147,9 @@ $integrantesDao = new DaoIntegrantes();
                         <div class="info container" id="conteudoD' . $i . '"  style="margin-top:70px;">
                             <h5 class="card-title">' . $rowDiscentes['nomeIntegrante'] . '</h5>
                             <p>
-                                <i class="fa fa-address-card-o"></i>&nbsp ' . $rowDiscentes['emailIntegrante'] . '
+                                <i class="fa fa-address-card-o"></i>&nbsp ' . $emailDiscente . '
                                 <br />
-                                <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;"></i><a href="' . $rowDiscentes['socialIntegrante'] . '"> &nbsp Linkedin</a>
+                                <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;"></i>' . $socialDiscente . '
                                 <br />
                                 <i class="fa fa-handshake-o" aria-hidden="true"></i> &nbsp ' . $rowDiscentes['situacaoIntegrante'] . '
                                 <button type="button" class="btn btn-primary" style="margin-left:90%; margin-top: 10px; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Editar" id="rowEditarInformacoes_' . $i . '" data-id="' . $rowDiscentes['codIntegrante'] . '" data-nome="' . $rowDiscentes['nomeIntegrante'] . '" data-cpf="' . $rowDiscentes['cpfIntegrante'] . '" data-email="' . $rowDiscentes['emailIntegrante'] . '"  data-social="' . $rowDiscentes['socialIntegrante'] . '" data-dataInicio="' . $rowDiscentes['dataInicioIntegrante'] . '" data-dataFim="' . $rowDiscentes['dataFimIntegrante'] . '" data-situacao="' . $rowDiscentes['situacaoIntegrante'] . '" data-foto="' . $rowDiscentes['fotoIntegrante'] . '" onclick="verInformacoes(' .  $i  . ')">
@@ -176,7 +199,7 @@ $integrantesDao = new DaoIntegrantes();
                         <div class="col-md-12">
                             <div class="form-material">
                                 <label class="" for="nome">
-                                    <h5> Nome *: </h5>
+                                    <h5> Nome: </h5>
                                 </label>
                                 <input type="text" class="form-control" id="nome" name="nome"> </input>
                             </div>
@@ -198,7 +221,7 @@ $integrantesDao = new DaoIntegrantes();
                         <div class="col-md-12">
                             <div class="form-material">
                                 <label for="cpf">
-                                    <h5> Cpf *: </h5>
+                                    <h5> Cpf: </h5>
                                 </label>
                                 <input type="text" class="form-control" id="cpf" name="cpf" placeholder="999.999.999-99"> </input>
                             </div>
@@ -209,7 +232,7 @@ $integrantesDao = new DaoIntegrantes();
                         <div class="col-md-12">
                             <div class="form-material">
                                 <label for="dataInicio">
-                                    <h5> Data de entrada no grupo *: </h5>
+                                    <h5> Data de entrada no grupo: </h5>
                                 </label>
                                 <input type="date" class="form-control" id="dataInicio" name="dataInicio"> </input>
                             </div>
@@ -249,7 +272,7 @@ $integrantesDao = new DaoIntegrantes();
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material">
-                                <h5> Situação atual *: </h5>
+                                <h5> Situação atual: </h5>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" value="Tutor(a)" id="situacao1" name="situacao" class="custom-control-input">
                                     <label class="custom-control-label" for="situacao1">Tutor(a)</label>
@@ -265,7 +288,7 @@ $integrantesDao = new DaoIntegrantes();
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="left" title="Ajuda" data-content="Os campos marcados com * são origatórios. É permitido apenas o envio de imagens com as seguintes extensões: .png, .jpg, .jpeg, .JPG, .PNG, .JPEG">
+                    <button type="button" class="btn btn-lg btn-danger" data-continer="body" data-toggle="popover" data-placement="left" title="Ajuda" data-content="É permitido apenas o envio de imagens com as seguintes extensões: .png, .jpg, .jpeg, .JPG, .PNG, .JPEG">
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                     </button>
             </div>

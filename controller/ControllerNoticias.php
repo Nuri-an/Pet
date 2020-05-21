@@ -25,9 +25,9 @@ function adicionarNoticia()
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
     $descricao = filter_var($_POST["descricao"], FILTER_SANITIZE_STRING);
     $data = filter_var($_POST["data"], FILTER_SANITIZE_STRING);
-    $localN = filter_var($_POST["localNoticia"], FILTER_SANITIZE_STRING);
+    $resumo = filter_var($_POST["resumoNoticia"], FILTER_SANITIZE_STRING);
 
-    if ($_FILES['arquivo']['name'] != '') {
+    if (isset($_FILES['arquivo']['name']) && ($_FILES['arquivo']['name'] != '')) {
 
         $fileName = $_FILES['arquivo']['name'];
 
@@ -50,7 +50,7 @@ function adicionarNoticia()
     $Noticia->setTitulo($titulo);
     $Noticia->setDescricao($descricao);
     $Noticia->setData($data);
-    $Noticia->setLocal($localN);
+    $Noticia->setResumo($resumo);
 
 
     $dao->adicionarNoticia($Noticia);
@@ -69,9 +69,9 @@ function atualizarNoticia()
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
     $descricao = filter_var($_POST["descricao"], FILTER_SANITIZE_STRING);
     $data = filter_var($_POST["data"], FILTER_SANITIZE_STRING);
-    $localN = filter_var($_POST["local"], FILTER_SANITIZE_STRING);
+    $resumo = filter_var($_POST["resumo"], FILTER_SANITIZE_STRING);
 
-    if ($_FILES['arquivo']['name'] != '') {
+    if (isset($_FILES['arquivo']['name']) && ($_FILES['arquivo']['name'] != '')) {
 
         $fileName = $_FILES['arquivo']['name'];
 
@@ -95,7 +95,7 @@ function atualizarNoticia()
     $Noticia->setTitulo($titulo);
     $Noticia->setDescricao($descricao);
     $Noticia->setData($data);
-    $Noticia->setLocal($localN);
+    $Noticia->setResumo($resumo);
     $Noticia->setId($id);
 
     $dao->atualizarNoticia($Noticia);

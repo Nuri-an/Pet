@@ -46,7 +46,7 @@
         <br>
         <div class="versao text-white">
             <p class="desenvolvedor">
-                Copyright © 2020 PET - Programa de Educação Tutorial 1.0 | Desenvolvido por
+                Copyright © 2020 PET - Conexões e Saberes 1.0 | Desenvolvido por
                 <a class="text-white" target="_blank" href="mailto:nuriancoelho@hotmail.com">
                     Nurian Coelho
                 </a>

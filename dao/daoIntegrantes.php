@@ -164,6 +164,19 @@ class DaoIntegrantes
             $id = $integrantes->getId();
             $tipo = $integrantes->getTipo();
 
+
+            $stmtFoto = $this->conn->prepare("SELECT * FROM integrantes WHERE codIntegrante = ?");
+            $stmtFoto->bindparam(1, $id);
+            $stmtFoto->execute();
+
+            while ($rowIntegrante = $stmtFoto->fetch(PDO::FETCH_ASSOC)) {
+
+                $caminho = "../assets/media/integrantes/" . $rowIntegrante['fotoIntegrante'];
+                if (file_exists($caminho)) {
+                    unlink($caminho);
+                }
+            }
+
             if ($tipo == 'discente') {
                 $stmtAux = $this->conn->prepare("SELECT codDiscente FROM discentes WHERE codIntegrante = ?");
                 $stmtAux->bindparam(1, $id);

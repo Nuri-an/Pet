@@ -31,7 +31,7 @@ $totalPg = ceil($rowTotalDownloads['numResult'] / $quantidadePg);
 
 <div class="container" style="border-bottom:30px; align-items: center; width: 100%;">
     <br>
-    <div class="download" style="border-radius: 5px;">
+    <div class="download border border-info" style="border-radius: 5px;">
         <div class="tab-content">
 
             <?php
@@ -51,9 +51,11 @@ $totalPg = ceil($rowTotalDownloads['numResult'] / $quantidadePg);
                                     </h6>
                                 </a>';
                 } else {
-                    $srcSlides = '<small class="text-muted " style="font-size:50; ">
-                                    <i>Sem slides dispníveis para download</i>
-                                </small>';
+                    $srcSlides = '<div>
+                                    <small class="text-muted " style="font-size:50; ">
+                                        <i>Sem slides dispníveis para download</i>
+                                    </small>
+                                </div>';
                 }
 
                 if (($rowDownloads['algoritmoDownload'] != '') && (file_exists($algoritmo))) {
@@ -64,23 +66,40 @@ $totalPg = ceil($rowTotalDownloads['numResult'] / $quantidadePg);
                                         </h6>
                                     </a>';
                 } else {
-                    $srcAlgoritmo = '<br>
+                    $srcAlgoritmo = '<div>
+                                        <small class="text-muted " style="font-size:50; top: 3">
+                                            <i>Sem algoritmo dispnível para download</i>
+                                        </small>
+                                    </div>';
+                }
+
+                if (!(empty($rowDownloads['linkDownload']))) {
+
+                    $srcLink = '<a href="' . $rowDownloads['linkDownload'] . '" target="_blank">
+                                        <h6>
+                                            <i class="fa fa-external-link" aria-hidden="true"></i> Link
+                                        </h6>
+                                    </a>';
+                } else {
+                    $srcLink = '<div>
                                     <small class="text-muted " style="font-size:50; top: 3">
-                                        <i>Sem algoritmo dispnível para download</i>
-                                    </small>';
+                                        <i>Sem link</i>
+                                    </small>
+                                </div>';
                 }
 
                 if($i == 1){
                     echo '<div class="tab-pane active" id="download_' . $i . '" role="tabpanel">
                             <div class="text-center lead"> ' . $rowDownloads['tituloDownload'] . ' </div>
                             <div class="editar" style="display: none; margin-top: 25px;">
-                                <button type="button" class="btn btn-primary" onclick="editar_modal('. $i .')" id="rowEditarDownloads_'. $i .'" data-id="'. $rowDownloads['codDownload'] .'" data-titulo="'. $rowDownloads['tituloDownload'] .'" data-referecia="'. $rowDownloads['referenciaDownload'] .'" data-slides="'. $rowDownloads['slidesDownload'] .'" data-algoritmo="'. $rowDownloads['algoritmoDownload'] .'" style="border-radius: 50px; position: relative; float: right;" title="Editar">
+                                <button type="button" class="btn btn-primary" onclick="editar_modal('. $i .')" id="rowEditarDownloads_'. $i .'" data-id="'. $rowDownloads['codDownload'] .'" data-titulo="'. $rowDownloads['tituloDownload'] .'" data-referencia="'. $rowDownloads['referenciaDownload'] .'" data-slides="'. $rowDownloads['slidesDownload'] .'" data-algoritmo="'. $rowDownloads['algoritmoDownload'] .'" style="border-radius: 50px; position: relative; float: right;" title="Editar">
                                     <i class="fa fa-pencil" aria-hidden="true" ></i>
                                 </button>
                             </div>
                             <div class="container" style="margin-top: 15px;">
                                 '. $srcSlides .'
                                 '. $srcAlgoritmo .'
+                                '. $srcLink .'
                             </div>
                         </div>';
                 }
@@ -89,13 +108,14 @@ $totalPg = ceil($rowTotalDownloads['numResult'] / $quantidadePg);
                     echo '<div class="tab-pane" id="download_' . $i . '" role="tabpanel">
                             <div class="text-center lead"> ' . $rowDownloads['tituloDownload'] . ' </div>
                             <div class="editar" style="display: none; margin-top: 25px;">
-                                <button type="button" onclick="editar_modal()" class="btn btn-primary" style="border-radius: 50px; position: relative; float: right;" title="Editar">
+                                <button type="button" onclick="editar_modal('. $i .')" id="rowEditarDownloads_'. $i .'" data-id="'. $rowDownloads['codDownload'] .'" data-titulo="'. $rowDownloads['tituloDownload'] .'" data-referencia="'. $rowDownloads['referenciaDownload'] .'" data-slides="'. $rowDownloads['slidesDownload'] .'" data-algoritmo="'. $rowDownloads['algoritmoDownload'] .'"  class="btn btn-primary" style="border-radius: 50px; position: relative; float: right;" title="Editar">
                                     <i class="fa fa-pencil" aria-hidden="true" ></i>
                                 </button>
                             </div>
                             <div class="container" style="margin-top: 15px;">
                                 '. $srcSlides .'
                                 '. $srcAlgoritmo .'
+                                '. $srcLink .'
                             </div>
                         </div>';
                 }

@@ -8,7 +8,7 @@
   <!-- As 3 meta tags acima *devem* vir em primeiro lugar dentro do `head`; qualquer outro conteúdo deve vir *após* essas tags -->
 
 
-  <title>PET - Programa de Educação Tutorial</title>
+  <title>PET - Conexões e Saberes</title>
 
   <link rel="shortcut icon" href="../assets/media/logo.png" type="image/x-png" />
 
