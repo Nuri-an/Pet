@@ -45,11 +45,13 @@ $totalPg = ceil($rowTotalDownloads['numResult'] / $quantidadePg);
 
                 if (($rowDownloads['slidesDownload'] != '') && (file_exists($slides))) {
 
-                    $srcSlides = '<a href="'. $slides .'" download="' . $rowDownloads['tituloDownload'] . ' - slides">
-                                    <h6>
-                                        <i class="fa fa-download" aria-hidden="true"></i> Slides
-                                    </h6>
-                                </a>';
+                    $srcSlides = '<div>
+                                    <a href="'. $slides .'" download="' . $rowDownloads['tituloDownload'] . ' - slides">
+                                        <h6>
+                                            <i class="fa fa-download" aria-hidden="true"></i> Slides
+                                        </h6>
+                                    </a>
+                                </div>';
                 } else {
                     $srcSlides = '<div>
                                     <small class="text-muted " style="font-size:50; ">
@@ -60,11 +62,13 @@ $totalPg = ceil($rowTotalDownloads['numResult'] / $quantidadePg);
 
                 if (($rowDownloads['algoritmoDownload'] != '') && (file_exists($algoritmo))) {
 
-                    $srcAlgoritmo = '<a href="' . $algoritmo . '" download="' . $rowDownloads['tituloDownload'] . ' - algoritmo">
-                                        <h6>
-                                            <i class="fa fa-download" aria-hidden="true"></i> Algoritmo
-                                        </h6>
-                                    </a>';
+                    $srcAlgoritmo = '<div>
+                                        <a href="' . $algoritmo . '" download="' . $rowDownloads['tituloDownload'] . ' - algoritmo">
+                                            <h6>
+                                                <i class="fa fa-download" aria-hidden="true"></i> Algoritmo
+                                            </h6>
+                                        </a>
+                                    </div>';
                 } else {
                     $srcAlgoritmo = '<div>
                                         <small class="text-muted " style="font-size:50; top: 3">
@@ -75,11 +79,13 @@ $totalPg = ceil($rowTotalDownloads['numResult'] / $quantidadePg);
 
                 if (!(empty($rowDownloads['linkDownload']))) {
 
-                    $srcLink = '<a href="' . $rowDownloads['linkDownload'] . '" target="_blank">
+                    $srcLink = '<div>
+                                    <a href="' . $rowDownloads['linkDownload'] . '" target="_blank">
                                         <h6>
                                             <i class="fa fa-external-link" aria-hidden="true"></i> Link
                                         </h6>
-                                    </a>';
+                                    </a>
+                                </div>';
                 } else {
                     $srcLink = '<div>
                                     <small class="text-muted " style="font-size:50; top: 3">
