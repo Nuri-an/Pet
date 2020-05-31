@@ -54,7 +54,7 @@ if ($stmtAdministradores->rowCount() == 0) {
             <th scope="row">' . $rowAdministradores['nomeIntegrante'] . ' </th>
             <td>
                 <div style="cursor: pointer;"> 
-                    <i class="text-primary fa fa-check fa-2x" title="Aceitar solicitação" aria-hidden="true" id="rowAceitarAdm_'. $i .'" data-id="'. $rowAdministradores['codIntegrante'] .'" data-nome="'. $rowAdministradores['nomeIntegrante'] .'" onclick="aceitarAdm('. $i .')"></i>
+                    <i class="text-warning fa fa-check fa-2x" title="Aceitar solicitação" aria-hidden="true" id="rowAceitarAdm_'. $i .'" data-id="'. $rowAdministradores['codIntegrante'] .'" data-nome="'. $rowAdministradores['nomeIntegrante'] .'" onclick="aceitarAdm('. $i .')"></i>
                     <i class="text-danger fa fa-times fa-2x" title="Cancelar solicitação" aria-hidden="true" id="rowCancelarAdm_'. $i .'" data-id="'. $rowAdministradores['codIntegrante'] .'" data-nome="'. $rowAdministradores['nomeIntegrante'] .'" onclick="cancelarAdm('. $i .')"></i>
                 </div>    
             </td>
@@ -78,25 +78,25 @@ if ($pagina == 1) {
                 </li>';
 } else {
     echo '<li class="page-item">
-                    <a class="page-link" href="#corpo" onclick="listarAdministradores(1, ' . $quantidadePg . ')">Primeira</a>
+                    <a class="page-link text-success" href="#corpo" onclick="listarAdministradores(1, ' . $quantidadePg . ')">Primeira</a>
                 </li>';
 }
 
 for ($pagAnt = $pagina - 2; $pagAnt < $pagina; $pagAnt++) {
     if ($pagAnt >= 1) {
         echo  '<li class="page-item">
-                        <a class="page-link" href="#corpo" onclick="listarAdministradores(' . $pagAnt . ', ' . $quantidadePg . ')">' . $pagAnt . '</a>
+                        <a class="page-link text-success" href="#corpo" onclick="listarAdministradores(' . $pagAnt . ', ' . $quantidadePg . ')">' . $pagAnt . '</a>
                       </li>';
     }
 }
-echo '<li class="page-item active">
-                <a class="page-link" href="#corpo" onclick="listarAdministradores(' . $pagina . ', ' . $quantidadePg . ')">' . $pagina . '</a>
+echo '<li class="page-item">
+                <a class="page-link bg-success text-white" href="#corpo" onclick="listarAdministradores(' . $pagina . ', ' . $quantidadePg . ')">' . $pagina . '</a>
             </li>';
 
 for ($pagDep = $pagina + 1; $pagDep < $pagina + 3; $pagDep++) {
     if ($pagDep <= $totalPg) {
         echo '<li class="page-item">
-                        <a class="page-link" href="#corpo" onclick="listarAdministradores(' . $pagDep . ', ' . $quantidadePg . ')">' . $pagDep . '</a>
+                        <a class="page-link text-success" href="#corpo" onclick="listarAdministradores(' . $pagDep . ', ' . $quantidadePg . ')">' . $pagDep . '</a>
                     </li>';
     }
 }
@@ -106,7 +106,7 @@ if (($pagina == $totalPg) || ($pagina > $totalPg)) {
                 </li>';
 } else {
     echo '<li class="page-item">
-                    <a class="page-link" href="#corpo"  onclick="listarAdministradores(' . $totalPg . ', ' . $quantidadePg . ')">Última</a>
+                    <a class="page-link text-success" href="#corpo"  onclick="listarAdministradores(' . $totalPg . ', ' . $quantidadePg . ')">Última</a>
                 </li>';
 }
 echo '</ul>

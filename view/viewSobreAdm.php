@@ -52,7 +52,7 @@ $inicioDao = new DaoInicio();
                 echo '<br>';
                 echo '<br>
                 <div style="display: inline;float: right; margin-bottom: 5px;">
-                    <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Editar" id="rowEditarInfo" data-id="' . $rowInformacoes['codInfo'] . '" data-tituloP="' . $rowInformacoes['tituloInfo'] . '" data-infoP="' . $rowInformacoes['descricaoInfo'] . '" data-tituloS="' . $rowInformacoes['subTituloInfo'] . '" data-infoS="' . $rowInformacoes['subDescricaoInfo'] . '"  data-extra ="' . $rowInformacoes['extrasInfo'] . '" onclick="editarInfo()" >
+                    <button type="button" class="btn btn-success" data-toggle="tooltip" title="Editar" id="rowEditarInfo" data-id="' . $rowInformacoes['codInfo'] . '" data-tituloP="' . $rowInformacoes['tituloInfo'] . '" data-infoP="' . $rowInformacoes['descricaoInfo'] . '" data-tituloS="' . $rowInformacoes['subTituloInfo'] . '" data-infoS="' . $rowInformacoes['subDescricaoInfo'] . '"  data-extra ="' . $rowInformacoes['extrasInfo'] . '" onclick="editarInfo()" >
                         <i class="fa fa-pencil"></i>
                     </button>
                 </div>';
@@ -64,8 +64,8 @@ $inicioDao = new DaoInicio();
         </hr>
 
         <div class=" text-center" style="margin-top:30px; margin-bottom:30px;" role="group" aria-label="Exemplo básico">
-            <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('f')">Galeria de Fotos</button>
-            <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('v')">Galeria de Vídeos</button>
+            <button type="button" class="btn btn-outline-success h5" onclick="escolheGaleria('f')">Galeria de Fotos</button>
+            <button type="button" class="btn btn-outline-success h5" onclick="escolheGaleria('v')">Galeria de Vídeos</button>
         </div>
 
         <div id="caroselFoto" class="carousel slide" data-ride="carousel">
@@ -86,7 +86,7 @@ $inicioDao = new DaoInicio();
 
                         echo '<div class="carousel-item" >
                         <img src="' . $arquivo . '"  class="rounded mx-auto img-fluid d-block carouselItemFoto" data-toggle="tooltip" alt="' . $titulo . '" title="Clique para substituir imagem"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" data-titulo="' . $rowGaleria['tituloGaleria'] . '" data-foto="' . $rowGaleria['midiaGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
-                        <button type="button" class="btn btn-primary" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir imagem" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
+                        <button type="button" class="btn btn-danger" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir imagem" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
                             <i class="fa fa-trash "></i> 
                         </button>
                     </div>';
@@ -129,10 +129,10 @@ $inicioDao = new DaoInicio();
                     </div>
                     <div style=" text-align:center;">
                     <div id="buttons" style="bottom: 0%;">
-                        <button type="button" class="btn btn-primary" data-toggle="tooltip"  title="Excluir vídeo" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleriaV['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
+                        <button type="button" class="btn btn-danger" data-toggle="tooltip"  title="Excluir vídeo" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleriaV['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
                             <i class="fa fa-trash "></i> 
                         </button>
-                        <button type="button" class="btn btn-primary" data-toggle="tooltip"  title="Clique para substituir vídeo"  id="rowEditarVideo_' . $i . '" data-id="' . $rowGaleriaV['codGaleria'] . '" data-titulo="' . $rowGaleriaV['tituloGaleria'] . '" data-video="' . $rowGaleriaV['midiaGaleria'] . '" data-link="' . $rowGaleriaV['urlGaleria'] . '" onclick="editarVideo_modal(' . $i . ')" >
+                        <button type="button" class="btn btn-success" data-toggle="tooltip"  title="Clique para substituir vídeo"  id="rowEditarVideo_' . $i . '" data-id="' . $rowGaleriaV['codGaleria'] . '" data-titulo="' . $rowGaleriaV['tituloGaleria'] . '" data-video="' . $rowGaleriaV['midiaGaleria'] . '" data-link="' . $rowGaleriaV['urlGaleria'] . '" onclick="editarVideo_modal(' . $i . ')" >
                             <i class="fa fa-pencil "></i> 
                         </button>
                     </div>
@@ -153,10 +153,10 @@ $inicioDao = new DaoInicio();
                     <div style=" text-align:center;">
                         <h5> Conheça nosso canal no Youtube! </h5>
                         <div id="buttons" style="bottom: 30px;">
-                        <button type="button" class="btn btn-primary" data-toggle="tooltip"  title="Excluir vídeo" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" > 
+                        <button type="button" class="btn btn-danger" data-toggle="tooltip"  title="Excluir vídeo" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" > 
                             <i class="fa fa-trash "></i> 
                         </button>
-                        <button type="button" class="btn btn-primary" data-toggle="tooltip"  title="Clique para substituir vídeo"  id="rowEditarVideo_' . $i . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" data-titulo="' . $rowGaleriaVE['tituloGaleria'] . '" data-video="' . $rowGaleriaVE['midiaGaleria'] . '" onclick="editarVideo_modal(' . $i . ')" >
+                        <button type="button" class="btn btn-success" data-toggle="tooltip"  title="Clique para substituir vídeo"  id="rowEditarVideo_' . $i . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" data-titulo="' . $rowGaleriaVE['tituloGaleria'] . '" data-video="' . $rowGaleriaVE['midiaGaleria'] . '" onclick="editarVideo_modal(' . $i . ')" >
                             <i class="fa fa-pencil "></i> 
                         </button>
                     </div>
@@ -264,7 +264,7 @@ $inicioDao = new DaoInicio();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
-                <button type="submit" class="btn btn-primary" id="btnEditarInfo">
+                <button type="submit" class="btn btn-warning" id="btnEditarInfo">
                     <i class="fa fa-check"></i> Salvar
                 </button>
             </div>
@@ -338,7 +338,7 @@ $inicioDao = new DaoInicio();
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
-                    <button type="submit" class="btn btn-primary" id="btnAdicionarMidia">
+                    <button type="submit" class="btn btn-warning" id="btnAdicionarMidia">
                         <i class="fa fa-check"></i> Adicionar
                     </button>
                 </div>

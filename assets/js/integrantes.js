@@ -1,62 +1,62 @@
 
-    $(document).ready(function() {
-        $("#integrantes").addClass('menuAtivo');
-        $("#integrantes").addClass('text-white');
+$(document).ready(function () {
+    $("#integrantes").addClass('menuAtivo');
+    $("#integrantes").addClass('font-weight-bold');
 
-        $(".nav-link").click(function() {
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-            $('body').css('overflowY', 'hidden');
-            $('#loader').show();
-        });
-
-
-        $('#loader').slideUp(1000);
-        $('body').css('overflowY', 'auto');
-
-        $("#cpf").mask("999.999.999-99", {
-            reverse: true
-        });
-
+    $(".nav-link").click(function () {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $('body').css('overflowY', 'hidden');
+        $('#loader').show();
     });
 
-    function abreT(indice) {
-        var conteudo = $('#conteudoT' + indice);
-        var foto = $('#fotoT' + indice);
-        if (conteudo.hasClass('info')) {
-            foto.slideUp();
-            conteudo.removeClass('info');
-        } else {
-            conteudo.slideDown();
-            foto.show();
-            conteudo.addClass('info');
-        }
-    }
 
-    function abreD(indice) {
-        var conteudo = $('#conteudoD' + indice);
-        var foto = $('#fotoD' + indice);
-        if (conteudo.hasClass('info')) {
-            foto.slideUp();
-            conteudo.removeClass('info');
-        } else {
-            conteudo.slideDown();
-            foto.show();
-            conteudo.addClass('info');
-        }
-    }
+    $('#loader').slideUp(1000);
+    $('body').css('overflowY', 'auto');
 
-    function nomeFoto() {
-        if ($('#arquivo').val()) {
-            var foto = $('#arquivo').val();
-            var letra = '\\';
+    $("#cpf").mask("999.999.999-99", {
+        reverse: true
+    });
 
-            posic = foto.indexOf(letra); //pega a posicao da letra
-            while (foto.includes(letra)) {
-                foto = foto.substring(posic); //exclui da string todas as letras ate a posicao desejada
-            }
-            $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
-        }
+});
+
+function abreT(indice) {
+    var conteudo = $('#conteudoT' + indice);
+    var foto = $('#fotoT' + indice);
+    if (conteudo.hasClass('info')) {
+        foto.slideUp();
+        conteudo.removeClass('info');
+    } else {
+        conteudo.slideDown();
+        foto.show();
+        conteudo.addClass('info');
     }
+}
+
+function abreD(indice) {
+    var conteudo = $('#conteudoD' + indice);
+    var foto = $('#fotoD' + indice);
+    if (conteudo.hasClass('info')) {
+        foto.slideUp();
+        conteudo.removeClass('info');
+    } else {
+        conteudo.slideDown();
+        foto.show();
+        conteudo.addClass('info');
+    }
+}
+
+function nomeFoto() {
+    if ($('#arquivo').val()) {
+        var foto = $('#arquivo').val();
+        var letra = '\\';
+
+        posic = foto.indexOf(letra); //pega a posicao da letra
+        while (foto.includes(letra)) {
+            foto = foto.substring(posic); //exclui da string todas as letras ate a posicao desejada
+        }
+        $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
+    }
+}
 
 $.validator.addMethod("nomeCompleto", function (value, element) {
     if (value.includes(' ')) {
@@ -224,40 +224,57 @@ function excluir(id) {
             },
             user: {
                 label: "Excluir integrante",
-                className: 'btn-info',
+                className: 'btn-danger',
                 callback: function () {
-                    dialog = bootbox.dialog({
-                        message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
-                        closeButton: false
-                    });
-                    $.ajax({
-                        type: "POST",
-                        url: "../controller/ControllerIntegrantes.php",
-                        data: {
-                            acao: "excluirInt",
-                            id: cod,
-                            tipo: tipo
+                    bootbox.confirm({
+                        message: "Você realmente deseja excluir todos os dados desse integrante?",
+                        buttons: {
+                            confirm: {
+                                label: 'Sim',
+                                className: 'btn-danger'
+                            },
+                            cancel: {
+                                label: 'Não',
+                                className: 'btn-warning'
+                            }
                         },
-                        success: function (resultado) {
-                            //alert(resultado);
-                            if (resultado == 1) {
-                                dialog.init(function () {
-                                    dialog.find('.bootbox-body').html('Integrante excluído com sucesso!');
+                        callback: function (result) {
+                            if (result) {
+                                dialog = bootbox.dialog({
+                                    message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
+                                    closeButton: false
                                 });
-                                setTimeout(function () {
-                                    dialog.modal('hide');
-                                }, 3000); //3 segundos depois executa
-                            }
+                                $.ajax({
+                                    type: "POST",
+                                    url: "../controller/ControllerIntegrantes.php",
+                                    data: {
+                                        acao: "excluirInt",
+                                        id: cod,
+                                        tipo: tipo
+                                    },
+                                    success: function (resultado) {
+                                        //alert(resultado);
+                                        if (resultado == 1) {
+                                            dialog.init(function () {
+                                                dialog.find('.bootbox-body').html('Integrante excluído com sucesso!');
+                                            });
+                                            setTimeout(function () {
+                                                dialog.modal('hide');
+                                            }, 3000); //3 segundos depois executa
+                                        }
 
-                            else {
-                                dialog.init(function () {
-                                    dialog.find('.bootbox-body').html('Não foi possível excluir o integrante. Tente novamente mais tarde.');
+                                        else {
+                                            dialog.init(function () {
+                                                dialog.find('.bootbox-body').html('Não foi possível excluir o integrante. Tente novamente mais tarde.');
+                                            });
+                                            setTimeout(function () {
+                                                dialog.modal('hide');
+                                            }, 3000); //3 segundos depois executa
+                                        }
+                                        atualizarInicio();
+                                    }
                                 });
-                                setTimeout(function () {
-                                    dialog.modal('hide');
-                                }, 3000); //3 segundos depois executa
                             }
-                            atualizarInicio();
                         }
                     });
                 }
@@ -265,6 +282,7 @@ function excluir(id) {
         }
     });
 }
+
 function atualizarInicio() {
     $("#atualiza").load('viewIntegrantesAdm.php #atualiza');
 }
@@ -288,12 +306,12 @@ function verInformacoes(id) {
     $('.form-group .col-md-12 .form-material .custom-file #foto').html(foto);
     $("input[name='situacao'][value='" + situacao + "']").prop('checked', true);
 
-    if(situacao == 'Tutor(a)'){
+    if (situacao == 'Tutor(a)') {
         $("input[name='situacao'][value='Bolsista']").prop('disabled', true);
         $("input[name='situacao'][value='Voluntário']").prop('disabled', true);
         $("input[name='situacao'][value='Tutor(a)']").prop('disabled', false);
     }
-    else if(situacao != 'Tutor(a)'){
+    else if (situacao != 'Tutor(a)') {
         $("input[name='situacao'][value='Bolsista']").prop('disabled', false);
         $("input[name='situacao'][value='Voluntário']").prop('disabled', false);
         $("input[name='situacao'][value='Tutor(a)']").prop('disabled', true);

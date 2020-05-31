@@ -1,6 +1,6 @@
 
     .borda:hover {
-        border: 2px solid #836FFF;
+        border: 2px solid #28a745;
     }
 
     .info {
@@ -16,7 +16,7 @@
     }
 
     .menuAtivo {
-        border-bottom: 2px solid #fff;
+        border-bottom: 2px solid #000;
     }
 
     hr {
@@ -115,7 +115,4 @@
             height: auto;
         }
 
-        .container{
-            margin-bottom: 70px;
-        }
     }

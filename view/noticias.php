@@ -58,18 +58,18 @@ while ($rowNoticias = $stmtNoticias->fetch(PDO::FETCH_ASSOC)) {
                 <div style="padding: .75rem 1.25rem; background-color: rgba(0,0,0,.03);">
                     <footer class="blockquote-footer  text-right" > Publicado em: ' . $newDate . '</footer>
                     <div class="editar" style="float: left; margin-bottom: 5px; display: none;">
-                        <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Editar" id="rowEditarNoticiaIn_' . $i . '" data-id="' . $rowNoticias['codNoticia'] . '"  data-titulo="' . $rowNoticias['tituloNoticia'] . '" data-descricao="' . $rowNoticias['descricaoNoticia'] . '" data-resumo="' . $rowNoticias['resumoNoticia'] . '" data-midia="' . $rowNoticias['midiaNoticia'] . '" data-data="' . $rowNoticias['dataNoticia'] . '" onclick="editar_modal(' . $i . ')" >
+                        <button type="button" style="background-color: #8FBC8F;" class="btn" data-toggle="tooltip" title="Editar" id="rowEditarNoticia_' . $i . '" data-id="' . $rowNoticias['codNoticia'] . '"  data-titulo="' . $rowNoticias['tituloNoticia'] . '" data-descricao="' . $rowNoticias['descricaoNoticia'] . '" data-resumo="' . $rowNoticias['resumoNoticia'] . '" data-midia="' . $rowNoticias['midiaNoticia'] . '" data-data="' . $rowNoticias['dataNoticia'] . '" onclick="editar_modal(' . $i . ')" >
                             <i class="fa fa-pencil"></i>
                         </button>
                     </div>
                     <div style="display: inline; float: right; margin-bottom: 5px;">
                         <h5 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_'. $i .'" aria-expanded="true" aria-controls="collapseOne" id="rowLerMais_' . $i . '" onclick="lerMais(' . $i . ')">
+                            <button class="btn btn-link text-success" type="button" data-toggle="collapse" data-target="#collapse_'. $i .'" aria-expanded="true" aria-controls="collapseOne" id="rowLerMais_' . $i . '" onclick="lerMais(' . $i . ')">
                                 Ler mais
                             </button>
                         </h5>
                         <h5 class="mb-0">
-                            <button class="btn btn-link lerMenos" type="button" style="float: right;" data-toggle="collapse" data-target="#collapse_'. $i .'" aria-expanded="true" aria-controls="collapseOne" id="rowLerMenos_' . $i . '" onclick="lerMenos(' . $i . ')">
+                            <button class="btn btn-link text-success lerMenos" type="button" style="float: right;" data-toggle="collapse" data-target="#collapse_'. $i .'" aria-expanded="true" aria-controls="collapseOne" id="rowLerMenos_' . $i . '" onclick="lerMenos(' . $i . ')">
                                 Ler menos
                             </button>
                         </h2>
@@ -82,7 +82,7 @@ while ($rowNoticias = $stmtNoticias->fetch(PDO::FETCH_ASSOC)) {
 }
 
 echo '<div class="editar" style="display: none;">
-        <button type="button" onclick="adicionar_modal()" class="btn btn-primary" style="border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
+        <button type="button" onclick="adicionar_modal()" class="btn" style="background-color: #8FBC8F; border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
             <i class="fa fa-plus" aria-hidden="true" ></i>
         </button>
     </div>';
@@ -96,25 +96,25 @@ if ($pagina == 1) {
                 </li>';
 } else {
     echo '<li class="page-item">
-                    <a class="page-link" href="#corpo" onclick="listarNoticias(1, ' . $quantidadePg . ')">Primeira</a>
+                    <a class="page-link text-success" href="#corpo" onclick="listarNoticias(1, ' . $quantidadePg . ')">Primeira</a>
                 </li>';
 }
 
 for ($pagAnt = $pagina - 2; $pagAnt < $pagina; $pagAnt++) {
     if ($pagAnt >= 1) {
         echo  '<li class="page-item">
-                        <a class="page-link" href="#corpo" onclick="listarNoticias(' . $pagAnt . ', ' . $quantidadePg . ')">' . $pagAnt . '</a>
+                        <a class="page-link text-success" href="#corpo" onclick="listarNoticias(' . $pagAnt . ', ' . $quantidadePg . ')">' . $pagAnt . '</a>
                       </li>';
     }
 }
-echo '<li class="page-item active">
-                <a class="page-link" href="#corpo" onclick="listarNoticias(' . $pagina . ', ' . $quantidadePg . ')">' . $pagina . '</a>
+echo '<li class="page-item">
+                <a class="page-link  bg-success text-white" href="#corpo" onclick="listarNoticias(' . $pagina . ', ' . $quantidadePg . ')">' . $pagina . '</a>
             </li>';
 
 for ($pagDep = $pagina + 1; $pagDep < $pagina + 3; $pagDep++) {
     if ($pagDep <= $totalPg) {
         echo '<li class="page-item">
-                        <a class="page-link" href="#corpo" onclick="listarNoticias(' . $pagDep . ', ' . $quantidadePg . ')">' . $pagDep . '</a>
+                        <a class="page-link text-success" href="#corpo" onclick="listarNoticias(' . $pagDep . ', ' . $quantidadePg . ')">' . $pagDep . '</a>
                     </li>';
     }
 }
@@ -124,7 +124,7 @@ if (($pagina == $totalPg) || ($pagina > $totalPg)) {
                 </li>';
 } else {
     echo '<li class="page-item">
-                    <a class="page-link" href="#corpo"  onclick="listarNoticias(' . $totalPg . ', ' . $quantidadePg . ')">Última</a>
+                    <a class="page-link text-success" href="#corpo"  onclick="listarNoticias(' . $totalPg . ', ' . $quantidadePg . ')">Última</a>
                 </li>';
 }
 echo '</ul>

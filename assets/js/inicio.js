@@ -5,8 +5,8 @@ function atualizarInicio() {
 
 $(document).ready(function () {
 
-  $("#inicio").addClass('menuAtivo');
-  $("#inicio").addClass('text-white');
+  $("#sobre").addClass('menuAtivo');
+  $("#sobre").addClass('font-weight-bold');
 
   $(".nav-link").click(function () {
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -319,11 +319,11 @@ function excluirMidia(id) {
     buttons: {
       confirm: {
         label: 'Sim',
-        className: 'btn-primary'
+        className: 'btn-danger'
       },
       cancel: {
         label: 'Não',
-        className: 'btn-danger'
+        className: 'btn-warning'
       }
     },
     callback: function (result) {
@@ -474,7 +474,7 @@ function editarVideo_modal(id) {
   $('#divVideo').show();
   $('#divUrl').show();
 
-  $('#divVideo .col-md-12 .form-material .custom-file #midia').html('<div><i class="fa fa-times" aria-hidden="true" style="cursor: pointer;" onclick="delet()"></i> &nbsp' + video + '</div>');
+  $('#divVideo .col-md-12 .form-material .custom-file #midia').html('<div><i class="fa fa-times" aria-hidden="true" title="deletar" style="cursor: pointer;" onclick="delet()"></i> &nbsp' + video + '</div>');
 
   $('.modal .modal-dialog .modal-content #nomeP').text("Substitua o vídeo ou altere seu título");
   $('.modal .modal-dialog .modal-content #adicionarFoto #id').val(cod);

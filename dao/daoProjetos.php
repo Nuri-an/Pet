@@ -65,19 +65,33 @@ class DaoProjetos
             $parceria = $projeto->getParceria();
             $id = $projeto->getId();
 
-            if ($midia != '') {
-                $stmtNome = $this->conn->prepare("SELECT * FROM projetos WHERE codProjeto = ?");
+            $stmtNome = $this->conn->prepare("SELECT * FROM projetos WHERE codProjeto = ?");
                 $stmtNome->bindparam(1, $id);
                 $stmtNome->execute();
 
                 while ($rowProjeto = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
 
-                    $caminho = "../assets/media/projetos/" . $rowProjeto['midiaNoticia'];
-                    if (file_exists($caminho)) {
-                        unlink($caminho);
-                    }
+                    $midiaPath = "../assets/media/projetos/" . $rowProjeto['midiaProjeto'];
+                    $midiaAnte = $rowProjeto['midiaProjeto'];
                 }
 
+                if ($midia == 'vazio') {
+                    if (($midiaAnte != '') && (file_exists($midiaPath))) {
+                        unlink($midiaPath);
+                    }
+                    $midia = '';
+    
+                } else if ($midia == 'ante') {
+                    $midia = $midiaAnte;
+    
+                }else if ($midia == '') {
+                    $midia = '';
+    
+                }else {
+                    if (($midiaAnte != '') && (file_exists($midiaPath))) {
+                        unlink($midiaPath);
+                    }
+                }
                 $stmt = $this->conn->prepare("UPDATE projetos SET tituloProjeto = ?, midiaProjeto = ?, descricaoProjeto = ?, anoProjeto = ?, publicacaoProjeto =?, parceriaProjeto =? WHERE codProjeto = ? ");
 
                 $stmt->bindparam(1, $titulo);
@@ -94,23 +108,6 @@ class DaoProjetos
                 } else {
                     echo 2;
                 }
-            } else {
-                $stmt = $this->conn->prepare("UPDATE projetos SET tituloProjeto = ?, descricaoProjeto = ?, anoProjeto = ?, publicacaoProjeto =?, parceriaProjeto =? WHERE codProjeto = ?  ");
-
-                $stmt->bindparam(1, $titulo);
-                $stmt->bindparam(2, $descricao);
-                $stmt->bindparam(3, $data);
-                $stmt->bindparam(4, $publicacao);
-                $stmt->bindparam(5, $parceria);
-                $stmt->bindparam(6, $id);
-                $stmt->execute();
-
-                if ($stmt->rowCount() > 0) {
-                    echo 3;
-                } else {
-                    echo 2;
-                }
-            }
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -151,4 +148,3 @@ class DaoProjetos
         }
     }
 }
-?>

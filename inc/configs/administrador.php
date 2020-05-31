@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar" style=" width: 100vw;">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg navbar-light container" id="navbar" style=" background-color: #8FBC8F; width: 100vw;">
+  <button class="navbar-toggler" type="button" style="background-color:#E9ECEF;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span> MENU
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
@@ -30,14 +30,14 @@
       </li>
     </ul>
   </div>
-  <div style="float:rigth; opacity:1; margin-right: 10px;">
-    <a href="#">
-      <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #6959CD; cursor: pointer;" title="Página do grupo"></i>
+  <div style="float:rigth; margin-right: 10px;">
+    <a href="https://www.facebook.com/gpca.if" target="_blank">
+      <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #000; cursor: pointer;" title="Página do grupo"></i>
     </a>
     <a href="#">
-      <i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #6959CD; cursor: pointer; margin-left:10px;" title="Perfil do grupo"></i>
+      <i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #000; cursor: pointer; margin-left:10px;" title="Perfil do grupo"></i>
     </a>
   </div>
 </nav>
 
-<div class="jumbotron mobile " style="min-height: 100vh;">
+<div class="jumbotron container" style="background-color: #f4f4f4; display: flow-root; min-height: 100vh;">

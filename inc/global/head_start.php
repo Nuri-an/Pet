@@ -8,9 +8,9 @@
   <!-- As 3 meta tags acima *devem* vir em primeiro lugar dentro do `head`; qualquer outro conteúdo deve vir *após* essas tags -->
 
 
-  <title>PET - Conexões e Saberes</title>
+  <title> Grupo PET - GPCA</title>
 
-  <link rel="shortcut icon" href="../assets/media/logo.png" type="image/x-png" />
+  <link rel="shortcut icon" href="../assets/media/logo-gpca.png" type="image/x-png" />
 
   <!-- Locais -->
   <link href="../assets/css/plugins/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -31,11 +31,24 @@
       overflow-y: hidden;
       margin:0; 
       height: 100%;
-      background-color: #e9ecef;
+      background-color: #fff;
     }
+    
+    ::-webkit-scrollbar-track {
+        background-color: #F4F4F4;
+    }
+    ::-webkit-scrollbar {
+        width: 8px;
+        background: #F4F4F4;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #dad7d7;
+    }
+
     @media only screen and (max-width: 768px){
-      #banner{
-        display: none;
+      #navbar{
+        margin-right: 0px; 
+        margin-left: 0px;
       }
     }
   </style>
@@ -48,7 +61,7 @@
   <script src="../assets/js/plugins/google/apis/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-  <div id="loader" class="text-center" style="height: 100vh; width: 100vw; display:block; background-color:#ADD8E6;">
-    <div class="spinner-grow text-info" style="width: 10rem; height: 10rem;  margin-top:40vh;" role="status"></div>
+  <div id="loader" class="text-center" style="height: 100vh; width: 100vw; display:block; background-color:#90EE90;">
+    <div class="spinner-grow text-success" style="width: 10rem; height: 10rem;  margin-top:40vh;" role="status"></div>
 </div>
   

@@ -67,7 +67,7 @@ require '../inc/global/config.php';
             <div style="width: 100%; border-top: 1px solid #dee2e6;">
                 <div class="modal-footer" style="width: 50%; float: right; border-top: 0px solid #fff;">
                     <button type="button" class="btn btn-secondary" style="float: right; margin-left: 10px; margin-top: 0px;" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
-                    <button type="submit" class="btn btn-primary" style="float: right" id="btnEditarPublicacao">
+                    <button type="submit" class="btn btn-warning" style="float: right" id="btnEditarPublicacao">
                         <i class="fa fa-check"></i> Salvar
                     </button>
                 </div>
@@ -133,7 +133,7 @@ require '../inc/global/config.php';
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
-                <button type="submit" class="btn btn-primary" id="btnAdicionarPublicacao">
+                <button type="submit" class="btn btn-warning" id="btnAdicionarPublicacao">
                     <i class="fa fa-check"></i> Adicionar
                 </button>
             </div>

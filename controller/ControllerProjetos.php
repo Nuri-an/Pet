@@ -73,8 +73,9 @@ function atualizarProjeto()
     $data = filter_var($_POST["data"], FILTER_SANITIZE_STRING);
     $publicacao = filter_var($_POST["publicacao"], FILTER_SANITIZE_STRING);
     $parceria = filter_var($_POST["parceria"], FILTER_SANITIZE_STRING);
+    $midiaValue = filter_var($_POST["idMidia"], FILTER_SANITIZE_STRING);
 
-    if ($_FILES['arquivo']['name'] != '') {
+    if ((isset($_FILES['arquivo']['name'])) && ($midiaValue != 'ante') && ($midiaValue != 'vazio'))  {
 
         $fileName = $_FILES['arquivo']['name'];
 
@@ -87,14 +88,22 @@ function atualizarProjeto()
         $newFileName = 'midia_' . time() . '.' . $fileExtension;
 
         //Pasta onde o arquivo vai ser salvo
-        $local = '../assets/media/Projetos/';
+        $local = '../assets/media/projetos/';
 
-        move_uploaded_file($_FILES['arquivo']['tmp_name'], $local . $newFileName);
-    } else {
-        $newFileName = '';
+        if(move_uploaded_file($_FILES['arquivo']['tmp_name'], $local . $newFileName)){
+            $midia = $newFileName;
+
+        } else {
+            $midia = '';
+        }
+
+    } else if($midiaValue == 'ante'){
+        $midia = 'ante';
+    } else{
+        $midia = 'vazio';
     }
 
-    $projeto->setMidia($newFileName);
+    $projeto->setMidia($midia);
     $projeto->setTitulo($titulo);
     $projeto->setDescricao($descricao);
     $projeto->setData($data);

@@ -2,7 +2,7 @@ $(document).ready(function () {
 
   atualizar();
   $("#downloads").addClass('menuAtivo');
-  $("#downloads").addClass('text-white');
+  $("#downloads").addClass('font-weight-bold');
 
   $(".nav-link").click(function () {
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -77,6 +77,7 @@ function editar_modal(id) {
   var referencia = $('#rowEditarDownloads_' + id).attr("data-referencia");
   var slides = $('#rowEditarDownloads_' + id).attr("data-slides");
   var algoritmo = $('#rowEditarDownloads_' + id).attr("data-algoritmo");
+  var link = $('#rowEditarDownloads_' + id).attr("data-link");
   var acao = 'editar';
   var excluir = $('#excluir');
 
@@ -90,9 +91,12 @@ function editar_modal(id) {
   $('.modal .modal-dialog .modal-content #excluirDownloads-form #id').val(cod);
   $('.modal .modal-dialog .modal-content  #titulo').val(titulo);
   $('.modal .modal-dialog .modal-content  #referencia').val(referencia);
+  $('.modal .modal-dialog .modal-content  #link').val(link);
   $('.modal .modal-dialog .modal-content .custom-file #midiaS').html(slides);
+  $('#idSlides').val('ante');
   $('.modal .modal-dialog .modal-content .custom-file #midiaA').html(algoritmo);
-
+  $('#idAlgoritmo').val('ante');
+  
 }
 
 
@@ -106,6 +110,7 @@ function nomeAquivoSlide() {
       slide = slide.substring(posic); //exclui da string todas as letras ate a posicao desejada
     }
     $('.modal .modal-dialog .modal-content .custom-file #midiaS').html(slide);
+    $('#idSlides').val('');
   }
 }
 
@@ -119,7 +124,18 @@ function nomeAquivoAlgoritmo() {
       algoritmo = algoritmo.substring(posic); //exclui da string todas as letras ate a posicao desejada
     }
     $('.modal .modal-dialog .modal-content .custom-file #midiaA').html(algoritmo);
+    $('#idAlgoritmo').val('');
   }
+}
+
+function deletSlides() {
+  $('.modal .modal-dialog .modal-content .custom-file #midiaS').html('');
+  $('#idSlides').val('vazio');
+}
+
+function deletAlgoritmo() {
+  $('.modal .modal-dialog .modal-content .custom-file #midiaA').html('');
+  $('#idAlgoritmo').val('vazio');
 }
 
 
@@ -224,11 +240,11 @@ $(document).ready(function () {
       buttons: {
         confirm: {
           label: 'Sim',
-          className: 'btn-primary'
+          className: 'btn-danger'
         },
         cancel: {
           label: 'Não',
-          className: 'btn-danger'
+          className: 'btn-warning'
         }
       },
       callback: function (result) {

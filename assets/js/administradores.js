@@ -1,7 +1,7 @@
 $(document).ready(function () {
     atualizar();
     $("#administradores").addClass('menuAtivo');
-    $("#administradores").addClass('text-white');
+    $("#administradores").addClass('font-weight-bold');
 
     $(".nav-link").click(function () {
         $("html, body").animate({ scrollTop: 0 }, "slow");

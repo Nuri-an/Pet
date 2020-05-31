@@ -1,7 +1,10 @@
 <?php
-if ( session_status() !== PHP_SESSION_ACTIVE ){
-session_start(); }
-if (!isset($_SESSION['adm_session'])){ header("Location: viewInicioUser.php"); }
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+if (!isset($_SESSION['adm_session'])) {
+    header("Location: viewInicioUser.php");
+}
 require '../inc/global/head_start.php';
 require '../inc/global/banner.php';
 require '../inc/global/config.php';
@@ -21,15 +24,16 @@ require '../inc/global/config.php';
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header  sm-primary">
-                <h3 class="modal-title" id="tituloModal">  </h3>
+                <h3 class="modal-title" id="tituloModal"> </h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="openNewModal()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="Projetos-form" name="Projetos-form" method="POST"  enctype="multipart/form-data">
+                <form class="form-horizontal" id="Projetos-form" name="Projetos-form" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="acao" id="acao">
                     <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="idMidia" id="idMidia">
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material">
@@ -67,9 +71,16 @@ require '../inc/global/config.php';
                         <div class="col-md-12">
                             <div class="form-material">
                                 <h5> Upload: </h5>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="arquivo" name="arquivo" lang="pt" onchange="nomeMidiaAdd()">
-                                    <label class="custom-file-label" for="arquivo" id="midia"> </label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" type="button" style="cursor: pointer; border: 1px solid #ced4da;" onclick="deletMidia()">
+                                            <i class="fa fa-times" aria-hidden="true" title="Deletar arquivo"></i>
+                                        </button>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="arquivo" name="arquivo" lang="pt" onchange="nomeMidiaAdd()">
+                                        <label class="custom-file-label" for="arquivo" id="midia"> </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +92,7 @@ require '../inc/global/config.php';
                                 <label class="" for="parceria">
                                     <h5> Parcerias no desenvolvimento: </h5>
                                 </label>
-                                <textarea class="form-control" id="parceria" name="parceria" ></textarea>
+                                <textarea class="form-control" id="parceria" name="parceria"></textarea>
                             </div>
                         </div>
                     </div>
@@ -100,7 +111,7 @@ require '../inc/global/config.php';
             <div style="width: 100%; border-top: 1px solid #dee2e6;">
                 <div class="modal-footer" style="width: 50%; float: right; border-top: 0px solid #fff;">
                     <button type="button" class="btn btn-secondary" style="float: right; margin-left: 10px; margin-top: 0px;" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
-                    <button type="submit" class="btn btn-primary" style="float: right" id="btnProjeto">
+                    <button type="submit" class="btn btn-warning" style="float: right" id="btnProjeto">
                         <i class="fa fa-check"></i> Salvar
                     </button>
                 </div>

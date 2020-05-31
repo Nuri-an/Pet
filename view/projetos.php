@@ -5,7 +5,7 @@ $projetosDao = new DaoProjetos();
 ?>
 
 <?php
-$stmtAnoProjetos = $projetosDao->runQuery("SELECT DISTINCT anoProjeto as ano FROM projetos ");
+$stmtAnoProjetos = $projetosDao->runQuery("SELECT DISTINCT anoProjeto as ano FROM projetos  ORDER BY anoProjeto DESC");
 $stmtAnoProjetos->execute();
 
 $pagina = filter_input(INPUT_POST, 'pagina', FILTER_SANITIZE_NUMBER_INT);
@@ -25,8 +25,8 @@ $totalPg = ceil($rowTotalProjetosAno['numResult'] / $quantidadePg);
 ?>
 
 <div class="btn-group" style="margin-bottom: 30px; padding-left: 15px; margin-left: auto;">
-    <button type="button" class="btn btn-info">Selecionar o ano do projeto</button>
-    <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button type="button" style="color: rgba(0,0,0,.5);" class="btn border border-success">Selecionar o ano do projeto</button>
+    <button type="button" class="btn dropdown-toggle dropdown-toggle-split" style="background-color: #8FBC8F; " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="sr-only">Toggle Dropdown</span>
     </button>
     <div class="dropdown-menu">
@@ -95,7 +95,7 @@ if ($stmtProjetos->rowCount() == 0) {
                         </footer>';
         }
 
-        echo '<tr style="border-bottom: 20px solid #e9ecef;">
+        echo '<tr style="border-bottom: 20px solid #f4f4f4;">
                 <td style="border-top: 0px; background-color: #f9f9f9;">
                     <h3 class="display-5 text-secundary" style="margin-top: 10px;">' . $rowProjetos['tituloProjeto'] . '</h3>
                     <div  class="lead " style="display: none;  margin-left: 15px;  margin-right: 15px;" id="descricao_' . $i . '"
@@ -111,17 +111,17 @@ if ($stmtProjetos->rowCount() == 0) {
                         </footer>
                     </div>
                     <div class="editar" style="cursor: pointer; float: left; margin-top: 10px; margin-left: 10px; display: none;">
-                        <a title="Editar" id="rowEditarProjetos_'. $i .'" data-id="'. $rowProjetos['codProjeto'] .'"  data-titulo="'. $rowProjetos['tituloProjeto'] .'" data-descricao="'. $rowProjetos['descricaoProjeto'] .'" data-midia="'. $rowProjetos['midiaProjeto'] .'" data-ano="'. $rowProjetos['anoProjeto'] .'" data-publicacao="'. $rowProjetos['publicacaoProjeto'] .'" data-parceria="'. $rowProjetos['parceriaProjeto'] .'" onclick="editar_modal('. $i .')" >
-                            <i class="fa fa-pencil text-primary"></i>
+                        <a title="Editar"  id="rowEditarProjetos_'. $i .'" data-id="'. $rowProjetos['codProjeto'] .'"  data-titulo="'. $rowProjetos['tituloProjeto'] .'" data-descricao="'. $rowProjetos['descricaoProjeto'] .'" data-midia="'. $rowProjetos['midiaProjeto'] .'" data-ano="'. $rowProjetos['anoProjeto'] .'" data-publicacao="'. $rowProjetos['publicacaoProjeto'] .'" data-parceria="'. $rowProjetos['parceriaProjeto'] .'" onclick="editar_modal('. $i .')" >
+                            <i class="fa fa-pencil" style="color: #8FBC8F;" ></i>
                         </a>
                     </div>
                     <div style="display: inline; float: right; margin-bottom: 5px;">
-                        <button type="button" class="btn btn-primary"  id="rowLerMais_' . $i . '" onclick="lerMais(' . $i . ')">
+                        <a class="text-success"  style="cursor: pointer;" id="rowLerMais_' . $i . '" onclick="lerMais(' . $i . ')">
                             Ler mais
-                        </button>
-                        <button type="button" style="display: none;" class="btn btn-primary"  id="rowLerMenos_' . $i . '" onclick="lerMenos(' . $i . ')">
+                        </a>
+                        <a style="cursor: pointer; display: none;" class="text-success"  id="rowLerMenos_' . $i . '" onclick="lerMenos(' . $i . ')">
                             Ler menos
-                        </button>
+                        </a>
                     </div>
                 </td>
             </tr>';
@@ -134,7 +134,7 @@ if ($stmtProjetos->rowCount() == 0) {
                 <tr>
                     <td>   
                         <div class="editar" style="display: none; margin-top: 20px;">
-                            <button type="button" onclick="adicionar_modal()" class="btn btn-primary" style="border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
+                            <button type="button" onclick="adicionar_modal()" class="btn" style="background-color: #8FBC8F; border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
                                 <i class="fa fa-plus" aria-hidden="true" ></i>
                             </button>
                         </div>
@@ -155,25 +155,25 @@ if ($pagina == 1) {
                 </li>';
 } else {
     echo '<li class="page-item">
-                    <a class="page-link" href="#corpo" onclick="listarProjetos(1, ' . $quantidadePg . ', ' . $ano . ')">Primeira</a>
+                    <a class="page-link text-success" href="#corpo" onclick="listarProjetos(1, ' . $quantidadePg . ', ' . $ano . ')">Primeira</a>
                 </li>';
 }
 
 for ($pagAnt = $pagina - 2; $pagAnt < $pagina; $pagAnt++) {
     if ($pagAnt >= 1) {
         echo  '<li class="page-item">
-                        <a class="page-link" href="#corpo" onclick="listarProjetos(' . $pagAnt . ', ' . $quantidadePg . ', ' . $ano . ')">' . $pagAnt . '</a>
+                        <a class="page-link text-success" href="#corpo" onclick="listarProjetos(' . $pagAnt . ', ' . $quantidadePg . ', ' . $ano . ')">' . $pagAnt . '</a>
                       </li>';
     }
 }
-echo '<li class="page-item active">
-                <a class="page-link" href="#corpo" onclick="listarProjetos(' . $pagina . ', ' . $quantidadePg . ', ' . $ano . ')">' . $pagina . '</a>
+echo '<li class="page-item">
+                <a class="page-link bg-success text-white" href="#corpo" onclick="listarProjetos(' . $pagina . ', ' . $quantidadePg . ', ' . $ano . ')">' . $pagina . '</a>
             </li>';
 
 for ($pagDep = $pagina + 1; $pagDep < $pagina + 3; $pagDep++) {
     if ($pagDep <= $totalPg) {
         echo '<li class="page-item">
-                        <a class="page-link" href="#corpo" onclick="listarProjetos(' . $pagDep . ', ' . $quantidadePg . ', ' . $ano . ')">' . $pagDep . '</a>
+                        <a class="page-link text-success" href="#corpo" onclick="listarProjetos(' . $pagDep . ', ' . $quantidadePg . ', ' . $ano . ')">' . $pagDep . '</a>
                     </li>';
     }
 }
@@ -183,7 +183,7 @@ if (($pagina == $totalPg) || ($pagina > $totalPg)) {
                 </li>';
 } else {
     echo '<li class="page-item">
-                    <a class="page-link" href="#corpo"  onclick="listarProjetos(' . $totalPg . ', ' . $quantidadePg . ', ' . $ano . ')">Última</a>
+                    <a class="page-link text-success" href="#corpo"  onclick="listarProjetos(' . $totalPg . ', ' . $quantidadePg . ', ' . $ano . ')">Última</a>
                 </li>';
 }
 echo '</ul>

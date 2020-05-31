@@ -71,21 +71,53 @@ class DaoDownloads
 
                 $slidesAnte =  $rowDownloads['slidesDownload'];
                 $algoritmoAnte =  $rowDownloads['algoritmoDownload'];
+                $slidesPath = "../assets/media/downloads/" . $slidesAnte;
+                $algoritmoPath = "../assets/media/downloads/" . $rowDownloads['algoritmoDownload'];
             }
 
-            if (!($slides == '')) {
-                $slidesAnte =  $slides;
-            } 
-            if (!($algoritmo == '')) {
-                $algoritmoAnte =  $algoritmo;
+            if ($slides == 'vazio') {
+                if (($slidesAnte != '') && (file_exists($slidesPath))) {
+                    unlink($slidesPath);
+                }
+                $slides = '';
+
+            } else if ($slides == 'ante') {
+                $slides = $slidesAnte;
+
+            }else if ($slides == '') {
+                $slides = '';
+
+            }else {
+                if (($slidesAnte != '') && (file_exists($slidesPath))) {
+                    unlink($slidesPath);
+                }
             }
+
+            if ($algoritmo == 'vazio') {
+                if (($algoritmoAnte != '') && (file_exists($algoritmoPath))) {
+                    unlink($algoritmoPath);
+                }
+                $algoritmo = '';
+
+            } else if ($algoritmo == 'ante') {
+                $algoritmo = $algoritmoAnte;
+
+            }else if ($algoritmo == '') {
+                $algoritmo = '';
+
+            }else {
+                if (($algoritmoAnte != '') && (file_exists($algoritmoPath))) {
+                    unlink($algoritmoPath);
+                }
+            }
+
 
             $stmt = $this->conn->prepare("UPDATE downloads SET tituloDownload = ?, referenciaDownload = ?, slidesDownload = ?, algoritmoDownload = ?, linkDownload = ? WHERE codDownload = ? ");
 
             $stmt->bindparam(1, $titulo);
             $stmt->bindparam(2, $referencia);
-            $stmt->bindparam(3, $slidesAnte);
-            $stmt->bindparam(4, $algoritmoAnte);
+            $stmt->bindparam(3, $slides);
+            $stmt->bindparam(4, $algoritmo);
             $stmt->bindparam(5, $link);
             $stmt->bindparam(6, $id);
             $stmt->execute();

@@ -1,7 +1,7 @@
 $(document).ready(function () {
     atualizar();
     $("#publicacoes").addClass('menuAtivo');
-    $("#publicacoes").addClass('text-white');
+    $("#publicacoes").addClass('font-weight-bold');
 
     $(".nav-link").click(function () {
         $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -274,11 +274,11 @@ $(document).ready(function () {
         buttons: {
           confirm: {
             label: 'Sim',
-            className: 'btn-primary'
+            className: 'btn-danger'
           },
           cancel: {
             label: 'Não',
-            className: 'btn-danger'
+            className: 'btn-warning'
           }
         },
         callback: function (result) {

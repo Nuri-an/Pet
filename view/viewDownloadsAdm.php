@@ -18,7 +18,7 @@ require '../inc/global/config.php';
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header  sm-primary">
-                <h3 class="modal-title" id="tituloP">  </h3>
+                <h3 class="modal-title" id="tituloP"> </h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="openNewModal()">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -27,6 +27,8 @@ require '../inc/global/config.php';
                 <form class="form-horizontal" id="Downloads-form" name="Downloads-form" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="acao" id="acao">
                     <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="idSlides" id="idSlides">
+                    <input type="hidden" name="idAlgoritmo" id="idAlgoritmo">
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material">
@@ -53,16 +55,23 @@ require '../inc/global/config.php';
                         <div class="col-md-12">
                             <div class="form-material">
                                 <h5> Arquivo - slides: </h5>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="slides" name="slides" lang="pt" onchange="nomeAquivoSlide()">
-                                    <label class="custom-file-label" for="slides" id="midiaS"> </label>
-                                    <small id="codHelp" class="form-text text-muted">
-                                        Para envio de multiplos arquivos, compacte-os em formato .zip. Para entender como compactar 
-                                        <a href="https://tecnoblog.net/265035/como-zipar-um-arquivo-ou-pastas-compactar-e-descompactar/" target="_blank">
-                                            clique aqui.
-                                        </a>
-                                    </small>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" type="button" style="cursor: pointer; border: 1px solid #ced4da;" onclick="deletSlides()">
+                                            <i class="fa fa-times" aria-hidden="true" title="Deletar arquivo"></i>
+                                        </button>
+                                    </div>
+                                    <div class="custom-file">
+                                        <label class="custom-file-label" for="slides" id="midiaS"></label>
+                                        <input type="file" class="custom-file-input" id="slides" name="slides" lang="pt" onchange="nomeAquivoSlide()">
+                                    </div>
                                 </div>
+                                <small id="codHelp" class="form-text text-muted">
+                                    Para envio de multiplos arquivos, compacte-os em formato .zip. Para entender como compactar
+                                    <a href="https://tecnoblog.net/265035/como-zipar-um-arquivo-ou-pastas-compactar-e-descompactar/" target="_blank">
+                                        clique aqui.
+                                    </a>
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -71,16 +80,23 @@ require '../inc/global/config.php';
                         <div class="col-md-12">
                             <div class="form-material">
                                 <h5> Arquivo - algoritmo: </h5>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="algoritmo" name="algoritmo" lang="pt" onchange="nomeAquivoAlgoritmo()">
-                                    <label class="custom-file-label" for="algoritmo" id="midiaA"> </label>
-                                    <small id="codHelp" class="form-text text-muted">
-                                        Permitido apenas arquivos compactados em formato .zip. Para entender como compactar 
-                                        <a href="https://tecnoblog.net/265035/como-zipar-um-arquivo-ou-pastas-compactar-e-descompactar/" target="_blank">
-                                            clique aqui.
-                                        </a>
-                                    </small>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" type="button" style="cursor: pointer; border: 1px solid #ced4da;" onclick="deletAlgoritmo()">
+                                            <i class="fa fa-times" aria-hidden="true" title="Deletar arquivo"></i>
+                                        </button>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="algoritmo" name="algoritmo" lang="pt" onchange="nomeAquivoAlgoritmo()">
+                                        <label class="custom-file-label" for="algoritmo" id="midiaA"> </label>
+                                    </div>
                                 </div>
+                                <small id="codHelp" class="form-text text-muted">
+                                    Permitido apenas arquivos compactados em formato .zip. Para entender como compactar
+                                    <a href="https://tecnoblog.net/265035/como-zipar-um-arquivo-ou-pastas-compactar-e-descompactar/" target="_blank">
+                                        clique aqui.
+                                    </a>
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -99,7 +115,7 @@ require '../inc/global/config.php';
             <div style="width: 100%; border-top: 1px solid #dee2e6;">
                 <div class="modal-footer" style="width: 50%; float: right; border-top: 0px solid #fff;">
                     <button type="button" class="btn btn-secondary" style="float: right; margin-left: 10px; margin-top: 0px;" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
-                    <button type="submit" class="btn btn-primary" style="float: right" id="btnDownload">
+                    <button type="submit" class="btn btn-warning" style="float: right" id="btnDownload">
                         <i class="fa fa-check"></i> Salvar
                     </button>
                 </div>
@@ -131,7 +147,6 @@ require '../inc/global/config.php';
             $('li').addClass('paginacao');
         });
     });
-
 </script>
 <?php
 require '../inc/global/footer.php';

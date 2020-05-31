@@ -94,8 +94,10 @@ function atualizar()
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
     $referencia = filter_var($_POST["referencia"], FILTER_SANITIZE_STRING);
     $link = filter_var($_POST["link"], FILTER_SANITIZE_STRING);
+    $slidesValue = filter_var($_POST["idSlides"], FILTER_SANITIZE_STRING);
+    $algoritmoValue = filter_var($_POST["idAlgoritmo"], FILTER_SANITIZE_STRING);
 
-    if ((isset($_FILES['slides']['name'])) && ($_FILES['slides']['name'] != '')) {
+    if ((isset($_FILES['slides']['name'])) && ($slidesValue != 'ante') && ($slidesValue != 'vazio')) {
 
         $fileName = $_FILES['slides']['name'];
 
@@ -115,18 +117,20 @@ function atualizar()
         }else{
             $slides = '';
         }
-    } else {
-        $slides = '';
+    } else if($slidesValue == 'ante'){
+        $slides = 'ante';
+    } else{
+        $slides = 'vazio';
     }
     
-    if ((isset($_FILES['algoritmo']['name'])) && ($_FILES['algoritmo']['name'] != '')) {
+    if ((isset($_FILES['algoritmo']['name'])) && ($algoritmoValue != 'ante') && ($algoritmoValue != 'vazio')) {
 
         $fileName = $_FILES['algoritmo']['name'];
 
         //Faz a verificação da extensao do arquivo
         $extension = explode('.', $fileName);
         $fileExtension = end($extension);
-
+ 
 
         //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
         $newFileNameAlgoritmo = 'algoritmo_' . time() . '.' . $fileExtension;
@@ -139,8 +143,10 @@ function atualizar()
         }else{
             $algoritmo = '';
         }
-    } else {
-        $algoritmo = '';
+    } else if($algoritmoValue == 'ante'){
+        $algoritmo = 'ante';
+    } else{
+        $algoritmo = 'vazio';
     }
 
     $Download->setId($id);

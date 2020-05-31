@@ -1,7 +1,7 @@
 $(document).ready(function () {
     atualizar();
     $("#projetos").addClass('menuAtivo');
-    $("#projetos").addClass('text-white');
+    $("#projetos").addClass('font-weight-bold');
 
     $(".nav-link").click(function () {
         $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -99,6 +99,7 @@ function editar_modal(id) {
         $('.modal .modal-dialog .modal-content  #descricao').val(descricao);
         $('.modal .modal-dialog .modal-content  #data').val(ano);
         $('.modal .modal-dialog .modal-content .custom-file #midia').html(midia);
+        $('#idMidia').val('ante');
         $('.modal .modal-dialog .modal-content  #publicacao').val(publicacao);
         $('.modal .modal-dialog .modal-content  #parceria').val(parceria);
 
@@ -128,8 +129,15 @@ function nomeMidiaAdd() {
             foto = foto.substring(posic); //exclui da string todas as letras ate a posicao desejada
         }
         $('#midia').html(foto);
+        $('#idMidia').val('');
     }
 }
+
+
+function deletMidia() {
+    $('.modal .modal-dialog .modal-content .custom-file #midia').html('');
+    $('#idMidia').val('vazio');
+  }
 
 $(document).ready(function () {
     $('#btnProjeto').click(function () {
@@ -197,9 +205,9 @@ $(document).ready(function () {
                     contentType: false,
 
                     success: function (result) {
-                        //(result);
+                        alert(result);
 
-                        if ((result == 1) || (result == 3)) {
+                        if (result == 1) {
                             dialog.init(function () {
                                 dialog.find('.bootbox-body').html('Adicionada com sucesso!');
                             });
@@ -238,11 +246,11 @@ $(document).ready(function () {
         buttons: {
           confirm: {
             label: 'Sim',
-            className: 'btn-primary'
+            className: 'btn-danger'
           },
           cancel: {
             label: 'Não',
-            className: 'btn-danger'
+            className: 'btn-warning'
           }
         },
         callback: function (result) {

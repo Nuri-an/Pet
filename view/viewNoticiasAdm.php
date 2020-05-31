@@ -84,26 +84,11 @@ require '../inc/global/config.php';
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-12">
-                            <div class="form-material">
-                                <h5> Abrangência: </h5>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" value="Interna" id="local1" name="local" class="custom-control-input">
-                                    <label class="custom-control-label" for="local1">Notícia interna</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" value="Externa" id="local2" name="local" class="custom-control-input">
-                                    <label class="custom-control-label" for="local2">Notícia Externa</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
             </div>
             <div style="width: 100%; border-top: 1px solid #dee2e6;">
                 <div class="modal-footer" style="width: 50%; float: right; border-top: 0px solid #fff;">
                     <button type="button" class="btn btn-secondary" style="float: right; margin-left: 10px; margin-top: 0px;" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
-                    <button type="submit" class="btn btn-primary" style="float: right" id="btnEditarNoticia">
+                    <button type="submit" class="btn btn-warning" style="float: right" id="btnEditarNoticia">
                         <i class="fa fa-check"></i> Salvar
                     </button>
                 </div>
@@ -193,7 +178,7 @@ require '../inc/global/config.php';
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openNewModal()">Fechar</button>
-                <button type="submit" class="btn btn-primary" id="btnAdicionarNoticia">
+                <button type="submit" class="btn btn-warning" id="btnAdicionarNoticia">
                     <i class="fa fa-check"></i> Adicionar
                 </button>
             </div>
