@@ -149,9 +149,11 @@ class DaoInicio
 
             while ($rowGaleria = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
 
-                $caminho = "../assets/media/galeria/". $rowGaleria['midiaGaleria'];
-                if(file_exists($caminho)){
-                    unlink($caminho);
+                $midiaAnte =  $rowGaleria['midiaGaleria'];
+                $midiaPath = "../assets/media/galeria/" . $midiaAnte;
+
+                if(($midiaAnte != '') && (file_exists($midiaPath))){
+                    unlink($midiaPath);
                 }
             }
 

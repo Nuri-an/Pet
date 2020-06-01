@@ -138,14 +138,16 @@ class DaoDownloads
 
             while ($rowDownloads = $stmtArquivos->fetch(PDO::FETCH_ASSOC)) {
 
-                $slides = "../assets/media/downloads/" . $rowDownloads['slidesDownload'];
-                $algoritmo = "../assets/media/downloads/" . $rowDownloads['algoritmoDownload'];
+                $slidesAnte =  $rowDownloads['slidesDownload'];
+                $algoritmoAnte =  $rowDownloads['algoritmoDownload'];
+                $slidesPath = "../assets/media/downloads/" . $slidesAnte;
+                $algoritmoPath = "../assets/media/downloads/" . $rowDownloads['algoritmoDownload'];
 
-                if (file_exists($slides)) {
-                    unlink($slides);
+                if (($slidesAnte != '') && (file_exists($slidesPath))) {
+                    unlink($slidesPath);
                 }
-                if (file_exists($algoritmo)) {
-                    unlink($algoritmo);
+                if (($algoritmoAnte != '') && (file_exists($algoritmoPath))) {
+                    unlink($algoritmoPath);
                 }
             }
 

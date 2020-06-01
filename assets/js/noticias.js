@@ -248,7 +248,7 @@ $(document).ready(function () {
   $('#btnExcluirNoticia').click(function () {
     var dados = $('#excluirNoticias-form').serializeArray();
     //alert(dados);
-    $('#verEditarNoticias').modal('hide');
+    $('#verNoticias').modal('hide');
     bootbox.confirm({
       message: "Você realmente deseja excluir essa notícia ?",
       buttons: {
