@@ -156,7 +156,7 @@ $inicioDao = new DaoInicio();
                         <button type="button" class="btn btn-danger" data-toggle="tooltip"  title="Excluir vídeo" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" > 
                             <i class="fa fa-trash "></i> 
                         </button>
-                        <button type="button" class="btn btn-success" data-toggle="tooltip"  title="Clique para substituir vídeo"  id="rowEditarVideo_' . $i . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" data-titulo="' . $rowGaleriaVE['tituloGaleria'] . '" data-video="' . $rowGaleriaVE['midiaGaleria'] . '" onclick="editarVideo_modal(' . $i . ')" >
+                        <button type="button" class="btn btn-success" data-toggle="tooltip"  title="Clique para substituir vídeo"  id="rowEditarVideo_' . $i . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" data-titulo="' . $rowGaleriaVE['tituloGaleria'] . '" data-link="' . $rowGaleriaVE['urlGaleria'] . '" data-video="' . $rowGaleriaVE['midiaGaleria'] . '" onclick="editarVideo_modal(' . $i . ')" >
                             <i class="fa fa-pencil "></i> 
                         </button>
                     </div>
@@ -274,9 +274,9 @@ $inicioDao = new DaoInicio();
     </div>
 </div>
 
-<div class="modal" id="verModalFoto" role="dialog" data-backdrop="static" aria-labelledby="moda-normal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-        <div class="modal-content">
+<div class="modal" id="verModalFoto" role="dialog" data-backdrop="static" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document" style="overflow:auto; ">
+        <div class="modal-content" style="overflow:auto; ">
             <div class="modal-header  sm-primary">
                 <h3 class="modal-title" id="nomeP"> </h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="openNewModal()">
@@ -284,9 +284,11 @@ $inicioDao = new DaoInicio();
                 </button>
             </div>
             <form method="POST" class="form-horizontal" enctype="multipart/form-data" id="adicionarFoto" name="adicionarFoto">
-                <div class="modal-body">
+                <div class="modal-body" style="overflow:auto; ">
                     <input type="hidden" name="acao" id="acao">
                     <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="idVideo" id="idVideo">
+                    <input type="hidden" name="idImagem" id="idImagem">
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material">
@@ -313,10 +315,17 @@ $inicioDao = new DaoInicio();
                         <div class="col-md-12">
                             <div class="form-material">
                                 <h5> Upload: </h5>
-                                <div class="custom-file">
-                                    <div id="delet" style="border-left:10px;"><i class="fa fa-times" aria-hidden="true"></i></div>
-                                    <input type="file" class="custom-file-input" id="video" name="video" lang="pt" onchange="nomeFoto()">
-                                    <label class="custom-file-label" for="arquivo" id="midia"> </label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" type="button" style="cursor: pointer; border: 1px solid #ced4da;" onclick="deletVideo()">
+                                            <i class="fa fa-times" aria-hidden="true" title="Deletar arquivo"></i>
+                                        </button>
+                                    </div>
+                                    <div class="custom-file">
+                                        <div id="delet" style="border-left:10px;"><i class="fa fa-times" aria-hidden="true"></i></div>
+                                        <input type="file" class="custom-file-input" id="video" name="video" lang="pt" onchange="nomeFoto()">
+                                        <label class="custom-file-label" for="arquivo" id="midia"> </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -328,13 +337,17 @@ $inicioDao = new DaoInicio();
                                 <label for="videoLink">
                                     <h5> Vídeo externo (link): </h5>
                                 </label>
-                                <input type="text" class="form-control" id="videoLink" name="videoLink"> </input>
+                                <input type="text" class="form-control" id="videoLink" name="videoLink" onchange="changeLinkVideo()"> </input>
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-lg btn-danger" id="ajuda" data-continer="body" data-toggle="popover" data-placement="right" title="Ajuda">
-                        <i class="fa fa-question-circle" aria-hidden="true"></i>
-                    </button>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-lg btn-danger" id="ajuda" data-continer="body" data-toggle="popover" data-placement="right" title="Ajuda">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="openNewModal()">Fechar</button>

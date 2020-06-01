@@ -99,7 +99,7 @@ if ($stmtProjetos->rowCount() == 0) {
                 <td style="border-top: 0px; background-color: #f9f9f9;">
                     <h3 class="display-5 text-secundary" style="margin-top: 10px;">' . $rowProjetos['tituloProjeto'] . '</h3>
                     <div  class="lead " style="display: none;  margin-left: 15px;  margin-right: 15px;" id="descricao_' . $i . '"
-                        <p>' . $rowProjetos['descricaoProjeto'] . '</p>
+                        <p>' . nl2br($rowProjetos['descricaoProjeto']) . '</p>
                         <p align="center" style=" width: 100%; margin-top: 10px;">
                             ' . $srcMidia . ' 
                         </p>

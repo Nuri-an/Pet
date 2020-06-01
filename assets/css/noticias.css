@@ -14,3 +14,14 @@ body {
 .lerMenos{
 	display: none;
 }
+
+.imgMobile{
+	float: none;
+}
+
+@media only screen and (min-width: 768px){
+	.imgMobile{
+		width: 350px;
+		float: left;
+	}
+}

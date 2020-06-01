@@ -68,11 +68,23 @@ class DaoNoticias
 
                 while ($rowNoticia = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
 
-                    $caminho = "../assets/media/noticias/" . $rowNoticia['midiaNoticia'];
-                    if (file_exists($caminho)) {
-                        unlink($caminho);
+                    $midiaAnte =  $rowNoticia['midiaNoticia'];
+                    $midiaPath = "../assets/media/noticias/" . $midiaAnte;
+                }
+
+                if ($midia == 'vazio') {
+                    if (($midiaAnte != '') && (file_exists($midiaPath))) {
+                        unlink($midiaPath);
+                    }
+                    $midia = '';
+                } else if ($midia == 'ante') {
+                    $midia = $midiaAnte;
+                } else {
+                    if (($midiaAnte != '') && (file_exists($midiaPath))) {
+                        unlink($midiaPath);
                     }
                 }
+
 
                 $stmt = $this->conn->prepare("UPDATE noticias SET tituloNoticia = ?, midiaNoticia = ?, descricaoNoticia = ?, dataNoticia = ?, resumoNoticia =? WHERE codNoticia = ? ");
 
@@ -86,25 +98,12 @@ class DaoNoticias
 
                 if ($stmt->rowCount() > 0) {
                     echo 1;
-                } else {
-                    echo 2;
+                }else{
+                    echo $midia;
                 }
             } else {
-                $stmt = $this->conn->prepare("UPDATE noticias SET tituloNoticia = ?, descricaoNoticia = ?, dataNoticia = ?, resumoNoticia =? WHERE codNoticia = ? ");
-
-                $stmt->bindparam(1, $titulo);
-                $stmt->bindparam(2, $descricao);
-                $stmt->bindparam(3, $data);
-                $stmt->bindparam(4, $resumo);
-                $stmt->bindparam(5, $id);
-                $stmt->execute();
-
-                if ($stmt->rowCount() > 0) {
-                    echo 3;
-                } else {
                     echo 2;
-                }
-            }
+                } 
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

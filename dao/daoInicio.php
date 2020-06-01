@@ -67,9 +67,22 @@ class DaoInicio
 
                 while ($rowGaleria = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
 
-                    $caminho = "../assets/media/galeria/" . $rowGaleria['midiaGaleria'];
-                    if (file_exists($caminho)) {
-                        unlink($caminho);
+                    $midiaAnte =  $rowGaleria['midiaGaleria'];
+                    $midiaPath = "../assets/media/galeria/" . $midiaAnte;
+                }
+
+                if ($midia == 'vazio') { //apagar
+                    if (($midiaAnte != '') && (file_exists($midiaPath))) {
+                        unlink($midiaPath);
+                    }
+                    $midia = '';
+    
+                } else if ($midia == 'ante') { //mudar só o título
+                    $midia = $midiaAnte;
+    
+                }else { //add uma nova
+                    if (($midiaAnte != '') && (file_exists($midiaPath))) {
+                        unlink($midiaPath);
                     }
                 }
 
@@ -83,22 +96,14 @@ class DaoInicio
 
                 if ($stmt->rowCount() > 0) {
                     echo 1;
-                } else {
-                    echo 2;
+                } else{
+                    echo $midia;
+                    echo $id;
+                    echo $midiaPath;
                 }
             } else {
-                $stmt = $this->conn->prepare("UPDATE galeria SET tituloGaleria = ? WHERE codGaleria = ? ");
-
-                $stmt->bindparam(1, $titulo);
-                $stmt->bindparam(2, $id);
-                $stmt->execute();
-
-                if ($stmt->rowCount() > 0) {
-                    echo 1;
-                } else {
                     echo 2;
                 }
-            }
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

@@ -70,8 +70,9 @@ function atualizarNoticia()
     $descricao = filter_var($_POST["descricao"], FILTER_SANITIZE_STRING);
     $data = filter_var($_POST["data"], FILTER_SANITIZE_STRING);
     $resumo = filter_var($_POST["resumo"], FILTER_SANITIZE_STRING);
+    $midiaValue = filter_var($_POST["idMidia"], FILTER_SANITIZE_STRING);
 
-    if (isset($_FILES['arquivo']['name']) && ($_FILES['arquivo']['name'] != '')) {
+    if ((isset($_FILES['arquivo']['name'])) && ($midiaValue != 'ante') && ($midiaValue != 'vazio')) {
 
         $fileName = $_FILES['arquivo']['name'];
 
@@ -86,12 +87,18 @@ function atualizarNoticia()
         //Pasta onde o arquivo vai ser salvo
         $local = '../assets/media/noticias/';
 
-        move_uploaded_file($_FILES['arquivo']['tmp_name'], $local . $newFileName);
-    } else {
+        if(move_uploaded_file($_FILES['arquivo']['tmp_name'], $local . $newFileName)){
+            $midia = $newFileName;
+        }else {
         $newFileName = '';
+        }
+    } else if($midiaValue == 'ante'){
+        $midia = 'ante';
+    } else{
+        $midia = 'vazio';
     }
 
-    $Noticia->setMidia($newFileName);
+    $Noticia->setMidia($midia);
     $Noticia->setTitulo($titulo);
     $Noticia->setDescricao($descricao);
     $Noticia->setData($data);

@@ -64,8 +64,8 @@ function adicionarFoto()
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
     $link = filter_var($_POST["videoLink"], FILTER_SANITIZE_STRING);
 
-    if ($_FILES['arquivo']['name'] != '') {
-        $fileName = $_FILES['arquivo']['name'];
+    if (isset($_FILES['foto']['name'])) {
+        $fileName = $_FILES['foto']['name'];
 
         //Faz a verificação da extensao do arquivo
         $extension = explode('.', $fileName);
@@ -77,8 +77,10 @@ function adicionarFoto()
         //Pasta onde o arquivo vai ser salvo
         $local = '../assets/media/galeria/';
 
-        move_uploaded_file($_FILES['arquivo']['tmp_name'], $local . $newFileName);
-
+        if (move_uploaded_file($_FILES['foto']['tmp_name'], $local . $newFileName)) {
+        } else {
+            $newFileName = '';
+        }
     } else {
         $newFileName = '';
     }
@@ -102,7 +104,7 @@ function adicionarVideo()
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
     $link = filter_var($_POST["videoLink"], FILTER_SANITIZE_STRING);
 
-    if (($_FILES['video']['name'] != '') && ($_FILES['video']['error'] == 0)) {
+    if (isset($_FILES['video']['name'])) {
         $fileName = $_FILES['video']['name'];
 
         //Faz a verificação da extensao do arquivo
@@ -112,17 +114,17 @@ function adicionarVideo()
         //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
         $newFileName = 'video_' . time() . '.' . $fileExtension;
 
-        echo 'erros ' . var_dump($_FILES['video']) . ' ';
-    
         //Pasta onde o arquivo vai ser salvo
         $local = '../assets/media/galeria/';
 
-        move_uploaded_file($_FILES['video']['tmp_name'], $local . $newFileName);
-
+        if (move_uploaded_file($_FILES['video']['tmp_name'], $local . $newFileName)) {
+        } else {
+            $newFileName = '';
+        }
     } else {
         $newFileName = '';
     }
-    
+
     $Galeria->setMidia($newFileName);
     $Galeria->setTitulo($titulo);
     $Galeria->setLink($link);
@@ -131,47 +133,50 @@ function adicionarVideo()
     $dao->adicionarMidia($Galeria);
 }
 
-function atualizarFoto() {
+function atualizarFoto()
+{
     require_once('../model/ModelInicio.php');
     require_once('../dao/daoInicio.php');
 
     $dao = new DaoInicio();
     $Galeria = new ModelInicio();
-   
+
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
     $link = filter_var($_POST["videoLink"], FILTER_SANITIZE_STRING);
+    $imagemValue = filter_var($_POST["idImagem"], FILTER_SANITIZE_STRING);
 
-    if((isset($_FILES['arquivo']['name'])) && ($_FILES['arquivo']['name'] != '')){ 
+    if ((isset($_FILES['foto']['name'])) && ($imagemValue != 'ante')) {
 
-        $fileName=$_FILES['arquivo']['name'];
-    
+        $fileName = $_FILES['foto']['name'];
+
         //Faz a verificação da extensao do arquivo
-        $extension= explode('.', $fileName);
-        $fileExtension= end( $extension );
+        $extension = explode('.', $fileName);
+        $fileExtension = end($extension);
 
-	    //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
-        $newFileName= 'imagem_' . time() . '.' . $fileExtension;
+        //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão
+        $newFileName = 'imagem_' . time() . '.' . $fileExtension;
 
-	    //Pasta onde o arquivo vai ser salvo
-        $local='../assets/media/galeria/';
-    
-        $destino= $local . $newFileName;
-   
-         move_uploaded_file($_FILES['arquivo']['tmp_name'], $local. $newFileName);
-              
+        //Pasta onde o arquivo vai ser salvo
+        $local = '../assets/media/galeria/';
+
+        if (move_uploaded_file($_FILES['foto']['tmp_name'], $local . $newFileName)) {
+            $imagem = $newFileName;
+        } else {
+            $imagem = '';
+        }
+    } else if ($imagemValue == 'ante') {
+        $imagem = 'ante';
     }
-    else{ 
-        $newFileName = '';
-    }
 
-        $Galeria->setMidia($newFileName);
-        $Galeria->setTitulo($titulo);
-        $Galeria->setLink($link);
-        $Galeria->setId($id);
 
-        $dao->atualizarMidia($Galeria);
+    $Galeria->setMidia($imagem);
+    $Galeria->setTitulo($titulo);
+    $Galeria->setLink($link);
+    $Galeria->setId($id);
+
+    $dao->atualizarMidia($Galeria);
 }
 
 function atualizarVideo()
@@ -185,8 +190,9 @@ function atualizarVideo()
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
     $link = filter_var($_POST["videoLink"], FILTER_SANITIZE_STRING);
+    $videoValue = filter_var($_POST["idVideo"], FILTER_SANITIZE_STRING);
 
-    if (($_FILES['video']['name'] != '') && ($_FILES['video']['error'] == 0)) {
+    if ((isset($_FILES['video']['name'])) && ($videoValue != 'ante') && ($videoValue != 'vazio')) {
         $fileName = $_FILES['video']['name'];
 
         //Faz a verificação da extensao do arquivo
@@ -197,18 +203,23 @@ function atualizarVideo()
         $newFileName = 'video_' . time() . '.' . $fileExtension;
 
         echo 'erros ' . var_dump($_FILES['video']) . ' ';
-    
+
         //Pasta onde o arquivo vai ser salvo
         $local = '../assets/media/galeria/';
 
-        move_uploaded_file($_FILES['video']['tmp_name'], $local . $newFileName);
-
+        if (move_uploaded_file($_FILES['video']['tmp_name'], $local . $newFileName)) {
+            $video = $newFileName;
+        } else {
+            $video = '';
+        }
+    } else if ($videoValue == 'ante') {
+        $video = 'ante';
     } else {
-        $newFileName = '';
+        $video = 'vazio';
     }
 
     $Galeria->setId($id);
-    $Galeria->setMidia($newFileName);
+    $Galeria->setMidia($video);
     $Galeria->setTitulo($titulo);
     $Galeria->setLink($link);
 
@@ -216,7 +227,8 @@ function atualizarVideo()
     $dao->atualizarMidia($Galeria);
 }
 
-function excluirMidia() {
+function excluirMidia()
+{
     require_once('../model/ModelInicio.php');
     require_once('../dao/daoInicio.php');
 

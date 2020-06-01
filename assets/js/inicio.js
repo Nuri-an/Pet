@@ -56,7 +56,9 @@ function nomeFoto() {
       midia = midia.substring(posic); //exclui da string todas as letras ate a posicao desejada
     }
     $('#divFoto .col-md-12 .form-material .custom-file #midia').html(midia);
+    $('#idImagem').val('');
   }
+
   if ($('#video').val()) {
     var midia = $('#video').val();
     //alert(midia);
@@ -64,7 +66,11 @@ function nomeFoto() {
     while (midia.includes(letra)) {
       midia = midia.substring(posic); //exclui da string todas as letras ate a posicao desejada
     }
-    $('#divVideo .col-md-12 .form-material .custom-file #midia').html('<div><i class="fa fa-times" aria-hidden="true" style="cursor: pointer;" onclick="delet()"></i> &nbsp' + midia + '</div>');
+    $('#divVideo .col-md-12 .form-material .custom-file #midia').html(midia);
+    $('#idVideo').val('');
+    if($('#video').val() != ''){
+      $('#videoLink').prop( "readonly", true );
+    }
   }
 }
 
@@ -96,9 +102,21 @@ function controles(id, situacao) {
 
 }
 
-function delet() {
-  $('#divVideo .col-md-12 .form-material .custom-file #midia').html('<div><i class="fa fa-times" aria-hidden="true" style="cursor: pointer;" onclick="delet()"></i></div>');
-  $('#video').val('');
+function deletVideo() {
+  $('#divVideo .col-md-12 .form-material .custom-file #midia').html('');
+  $('#video').val('')
+  $('#idVideo').val('vazio');
+  $('#videoLink').prop( "readonly", false );
+}
+
+function changeLinkVideo(){
+  if($('#videoLink').val() == ''){
+    $('#video').prop( "disabled", false );
+    $('#idVideo').val('vazio');
+  }
+  if($('#videoLink').val() != ''){
+    $('#video').prop( "disabled", true );
+  }
 }
 
 $(document).ready(function () {
@@ -191,27 +209,18 @@ $.validator.addMethod("size", function (value, element) {
     return true
   }
 });
-$.validator.addMethod("noLink", function (value, element) {
-  if (value != '') {
-    var link = $('#videoLink');
-    if (link.val() == '') {
-      return true
-    } else {
+$.validator.addMethod("noLinkORnoVideo", function () {
+    if (($('#videoLink').val() == '') && (($('#video').val() == '') && ($('#idVideo').val() != 'ante'))) {
       return false
+    } else{
+      return true
     }
-  } else {
-    return true
-  }
 });
-$.validator.addMethod("noVideo", function (value, element) {
-  if (value != '') {
-    var video = $('#video')
-    if (video.val() == '') {
-      return true
-    } else {
-      return false
-    }
-  } else {
+
+$.validator.addMethod("noImage", function () {
+  if (($('#foto').val() == '') && ($('#idImagem').val() != 'ante')) {
+    return false
+  } else{
     return true
   }
 });
@@ -237,28 +246,32 @@ $(document).ready(function () {
           required: true
         },
         'foto': {
-          extension: "jpg|JPG|png|PNG|jpeg|JPEG"
+          extension: "jpg|JPG|png|PNG|jpeg|JPEG",
+          noImage: true
         },
         'video': {
           extension: "avi|mp4|flv|wmv|ogv|webm",
           size: true,
-          noLink: true
+          noLinkORnoVideo: true
         },
         'videoLink': {
           url: true,
-          noVideo: true
+          noLinkORnoVideo: true
         }
       },
       messages: {
         'titulo': {
           required: 'Por favor, preeencha este campo.'
         },
+        'foto': {
+          noImage: 'Por favor, adicione imagem.'
+        },
         'video': {
           size: 'O tamanho do arquivo selecionado exede o permitido (8,3MB)!',
-          noLink: 'Por favor, escolha entre um vídeo externo ou um upload.'
+          noLinkORnoVideo: 'Por favor, adicione um upload ou um link para um video externo.'
         },
         'videoLink': {
-          noVideo: 'Por favor, escolha entre um vídeo externo ou um upload.'
+          noLinkORnoVideo: 'Por favor, adicione um link para um video externo ou um upload.'
         }
       },
       submitHandler: function (form) {
@@ -278,7 +291,7 @@ $(document).ready(function () {
           contentType: false,
 
           success: function (result) {
-            //alert(result);
+            alert(result);
 
             if (result == 1) {
               dialog.init(function () {
@@ -287,6 +300,7 @@ $(document).ready(function () {
               setTimeout(function () {
                 dialog.modal('hide');
               }, 3000); //3 segundos depois executa
+              atualizarInicio();
             }
             else {
               dialog.init(function () {
@@ -296,7 +310,6 @@ $(document).ready(function () {
                 dialog.modal('hide');
               }, 3000); //3 segundos depois executa
             }
-          atualizarInicio();
           }
         });
         $('#verModalFoto').modal('hide');
@@ -305,7 +318,7 @@ $(document).ready(function () {
       }
 
     });
-    //alert("entrou");
+    alert($('#idImagem'));
   });
 });
 
@@ -415,6 +428,7 @@ function adicionarFoto_modal() {
   $('#divVideo').hide();
   $('#divUrl').hide();
   $('#verModalFoto').modal('show');
+
   $('.modal .modal-dialog .modal-content #nomeP').text("Adicione uma imagem à galeria");
   $('.modal .modal-dialog .modal-content #acao').val(acao);
   $( "#ajuda" ).attr( 'data-content','É permitido apenas o envio de imagens contendo as seguintes extensões: .jpg, .png e .jpeg');
@@ -425,12 +439,16 @@ function adicionarVideo_modal() {
 
   var acao = 'adicionarV';
 
+  $('#video').prop( "disabled", false );
+  $('#videoLink').prop( "readonly", false );
+
   $('#adicionarFoto').trigger('reset');
-  $('#divVideo .col-md-12 .form-material .custom-file #midia').html('<div><i class="fa fa-times" aria-hidden="true" style="cursor: pointer;" onclick="delet()"></i></div>');
+  $('#divVideo .col-md-12 .form-material .custom-file #midia').html('');
   $('#divFoto').hide();
   $('#divVideo').show();
   $('#divUrl').show();
   $('#verModalFoto').modal('show');
+
   $('.modal .modal-dialog .modal-content #nomeP').text("Adicione um vídeo à galeria");
   $('.modal .modal-dialog .modal-content #acao').val(acao);
   $( "#ajuda" ).attr( 'data-content','É permitido apenas o envio de vídeos com qualidade igual ou inferior a 360p contendo as seguintes extensões: .avi, .mp4, .flv, .wmv, .ogv, .webm');
@@ -451,6 +469,7 @@ function editarFoto_modal(id) {
   $('#divUrl').hide();
 
   $('#divFoto .col-md-12 .form-material .custom-file #midia').html(foto);
+  $('#idImagem').val('ante');
 
   $('.modal .modal-dialog .modal-content #nomeP').text("Substitua a imagem ou altere seu título");
   $('.modal .modal-dialog .modal-content #adicionarFoto #id').val(cod);
@@ -474,9 +493,17 @@ function editarVideo_modal(id) {
   $('#divVideo').show();
   $('#divUrl').show();
 
-  $('#divVideo .col-md-12 .form-material .custom-file #midia').html('<div><i class="fa fa-times" aria-hidden="true" title="deletar" style="cursor: pointer;" onclick="delet()"></i> &nbsp' + video + '</div>');
+  if(video != ''){
+    $('#video').prop( "disabled", false );
+    $('#videoLink').prop( "readonly", true );
+  }else{
+    $('#video').prop( "disabled", true );
+    $('#videoLink').prop( "readonly", false );
+  }
 
   $('.modal .modal-dialog .modal-content #nomeP').text("Substitua o vídeo ou altere seu título");
+  $('#divVideo .col-md-12 .form-material .custom-file #midia').html(video);
+  $('#idVideo').val('ante');
   $('.modal .modal-dialog .modal-content #adicionarFoto #id').val(cod);
   $('.modal .modal-dialog .modal-content  #titulo').val(titulo);
   $('.modal .modal-dialog .modal-content  #videoLink').val(link);

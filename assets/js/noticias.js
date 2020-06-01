@@ -82,74 +82,70 @@ function lerMenos(id) {
 
 
 function editar_modal(id) {
-  $.get("viewNoticiasAdm.php", function () {
-
     var cod = $('#rowEditarNoticia_' + id).attr("data-id");
     var titulo = $('#rowEditarNoticia_' + id).attr("data-titulo");
     var descricao = $('#rowEditarNoticia_' + id).attr("data-descricao");
     var resumo = $('#rowEditarNoticia_' + id).attr("data-resumo");
     var midia = $('#rowEditarNoticia_' + id).attr("data-midia");
     var data = $('#rowEditarNoticia_' + id).attr("data-data");
-    //var acao = 'editarF';
+    var acao = 'editar';
+    var excluir = $('#excluir');
 
-    $('#editarNoticias-form').trigger("reset");
-    $('#verEditarNoticias').modal('show');
+    $('#Noticias-form').trigger("reset");
+    $('#verNoticias').modal('show');
+    excluir.show();
 
-    $('.modal .modal-dialog .modal-content #editarNoticias-form #id').val(cod);
+    $('.modal .modal-dialog .modal-content #tituloP').text("Edite esta nova notícia");
+    $('.modal .modal-dialog .modal-content #Noticias-form #acao').val(acao);
+    $('.modal .modal-dialog .modal-content #Noticias-form #id').val(cod);
     $('.modal .modal-dialog .modal-content #excluirNoticias-form #id').val(cod);
     $('.modal .modal-dialog .modal-content  #titulo').val(titulo);
     $('.modal .modal-dialog .modal-content  #descricao').val(descricao);
     $('.modal .modal-dialog .modal-content  #resumo').val(resumo);
     $('.modal .modal-dialog .modal-content .custom-file #midia').html(midia);
+    $('#idMidia').val('ante');
     $('.modal .modal-dialog .modal-content  #data').val(data);
 
-  });
 }
 
 
 function adicionar_modal() {
-  $.get("viewNoticiasAdm.php", function () {
+  var acao = 'adicionar';
+  var excluir = $('#excluir');
 
-    $('#adicionarNoticias-form').trigger("reset");
-    $('#adicionarNoticias-form .form-group .col-md-12 .form-material .custom-file #arquivo').html('');
-    $('#editarNoticias-form .form-group .col-md-12 .form-material .custom-file #arquivo').html('');
-    $('#verAdicionarNoticias').modal('show');
+  $('#Noticias-form').trigger("reset");
+  $('#verNoticias').modal('show');
+  excluir.hide();
 
-
-    $('.modal .modal-dialog .modal-content #adicionarNoticias-form #localNoticia').val(local);
-  });
+  $('#adicionarNoticias-form .form-group .col-md-12 .form-material .custom-file #arquivo').html('');
+  $('.modal .modal-dialog .modal-content #tituloP').text("Adicione uma nova notícia");
+  $('.modal .modal-dialog .modal-content #acao').val(acao);
 }
 
-function nomeMidiaAdd() {
-  if ($('#adicionarNoticias-form .form-group .col-md-12 .form-material .custom-file #arquivo').val()) {
-    var foto = $('#adicionarNoticias-form .form-group .col-md-12 .form-material .custom-file #arquivo').val();
+function nomeMidia() {
+  if ($('#Noticias-form .form-group .col-md-12 .form-material .custom-file #arquivo').val()) {
+    var foto = $('#Noticias-form .form-group .col-md-12 .form-material .custom-file #arquivo').val();
     var letra = '\\';
 
     posic = foto.indexOf(letra); //pega a posicao da letra
     while (foto.includes(letra)) {
       foto = foto.substring(posic); //exclui da string todas as letras ate a posicao desejada
     }
-    $('#adicionarNoticias-form .form-group .col-md-12 .form-material .custom-file #midia').html(foto);
+    $('#Noticias-form .form-group .col-md-12 .form-material .custom-file #midia').html(foto);
+    $('#idMidia').val('');
   }
 }
 
-function nomeMidiaEdit() {
-  if ($('#editarNoticias-form .form-group .col-md-12 .form-material .custom-file #arquivo').val()) {
-    var foto = $('#editarNoticias-form .form-group .col-md-12 .form-material .custom-file #arquivo').val();
-    var letra = '\\';
 
-    posic = foto.indexOf(letra); //pega a posicao da letra
-    while (foto.includes(letra)) {
-      foto = foto.substring(posic); //exclui da string todas as letras ate a posicao desejada
-    }
-    $('#editarNoticias-form .form-group .col-md-12 .form-material .custom-file #midia').html(foto);
-  }
+
+function deletMidia() {
+  $('.modal .modal-dialog .modal-content .custom-file #midia').html('');
+  $('#idMidia').val('vazio');
 }
-
 
 $(document).ready(function () {
-  $('#btnAdicionarNoticia').click(function () {
-    jQuery("#adicionarNoticias-form").validate({
+  $('#btnNoticia').click(function () {
+    jQuery("#Noticias-form").validate({
       focusInvalid: true,
       errorClass: 'invalid-feedback animated fadeInDown',
       errorElement: 'div',
@@ -201,7 +197,7 @@ $(document).ready(function () {
       },
       submitHandler: function (form) {
         //alert("enta coletando dados do form");
-        var formdata = new FormData($("form[name='adicionarNoticias-form']")[0]);
+        var formdata = new FormData($("form[name='Noticias-form']")[0]);
 
 
         dialog = bootbox.dialog({
@@ -217,123 +213,16 @@ $(document).ready(function () {
           contentType: false,
 
           success: function (result) {
-            //alert(result);
+            alert(result);
 
             if (result == 1) {
               dialog.init(function () {
-                dialog.find('.bootbox-body').html('Adicionado com sucesso!');
+                dialog.find('.bootbox-body').html('Operação realizada com sucesso!');
               });
               setTimeout(function () {
                 dialog.modal('hide');
               }, 3000); //3 segundos depois executa
-            }
-            if (result == 2) {
-              dialog.init(function () {
-                dialog.find('.bootbox-body').html('Ocorreu um erro no processamento. Tente novamente mais tarde.');
-              });
-              setTimeout(function () {
-                dialog.modal('hide');
-              }, 3000); //3 segundos depois executa
-            }
             atualizar();
-          }
-        });
-        $('#verAdicionarNoticias').modal('hide');
-        $('#adicionarNoticias-form').trigger("reset");
-        return false;
-      }
-
-    });
-    //alert("entrou");
-  });
-});
-
-
-$(document).ready(function () {
-  $('#btnEditarNoticia').click(function () {
-    jQuery("#editarNoticias-form").validate({
-      focusInvalid: true,
-      errorClass: 'invalid-feedback animated fadeInDown',
-      errorElement: 'div',
-      errorPlacement: (error, e) => {
-        jQuery(e).parents('.form-group > div').append(error);
-      },
-      highlight: e => {
-        jQuery(e).closest('.form-group').removeClass('is-invalid').addClass('is-invalid');
-      },
-      success: e => {
-        jQuery(e).closest('.form-group').removeClass('is-invalid');
-        jQuery(e).remove();
-      },
-      rules: {
-        'titulo': {
-          required: true
-        },
-        'descricao': {
-          required: true
-        },
-        'resumo': {
-          required: true
-        },
-        'arquivo': {
-          required: false,
-          extension: "jpg|JPG|png|PNG|jpeg|JPEG"
-        },
-        'data': {
-          required: true,
-          date: true
-        },
-        'local': {
-          required: true,
-        }
-      },
-      messages: {
-        'titulo': {
-          required: 'Por favor, preeencha este campo'
-        },
-        'descricao': {
-          required: 'Por favor, preeencha este campo',
-        },
-        'resumo': {
-          required: 'Por favor, preeencha este campo'
-        },
-        'arquivo': {
-          required: 'Por favor, preeencha este campo',
-        },
-        'data': {
-          required: 'Por favor, preeencha este campo',
-        },
-        'local': {
-          required: 'Por favor, selecione a área que a notícia se aplica',
-        }
-      },
-      submitHandler: function (form) {
-        //alert("enta coletando dados do form");
-        var formdata = new FormData($("form[name='editarNoticias-form']")[0]);
-
-
-        dialog = bootbox.dialog({
-          message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
-          closeButton: false
-        });
-
-        $.ajax({
-          type: 'POST',
-          url: "../controller/ControllerNoticias.php",
-          data: formdata,
-          processData: false,
-          contentType: false,
-
-          success: function (result) {
-            //alert(result);
-
-            if ((result == 1) || (result == 3)) {
-              dialog.init(function () {
-                dialog.find('.bootbox-body').html('Editado com sucesso!');
-              });
-              setTimeout(function () {
-                dialog.modal('hide');
-              }, 3000); //3 segundos depois executa
             }
             else {
               dialog.init(function () {
@@ -343,11 +232,10 @@ $(document).ready(function () {
                 dialog.modal('hide');
               }, 3000); //3 segundos depois executa
             }
-            atualizar();
           }
         });
-        $('#verEditarNoticias').modal('hide');
-        $('#editarNoticas-form').trigger("reset");
+        $('#verNoticias').modal('hide');
+        $('#Noticias-form').trigger("reset");
         return false;
       }
 
@@ -355,8 +243,6 @@ $(document).ready(function () {
     //alert("entrou");
   });
 });
-
-
 
 $(document).ready(function () {
   $('#btnExcluirNoticia').click(function () {

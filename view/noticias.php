@@ -35,7 +35,7 @@ while ($rowNoticias = $stmtNoticias->fetch(PDO::FETCH_ASSOC)) {
     $midia = "../assets/media/noticias/" . $rowNoticias['midiaNoticia'];
 
     if (($rowNoticias['midiaNoticia'] != '') && (file_exists($midia))) {
-        $srcMidia = '<img class="rounded float-left" id="collapseMidia_'. $i .'" src="' . $midia . '" style=" margin-right: 20px; margin-bottom: 10px;" name="midia">';
+        $srcMidia = '<img class="rounded imgMobile img-fluid" id="collapseMidia_'. $i .'" src="' . $midia . '" style=" margin-right: 20px; margin-bottom: 10px;" name="midia">';
     } else {
         $srcMidia = "";
     }
