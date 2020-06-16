@@ -44,7 +44,7 @@ function aceitarAdm(id) {
         buttons: {
             confirm: {
                 label: 'Sim',
-                className: 'btn-primary'
+                className: 'btn-warning'
             },
             cancel: {
                 label: 'Não',
@@ -100,14 +100,14 @@ function cancelarAdm(id) {
     bootbox.confirm({
         message: 'Você realmente deseja cancelar a solicitação de ' + nome + ' ?',
         buttons: {
-            confirm: {
-                label: 'Sim',
-                className: 'btn-primary'
-            },
             cancel: {
                 label: 'Não',
+                className: 'btn-warning'
+            },
+            confirm: {
+                label: 'Sim',
                 className: 'btn-danger'
-            }
+            },
         },
         callback: function (result) {
             if (result) {
@@ -143,6 +143,63 @@ function cancelarAdm(id) {
                             }, 3000); //3 segundos depois executa
                             atualizar();
                         }
+                    }
+                });
+            }
+        }
+    });
+}
+
+function excluirPerfil(id) {
+    var cod = $('#buttonExcluirPerfil').attr("data-id");
+    alert(cod);
+    bootbox.confirm({
+        message: 'Você realmente deseja excluir seu perfil ?',
+        buttons: {
+            confirm: {
+                label: 'Sim',
+                className: 'btn-danger'
+            },
+            cancel: {
+                label: 'Não',
+                className: 'btn-warning'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                dialog = bootbox.dialog({
+                    message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
+                    closeButton: false
+                });
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "../controller/ControllerAdministradores.php",
+                    data: {
+                        id: cod,
+                        acao: "excluirPerfil"
+                    },
+
+                    success: function (resultado) {
+                        alert(resultado);
+                        if (resultado == 1)  {
+                            dialog.init(function () {
+                                dialog.find('.bootbox-body').html('Seu perfil foi excluído com sucesso!');
+                            });
+                            setTimeout(function () {
+                                window.location.href='index.php';
+                            }, 5000); //3 segundos depois executa
+                        }
+                        else {
+                            dialog.init(function () {
+                                dialog.find('.bootbox-body').html('Não foi possível excluir. Tente novamente mais tarde.');
+                            });
+                            setTimeout(function () {
+                                dialog.modal('hide');
+                            }, 3000); //3 segundos depois executa
+                        }
+
                     }
                 });
             }

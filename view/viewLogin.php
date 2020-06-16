@@ -14,7 +14,7 @@ require '../inc/global/head_start.php';
 <div class="container fundoLogin" id="login">
     <div class="container">
         <a href='index.php'>
-            <i class="fa fa-chevron-circle-left fa-4x" style="margin-top: 5px;" id="back" aria-hidden="true"></i>
+            <i class="fa fa-chevron-circle-left fa-4x" style="margin-top: 5px; color: #8FBC8F;" id="back" aria-hidden="true"></i>
         </a>
         <div id="title" style="margin-bottom: 20px; text-align:center;">
             <h2 class="display-4"> Login </h2>
@@ -39,19 +39,19 @@ require '../inc/global/head_start.php';
                 <input type="checkbox" class="form-check-input" id="checkMostarSenha" name="checkMostarSenha" onclick="escondeSenha()">
                 <label class="form-check-label" for="esconder">Esconder Senha</label>
             </div>
-            <button type="submit" class="btn btn-primary" id="btnEntrar" style="position:relative; left:50%; top: 10px; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">Entrar</button>
+            <button type="submit" class="btn btn-success" id="btnEntrar" style="position:relative; left:50%; top: 10px; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">Entrar</button>
             <div style="text-align:center;">
-                <button type="submit" class="text-primary" style="cursor: pointer; border: 0px; background: transparent;" id="btnEsqueceuSenha"> Esqueceu a senha? </button>
+                <button type="submit" class="text-danger" style="cursor: pointer; border: 0px; background: transparent;" id="btnEsqueceuSenha"> Esqueceu a senha? </button>
                 <br>
-                <button type="button" class="text-primary" style="cursor: pointer; border: 0px; background: transparent;" onclick="cadastroAdm()"> Solicitar acesso </button>
+                <button type="button" class="text-danger" style="cursor: pointer; border: 0px; background: transparent;" onclick="cadastroAdm()"> Solicitar acesso </button>
             </div>
         </form>
     </div>
 </div>
 
 <div class="container fundoLogin" style="display: none;" id="esqueceuSenha">
-    <a class="text-primary" style="cursor: pointer;" onclick="backLogin()">
-        <i class="fa fa-chevron-circle-left fa-4x" style="margin-top: 5px;" id="back" aria-hidden="true"></i>
+    <a class="text-primary" style="cursor: pointer;" onclick="backLoginS()">
+        <i class="fa fa-chevron-circle-left fa-4x" style="margin-top: 5px;  color: #8FBC8F;" id="back" aria-hidden="true"></i>
     </a>
     <div id="title" style="margin-bottom: 20px; text-align:center;">
         <h2 class="display-4"> Redefinir senha </h2>
@@ -67,7 +67,7 @@ require '../inc/global/head_start.php';
                         </label>
                         <input type="number" maxlength="4" class="form-control" id="codigo" name="codigo"> </input>
                         <small id="codHelp" class="form-text text-muted">
-                            Aguarde alguns minutos. Caso não receba o email tente novamente mais tarde
+                            Aguarde alguns minutos. Caso não receba o email, tente novamente mais tarde
                         </small>
                     </div>
                 </div>
@@ -75,7 +75,7 @@ require '../inc/global/head_start.php';
             <div class="form-group row">
                 <div class="col-md-12">
                     <div class="form-material">
-                        <button type="submit" class="btn btn-primary" style="margin-bottom: 30px;" id="btnValidaCod">
+                        <button type="submit" class="btn btn-success" style="margin-bottom: 30px;" id="btnValidaCod">
                             <i class="fa fa-check"></i> Seguinte
                         </button>
                     </div>
@@ -110,7 +110,7 @@ require '../inc/global/head_start.php';
             <div class="form-group row">
                 <div class="col-md-12">
                     <div class="form-material">
-                        <button type="submit" class="btn btn-primary" style="margin-bottom: 30px;" id="btnRedefinirSenha">
+                        <button type="submit" class="btn btn-success" style="margin-bottom: 30px;" id="btnRedefinirSenha">
                             <i class="fa fa-check"></i> Salvar
                         </button>
                     </div>
@@ -122,8 +122,8 @@ require '../inc/global/head_start.php';
 
 
 <div class="container fundoCadastro" style="display: none; " id="cadastro">
-    <a class="text-primary" style="cursor: pointer;" onclick="backLogin()">
-        <i class="fa fa-chevron-circle-left fa-4x" style="margin-top: 5px;" id="back" aria-hidden="true"></i>
+    <a class="text-primary" style="cursor: pointer;" onclick="backLoginC()">
+        <i class="fa fa-chevron-circle-left fa-4x" style="margin-top: 5px;  color: #8FBC8F;" id="back" aria-hidden="true"></i>
     </a>
     <div id="title" style="margin-bottom: 20px; text-align:center;">
         <h2 class="display-4"> Solicitar acesso </h2>
@@ -189,7 +189,7 @@ require '../inc/global/head_start.php';
             <div class="form-group row">
                 <div class="col-md-12">
                     <div class="form-material">
-                        <button type="submit" class="btn btn-primary" style="margin-bottom: 30px;" id="btnCadastroAdm">
+                        <button type="submit" class="btn btn-success" style="margin-bottom: 30px;" id="btnCadastroAdm">
                             <i class="fa fa-check"></i> Solicitar
                         </button>
                     </div>

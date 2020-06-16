@@ -1,4 +1,4 @@
-<?php 
+<?php
 require '../inc/global/head_start.php';
 require '../inc/global/banner.php';
 require '../inc/global/config.php';
@@ -11,42 +11,41 @@ $inicioDao = new DaoInicio(); ?>
 
 <script type="text/javascript" src="../assets/js/inicio.js"></script>
 
-<div class="container" style="overflow:hidden; border-bottom:30px;">
-  <?php
-  $stmtInformacoes = $inicioDao->runQuery("SELECT * FROM informacoes");
-  $stmtInformacoes->execute();
+<div style="margin-top: 20px; margin-bottom: 20px;">
+  <div class="container" style="overflow:hidden;" id="corpoInfo">
+    <?php
+    $stmtInformacoes = $inicioDao->runQuery("SELECT * FROM informacoes");
+    $stmtInformacoes->execute();
 
-  $stmtGaleria = $inicioDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'imagem%'");
-  $stmtGaleria->execute();
+    $stmtGaleria = $inicioDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'imagem%'");
+    $stmtGaleria->execute();
 
-  $stmtGaleriaV = $inicioDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'video%'");
-  $stmtGaleriaV->execute();
+    $stmtGaleriaV = $inicioDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'video%'");
+    $stmtGaleriaV->execute();
 
-  $stmtGaleriaVE = $inicioDao->runQuery("SELECT * FROM galeria WHERE urlGaleria is not null");
-  $stmtGaleriaVE->execute();
-  ?>
-  <?php while ($rowInformacoes = $stmtInformacoes->fetch(PDO::FETCH_ASSOC)) {
-    echo '<h1 class="display-4">' . $rowInformacoes['tituloInfo'] . ' </h1>';
-    echo '<p class="lead">';
-    echo nl2br($rowInformacoes['descricaoInfo']);
-    echo '<p> <b>' . $rowInformacoes['subTituloInfo'] . ' </b> </p>';
-    echo  nl2br($rowInformacoes['subDescricaoInfo']);
-  }
-  ?>
-</div>
-
-<hr class="line">
-</hr>
-
-<div class="container" style="overflow:hidden;">
-  <div class=" text-center" role="group" aria-label="Exemplo básico" style="margin-top:20px;">
-    <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('f')">Galeria de Fotos</button>
-    <button type="button" class="btn btn-outline-info h5" onclick="escolheGaleria('v')">Galeria de Vídeos</button>
+    $stmtGaleriaVE = $inicioDao->runQuery("SELECT * FROM galeria WHERE urlGaleria is not null");
+    $stmtGaleriaVE->execute();
+    ?>
+    <?php while ($rowInformacoes = $stmtInformacoes->fetch(PDO::FETCH_ASSOC)) {
+      echo '<h1 class="display-4">' . $rowInformacoes['tituloInfo'] . ' </h1>';
+      echo '<p class="lead">';
+      echo nl2br($rowInformacoes['descricaoInfo']);
+      echo '<p> <b>' . $rowInformacoes['subTituloInfo'] . ' </b> </p>';
+      echo  nl2br($rowInformacoes['subDescricaoInfo']);
+    }
+    ?>
   </div>
 
+  <hr class="line">
+  </hr>
+
+  <div class=" text-center" style="margin-top:30px; margin-bottom:30px;" role="group" aria-label="Exemplo básico">
+    <button type="button" class="btn btn-outline-success h5" onclick="escolheGaleria('f')">Galeria de Fotos</button>
+    <button type="button" class="btn btn-outline-success h5" onclick="escolheGaleria('v')">Galeria de Vídeos</button>
+  </div>
   <div id="caroselFoto" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active" >
+      <div class="carousel-item active">
         <img src="../assets/media/galeria/imagem_2.png" class="rounded mx-auto img-fluid d-block carouselItemFoto" alt="capa" title="Capa">
       </div>
       <?php
@@ -62,7 +61,7 @@ $inicioDao = new DaoInicio(); ?>
                   </div>';
         }
       }
-      ?> 
+      ?>
 
       <a class="carousel-control-prev" href="#caroselFoto" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -78,7 +77,7 @@ $inicioDao = new DaoInicio(); ?>
     <div class="carousel-inner">
       <div class="carousel-item active">
         <!-- <form id="adicionarImagem-form" action="../controller/controllerGaleria.php"  method="POST" encyte="multipart/form-data">-->
-        <img src="../assets/media/galeria/video_0.png" class="rounded mx-auto img-fluid d-block carouselItemVideo" style="margin-top:30px; width: auto;" >
+        <img src="../assets/media/galeria/video_0.png" class="rounded mx-auto img-fluid d-block carouselItemVideo" style="margin-top:30px; width: auto;">
       </div>
       <?php
       $i = 1;
@@ -128,7 +127,7 @@ $inicioDao = new DaoInicio(); ?>
     </div>
   </div>
 </div>
-    </div>
+</div>
 <?php
 require '../inc/global/footer.php';
 require '../inc/global/head_end.php';

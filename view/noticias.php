@@ -35,7 +35,7 @@ while ($rowNoticias = $stmtNoticias->fetch(PDO::FETCH_ASSOC)) {
     $midia = "../assets/media/noticias/" . $rowNoticias['midiaNoticia'];
 
     if (($rowNoticias['midiaNoticia'] != '') && (file_exists($midia))) {
-        $srcMidia = '<img class="rounded imgMobile img-fluid" id="collapseMidia_'. $i .'" src="' . $midia . '" style=" margin-right: 20px; margin-bottom: 10px;" name="midia">';
+        $srcMidia = '<img class="rounded imgMobile img-fluid float-left" id="collapseMidia_'. $i .'" src="' . $midia . '" style=" margin-right: 20px; margin-bottom: 10px;" name="midia">';
     } else {
         $srcMidia = "";
     }
@@ -46,7 +46,7 @@ while ($rowNoticias = $stmtNoticias->fetch(PDO::FETCH_ASSOC)) {
                     <div class="">
                         '. $srcMidia .'
                         <h5 class="mt-0" style="padding-top: 10px;" >' . $rowNoticias['tituloNoticia'] . '</h5>
-                        <br>
+                        <br />
                         <p class="text-justify" id="collapseResumo_'. $i .'" > ' . $rowNoticias['resumoNoticia'] . '  </p>
                     </div>
                 </div>
@@ -61,7 +61,7 @@ while ($rowNoticias = $stmtNoticias->fetch(PDO::FETCH_ASSOC)) {
                         <button type="button" style="background-color: #8FBC8F;" class="btn" data-toggle="tooltip" title="Editar" id="rowEditarNoticia_' . $i . '" data-id="' . $rowNoticias['codNoticia'] . '"  data-titulo="' . $rowNoticias['tituloNoticia'] . '" data-descricao="' . $rowNoticias['descricaoNoticia'] . '" data-resumo="' . $rowNoticias['resumoNoticia'] . '" data-midia="' . $rowNoticias['midiaNoticia'] . '" data-data="' . $rowNoticias['dataNoticia'] . '" onclick="editar_modal(' . $i . ')" >
                             <i class="fa fa-pencil"></i>
                         </button>
-                    </div>
+                    </div> 
                     <div style="display: inline; float: right; margin-bottom: 5px;">
                         <h5 class="mb-0">
                             <button class="btn btn-link text-success" type="button" data-toggle="collapse" data-target="#collapse_'. $i .'" aria-expanded="true" aria-controls="collapseOne" id="rowLerMais_' . $i . '" onclick="lerMais(' . $i . ')">

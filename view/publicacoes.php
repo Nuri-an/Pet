@@ -43,7 +43,6 @@ $totalPg = ceil($rowTotalPublicacoesAno['numResult'] / $quantidadePg);
         ?>
     </div>
 </div>
-<hr>
 
 <?php
 

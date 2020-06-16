@@ -238,13 +238,13 @@ $(document).ready(function () {
     bootbox.confirm({
       message: "Você realmente deseja excluir esse download da lista ?",
       buttons: {
-        confirm: {
-          label: 'Sim',
-          className: 'btn-danger'
-        },
         cancel: {
           label: 'Não',
           className: 'btn-warning'
+        },
+        confirm: {
+          label: 'Sim',
+          className: 'btn-danger'
         }
       },
       callback: function (result) {

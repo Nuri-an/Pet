@@ -10,7 +10,11 @@ $(document).ready(function () {
     $('#loader').slideUp(1000);
     $('body').css('overflowY', 'auto');
 
-    $("#cpf").mask("999.999.999-99", {
+    $("#login #cpf").mask("999.999.999-99", {
+        reverse: true
+    });
+    
+    $("#cadastro #cpf").mask("999.999.999-99", {
         reverse: true
     });
 });
@@ -131,8 +135,14 @@ function cadastroAdm() {
 }
 
 
-function backLogin() {
+function backLoginC() {
     $('#cadastro').hide();
+    $('#login').show();
+
+}
+
+function backLoginS() {
+    $('#esqueceuSenha').hide();
     $('#login').show();
 
 }
@@ -378,8 +388,7 @@ $(document).ready(function () {
                             setTimeout(function () {
                                 dialog.modal('hide');
                             }, 3000); //3 segundos depois executa
-                            $('#esqueceuSenha').hide();
-                            $('#login').show();
+                            backLoginS();
                         } else {
                             dialog.init(function () {
                                 dialog.find('.bootbox-body').html('Ocorreu um erro no processamento. Tente novamente mais tarde.');
@@ -461,7 +470,7 @@ $(document).ready(function () {
                     buttons: {
                         confirm: {
                             label: 'Sim, conferi as informações e desejo solicitar acesso',
-                            className: 'btn-primary'
+                            className: 'btn-warning'
                         },
                         cancel: {
                             label: 'Não',
@@ -493,7 +502,14 @@ $(document).ready(function () {
                                         setTimeout(function () {
                                             dialog.modal('hide');
                                         }, 5000); //3 segundos depois executa
-                                        backLogin();
+                                        backLoginC();
+                                    } else if(result == 3) {
+                                        dialog.init(function () {
+                                            dialog.find('.bootbox-body').html('Seu CPF já está cadastrado no sistema. Se não consegue acessar, volte ao login e redefina sua senha, ou aguarde seu acesso ser aprovado.');
+                                        });
+                                        setTimeout(function () {
+                                            dialog.modal('hide');
+                                        }, 7000); //3 segundos depois executa
                                     }
                                     else {
                                         dialog.init(function () {

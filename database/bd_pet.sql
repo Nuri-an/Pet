@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 29-Maio-2020 às 00:38
+-- Generation Time: 16-Jun-2020 às 22:39
 -- Versão do servidor: 5.6.15-log
 -- PHP Version: 5.5.8
 
@@ -38,13 +38,7 @@ CREATE TABLE IF NOT EXISTS `administradores` (
 --
 
 INSERT INTO `administradores` (`codAdministrador`, `codIntegrante`) VALUES
-(1, 11),
-(3, 20),
-(13, 25),
-(12, 23),
-(11, 22),
-(10, 19),
-(14, 26);
+(10, 19);
 
 -- --------------------------------------------------------
 
@@ -67,12 +61,10 @@ INSERT INTO `discentes` (`codDiscente`, `codIntegrante`) VALUES
 (1, 2),
 (2, 3),
 (3, 4),
-(15, 29),
 (5, 6),
 (6, 7),
 (7, 8),
 (8, 9),
-(13, 27),
 (10, 12),
 (11, 13);
 
@@ -90,16 +82,15 @@ CREATE TABLE IF NOT EXISTS `downloads` (
   `algoritmoDownload` varchar(100) DEFAULT NULL,
   `linkDownload` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`codDownload`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Extraindo dados da tabela `downloads`
 --
 
 INSERT INTO `downloads` (`codDownload`, `tituloDownload`, `referenciaDownload`, `slidesDownload`, `algoritmoDownload`, `linkDownload`) VALUES
-(5, 'Análise estatística II', 'Minicurso', NULL, NULL, NULL),
-(7, 'Introdução ao Algoritmo I', 'Minicurso', NULL, NULL, NULL),
-(8, 'Introdução à Análise de Imagens Médicas III', 'Minicurso', NULL, NULL, NULL);
+(7, 'Introdução ao Algoritmo III', 'Minicurso', '', 'algoritmo_1590966237.zip', ''),
+(8, 'Introdução à Análise de Imagens Médicas III', 'Minicurso', 'slides_1590953660.pdf', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -113,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `galeria` (
   `midiaGaleria` varchar(40) NOT NULL,
   `urlGaleria` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`codGaleria`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=115 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=121 ;
 
 --
 -- Extraindo dados da tabela `galeria`
@@ -132,11 +123,12 @@ INSERT INTO `galeria` (`codGaleria`, `tituloGaleria`, `midiaGaleria`, `urlGaleri
 (98, '13:10', 'video_1580659813.mp4', NULL),
 (95, 'n', 'imagem_1580658388.mp4', NULL),
 (90, 'Florianópolis - Evento startups locais', 'imagem_1579639977.jpg', NULL),
+(115, 'Introdução ao Algoritmo III', '', 'https://www.youtube.com/watch?v=-WnQ6X2oSwU'),
 (89, 'Workshop SP - Code GIrls III', 'imagem_1579639902.png', NULL),
-(109, 'video yt', '', 'https://www.youtube.com/watch?v=dGIuBvhymQs'),
-(112, 'Video de paz', 'video_1580835417.mp4', ''),
-(113, 'infraestrutura ti', '', 'https://www.youtube.com/watch?v=-WnQ6X2oSwU'),
-(114, 'teste', '', 'https://www.youtube.com/watch?v=quSLB3dz-OM');
+(119, 'Introdução ao Algoritmo III', 'nao encontrou', ''),
+(118, 'Introdução ao Algoritmo III', '', 'https://www.youtube.com/watch?v=dGIuBvhymQs'),
+(116, 'Nascimento Nurian', '', 'https://www.youtube.com/watch?v=quSLB3dz-OM'),
+(112, 'Video de paz', 'video_1580835417.mp4', '');
 
 -- --------------------------------------------------------
 
@@ -179,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `integrantes` (
   `socialIntegrante` varchar(100) DEFAULT NULL,
   `senhaIntegrante` varchar(40) NOT NULL,
   PRIMARY KEY (`codIntegrante`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 --
 -- Extraindo dados da tabela `integrantes`
@@ -194,14 +186,8 @@ INSERT INTO `integrantes` (`codIntegrante`, `nomeIntegrante`, `emailIntegrante`,
 (7, 'Leonardo Antônio Almeida de Souza', NULL, '111.111.111-10', '2000-03-04', NULL, 'Bolsista', 'foto_7.jpg', NULL, ''),
 (8, 'Luana da Mercês Oliveira', 'l@gmail.com', '111.111.111-10', '2017-12-02', NULL, 'Bolsista', 'foto_8.jpg', NULL, ''),
 (9, 'Luiza Rosa de Moura', 'lr@gmail.com', '111.111.111-10', '2019-08-05', NULL, 'Bolsista', 'foto_9.jpg', NULL, ''),
-(11, 'Nurian Coelho', 'nuriancoelho@hotmail.com', '151.712.956-70', '2020-01-01', NULL, 'Administrador', '', '', 'coelho123'),
-(27, 'Marcella Linhares Menezes', 'marcella@email.com', '', '2016-08-17', NULL, 'Bolsista', 'foto_1589739403.jpg', '', ''),
-(29, 'Nurian Maria Amancio Coelho', 'nuriancoelho@hotmail.com', '', '2020-01-01', NULL, 'Voluntário', 'foto_1589894380.jpg', 'https://www.linkedin.com/in/nurian-coelho-04121618b', ''),
-(19, 'Nunda Xavier', 'nunda@gmail.com', '855.432.416-15', '2020-04-15', NULL, 'Administrador', NULL, NULL, 'coelho123'),
-(22, 'Adm 2', 'nuriancoelho@hotmail.com', '23395239071', '2020-04-15', NULL, 'Administrador', NULL, NULL, '123456'),
-(23, 'Adm 1', 'nuriancoelho@hotmail.com', '00576067652', '2020-04-15', NULL, 'Administrador', NULL, NULL, '1234567'),
-(25, 'Adm 3', 'nuriancoelho@hotmail.com', '23190850682', '2020-04-15', NULL, 'Administrador', NULL, NULL, '1234567'),
-(26, 'Adm 4', 'nuriancoelho@hotmail.com', '40249574063', '2020-04-15', NULL, 'Administrador', NULL, NULL, '1234567');
+(33, 'Nurian Maria Amâncio Coelho', 'nuriancoelho@hotmail.com', '151.712.956-70', '0000-00-00', NULL, 'Administrador', NULL, NULL, '1234567890'),
+(19, 'Nunda Xavier', 'nunda@gmail.com', '855.432.416-15', '2020-04-15', NULL, 'Administrador', NULL, NULL, 'coelho123');
 
 -- --------------------------------------------------------
 
@@ -224,17 +210,16 @@ CREATE TABLE IF NOT EXISTS `noticias` (
 --
 
 INSERT INTO `noticias` (`tituloNoticia`, `descricaoNoticia`, `midiaNoticia`, `codNoticia`, `dataNoticia`, `resumoNoticia`) VALUES
-('Calouro do DACC tem Artigo Completo Aprovado na 17ª Edição do SBGames.', ' O trabalho intitulado “Emoção e Desempenho de Jogadores de E-Sports: Um Estudo Piloto”, propõe uma análise das emoções e como estas influenciam no desempenho de jogadores do cenário competitivo de jogos de esportes eletrônicos, como League of Legends, Dota2 e Counter Strike. O estudo faz uso de um dispositivo de interface cérebro-computador (ou Brain Computer Interface – BCI) para capturar as emoções sentidas pelo jogador em um determinado período.\r\n  A SBGames 2018 é uma das maiores conferências de jogos eletrônicos da américa latina. Com o qualis B2, este ano o evento ocorrerá em Foz do Iguaçu em conjunto dos eventos SIBGRAPI’18 e SVR 2018, eventos renomados dá área de computação gráfica, processamento de imagens e realidade virtual.', 'midia_1.png', 1, '2018-12-17', ' O estudante do curso de Ciência da Computação, Davi Leal da Costa, sob orientação do professor Alex Machado e do aluno Matheus Baffa, teve seu artigo completo aprovado na 17ª edição do Simpósio Brasileiro de Jogos e Entretenimento Digital – SBGAMES 2018.'),
-('Participação na Semana da Informática no IFSul de Minas', 'As atividades conduzidas foram:\r\n\r\n1) Curso de Extensão: Desenvolvimento em Unity3D – Ofertado pelos bolsistas JULIE e PABLO\r\n2) Curso de Extensão: Introdução ao Blender  –  Ofertado pelos bolsistas  MARCELLA e VICTOR REZENDE\r\n3) Curso de Extensão: Introdução ao Android Studio  – Ofertado pelos bolsistas DIEGO e LEONARDO FAÊDA\r\n4) Curso de Extensão: Programação na Plataforma Dot Net  – Ofertado pelos bolsistas LUIZA e ARIEL\r\n5) Palestra: Realidade Virtual e Aumentada  – Ofertada pelo PROF. ALEX\r\n6) Palestra: Realidade Virtual e suas Aplicações –  Ofertada pelos bolsistas PABLO, MARCELLA e LEONARDO FAÊDA', NULL, 2, '2020-02-11', 'Como é tradição, pelo terceiro ano, o LAMIF participou da Semana da Informática no Campus Inconfidentes do IFSULDEMINAS, a convite da Professora Doutora Luciana Faria. O evento ocorreu do dia 27 a 29 desse mês de Agosto.'),
-('Professor Alex Realiza Palestra na UFJF', 'Com o título “Bem-Vindos à Realidade Paralela! Uma Breve Discussão sobre os Avanços da Realidade Virtual e Aumentada“, o discurso centrou-se nas tecnologias contemporâneas e desafios relacionados ao tema.\r\nUm breve resumo fornecido pelo autor pode ser conferido a seguir:\r\n“Entre os estudiosos não há um consenso sobre a origem da Realidade Virtual. Em meio aos escritores não há um limite das suas possibilidades futuras. Todavia entre ciência e ficção nos encontramos. Em uma era de avanços tecnológicos consideráveis relacionados à Realidade Virtual e Aumentada, como podemos nos preparar para os desafios contemporâneos desta área?”\r\n\r\nMais informações sobre o evento podem ser conferidos em:\r\nhttp://www.ufjf.br/getcomp/eventos/getmeeting/informacoes-do-evento/', NULL, 3, '2020-02-21', 'Nessa ultima sexta, 4 de Maio, o Prof. Alex realizou uma palestra sobre Realidade Virtual no GetMeeting 2018.'),
-('DACC Participa do GetMeeting na UFJF', 'Em um evento repleto de palestras, mesas de discussões e mostras tecnológicas, alunos do Curso de Ciência da Computação participaram nessa ultima sexta, 4 de Maio, do GetMeeting 2018.\r\nO VIII GETMeeting é um evento organizado pelo Grupo de Educação Tutorial do curso de Ciência da Computação (GETComp) voltado para os alunos do Departamento de Ciência da Computação e áreas afins da UFJF e é aberto para a participação de pessoas interessadas em tecnologia. O evento é constituído de minicursos a serem ministrados por alunos ou profissionais ligados à área de Ciência da Computação além da apresentação de trabalhos no Workshop de Trabalhos de Graduação, palestras e maratonas de programação.\r\n\r\nMais informações sobre o evento podem ser conferidos em:\r\nhttp://www.ufjf.br/getcomp/eventos/getmeeting/informacoes-do-evento/', NULL, 4, '2020-02-24', '\r\nCom destaque à palestra do Prof. Esteban Clua, sobre Jogos Eletrônicos e Realidade Virtual, o evento contou inclusive com a mostra de jogos eletrônicos com a co-participação de projetos do LAMIF.'),
+('Calouro do DACC tem Artigo Completo Aprovado na 17ª Edição do SBGames.', ' O trabalho intitulado “Emoção e Desempenho de Jogadores de E-Sports: Um Estudo Piloto”, propõe uma análise das emoções e como estas influenciam no desempenho de jogadores do cenário competitivo de jogos de esportes eletrônicos, como League of Legends, Dota2 e Counter Strike. O estudo faz uso de um dispositivo de interface cérebro-computador (ou Brain Computer Interface – BCI) para capturar as emoções sentidas pelo jogador em um determinado período.\r\n  A SBGames 2018 é uma das maiores conferências de jogos eletrônicos da américa latina. Com o qualis B2, este ano o evento ocorrerá em Foz do Iguaçu em conjunto dos eventos SIBGRAPI’18 e SVR 2018, eventos renomados dá área de computação gráfica, processamento de imagens e realidade virtual.', 'midia_1.png', 1, '2018-12-17', ' Inicialmente, um estudante do curso de Ciência da Computação, Davi Leal da Costa, sob orientação do professor Alex Machado e do aluno Matheus Baffa, teve seu artigo completo aprovado na 17ª edição do Simpósio Brasileiro de Jogos e Entretenimento Digital – SBGAMES 2018.'),
+('LAMIF participa de SBGames e SVR 2018', 'Durante os dias 22, 23, 24 e 25 de novembro, os integrantes do LAMIF João Paulo Freire, Leonardo Faêda, Marcella Menezes, Matheus Baffa e Pablo Sanches, sob a supervisão de Alex F. V. Machado apresentaram trabalhos em 2 das maiores conferências da América do Sul nas áreas de Jogos e Realidade Virtual.\r\n\r\nOs trabalhos aprovados foram:\r\n\r\nUm estudo semiótico em jogos e simulações de Realidade Virtual   \r\n\r\nLeonardo Faêda, Pablo Sanches, Italo Gama e Alex F. V. Machado\r\n\r\nEfeito agudo do estímulo de realidade virtual no desempenho de nadadores: Um estudo piloto\r\n\r\nJoão Paulo Freire, Marcella Menezes e Alex F. V. Machado\r\n\r\nEmoção e desempenho de jogadores de Esports: Um estudo piloto\r\n\r\nMatheus Baffa, Davi Leal da Costa e Alex F. V. Machado', 'midia_1592336880.png', 2, '2020-02-11', 'O Laboratório de Multimídia Interativa de Rio Pomba (LAMIF) levou 5 de seus integrantes para apresentarem trabalhos aprovados na SVR (Symposium on Virtual and Augmented Reality) e na SBGames em Foz do Iguaçu.'),
+('Integrantes do LAMIF realizam palestras no Campus Bom Sucesso', 'Com o título “Bem-Vindos à Realidade Paralela! Uma Breve Discussão sobre os Avanços da Realidade Virtual e Aumentada“, o discurso centrou-se nas tecnologias contemporâneas e desafios relacionados ao tema.\r\nUm breve resumo fornecido pelo autor pode ser conferido a seguir:\r\n“Entre os estudiosos não há um consenso sobre a origem da Realidade Virtual. Em meio aos escritores não há um limite das suas possibilidades futuras. Todavia entre ciência e ficção nos encontramos. Em uma era de avanços tecnológicos consideráveis relacionados à Realidade Virtual e Aumentada, como podemos nos preparar para os desafios contemporâneos desta área?”\r\n\r\nMais informações sobre o evento podem ser conferidos em:\r\nhttp://www.ufjf.br/getcomp/eventos/getmeeting/informacoes-do-evento/', 'midia_1592336756.jpg', 3, '2020-02-21', 'No último dia 12 de novembro, alunos integrantes do grupo PET estiveram no IFSUDESTEMG – Campus Avançado Bom Sucesso, ministrando palestras sobre os trabalhos desenvolvidos no laboratório de pesquisa. As palestras aconteceram no evento “IFPlayers”, realizado pelo instituto para os alunos.'),
+('Publicação: Consciência Artificial e Singularidade Tecnológica', 'Com apoio do filósofo Luiz Raimundo Tadeu da Silva Silva (UnB) e do graduando em Computação Pablo de Lara Sanches (IF Sudeste – MG), esta pesquisa multidisciplinar realizou um diálogo atemporal com Turing, Descartes, Wittgenstein, Karl Marx e John Searle, demonstrando a possibilidade da existência de uma consciência artificial e que a busca pela intencionalidade, promovida por algoritmos sofisticados de aprendizagem e descoberta de máquina, é a chave para o alcance da Singularidade Tecnológica.\r\n\r\nOs autores aproveitam para agradecer a iniciativa do Edital 02/2018 – PROPESQINOV, da Pró-Reitoria de Pesquisa e Inovação deste instituto, na qual a tradução para o inglês foi executada.\r\n\r\nMais informações em:\r\n\r\nhttp://www.marilia.unesp.br/#!/revistas-eletronicas/kinesis/edicoes/2018—volume-10-25/', 'midia_1592336650.jpg', 4, '2020-02-24', 'Como fruto de sua monografia da Graduação em Filosofia, o professor Alex publicou na Revista Kínesis (Qualis B2) o trabalho intitulado “THE EMERGENCE OF ARTIFICIAL CONSCIOUSNESS AND ITS IMPORTANCE TO REACH THE TECHNOLOGIC SINGULARITY”.'),
 ('Parceria para o Desenvolvimento de Produtos Tecnológicos', 'O Laboratório de Multimídia Interativa do Campus Rio Pomba (LAMIF) em parceria com professores e alunos do Mestrado em Educação Profissional e Tecnológica  celebram o início das atividades para o desenvolvimento de produtos educacionais de software.\r\nCom o objetivo de implementação de portais educacionais, aplicativos de celular e jogos eletrônicos, tem-se a meta de publicação dos primeiros protótipos para agosto deste ano.', 'midia_1.png', 5, '0000-00-00', ''),
-('LEO3D – Uma Tese em Defesa do Uso de um Jogo Eletrônico nas Aulas de Física', 'O que um jogo eletrônico deve ter para apoiar o ensino Física? Como avaliar a eficiência de um serius game? Esses entre outros questionamentos foram respondidos pelo pesquisador ANDRÉ LUIGI AMARAL DI SALVO. \r\nO professor Alex, deste departamento, prestigiou como membro da banca sua defesa de tese intitulada "AMBIENTE DIGITAL MULTIDIDÁTICO PARA O ENSINO DE ÓPTICA GEOMÉTRICA: LEO3D - UMA AVENTURA PELO O MUNDO DA ÓPTICA" na qual o recém Doutor dismistificou o uso de jogos eletrônicos na educação. \r\nA aplicação desenvolvida na Pós-Graduação em DESENVOLVIMENTO HUMANO E TECNOLOGIAS da UNIVERSIDADE ESTADUAL PAULISTA pode ser conferida no link:\r\nhttps://www.youtube.com/watch?v=-Xo0pg_WK9k', NULL, 6, '2020-02-27', ''),
+('Integrantes do LAMIF em parceria com alunos da Educação Física realizam avaliações na UFRJ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\nWhy do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'midia_1592335096.jpeg', 6, '2020-02-27', 'No último dia 5 de dezembro, alunos integrantes do grupo PET juntamente com alunos do curso de Licenciatura em Educação Física do Campus Rio Pomba estiveram na Universidade Federal do Rio de Janeiro para realizar avaliações de um projeto desenvolvido no laboratório.'),
 ('Participação na Semana das Profissões', 'O LAMIF teve a honra de participar representando o Departamento Acadêmico de Ciência da Computação da I Mostra de Cursos e Profissões do IF Sudeste MG – Campus Rio Pomba.\r\nO evento foi realizado nos dias 16 e 17 de agosto e teve o objetivo de apresentar as possibilidades de formação técnica e superior ofertadas gratuitamente pela unidade.', NULL, 7, '0000-00-00', ''),
-('LAMIF tem dois Artigos Publicados no SVR 2018', 'Apresentamos novos resultados das pesquisas do LAMIF: dois artigos completos aceito para publicação no Symposium on Virtual and Augmented Reality.\r\nEste evento é o mais importante da Sociedade Brasileira da Computação a tratar sobre Realidade Virtual e Aumentada. Seu extrato Qualis atual é B2. Este ano ocorrerá em Foz do Iguaçu em paralelo ao SBGames e SIBGRAPI.\r\n\r\nOs trabalhos aprovados foram:\r\nUm estudo semiótico em jogos de realidade virtual e simulações (Leonardo Faêda, Alex Machado,  Pablo Sanches, Ítalo Rodrigues Gama e Wallacy Pasqualini)\r\nEfeito agudo do estímulo de realidade virtual no desempenho de nadadores: um estudo piloto (Marcella Menezes, João Freire, Alex Machado e Guilherme Tucher)', NULL, 8, '2018-08-18', ''),
-('Integrantes do LAMIF realizam palestras no Campus Bom Sucesso', 'Os trabalhos e integrantes foram:\r\n“EFEITO AGUDO DE REALIDADE VIRTUAL NO ESTÍMULO DE NADADORES: UM ESTUDO PILOTO” – João Paulo Freire\r\n“A SEMIOTIC STUDY ON VIRTUAL REALITY GAMES AND SIMULATIONS” – Leonardo Moreira Faêda\r\n“EMOÇÃO E DESEMPENHO DE JOGADORES DE E-SPORTS: UM ESTUDO PILOTO” – Matheus de Freitas Oliveira Baffa\r\n“THE EMERGENCE OF ARTIFICIAL CONSCIOUSNESS AND ITS IMPORTANCE TO REACH THE TECHNOLOGICAL SINGULARITY” – Pablo de Lara Sanches\r\n\r\n', NULL, 9, '2019-07-16', 'No último dia 12 de novembro, alunos integrantes do grupo PET estiveram no IFSUDESTEMG – Campus Avançado Bom Sucesso, ministrando palestras sobre os trabalhos desenvolvidos no laboratório de pesquisa. As palestras aconteceram no evento “IFPlayers”, realizado pelo instituto para os alunos.'),
-('teste', '  ', '', 13, '2000-08-07', ''),
-('testando', '  ', '', 18, '2020-04-11', '');
+('LAMIF tem dois Artigos Publicados no SVR 2018', 'Apresentamos novos resultados das pesquisas do LAMIF: dois artigos completos aceito para publicação no Symposium on Virtual and Augmented Reality.\r\nEste evento é o mais importante da Sociedade Brasileira da Computação a tratar sobre Realidade Virtual e Aumentada. Seu extrato Qualis atual é B2. Este ano ocorrerá em Foz do Iguaçu em paralelo ao SBGames e SIBGRAPI.\r\n\r\nOs trabalhos aprovados foram:\r\nUm estudo semiótico em jogos de realidade virtual e simulações (Leonardo Faêda, Alex Machado,  Pablo Sanches, Ítalo Rodrigues Gama e Wallacy Pasqualini)\r\nEfeito agudo do estímulo de realidade virtual no desempenho de nadadores: um estudo piloto (Marcella Menezes, João Freire, Alex Machado e Guilherme Tucher)\r\n\r\nMais informações sobre o SVR podem ser conferidos em:\r\n\r\nhttp://svr.net.br/\r\n\r\nE sobre o SBGames em:\r\n\r\nhttps://www.sbgames.org/sbgames2018/home', 'midia_1592337146.jpg', 8, '2018-08-18', 'Apresentamos novos resultados das pesquisas do LAMIF: dois artigos completos aceito para publicação no Symposium on Virtual and Augmented Reality.'),
+('Participação na Semana da Informática no IFSul de Minas', 'As atividades conduzidas foram:\r\n\r\n1) Curso de Extensão: Desenvolvimento em Unity3D – Ofertado pelos bolsistas JULIE e PABLO\r\n\r\n2) Curso de Extensão: Introdução ao Blender  –  Ofertado pelos bolsistas  MARCELLA e VICTOR REZENDE\r\n3) Curso de Extensão: Introdução ao Android Studio  – Ofertado pelos bolsistas DIEGO e LEONARDO FAÊDA\r\n4) Curso de Extensão: Programação na Plataforma Dot Net  – Ofertado pelos bolsistas LUIZA e ARIEL\r\n5) Palestra: Realidade Virtual e Aumentada  – Ofertada pelo PROF. ALEX\r\n6) Palestra: Realidade Virtual e suas Aplicações –  Ofertada pelos bolsistas PABLO, MARCELLA e LEONARDO FAÊDA', 'midia_1592337007.jpg', 9, '2019-07-16', 'Como é tradição, pelo terceiro ano, o LAMIF participou da Semana da Informática no Campus Inconfidentes do IFSULDEMINAS, a convite da Professora Doutora Luciana Faria. O evento ocorreu do dia 27 a 29 desse mês de Agosto.'),
+('teste', '  ', '', 13, '2000-08-07', '');
 
 -- --------------------------------------------------------
 
@@ -251,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `projetos` (
   `publicacaoProjeto` mediumtext,
   `parceriaProjeto` mediumtext,
   PRIMARY KEY (`codProjeto`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Extraindo dados da tabela `projetos`
@@ -264,7 +249,8 @@ INSERT INTO `projetos` (`codProjeto`, `tituloProjeto`, `descricaoProjeto`, `anoP
 (3, 'Frigote', 'Frigote é um jogo desenvolvido na Unity que têm como objetivo simular uma fazenda e suas funções, de modo que alunos da Zootecnia possam aprender sobre sua área de forma divertida. Em primeiro momento, desenvolvemos um cenário para o frango de corte, onde é possível frangos desde a fase inicial como pintinho até a fase adulta, na qual ele já pode ser vendido. O jogo também é composto de um quiz relacionado a criação do frango, para que o jogador possa fixar esses conteúdos.', 2015, '', NULL, NULL),
 (6, 'Interação Real em Mundo Digital: Realidade Virtual + Kinect', '  Este projeto, desenvolvido na plataforma Unity, permite que qualquer pessoa com um dispositivo móvel que possua suporte para Realidade Virtual, Microsoft Kinect e criatividade possa desenvolver suas próprias experiências em Realidade Virtual. Os dados de rastreamento de posição do corpo capitados pelo Kinect são enviados para o jogador, e através do WiFi utilizando um servidor Unet(servidor Multiplayer da Unity Engine), todos os dados são recebidos no dispositivo móvel obtendo, assim, uma maior imersão no mundo virtual.', 2016, '', NULL, NULL),
 (13, 'Interação Real em Mundo Digital: Realidade Virtual + GPS', '  Algo que não é explorado atualmente é a interação de Realidade Virtual com GPS, ou seja, é a capacidade de você poder andar em um ambiente virtual a medida em que se desloca em um ambiente real. Há inúmeras aplicações que encaixam com esse tema, as opções de desenvolvimento são vastas e ainda não são exploradas , o que faz com que cada pesquisa sobre ele seja de grande importância. Com base nisso, este projeto entra para desenvolver as ferramentas necessárias para a exploração desse tema.', 2016, '', NULL, NULL),
-(15, 'Treinamento Mental com VR para ganho de rendimento na Natação', '  Você já pensou em melhorar seu desempenho em seu esporte favorito sem sair de casa? Essa é uma proposta do nosso grupo LAMIF juntamente com o Departamento Acadêmico de Educação Física. Desenvolver um jogo que utiliza realidade virtual para simular o ambiente real de treinamento, com intuído de investigar as possíveis aplicações desta ferramenta no dia a dia de treino do atleta. Com isto buscamos obter melhorias no rendimento do mesmo sem o desgaste físico dos treinamentos habituais.', 2020, '', NULL, NULL);
+(15, 'Treinamento Mental com VR para ganho de rendimento em Natação', '  Você já pensou em melhorar seu desempenho em seu esporte favorito sem sair de casa? Essa é uma proposta do nosso grupo LAMIF juntamente com o Departamento Acadêmico de Educação Física. Desenvolver um jogo que utiliza realidade virtual para simular o ambiente real de treinamento, com intuído de investigar as possíveis aplicações desta ferramenta no dia a dia de treino do atleta. Com isto buscamos obter melhorias no rendimento do mesmo sem o desgaste físico dos treinamentos habituais.', 2020, 'midia_1592337372.png', '', ''),
+(25, 'Introdução ao Algoritmo III', 'mknknkjnkjn\r\n\r\n    $(&#39;#idVideo&#39;).val(&#39;&#39;);\r\n    $(&#39;#idVideo&#39;).val(&#39;&#39;);\r\n    $(&#39;#idVideo&#39;).val(&#39;&#39;);', 2020, '', '', '');
 
 -- --------------------------------------------------------
 

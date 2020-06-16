@@ -332,11 +332,11 @@ function excluirMidia(id) {
     buttons: {
       confirm: {
         label: 'Sim',
-        className: 'btn-danger'
+        className: 'btn-warning'
       },
       cancel: {
         label: 'Não',
-        className: 'btn-warning'
+        className: 'btn-danger'
       }
     },
     callback: function (result) {

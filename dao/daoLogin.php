@@ -87,9 +87,9 @@ class DaoLogin
             $mail->Port = 587;                                    // TCP port to connect to
 
             $mail->CharSet = 'UTF-8';
-            $mail->setFrom('contatonfm@outlook.com.br', 'PET - Programa de Educação Tutorial');
+            $mail->setFrom('contatonfm@outlook.com.br', 'Grupo PET - GPCA');
             $mail->addAddress($email, $nome);
-            $mail->addEmbeddedImage('../assets/media/logo_original.png', 'logo');
+            $mail->addEmbeddedImage('../assets/media/logo-gpca.png', 'logo');
 
             $mail->isHTML(true);                                  // Set email format to HTML
 
@@ -105,7 +105,7 @@ class DaoLogin
                             </div>
                         </div>
                         <div style="margin-left: 300px;"> 
-                            <img style="width:100px; height:60px;" src="cid:logo">
+                            <img style="width:100px; height:80px;" src="cid:logo">
                         </div>';
 
             //echo $mail->send();
@@ -173,20 +173,28 @@ class DaoLogin
             $tipo = $login->getTipo();
             $senha = $login->getSenha();
 
-            $stmt = $this->conn->prepare("INSERT INTO integrantes(nomeIntegrante, emailIntegrante, cpfIntegrante, situacaoIntegrante, senhaIntegrante)
-           VALUES (:nome, :email, :cpf, :situacao, :senha)");
+            $stmt2 = $this->conn->prepare("SELECT * FROM integrantes WHERE cpfIntegrante = :cpf AND situacaoIntegrante LIKE 'Administrador'");
+            $stmt2->execute(array(':cpf' => $cpf));
 
-            $stmt->bindparam(":nome", $nome);
-            $stmt->bindparam(":email", $email);
-            $stmt->bindparam(":cpf", $cpf);
-            $stmt->bindparam(":situacao", $tipo);
-            $stmt->bindparam(":senha", $senha);
-            $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-                echo 1;
+            if ($stmt2->rowCount() > 0) {
+                echo 3;
             } else {
-                echo 2;
+
+                $stmt = $this->conn->prepare("INSERT INTO integrantes(nomeIntegrante, emailIntegrante, cpfIntegrante, situacaoIntegrante, senhaIntegrante)
+                VALUES (:nome, :email, :cpf, :situacao, :senha)");
+
+                $stmt->bindparam(":nome", $nome);
+                $stmt->bindparam(":email", $email);
+                $stmt->bindparam(":cpf", $cpf);
+                $stmt->bindparam(":situacao", $tipo);
+                $stmt->bindparam(":senha", $senha);
+                $stmt->execute();
+
+                if ($stmt->rowCount() > 0) {
+                    echo 1;
+                } else {
+                    echo 2;
+                }
             }
         } catch (PDOException $e) {
             echo $e->getMessage();

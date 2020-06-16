@@ -8,7 +8,7 @@
   <!-- As 3 meta tags acima *devem* vir em primeiro lugar dentro do `head`; qualquer outro conteúdo deve vir *após* essas tags -->
 
 
-  <title> Grupo PET - GPCA</title>
+  <title> PET - Ciência da Computação</title>
 
   <link rel="shortcut icon" href="../assets/media/logo-gpca.png" type="image/x-png" />
 

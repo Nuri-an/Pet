@@ -73,7 +73,7 @@ $stmtDiscentes->execute();
                             <p>
                                 <i class="fa fa-address-card-o"></i>&nbsp ' . $emailTutor . '
                                 <br />
-                                <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;">' . $socialTutores . '
+                                <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;"></i>' . $socialTutores . '
                                 <br />
                                 <i class="fa fa-handshake-o" aria-hidden="true"></i> &nbsp ' . $rowTutores['situacaoIntegrante'] . '
                             </p>
@@ -141,7 +141,7 @@ $stmtDiscentes->execute();
                                 <i class="fa fa-handshake-o" aria-hidden="true"></i> &nbsp ' . $rowDiscentes['situacaoIntegrante'] . '
                                 </p>
                             <p class="card-text">
-                                <small class="text-muted">Ativo desde ' . $newDateD . '</small>
+                                <small class="text-muted">Ativo desde ' . $newDateD . '</small> 
                             </p>
                         </div>
                     </div>

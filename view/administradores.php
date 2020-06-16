@@ -2,6 +2,7 @@
 require_once("../dao/daoAdministradores.php");
 
 $administradoresDao = new DaoAdministradores();
+session_start();
 ?>
 
 <?php
@@ -29,6 +30,8 @@ $totalPg = ceil($totalAdministradoresInativos / $quantidadePg);
 
 <?php
 
+echo '<p class="text-danger" onClick="excluirPerfil()" style="float: right; cursor: pointer; margin-bottom: 50px;"  id="buttonExcluirPerfil" data-id="'. $_SESSION['adm_session'] .'"> Excluir meu perfil administrativo </p>';
+
 if ($stmtAdministradores->rowCount() == 0) {
     echo '<div class = "container" style="margin-bottom: 20px;" id="semAdministradores">
             <small class="text-muted " style="font-size:50; ">
@@ -51,11 +54,11 @@ if ($stmtAdministradores->rowCount() == 0) {
     while ($rowAdministradores = $stmtAdministradores->fetch(PDO::FETCH_ASSOC)) {
 
         echo '<tr>
-            <th scope="row">' . $rowAdministradores['nomeIntegrante'] . ' </th>
+            <td>' . $rowAdministradores['nomeIntegrante'] . ' </td>
             <td>
                 <div style="cursor: pointer;"> 
-                    <i class="text-warning fa fa-check fa-2x" title="Aceitar solicitação" aria-hidden="true" id="rowAceitarAdm_'. $i .'" data-id="'. $rowAdministradores['codIntegrante'] .'" data-nome="'. $rowAdministradores['nomeIntegrante'] .'" onclick="aceitarAdm('. $i .')"></i>
-                    <i class="text-danger fa fa-times fa-2x" title="Cancelar solicitação" aria-hidden="true" id="rowCancelarAdm_'. $i .'" data-id="'. $rowAdministradores['codIntegrante'] .'" data-nome="'. $rowAdministradores['nomeIntegrante'] .'" onclick="cancelarAdm('. $i .')"></i>
+                    <i class="text-warning fa fa-check fa-2x" title="Aceitar solicitação" aria-hidden="true" id="rowAceitarAdm_'. $i .'" data-id="'. $rowAdministradores['codIntegrante'] .'" data-nome="'. explode(' ', $rowAdministradores['nomeIntegrante'])[0] .'" onclick="aceitarAdm('. $i .')"></i>
+                    <i class="text-danger fa fa-times fa-2x" title="Cancelar solicitação" aria-hidden="true" id="rowCancelarAdm_'. $i .'" data-id="'. $rowAdministradores['codIntegrante'] .'" data-nome="'. explode(' ', $rowAdministradores['nomeIntegrante'])[0] .'" onclick="cancelarAdm('. $i .')"></i>
                 </div>    
             </td>
         </tr>';

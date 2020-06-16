@@ -60,9 +60,9 @@ class DaoAdministradores
                 $mail->Port = 587;                                    // TCP port to connect to
 
                 $mail->CharSet = 'UTF-8';
-                $mail->setFrom('contatonfm@outlook.com.br', 'PET - Programa de Educação Tutorial');
+                $mail->setFrom('contatonfm@outlook.com.br', 'Grupo PET - GPCA');
                 $mail->addAddress($email, $nome);
-                $mail->addEmbeddedImage('../assets/media/logo_original.png', 'logo');
+                $mail->addEmbeddedImage('../assets/media/logo-gpca.png', 'logo');
 
                 $mail->isHTML(true);                                  // Set email format to HTML
 
@@ -73,12 +73,12 @@ class DaoAdministradores
                             </div>
                             <div style="margin-top: 30px;">
                                 <font size=3> 
-                                    Sua solicitação de acesso a área administrativa foi analisada e <b> aceita </b> por um dos atuais administradores. A partir de agora você poderá acessa a plataforma pala aba `Login` com seu CPF e senha cadastrados. 
+                                    Sua solicitação de acesso a área administrativa do site foi analisada e <b> aceita </b> por um dos atuais administradores. A partir de agora você poderá acessa a plataforma pala aba `Login` com seu CPF e senha cadastrados. 
                                 </font>
                             </div>
                         </div>
                         <div style="margin-left: 300px;"> 
-                            <img style="width:100px; height:60px;" src="cid:logo">
+                            <img style="width:100px; height:80px;" src="cid:logo">
                         </div>';
 
                 if ($mail->send()) {
@@ -127,9 +127,9 @@ class DaoAdministradores
                 $mail->Port = 587;                                    // TCP port to connect to
 
                 $mail->CharSet = 'UTF-8';
-                $mail->setFrom('contatonfm@outlook.com.br', 'PET - Programa de Educação Tutorial');
+                $mail->setFrom('contatonfm@outlook.com.br', 'Grupo PET - GPCA');
                 $mail->addAddress($email, $nome);
-                $mail->addEmbeddedImage('../assets/media/logo_original.png', 'logo');
+                $mail->addEmbeddedImage('../assets/media/logo-gpca.png', 'logo');
 
                 $mail->isHTML(true);                                  // Set email format to HTML
 
@@ -145,7 +145,7 @@ class DaoAdministradores
                             </div>
                         </div>
                         <div style="margin-left: 300px;"> 
-                            <img style="width:100px; height:60px;" src="cid:logo">
+                            <img style="width:100px; height:80px;" src="cid:logo">
                         </div>';
 
                 if ($mail->send()) {
@@ -153,6 +153,37 @@ class DaoAdministradores
                 } else {
                     echo $mail->ErrorInfo;
                 }
+            } else {
+                echo 2;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function excluirPerfil(ModelAdministradores $administrador)
+    {
+        try {
+            //update user where idprof
+            $id = $administrador->getId();
+
+            $stmt = $this->conn->prepare("SELECT codIntegrante FROM administradores WHERE codAdministrador = :id");
+            $stmt->execute(array(':id' => $id));
+            $idIntegrante = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $stmt2 = $this->conn->prepare("DELETE FROM integrantes WHERE codIntegrante = ?");
+            $stmt2->bindparam(1, $idIntegrante['codIntegrante']);
+            $stmt2->execute();
+
+            $stmt3 = $this->conn->prepare("DELETE FROM administradores WHERE codIntegrante = ?");
+            $stmt3->bindparam(1, $idIntegrante['codIntegrante']);
+            $stmt3->execute();
+
+            if (($stmt2->rowCount() > 0) && ($stmt3->rowCount() > 0)) {
+                session_start();
+                session_destroy();
+                unset($_SESSION['adm_session']);
+                echo 1;
             } else {
                 echo 2;
             }

@@ -229,13 +229,13 @@ function excluir(id) {
                     bootbox.confirm({
                         message: "Você realmente deseja excluir todos os dados desse integrante?",
                         buttons: {
-                            confirm: {
-                                label: 'Sim',
-                                className: 'btn-danger'
-                            },
                             cancel: {
                                 label: 'Não',
                                 className: 'btn-warning'
+                            },
+                            confirm: {
+                                label: 'Sim',
+                                className: 'btn-danger'
                             }
                         },
                         callback: function (result) {
