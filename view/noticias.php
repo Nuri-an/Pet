@@ -21,6 +21,8 @@ $rowTotalNoticias = $totalNoticias->fetch(PDO::FETCH_ASSOC);
 $totalPg = ceil($rowTotalNoticias['numResult'] / $quantidadePg);
 ?>
 
+<p class="badge badge-danger text-wrap">Notícias</p>
+<hr class="bg-danger" style="margin-top: -17px" />
 
 <?php
 $i = 1;

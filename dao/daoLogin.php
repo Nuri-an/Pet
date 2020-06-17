@@ -81,13 +81,13 @@ class DaoLogin
             $mail->isSMTP();                                      // Set mailer to use SMTP
             $mail->Host = 'smtp-mail.outlook.com; smtp.gmail.com';  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = 'contatonfm@outlook.com.br';                 // SMTP username
-            $mail->Password = 'contato123';                           // SMTP password
+            $mail->Username = 'gpca.recovery@gmail.com';                 // SMTP username
+            $mail->Password = '*%Zkmq6K2Q';                           // SMTP password
             $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 587;                                    // TCP port to connect to
 
             $mail->CharSet = 'UTF-8';
-            $mail->setFrom('contatonfm@outlook.com.br', 'Grupo PET - GPCA');
+            $mail->setFrom('gpca.recovery@gmail.com', 'PET - Grupo de Pesquisa em Computação Aplicada');
             $mail->addAddress($email, $nome);
             $mail->addEmbeddedImage('../assets/media/logo-gpca.png', 'logo');
 
@@ -105,7 +105,7 @@ class DaoLogin
                             </div>
                         </div>
                         <div style="margin-left: 300px;"> 
-                            <img style="width:100px; height:80px;" src="cid:logo">
+                            <img style="width:100px; height:90px;" src="cid:logo">
                         </div>';
 
             //echo $mail->send();

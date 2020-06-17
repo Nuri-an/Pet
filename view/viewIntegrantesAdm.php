@@ -26,6 +26,10 @@ $integrantesDao = new DaoIntegrantes();
 
 
 <div id="atualiza" class="container">
+
+    <p class="badge badge-danger text-wrap">Integrantes</p>
+    <hr class="bg-danger" style="margin-top: -17px; margin-bottom: 40px;" />
+
     <?php
     $stmtTutores = $integrantesDao->runQuery("SELECT * FROM integrantes i, tutores t WHERE i.codIntegrante = t.codIntegrante");
     $stmtTutores->execute();
@@ -36,8 +40,7 @@ $integrantesDao = new DaoIntegrantes();
     <!-- 355 - 575 -->
     <div id="tutores">
         <h2 class="display-4" style="text-align: center; color: rgba(0,0,0,.5);"> Tutores </h2>
-        <hr>
-        <div class="card-deck" style="width: 100%; justify-content: center; align-items: center; float: left;">
+        <div class="card-deck" style="margin-bottom: 80px; width: 100%; justify-content: center; align-items: center; float: left;">
             <?php
             $i = 1;
 
@@ -109,7 +112,6 @@ $integrantesDao = new DaoIntegrantes();
     </div>
     <div id="discentes" style="margin-top: 30px; ">
         <h2 class="display-4" style="text-align: center; color: rgba(0,0,0,.5);"> Alunos </h2>
-        <hr>
         <div class="card-deck" style="width: 100%; justify-content: center; align-items: center;">
             <?php
             while ($rowDiscentes = $stmtDiscentes->fetch(PDO::FETCH_ASSOC)) {

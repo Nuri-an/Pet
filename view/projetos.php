@@ -24,7 +24,10 @@ $rowTotalProjetosAno = $totalProjetosAno->fetch(PDO::FETCH_ASSOC);
 $totalPg = ceil($rowTotalProjetosAno['numResult'] / $quantidadePg);
 ?>
 
-<div class="btn-group" style="margin-bottom: 30px; padding-left: 15px; margin-left: auto;">
+<p class="badge badge-danger text-wrap">Projetos</p>
+<hr class="bg-danger" style="margin-top: -17px; margin-bottom: 20px;" />
+
+<div class="btn-group" style="margin-bottom: 30px; padding-left: 15px; margin-left: auto; float: right;">
     <button type="button" style="color: rgba(0,0,0,.5);" class="btn border border-success">Selecionar o ano do projeto</button>
     <button type="button" class="btn dropdown-toggle dropdown-toggle-split" style="background-color: #8FBC8F; " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="sr-only">Toggle Dropdown</span>
@@ -44,7 +47,6 @@ $totalPg = ceil($rowTotalProjetosAno['numResult'] / $quantidadePg);
     </div>
 </div>
 
-<hr>
 
 <?php
 

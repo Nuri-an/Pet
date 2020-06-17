@@ -23,11 +23,10 @@ $rowTotalDownloads = $totalDownloads->fetch(PDO::FETCH_ASSOC);
 $totalPg = ceil($rowTotalDownloads['numResult'] / $quantidadePg);
 ?>
 
+<p class="badge badge-danger text-wrap">Downloads</p>
+<hr class="bg-danger" style="margin-top: -17px; margin-bottom: 20px;" />
 
-<h6 class="lead container" style="text-align: left;"> Clique e escolha o arquivo para baixar </h6>
 
-<hr>
-</hr>
 
 <div class="container" style="border-bottom:30px; align-items: center; width: 100%;">
     <br>

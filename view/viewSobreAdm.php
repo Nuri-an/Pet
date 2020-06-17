@@ -25,6 +25,10 @@ $inicioDao = new DaoInicio();
 
 <div style="margin-top: 20px; margin-bottom: 20px;">
     <div id="atualiza">
+
+        <p class="badge badge-danger text-wrap">Sobre</p>
+        <hr class="bg-danger" style="margin-top: -17px; margin-bottom: 20px;" />
+
         <div class="container" style="overflow:hidden;" id="corpoInfo">
             <?php
 
@@ -41,12 +45,12 @@ $inicioDao = new DaoInicio();
             $stmtGaleriaVE->execute();
 
             while ($rowInformacoes = $stmtInformacoes->fetch(PDO::FETCH_ASSOC)) {
-                echo '<h1 class="display-4">' . $rowInformacoes['tituloInfo'] . ' </h1>';
+                echo '<h1 class="display-4">' . $rowInformacoes['tituloInfo'] . ' </h1> <br />';
                 echo '<p class="lead">';
                 echo nl2br($rowInformacoes['descricaoInfo']);
-                echo '<p> <b>' . $rowInformacoes['subTituloInfo'] . ' </b> </p>';
+                echo '<br /> <br /><p> <b>' . $rowInformacoes['subTituloInfo'] . ' </b> </p>';
                 echo  nl2br($rowInformacoes['subDescricaoInfo']);
-                echo '<p> <br>';
+                echo '<p><br /> <br />';
                 echo $rowInformacoes['extrasInfo'];
                 echo '</p>';
                 echo '<br>';

@@ -24,7 +24,10 @@ $rowTotalPublicacoesAno = $totalPublicacoesAno->fetch(PDO::FETCH_ASSOC);
 $totalPg = ceil($rowTotalPublicacoesAno['numResult'] / $quantidadePg);
 ?>
 
-<div class="btn-group" style="margin-bottom: 30px; padding-left: 15px; margin-left: auto;">
+<p class="badge badge-danger text-wrap">Publicações</p>
+<hr class="bg-danger" style="margin-top: -17px; margin-bottom: 20px;" />
+
+<div class="btn-group" style="margin-bottom: 30px; padding-left: 15px; margin-left: auto; float: right;">
     <button type="button" class="btn border border-success"  style="color: rgba(0,0,0,.5);">Selecionar ano da publicação</button>
     <button type="button" class="btn dropdown-toggle dropdown-toggle-split"  style="background-color: #8FBC8F; " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="sr-only">Toggle Dropdown</span>

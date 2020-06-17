@@ -12,6 +12,10 @@ $inicioDao = new DaoInicio(); ?>
 <script type="text/javascript" src="../assets/js/inicio.js"></script>
 
 <div style="margin-top: 20px; margin-bottom: 20px;">
+
+  <p class="badge badge-danger text-wrap">Sobre</p>
+  <hr class="bg-danger" style="margin-top: -17px; margin-bottom: 20px;" />
+
   <div class="container" style="overflow:hidden;" id="corpoInfo">
     <?php
     $stmtInformacoes = $inicioDao->runQuery("SELECT * FROM informacoes");

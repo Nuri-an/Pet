@@ -54,13 +54,13 @@ class DaoAdministradores
                 $mail->isSMTP();                                      // Set mailer to use SMTP
                 $mail->Host = 'smtp-mail.outlook.com; smtp.gmail.com';  // Specify main and backup SMTP servers
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                $mail->Username = 'contatonfm@outlook.com.br';                 // SMTP username
-                $mail->Password = 'contato123';                           // SMTP password
+                $mail->Username = 'gpca.recovery@gmail.com';                 // SMTP username
+                $mail->Password = '*%Zkmq6K2Q';                           // SMTP password
                 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
                 $mail->Port = 587;                                    // TCP port to connect to
 
                 $mail->CharSet = 'UTF-8';
-                $mail->setFrom('contatonfm@outlook.com.br', 'Grupo PET - GPCA');
+                $mail->setFrom('gpca.recovery@gmail.com', 'PET - Grupo de Pesquisa em Computação Aplicada');
                 $mail->addAddress($email, $nome);
                 $mail->addEmbeddedImage('../assets/media/logo-gpca.png', 'logo');
 
@@ -73,12 +73,12 @@ class DaoAdministradores
                             </div>
                             <div style="margin-top: 30px;">
                                 <font size=3> 
-                                    Sua solicitação de acesso a área administrativa do site foi analisada e <b> aceita </b> por um dos atuais administradores. A partir de agora você poderá acessa a plataforma pala aba `Login` com seu CPF e senha cadastrados. 
+                                    Sua solicitação de acesso a área administrativa do site foi analisada e <b> aceita </b> por um dos atuais administradores. A partir de agora você poderá acessa a plataforma com seu CPF e senha cadastrados. 
                                 </font>
                             </div>
                         </div>
                         <div style="margin-left: 300px;"> 
-                            <img style="width:100px; height:80px;" src="cid:logo">
+                            <img style="width:100px; height:90px;" src="cid:logo">
                         </div>';
 
                 if ($mail->send()) {
@@ -121,13 +121,13 @@ class DaoAdministradores
                 $mail->isSMTP();                                      // Set mailer to use SMTP
                 $mail->Host = 'smtp-mail.outlook.com; smtp.gmail.com';  // Specify main and backup SMTP servers
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                $mail->Username = 'contatonfm@outlook.com.br';                 // SMTP username
-                $mail->Password = 'contato123';                           // SMTP password
+                $mail->Username = 'gpca.recovery@gmail.com';                 // SMTP username
+                $mail->Password = '*%Zkmq6K2Q';                           // SMTP password
                 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
                 $mail->Port = 587;                                    // TCP port to connect to
 
                 $mail->CharSet = 'UTF-8';
-                $mail->setFrom('contatonfm@outlook.com.br', 'Grupo PET - GPCA');
+                $mail->setFrom('gpca.recovery@gmail.com', 'PET - Grupo de Pesquisa em Computação Aplicada');
                 $mail->addAddress($email, $nome);
                 $mail->addEmbeddedImage('../assets/media/logo-gpca.png', 'logo');
 
@@ -140,12 +140,12 @@ class DaoAdministradores
                             </div>
                             <div style="margin-top: 30px;">
                                 <font size=3> 
-                                    Sua solicitação de acesso a área administrativa foi analisada e <b> recusada </b> por um dos atuais administradores. Para mais esclarecimentos entre contato com o grupo através das informações forneciadas no rodapé do site. 
+                                    Sua solicitação de acesso a área administrativa foi analisada e <b> recusada </b> por um dos atuais administradores. Para mais esclarecimentos entre contato com o grupo. 
                                 </font>
                             </div>
                         </div>
                         <div style="margin-left: 300px;"> 
-                            <img style="width:100px; height:80px;" src="cid:logo">
+                            <img style="width:100px; height:90px;" src="cid:logo">
                         </div>';
 
                 if ($mail->send()) {

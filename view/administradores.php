@@ -28,9 +28,13 @@ $totalAdministradoresInativos = $rowTotalAdministradores['numResult'] - $rowTota
 $totalPg = ceil($totalAdministradoresInativos / $quantidadePg);
 ?>
 
+<p class="badge badge-danger text-wrap">Administradores</p>
+<hr class="bg-danger" style="margin-top: -17px" />
+
+
 <?php
 
-echo '<p class="text-danger" onClick="excluirPerfil()" style="float: right; cursor: pointer; margin-bottom: 50px;"  id="buttonExcluirPerfil" data-id="'. $_SESSION['adm_session'] .'"> Excluir meu perfil administrativo </p>';
+echo '<p class="text-danger " onClick="excluirPerfil()" style="float: right; cursor: pointer; margin-bottom: 50px;"  id="buttonExcluirPerfil" data-id="'. $_SESSION['adm_session'] .'"> Excluir meu perfil administrativo </p>';
 
 if ($stmtAdministradores->rowCount() == 0) {
     echo '<div class = "container" style="margin-bottom: 20px;" id="semAdministradores">

@@ -23,10 +23,14 @@ $stmtDiscentes->execute();
 
 
 <div class="container">
+
+    <p class="badge badge-danger text-wrap">Integrantes</p>
+    <hr class="bg-danger" style="margin-top: -17px; margin-bottom: 40px;" />
+
     <h2 class="display-4" style="text-align: center;"> Tutores </h2>
     <hr>
     </hr>
-    <div class="card-deck" style="width: 100%; justify-content: center; align-items: center;">
+    <div class="card-deck" style="margin-bottom: 80px; width: 100%; justify-content: center; align-items: center;">
         <?php
         if ($stmtTutores->rowCount() == 0) {
             echo '<small class="text-muted" style="font-size:30; "><i>Não há</i></small> ';
@@ -50,7 +54,7 @@ $stmtDiscentes->execute();
             if (empty($rowTutores['socialIntegrante'])) {
                 $emailTutor = '<a class="font-weight-normal" style="cursor: pointer;"> E-mail</a>';
             } else {
-                $emailTutor = '<a target="_blank" class="text-decoration-none text-body text-break" href="mailto:' . $rowTutores['emailIntegrante'] . '"> '. $rowTutores['emailIntegrante'] .'</a>';
+                $emailTutor = '<a target="_blank" class="text-decoration-none text-body text-break" href="mailto:' . $rowTutores['emailIntegrante'] . '"> ' . $rowTutores['emailIntegrante'] . '</a>';
             }
 
             if (empty($rowTutores['socialIntegrante'])) {
@@ -90,7 +94,6 @@ $stmtDiscentes->execute();
 </div>
 <div class="container" style="margin-top: 30px;">
     <h2 class="display-4" style="text-align: center;"> Alunos </h2>
-    <hr ></hr>
     <div class="card-deck" style="width: 100%; justify-content: center; align-items: center;">
         <?php
         if ($stmtDiscentes->rowCount() == 0) {
@@ -109,13 +112,13 @@ $stmtDiscentes->execute();
             } else {
                 $srcFotoD = "../assets/media/integrantes/foto_1.jpg";
             }
-                
+
             if (empty($rowDiscentes['socialIntegrante'])) {
                 $emailDiscente = '<a class="font-weight-normal" style="cursor: pointer;"> E-mail</a>';
             } else {
-                $emailDiscente = '<a target="_blank" class="text-decoration-none text-body" href="mailto:' . $rowDiscentes['emailIntegrante'] . '"> '. $rowDiscentes['emailIntegrante'] .'</a>';
+                $emailDiscente = '<a target="_blank" class="text-decoration-none text-body" href="mailto:' . $rowDiscentes['emailIntegrante'] . '"> ' . $rowDiscentes['emailIntegrante'] . '</a>';
             }
-            
+
             if (empty($rowDiscentes['socialIntegrante'])) {
                 $socialDiscente = '<a class="text-primary" style="cursor: pointer;"> &nbsp Linkedin</a>';
             } else {

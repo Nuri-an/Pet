@@ -19,7 +19,7 @@
         border-bottom: 2px solid #000;
     }
 
-    hr {
+    .linha {
         border: 0; 
         height: 1px; 
         background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
