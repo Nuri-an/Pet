@@ -1,10 +1,5 @@
-function atualizarInicio() {
-  $("#atualiza").load('viewInicioAdm.php #atualiza');
-
-}
-
 $(document).ready(function () {
-
+  atualizar();
   $("#sobre").addClass('menuAtivo');
   $("#sobre").addClass('font-weight-bold');
 
@@ -19,8 +14,22 @@ $(document).ready(function () {
 
 });
 
-function logout() {
 
+function atualizar() {
+  if ($("#corpoInfo").hasClass('paginacao')) {
+    classe = 1;
+  }
+  $.post('sobre.php', function (retorna) {
+    $("#corpo").html(retorna);
+
+    if (classe == 1) {
+      $.get("sobre.php", function () {
+        $('.editar').show();
+
+        $('#corpoInfo').addClass('paginacao');
+      });
+    }
+  });
 }
 
 function negrito() {
@@ -77,12 +86,16 @@ function nomeFoto() {
 function escolheGaleria(tipo) {
   if (tipo == 'f') {
     $('#caroselVideo').hide();
+    $('.slidesVideos').hide();
     $('#caroselFoto').show();
+    $('.slidesFotos').show();
   }
 
   if (tipo == 'v') {
     $('#caroselFoto').hide();
+    $('.slidesFotos').hide();
     $('#caroselVideo').show();
+    $('.slidesVideos').show();
     $("#caroselVideo").carousel('cycle');
   }
 }
@@ -175,7 +188,7 @@ $(document).ready(function () {
               setTimeout(function () {
                 dialog.modal('hide');
               }, 3000); //3 segundos depois executa
-            atualizarInicio();
+            atualizar();
             }
             else {
               dialog.init(function () {
@@ -300,7 +313,7 @@ $(document).ready(function () {
               setTimeout(function () {
                 dialog.modal('hide');
               }, 3000); //3 segundos depois executa
-              atualizarInicio();
+              atualizar();
             }
             else {
               dialog.init(function () {
@@ -332,7 +345,7 @@ function excluirMidia(id) {
     buttons: {
       confirm: {
         label: 'Sim',
-        className: 'btn-warning'
+        className: 'btn-warning' 
       },
       cancel: {
         label: 'Não',
@@ -361,7 +374,7 @@ function excluirMidia(id) {
               setTimeout(function () {
                 dialog.modal('hide');
               }, 3000); //3 segundos depois executa
-              atualizarInicio();
+              atualizar();
             }
 
             else {
