@@ -1,14 +1,5 @@
 <?php
-if ( session_status() !== PHP_SESSION_ACTIVE )
- {
-    session_start();
-}
-
-require '../inc/classes/Config.php';
-
-
-$cb                             = new Config('PET - Programa de Educação Tutorial', '1.0', '../assets');
-
+( session_status() !== PHP_SESSION_ACTIVE ) ? session_start() : ' ' ; 
 ?>
 <?php
 

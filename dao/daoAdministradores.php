@@ -45,7 +45,7 @@ class DaoAdministradores
                 $email = $admNewRow['emailIntegrante'];
                 $nome =  explode(' ', $admNewRow['nomeIntegrante'])[0];
 
-                require '../_php-mailer/PHPMailerAutoload.php';
+                require '../assets/php-mailer/PHPMailerAutoload.php';
 
                 $mail = new PHPMailer;
 
@@ -112,7 +112,7 @@ class DaoAdministradores
                 $email = $admNewRow['emailIntegrante'];
                 $nome =  explode(' ', $admNewRow['nomeIntegrante'])[0];
 
-                require '../_php-mailer/PHPMailerAutoload.php';
+                require '../assets/php-mailer/PHPMailerAutoload.php';
 
                 $mail = new PHPMailer;
 

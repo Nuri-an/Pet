@@ -72,7 +72,7 @@ class DaoLogin
             $email = $admRow['emailIntegrante'];
             $nome =  explode(' ', $admRow['nomeIntegrante'])[0];
 
-            require '../_php-mailer/PHPMailerAutoload.php';
+            require '../assets/php-mailer/PHPMailerAutoload.php';
 
             $mail = new PHPMailer;
 
