@@ -16,7 +16,7 @@ $(document).ready(function () {
 
 
 function atualizar() {
-  if ($("#corpoInfo").hasClass('paginacao')) {
+  if ($("#adm").hasClass('paginacao')) {
     classe = 1;
   }
   $.post('sobre.php', function (retorna) {
@@ -26,7 +26,7 @@ function atualizar() {
       $.get("sobre.php", function () {
         $('.editar').show();
 
-        $('#corpoInfo').addClass('paginacao');
+        $('#adm').addClass('paginacao');
       });
     }
   });

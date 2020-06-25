@@ -6,10 +6,6 @@ require '../inc/global/head_start.php';
 require '../inc/global/banner.php';
 require '../inc/global/config.php';
 
-require_once("../dao/daoInicio.php");
-
-$inicioDao = new DaoInicio();
-
 ?>
 
 <link rel="stylesheet" href="../assets/css/inicio.css">
@@ -209,7 +205,7 @@ $inicioDao = new DaoInicio();
 
             divEditar.show();
 
-            $('#corpoInfo').addClass('paginacao');
+            $('#adm').addClass('paginacao');
         });
     });
 </script>

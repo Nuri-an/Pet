@@ -15,7 +15,7 @@ require '../inc/global/config.php';
 <script>
     $(document).ready(function() {
         $.get("sobre.php", function() {
-            $('#corpoInfo').removeClass('paginacao');
+            $('#adm').removeClass('paginacao');
         });
     });
 

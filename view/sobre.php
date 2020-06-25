@@ -21,7 +21,7 @@ $stmtGaleriaVE->execute();
 ?>
 
 
-<p class="badge badge-danger text-wrap">Sobre</p>
+<p class="badge badge-danger text-wrap" id="adm">Sobre</p>
 <hr class="bg-danger" style="margin-top: -17px; margin-bottom: 20px;" />
 
 <div class="container" style="overflow:hidden;" id="corpoInfo">

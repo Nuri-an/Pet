@@ -1,5 +1,6 @@
 
 $(document).ready(function () {
+    atualizar();
     $("#integrantes").addClass('menuAtivo');
     $("#integrantes").addClass('font-weight-bold');
 
@@ -16,8 +17,25 @@ $(document).ready(function () {
     $("#cpf").mask("999.999.999-99", {
         reverse: true
     });
-
 });
+
+
+function atualizar() {
+    if ($("#adm").hasClass('paginacao')) {
+        classe = 1;
+    }
+    $.post('integrantes.php', function (retorna) {
+        $("#corpo").html(retorna);
+
+        if (classe == 1) {
+            $.get("integrantes.php", function () {
+                $('.editar').show();
+
+                $('#adm').addClass('paginacao');
+            });
+        }
+    });
+}
 
 function abreT(indice) {
     var conteudo = $('#conteudoT' + indice);
@@ -163,7 +181,7 @@ $(document).ready(function () {
                                 dialog.modal('hide');
                             }, 3000); //3 segundos depois executa
                         }
-                        atualizarInicio();
+                        atualizar();
                     }
                 });
                 $('#modalAtualizar').modal('hide');
@@ -217,7 +235,7 @@ function excluir(id) {
                                     dialog.modal('hide');
                                 }, 3000); //3 segundos depois executa
                             }
-                            atualizarInicio();
+                            atualizar();
                         }
                     });
                 }
@@ -271,7 +289,7 @@ function excluir(id) {
                                                 dialog.modal('hide');
                                             }, 3000); //3 segundos depois executa
                                         }
-                                        atualizarInicio();
+                                        atualizar();
                                     }
                                 });
                             }
@@ -283,9 +301,6 @@ function excluir(id) {
     });
 }
 
-function atualizarInicio() {
-    $("#atualiza").load('viewIntegrantesAdm.php #atualiza');
-}
 
 function verInformacoes(id) {
     var idIntegrante = $('#rowEditarInformacoes_' + id).attr("data-id");
