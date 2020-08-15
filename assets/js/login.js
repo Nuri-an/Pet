@@ -138,13 +138,15 @@ function cadastroAdm() {
 function backLoginC() {
     $('#cadastro').hide();
     $('#login').show();
-
+    $('#logar-form').trigger("reset");
+    escondeSenha();
 }
 
 function backLoginS() {
     $('#esqueceuSenha').hide();
     $('#login').show();
-
+    $('#logar-form').trigger("reset");
+    escondeSenha();
 }
 
 $.validator.addMethod("nomeCompleto", function (value, element) {
@@ -204,7 +206,7 @@ $(document).ready(function () {
                     data: dados,
 
                     success: function (result) {
-                        //alert(result);
+                        alert(result);
 
                         if (result == 2) {
                             dialog.init(function () {
@@ -238,6 +240,7 @@ $(document).ready(function () {
                                     id: result
                                 },
                                 success: function (envio) {
+                                    alert(envio);
                                     if (envio == 1) {
                                         dialog.init(function () {
                                             dialog.find('.bootbox-body').html('Detectamos algum erro. Caso não tenha recebido o email, tente novamente mais tarde.');

@@ -51,7 +51,11 @@ class DaoAdministradores
 
                 //$mail->SMTPDebug = 3;                               // Enable verbose debug output
 
-                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->isSMTP();      
+                $mail -> Host = 'localhost' ;
+                $mail -> SMTPAuth = false ;
+                $mail -> SMTPAutoTLS = false ; 
+                $mail -> Porta = 25 ;                                // Set mailer to use SMTP
                 $mail->Host = 'smtp-mail.outlook.com; smtp.gmail.com';  // Specify main and backup SMTP servers
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
                 $mail->Username = 'gpca.recovery@gmail.com';                 // SMTP username

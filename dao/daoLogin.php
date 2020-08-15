@@ -25,7 +25,7 @@ class DaoLogin
         try {
 
             $cpf = $login->getCpf();
-            $senha = $login->getSenha();
+            $senha = md5($login->getSenha());
 
             // $senhaCriptografada = hash('sha512', md5($senha));
 
@@ -142,7 +142,7 @@ class DaoLogin
 
             session_start();
             $id = $_SESSION['id_redefinir_senha'];
-            $senha = $login->getSenha();
+            $senha = md5($login->getSenha());
 
             $stmt = $this->conn->prepare("UPDATE integrantes SET senhaIntegrante = ? WHERE codIntegrante = ? ");
 
@@ -171,7 +171,7 @@ class DaoLogin
             $email = $login->getEmail();
             $cpf = $login->getCpf();
             $tipo = $login->getTipo();
-            $senha = $login->getSenha();
+            $senha = md5($login->getSenha());
 
             $stmt2 = $this->conn->prepare("SELECT * FROM integrantes WHERE cpfIntegrante = :cpf AND situacaoIntegrante LIKE 'Administrador'");
             $stmt2->execute(array(':cpf' => $cpf));

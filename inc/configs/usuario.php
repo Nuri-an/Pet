@@ -8,19 +8,19 @@
         <a class="nav-link" id="noticias" href='index.php'> <font size="4"> Início </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="sobre" href="viewSobreUser.php"> <font size="4"> Sobre </font> </a>
+        <a class="nav-link" id="sobre" href="sobre.php"> <font size="4"> Sobre </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="publicacoes" href="viewPublicacoesUser.php"> <font size="4"> Publicações </font> </a>
+        <a class="nav-link" id="publicacoes" href="publicacoes.php"> <font size="4"> Publicações </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="projetos" href="viewProjetosUser.php"> <font size="4"> Projetos </font> </a>
+        <a class="nav-link" id="projetos" href="projetos.php"> <font size="4"> Projetos </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="integrantes" href="viewIntegrantesUser.php"> <font size="4"> Integrantes </font> </a>
+        <a class="nav-link" id="integrantes" href="integrantes.php"> <font size="4"> Integrantes </font> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="downloads" href="viewDownloadsUser.php"> <font size="4"> Downloads </font> </a>
+        <a class="nav-link" id="downloads" href="downloads.php"> <font size="4"> Downloads </font> </a>
       </li>
     </ul>  
   </div>
@@ -28,7 +28,7 @@
     <a href="https://www.facebook.com/gpca.if" target="_blank">
       <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #000; cursor: pointer;" title="Página do grupo"></i>
     </a>
-    <a href="#">
+    <a href="https://www.instagram.com/pet_computacao/?hl=pt-br">
       <i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #000; cursor: pointer; margin-left:10px;" title="Perfil do grupo"></i>
     </a>
   </div>

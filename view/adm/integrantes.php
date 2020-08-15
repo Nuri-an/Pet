@@ -1,7 +1,4 @@
 <?php
-(session_status() !== PHP_SESSION_ACTIVE) ? session_start() : ' ';
-(isset($_SESSION['adm_session'])) ? ' ' : header("Location: viewNoticiasUser.php"); 
-
 require '../inc/global/head_start.php';
 require '../inc/global/banner.php';
 require '../inc/global/config.php';
@@ -149,7 +146,7 @@ require '../inc/global/config.php';
 
 <script>
     $(document).ready(function() {
-        $.get("integrantes.php", function() {
+        $.get("postIntegrantes.php", function() {
             var divEditar = $('.editar');
 
             divEditar.show();

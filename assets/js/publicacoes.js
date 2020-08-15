@@ -36,13 +36,13 @@ function listarPublicacoes(pagina, quantidadePg, ano) {
         quantidadePg: quantidadePg,
         ano: ano
     }
-    $.post('publicacoes.php', dados, function (retorna) {
+    $.post('postPublicacoes.php', dados, function (retorna) {
         //Subtitui o valor no seletor id="externas"
         $("#corpo").html(retorna);
 
         //alert(classe);
         if (classe == 1) {
-            $.get("publicacoes.php", function () {
+            $.get("postPublicacoes.php", function () {
                 var divEditar = $('.editar');
 
                 divEditar.show();

@@ -4,9 +4,9 @@ require '../inc/global/banner.php';
 require '../inc/global/config.php';
 ?>
 
-<link rel="stylesheet" href="../assets/css/publicacoes.css">
+<link rel="stylesheet" href="../assets/css/projetos.css">
 
-<script type="text/javascript" src="../assets/js/publicacoes.js"></script>
+<script type="text/javascript" src="../assets/js/projetos.js"></script>
 
 <div id="corpo"> </div>
 
@@ -14,7 +14,7 @@ require '../inc/global/config.php';
 
 <script>
     $(document).ready(function() {
-        $.get("publicacoes.php", function() {
+        $.get("postProjetos.php", function() {
             $('li').removeClass('paginacao');
         });
     });

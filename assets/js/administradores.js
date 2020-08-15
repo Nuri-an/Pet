@@ -30,7 +30,7 @@ function listarAdministradores(pagina, quantidadePg) {
         pagina: pagina,
         quantidadePg: quantidadePg
     }
-    $.post('administradores.php', dados, function (retorna) {
+    $.post('postAdministradores.php', dados, function (retorna) {
         //Subtitui o valor no seletor id="externas"
         $("#corpo").html(retorna);
     });

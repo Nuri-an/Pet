@@ -4,17 +4,21 @@ require '../inc/global/banner.php';
 require '../inc/global/config.php';
 ?>
 
-<link rel="stylesheet" href="../assets/css/inicio.css">
+<link rel="stylesheet" href="../assets/css/integrantes.css">
 
-<script type="text/javascript" src="../assets/js/inicio.js"></script>
+<script type="text/javascript" src="../assets/js/integrantes.js"></script>
 
-<div style="margin-top: 20px; margin-bottom: 20px;" id="corpo"> </div>
+
+<div id="corpo" class="container"> </div>
 
 </div>
 
 <script>
     $(document).ready(function() {
-        $.get("sobre.php", function() {
+        $.get("postIntegrantes.php", function() {
+            var divEditar = $('.editar');
+
+            divEditar.hide();
             $('#adm').removeClass('paginacao');
         });
     });

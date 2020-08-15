@@ -33,13 +33,12 @@ function listarNoticias(pagina, quantidadePg) {
     quantidadePgIn: quantidadePg
   }
 
-  $.post('noticias.php', dados, function (retorna) {
-    //Subtitui o valor no seletor id="externas"
+  $.post('postNoticias.php', dados, function (retorna) {
+    
     $("#corpo").html(retorna);
 
-    //alert(classe);
     if (classe == 1) {
-      $.get("noticias.php", function () {
+      $.get("postNoticias.php", function () {
         var divEditar = $('.editar');
 
         divEditar.show();

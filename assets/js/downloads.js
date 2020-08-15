@@ -39,13 +39,13 @@ function listarDownloads(pagina, quantidadePg) {
     quantidadePg: quantidadePg
   }
 
-  $.post('downloads.php', dados, function (retorna) {
+  $.post('postDownloads.php', dados, function (retorna) {
     //Subtitui o valor no seletor id="externas"
     $("#corpo").html(retorna);
 
     // alert(classe);
     if (classe == 1) {
-      $.get("downloads.php", function () {
+      $.get("postDownloads.php", function () {
         var divEditar = $('.editar');
 
         divEditar.show();

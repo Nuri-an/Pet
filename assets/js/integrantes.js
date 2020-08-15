@@ -24,11 +24,11 @@ function atualizar() {
     if ($("#adm").hasClass('paginacao')) {
         classe = 1;
     }
-    $.post('integrantes.php', function (retorna) {
+    $.post('postIntegrantes.php', function (retorna) {
         $("#corpo").html(retorna);
 
         if (classe == 1) {
-            $.get("integrantes.php", function () {
+            $.get("postIntegrantes.php", function () {
                 $('.editar').show();
 
                 $('#adm').addClass('paginacao');

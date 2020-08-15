@@ -36,13 +36,13 @@ function listarProjetos(pagina, quantidadePg, ano) {
         quantidadePg: quantidadePg,
         ano: ano
     }
-    $.post('projetos.php', dados, function (retorna) {
+    $.post('postProjetos.php', dados, function (retorna) {
         //Subtitui o valor no seletor id="externas"
         $("#corpo").html(retorna);
 
-       // alert(classe);
+        // alert(classe);
         if (classe == 1) {
-            $.get("projetos.php", function () {
+            $.get("postProjetos.php", function () {
                 var divEditar = $('.editar');
 
                 divEditar.show();
@@ -75,48 +75,41 @@ function lerMais(id) {
 }
 
 function editar_modal(id) {
-    $.get("viewProjetosAdm.php", function () {
 
-        var cod = $('#rowEditarProjetos_' + id).attr("data-id");
-        var titulo = $('#rowEditarProjetos_' + id).attr("data-titulo");
-        var descricao = $('#rowEditarProjetos_' + id).attr("data-descricao");
-        var midia = $('#rowEditarProjetos_' + id).attr("data-midia");
-        var ano = $('#rowEditarProjetos_' + id).attr("data-ano");
-        var publicacao = $('#rowEditarProjetos_' + id).attr("data-publicacao");
-        var parceria = $('#rowEditarProjetos_' + id).attr("data-parceria");
-        //var acao = 'editarF';
-//alert(publicacao);
+    var cod = $('#rowEditarProjetos_' + id).attr("data-id");
+    var titulo = $('#rowEditarProjetos_' + id).attr("data-titulo");
+    var descricao = $('#rowEditarProjetos_' + id).attr("data-descricao");
+    var midia = $('#rowEditarProjetos_' + id).attr("data-midia");
+    var ano = $('#rowEditarProjetos_' + id).attr("data-ano");
+    var publicacao = $('#rowEditarProjetos_' + id).attr("data-publicacao");
+    var parceria = $('#rowEditarProjetos_' + id).attr("data-parceria");
 
-        $('#Projetos-form').trigger("reset");
-        $('#excluirProjeto').show();
-        $('#verProjetos').modal('show');
+    $('#Projetos-form').trigger("reset");
+    $('#excluirProjeto').show();
+    $('#verProjetos').modal('show');
 
-        $('.modal .modal-dialog .modal-content #tituloModal').html('Edite as informações sobre o projetos');
-        $('.modal .modal-dialog .modal-content #Projetos-form  #acao').val('editar');
-        $('.modal .modal-dialog .modal-content #Projetos-form #id').val(cod);
-        $('.modal .modal-dialog .modal-content #excluirProjetos-form #id').val(cod);
-        $('.modal .modal-dialog .modal-content  #titulo').val(titulo);
-        $('.modal .modal-dialog .modal-content  #descricao').val(descricao);
-        $('.modal .modal-dialog .modal-content  #data').val(ano);
-        $('.modal .modal-dialog .modal-content .custom-file #midia').html(midia);
-        $('#idMidia').val('ante');
-        $('.modal .modal-dialog .modal-content  #publicacao').val(publicacao);
-        $('.modal .modal-dialog .modal-content  #parceria').val(parceria);
-
-    });
+    $('.modal .modal-dialog .modal-content #tituloModal').html('Edite as informações sobre o projetos');
+    $('.modal .modal-dialog .modal-content #Projetos-form  #acao').val('editar');
+    $('.modal .modal-dialog .modal-content #Projetos-form #id').val(cod);
+    $('.modal .modal-dialog .modal-content #excluirProjetos-form #id').val(cod);
+    $('.modal .modal-dialog .modal-content  #titulo').val(titulo);
+    $('.modal .modal-dialog .modal-content  #descricao').val(descricao);
+    $('.modal .modal-dialog .modal-content  #data').val(ano);
+    $('.modal .modal-dialog .modal-content .custom-file #midia').html(midia);
+    $('#idMidia').val('ante');
+    $('.modal .modal-dialog .modal-content  #publicacao').val(publicacao);
+    $('.modal .modal-dialog .modal-content  #parceria').val(parceria);
 }
 
 function adicionar_modal(id) {
-    $.get("viewProjetosAdm.php", function () {
 
-        $('#Projetos-form').trigger("reset");
-        $('#excluirProjeto').hide();
-        $('#verProjetos').modal('show');
+    $('#Projetos-form').trigger("reset");
+    $('#excluirProjeto').hide();
+    $('#verProjetos').modal('show');
 
-        $('.modal .modal-dialog .modal-content #tituloModal').html('Adicione um projetos à lista');
-        $('.modal .modal-dialog .modal-content  #acao').val('adicionar');
-        $('#midia').html('');
-    });
+    $('.modal .modal-dialog .modal-content #tituloModal').html('Adicione um projetos à lista');
+    $('.modal .modal-dialog .modal-content  #acao').val('adicionar');
+    $('#midia').html('');
 }
 
 function nomeMidiaAdd() {
@@ -137,7 +130,7 @@ function nomeMidiaAdd() {
 function deletMidia() {
     $('.modal .modal-dialog .modal-content .custom-file #midia').html('');
     $('#idMidia').val('vazio');
-  }
+}
 
 $(document).ready(function () {
     $('#btnProjeto').click(function () {
@@ -205,11 +198,11 @@ $(document).ready(function () {
                     contentType: false,
 
                     success: function (result) {
-                        alert(result);
+                        //alert(result);
 
                         if (result == 1) {
                             dialog.init(function () {
-                                dialog.find('.bootbox-body').html('Adicionada com sucesso!');
+                                dialog.find('.bootbox-body').html('Operação realizada com sucesso!');
                             });
                             setTimeout(function () {
                                 dialog.modal('hide');
@@ -223,7 +216,7 @@ $(document).ready(function () {
                                 dialog.modal('hide');
                             }, 3000); //3 segundos depois executa
                         }
-                        
+
                         atualizar();
                     }
                 });
@@ -239,61 +232,61 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('#btnExcluirProjeto').click(function () {
-      var dados = $('#excluirProjetos-form').serializeArray();
-      $('#verProjetos').modal('hide');
-      bootbox.confirm({
-        message: "Você realmente deseja excluir esse projeto da lista ?",
-        buttons: {
-          cancel: {
-            label: 'Não',
-            className: 'btn-warning'
-          },
-          confirm: {
-            label: 'Sim',
-            className: 'btn-danger'
-          }
-        },
-        callback: function (result) {
-          if (result) {
-            dialog = bootbox.dialog({
-              message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
-              closeButton: false
-            });
-  
-  
-            $.ajax({
-              type: "POST",
-              url: "../controller/ControllerProjetos.php",
-              data: dados,
-  
-              success: function (resultado) {
-                //alert(resultado);
-                if (resultado == 1) {
-                  dialog.init(function () {
-                    dialog.find('.bootbox-body').html('Excluído com sucesso!');
-                  });
-                  setTimeout(function () {
-                    dialog.modal('hide');
-                  }, 3000); //3 segundos depois executa
-                  atualizar();
+        var dados = $('#excluirProjetos-form').serializeArray();
+        $('#verProjetos').modal('hide');
+        bootbox.confirm({
+            message: "Você realmente deseja excluir esse projeto da lista ?",
+            buttons: {
+                cancel: {
+                    label: 'Não',
+                    className: 'btn-warning'
+                },
+                confirm: {
+                    label: 'Sim',
+                    className: 'btn-danger'
                 }
-  
-                else {
-                  dialog.init(function () {
-                    dialog.find('.bootbox-body').html('Não foi possível excluir. Tente novamente mais tarde.');
-                  });
-                  setTimeout(function () {
-                    dialog.modal('hide');
-                  }, 3000); //3 segundos depois executa
+            },
+            callback: function (result) {
+                if (result) {
+                    dialog = bootbox.dialog({
+                        message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
+                        closeButton: false
+                    });
+
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../controller/ControllerProjetos.php",
+                        data: dados,
+
+                        success: function (resultado) {
+                            //alert(resultado);
+                            if (resultado == 1) {
+                                dialog.init(function () {
+                                    dialog.find('.bootbox-body').html('Excluído com sucesso!');
+                                });
+                                setTimeout(function () {
+                                    dialog.modal('hide');
+                                }, 3000); //3 segundos depois executa
+                                atualizar();
+                            }
+
+                            else {
+                                dialog.init(function () {
+                                    dialog.find('.bootbox-body').html('Não foi possível excluir. Tente novamente mais tarde.');
+                                });
+                                setTimeout(function () {
+                                    dialog.modal('hide');
+                                }, 3000); //3 segundos depois executa
+                            }
+                        }
+                    });
                 }
-              }
-            });
-          }
-        }
-      });
-      return false;
+            }
+        });
+        return false;
     });
-  });
+});
 
 
 function openNewModal() {

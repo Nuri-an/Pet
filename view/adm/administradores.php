@@ -17,7 +17,7 @@ require '../inc/global/config.php';
 
 <script>
     $(document).ready(function() {
-        $.get("administradores.php", function() {
+        $.get("postAdministradores.php", function() {
             $('li').removeClass('paginacao');
         });
     });

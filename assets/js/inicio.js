@@ -19,11 +19,11 @@ function atualizar() {
   if ($("#adm").hasClass('paginacao')) {
     classe = 1;
   }
-  $.post('sobre.php', function (retorna) {
+  $.post('postSobre.php', function (retorna) {
     $("#corpo").html(retorna);
 
     if (classe == 1) {
-      $.get("sobre.php", function () {
+      $.get("postSobre.php", function () {
         $('.editar').show();
 
         $('#adm').addClass('paginacao');
@@ -96,7 +96,6 @@ function escolheGaleria(tipo) {
     $('.slidesFotos').hide();
     $('#caroselVideo').show();
     $('.slidesVideos').show();
-    $("#caroselVideo").carousel('cycle');
   }
 }
 
