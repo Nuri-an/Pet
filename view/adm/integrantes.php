@@ -91,7 +91,7 @@ require '../inc/global/config.php';
                         <div class="col-md-12">
                             <div class="form-material">
                                 <label for="social">
-                                    <h5> Linkedin: </h5>
+                                    <h5> Rede Social: </h5>
                                 </label>
                                 <input type="url" class="form-control" id="social" name="social"> </input>
                             </div>

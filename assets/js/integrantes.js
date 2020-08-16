@@ -360,6 +360,7 @@ function newDiscente() {
     $('.modal .modal-dialog .modal-content #tituloP').text("Adicione um novo discente ao grupo");
     $('.modal .modal-dialog .modal-content #acao').val(acao);
     $('.modal .modal-dialog .modal-content #tipo').val(tipo);
+    $('.form-group .col-md-12 .form-material .custom-file #foto').html('');
 }
 function newTutores() {
 
@@ -376,6 +377,7 @@ function newTutores() {
     $('.modal .modal-dialog .modal-content #tituloP').text("Adicione um novo tutor ao grupo");
     $('.modal .modal-dialog .modal-content #acao').val(acao);
     $('.modal .modal-dialog .modal-content #tipo').val(tipo);
+    $('.form-group .col-md-12 .form-material .custom-file #foto').html('');
 }
 
 

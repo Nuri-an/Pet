@@ -33,15 +33,15 @@ $stmtDiscentes->execute();
             }
 
             if (empty($rowTutores['socialIntegrante'])) {
-                $emailTutor = '<a class="font-weight-normal" style="cursor: pointer;"> E-mail</a>';
+                $emailTutor = '<a class="font-weight-normal" style="cursor: pointer;"  title="Sem e-mail disponível"> E-mail</a>';
             } else {
-                $emailTutor = '<a target="_blank" class="text-decoration-none text-body text-break" href="mailto:' . $rowTutores['emailIntegrante'] . '"> ' . $rowTutores['emailIntegrante'] . '</a>';
+                $emailTutor = '<a target="_blank" class="text-decoration-none text-body text-break"  title="Clique e confira" href="mailto:' . $rowTutores['emailIntegrante'] . '"> E-mail </a>';
             }
 
             if (empty($rowTutores['socialIntegrante'])) {
-                $socialTutores = '<a  class="text-primary" style="cursor: pointer;"> &nbsp Linkedin</a>';
+                $socialTutores = '<a  class="font-weight-normal" style="cursor: pointer;"  title="Sem link disponível"> &nbsp Reade Social</a>';
             } else {
-                $socialTutores = '<a target="_blank" href="' . $rowTutores['socialIntegrante'] . '"> &nbsp Linkedin</a>';
+                $socialTutores = '<a target="_blank" class="text-decoration-none text-body text-break" href="' . $rowTutores['socialIntegrante'] . '"   title="Clique e confira"> &nbsp Reade Social</a>';
             }
 
             echo '
@@ -61,10 +61,10 @@ $stmtDiscentes->execute();
                             <p>
                                 <i class="fa fa-address-card-o"></i>&nbsp ' . $emailTutor . '
                                 <br />
-                                <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;"></i>' . $socialTutores . '
+                                <i class="fa fa-share-square-o" aria-hidden="true"></i>' . $socialTutores . '
                                 <br />
                                 <i class="fa fa-handshake-o" aria-hidden="true"></i> &nbsp ' . $rowTutores['situacaoIntegrante'] . '
-                                <a class="editar" style="display: none; cursor: pointer; margin-left:90%; margin-top: 10px; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Editar" id="rowEditarInformacoes_' . $i . '" data-id="' . $rowTutores['codIntegrante'] . '" data-nome="' . $rowTutores['nomeIntegrante'] . '" data-cpf="' . $rowTutores['cpfIntegrante'] . '" data-email="' . $rowTutores['emailIntegrante'] . '"  data-social="' . $rowTutores['socialIntegrante'] . '" data-dataInicio="' . $rowTutores['dataInicioIntegrante'] . '" data-dataFim="' . $rowTutores['dataFimIntegrante'] . '" data-situacao="' . $rowTutores['situacaoIntegrante'] . '" onclick="verInformacoes(' . $i . ')">
+                                <a class="editar" style="display: none; cursor: pointer; margin-left:90%; margin-top: 10px; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Editar" id="rowEditarInformacoes_' . $i . '" data-id="' . $rowTutores['codIntegrante'] . '" data-nome="' . $rowTutores['nomeIntegrante'] . '" data-cpf="' . $rowTutores['cpfIntegrante'] . '" data-email="' . $rowTutores['emailIntegrante'] . '"  data-social="' . $rowTutores['socialIntegrante'] . '" data-dataInicio="' . $rowTutores['dataInicioIntegrante'] . '" data-dataFim="' . $rowTutores['dataFimIntegrante'] . '" data-foto="' . $rowTutores['fotoIntegrante'] . '"  data-situacao="' . $rowTutores['situacaoIntegrante'] . '" onclick="verInformacoes(' . $i . ')">
                                     <i class="fa fa-pencil fa-2x text-success"></i> 
                                 </a>
                             </p>
@@ -103,15 +103,15 @@ $stmtDiscentes->execute();
             }
 
             if (empty($rowDiscentes['socialIntegrante'])) {
-                $emailDiscente = '<a class="font-weight-normal" style="cursor: pointer;"> E-mail</a>';
+                $emailDiscente = '<a class="font-weight-normal" style="cursor: pointer;" title="Sem e-mail disponível"> E-mail</a>';
             } else {
-                $emailDiscente = '<a target="_blank" class="text-decoration-none text-body" href="mailto:' . $rowDiscentes['emailIntegrante'] . '"> ' . $rowDiscentes['emailIntegrante'] . '</a>';
+                $emailDiscente = '<a target="_blank" class="text-decoration-none text-body"  title="Clique e confira" href="mailto:' . $rowDiscentes['emailIntegrante'] . '"> E-mail </a>';
             }
 
             if (empty($rowDiscentes['socialIntegrante'])) {
-                $socialDiscente = '<a class="text-primary" style="cursor: pointer;"> &nbsp Linkedin</a>';
+                $socialDiscente = '<a  class="font-weight-normal" style="cursor: pointer;"  title="Sem link disponível"> &nbsp Reade Social</a>';
             } else {
-                $socialDiscente = '<a target="_blank"  class="text-decoration-none" href="' . $rowDiscentes['socialIntegrante'] . '"> &nbsp Linkedin</a>';
+                $socialDiscente = '<a target="_blank"  class="text-decoration-none text-body text-break"  title="Clique e confira" href="' . $rowDiscentes['socialIntegrante'] . '"> &nbsp Reade Social</a>';
             }
 
             echo '
@@ -131,7 +131,7 @@ $stmtDiscentes->execute();
                             <p>
                                 <i class="fa fa-address-card-o"></i>&nbsp ' . $emailDiscente . '
                                 <br />
-                                <i class="fa fa-linkedin-square" aria-hidden="true" style="color: blue;"></i>' . $socialDiscente . '
+                                <i class="fa fa-share-square-o" aria-hidden="true"></i>' . $socialDiscente . '
                                 <br />
                                 <i class="fa fa-handshake-o" aria-hidden="true"></i> &nbsp ' . $rowDiscentes['situacaoIntegrante'] . '
                                 <a class="editar" style="display: none; cursor: pointer; margin-left:90%; margin-top: 10px; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Editar" id="rowEditarInformacoes_' . $i . '" data-id="' . $rowDiscentes['codIntegrante'] . '" data-nome="' . $rowDiscentes['nomeIntegrante'] . '" data-cpf="' . $rowDiscentes['cpfIntegrante'] . '" data-email="' . $rowDiscentes['emailIntegrante'] . '"  data-social="' . $rowDiscentes['socialIntegrante'] . '" data-dataInicio="' . $rowDiscentes['dataInicioIntegrante'] . '" data-dataFim="' . $rowDiscentes['dataFimIntegrante'] . '" data-situacao="' . $rowDiscentes['situacaoIntegrante'] . '" data-foto="' . $rowDiscentes['fotoIntegrante'] . '" onclick="verInformacoes(' .  $i  . ')">
