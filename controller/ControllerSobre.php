@@ -26,9 +26,9 @@ switch ($acao) {
 
 function atualizarInfo()
 {
-    require_once('../model/ModelInicio.php');
-    require_once('../dao/daoInicio.php');
-    $dao = new DaoInicio();
+    require_once('../model/ModelSobre.php');
+    require_once('../dao/daoSobre.php');
+    $dao = new DaoSobre();
 
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
@@ -40,7 +40,7 @@ function atualizarInfo()
 
 
 
-    $Informacoes = new ModelInicio();
+    $Informacoes = new ModelSobre();
     $Informacoes->setId($id);
     $Informacoes->setTituloP($tituloP);
     $Informacoes->setInfoP($infoP);
@@ -55,11 +55,11 @@ function atualizarInfo()
 
 function adicionarFoto()
 {
-    require_once('../model/ModelInicio.php');
-    require_once('../dao/daoInicio.php');
+    require_once('../model/ModelSobre.php');
+    require_once('../dao/daoSobre.php');
 
-    $dao = new DaoInicio();
-    $Galeria = new ModelInicio();
+    $dao = new DaoSobre();
+    $Galeria = new ModelSobre();
 
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
     $link = filter_var($_POST["videoLink"], FILTER_SANITIZE_STRING);
@@ -95,11 +95,11 @@ function adicionarFoto()
 
 function adicionarVideo()
 {
-    require_once('../model/ModelInicio.php');
-    require_once('../dao/daoInicio.php');
+    require_once('../model/ModelSobre.php');
+    require_once('../dao/daoSobre.php');
 
-    $dao = new DaoInicio();
-    $Galeria = new ModelInicio();
+    $dao = new DaoSobre();
+    $Galeria = new ModelSobre();
 
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
     $link = filter_var($_POST["videoLink"], FILTER_SANITIZE_STRING);
@@ -135,11 +135,11 @@ function adicionarVideo()
 
 function atualizarFoto()
 {
-    require_once('../model/ModelInicio.php');
-    require_once('../dao/daoInicio.php');
+    require_once('../model/ModelSobre.php');
+    require_once('../dao/daoSobre.php');
 
-    $dao = new DaoInicio();
-    $Galeria = new ModelInicio();
+    $dao = new DaoSobre();
+    $Galeria = new ModelSobre();
 
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
@@ -181,11 +181,11 @@ function atualizarFoto()
 
 function atualizarVideo()
 {
-    require_once('../model/ModelInicio.php');
-    require_once('../dao/daoInicio.php');
+    require_once('../model/ModelSobre.php');
+    require_once('../dao/daoSobre.php');
 
-    $dao = new DaoInicio();
-    $Galeria = new ModelInicio();
+    $dao = new DaoSobre();
+    $Galeria = new ModelSobre();
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
     $titulo = filter_var($_POST["titulo"], FILTER_SANITIZE_STRING);
@@ -229,11 +229,11 @@ function atualizarVideo()
 
 function excluirMidia()
 {
-    require_once('../model/ModelInicio.php');
-    require_once('../dao/daoInicio.php');
+    require_once('../model/ModelSobre.php');
+    require_once('../dao/daoSobre.php');
 
-    $dao = new DaoInicio();
-    $Galeria = new ModelInicio();
+    $dao = new DaoSobre();
+    $Galeria = new ModelSobre();
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
 

@@ -5,13 +5,13 @@ require '../inc/global/config.php';
 
 ?>
 
-<link rel="stylesheet" href="../assets/css/inicio.css">
+<link rel="stylesheet" href="../assets/css/sobre.css">
 
 <script type="text/javascript" src="../assets/js/plugins/jquery-3.3.1.min.js"> </script>
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/additional-methods.min.js"></script>
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/localization/messages_pt_BR.js"></script>
-<script type="text/javascript" src="../assets/js/inicio.js"></script>
+<script type="text/javascript" src="../assets/js/sobre.js"></script>
 
 <div style="margin-top: 20px; margin-bottom: 20px;" id="corpo"> </div>
 
@@ -201,6 +201,8 @@ require '../inc/global/config.php';
             var divEditar = $('.editar');
 
             divEditar.show();
+            
+            $('.slidesVideos').hide();    
 
             $('#adm').addClass('paginacao');
         });

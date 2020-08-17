@@ -1,22 +1,22 @@
 <?php
 
-require_once("../dao/daoInicio.php");
+require_once("../dao/daoSobre.php");
 
-$inicioDao = new DaoInicio();
+$sobreDao = new DaoSobre();
 
 ?>
 
 <?php
-$stmtInformacoes = $inicioDao->runQuery("SELECT * FROM informacoes");
+$stmtInformacoes = $sobreDao->runQuery("SELECT * FROM informacoes");
 $stmtInformacoes->execute();
 
-$stmtGaleria = $inicioDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'imagem%'");
+$stmtGaleria = $sobreDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'imagem%'");
 $stmtGaleria->execute();
 
-$stmtGaleriaV = $inicioDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'video%'");
+$stmtGaleriaV = $sobreDao->runQuery("SELECT * FROM galeria WHERE midiaGaleria LIKE 'video%'");
 $stmtGaleriaV->execute();
 
-$stmtGaleriaVE = $inicioDao->runQuery("SELECT * FROM galeria WHERE urlGaleria is not null");
+$stmtGaleriaVE = $sobreDao->runQuery("SELECT * FROM galeria WHERE urlGaleria is not null");
 $stmtGaleriaVE->execute();
 ?>
 
@@ -165,7 +165,7 @@ $stmtGaleriaVE->execute();
 
             if ($rowGaleriaVE['urlGaleria'] != '') {
                 echo '<div class="carousel-item carouselItemVideo" align="center" style="margin-top:30px;">
-                        <embed class="carouselItemVideoYt" src="https://www.youtube.com/embed/' . explode('=', $rowGaleriaVE['urlGaleria'])[1] . '"  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen 
+                        <embed class="carouselItemVideoYt" src="https://www.youtube.com/embed/' . explode('/', $rowGaleriaVE['urlGaleria'])[3] . '"  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen 
                         onclick=controles("' . $j . '","pause") id="videoG_' . $j . '" alt="Youtube - ' . $titulo . '" />
                         <div style=" text-align:center;">
                             <h5> Conheça nosso canal no Youtube! </h5>

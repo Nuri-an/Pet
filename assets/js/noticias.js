@@ -119,6 +119,7 @@ function adicionar_modal() {
   $('#adicionarNoticias-form .form-group .col-md-12 .form-material .custom-file #arquivo').html('');
   $('.modal .modal-dialog .modal-content #tituloP').text("Adicione uma nova notícia");
   $('.modal .modal-dialog .modal-content #acao').val(acao);
+  $('#Noticias-form .form-group .col-md-12 .form-material .custom-file #midia').html('');
 }
 
 function nomeMidia() {
@@ -212,7 +213,7 @@ $(document).ready(function () {
           contentType: false,
 
           success: function (result) {
-            alert(result);
+            //alert(result);
 
             if (result == 1) {
               dialog.init(function () {

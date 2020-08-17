@@ -59,14 +59,18 @@ function editar_modal(id) {
     var data = $('#rowEditarPublicacao_' + id).attr("data-data");
     var descricao = $('#rowEditarPublicacao_' + id).attr("data-descricao");
     var link = $('#rowEditarPublicacao_' + id).attr("data-link");
-    //var acao = 'editarF';
+    var acao = 'editar';
+    var excluir = $('#excluir');
 
 
-    $('#editarPublicacoes-form').trigger("reset");
-    $('#verEditarPublicacoes').modal('show');
+    $('#Publicacoes-form').trigger("reset");
+    $('#verPublicacoes').modal('show');
+    excluir.show();
 
 
-    $('.modal .modal-dialog .modal-content #editarPublicacoes-form #id').val(cod);
+    $('.modal .modal-dialog .modal-content .modal-title').html('Edite as informações sobre a publicações');
+    $('.modal .modal-dialog .modal-content #Publicacoes-form #acao').val(acao);
+    $('.modal .modal-dialog .modal-content #Publicacoes-form #id').val(cod);
     $('.modal .modal-dialog .modal-content #excluirPublicacoes-form #id').val(cod);
     $('.modal .modal-dialog .modal-content  #descricao').val(descricao);
     $('.modal .modal-dialog .modal-content #link').val(link);
@@ -75,30 +79,26 @@ function editar_modal(id) {
 }
 
 
-function adicionar_modal(id) {
+function adicionar_modal() {
 
-    var cod = $('#rowAdicionarPublicacao_' + id).attr("data-id");
-    var data = $('#rowAdicionarPublicacao_' + id).attr("data-data");
-    var descricao = $('#rowAdicionarPublicacao_' + id).attr("data-descricao");
-    var link = $('#rowAdicionarPublicacao_' + id).attr("data-link");
-    //var acao = 'editarF';
+  var excluir = $('#excluir');
+  var acao = 'adicionar';
 
 
-    $('#adicionarPublicacoes-form').trigger("reset");
-    $('#verAdicionarPublicacoes').modal('show');
+    $('#Publicacoes-form').trigger("reset");
+    $('#verPublicacoes').modal('show');
+    excluir.hide();
 
 
-    $('.modal .modal-dialog .modal-content #adicionarPublicacoes-form #id').val(cod);
-    $('.modal .modal-dialog .modal-content  #descricao').val(descricao);
-    $('.modal .modal-dialog .modal-content #link').val(link);
-    $('.modal .modal-dialog .modal-content  #data').val(data);
+    $('.modal .modal-dialog .modal-content .modal-title').html('Adicione uma publicacão');
+    $('.modal .modal-dialog .modal-content #Publicacoes-form #acao').val(acao);
 
 }
 
 
 $(document).ready(function () {
-    $('#btnAdicionarPublicacao').click(function () {
-        jQuery("#adicionarPublicacoes-form").validate({
+    $('#btnPublicacao').click(function () {
+        jQuery("#Publicacoes-form").validate({
             focusInvalid: true,
             errorClass: 'invalid-feedback animated fadeInDown',
             errorElement: 'div',
@@ -122,7 +122,7 @@ $(document).ready(function () {
                 },
                 'data': {
                     required: true,
-                    date: true
+                    number: true
                 }
             },
             messages: {
@@ -134,8 +134,7 @@ $(document).ready(function () {
                 }
             },
             submitHandler: function (form) {
-                //alert("enta coletando dados do form");
-                var dados = $('#adicionarPublicacoes-form').serializeArray();
+                var dados = $('#Publicacoes-form').serializeArray();
 
                 dialog = bootbox.dialog({
                     message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
@@ -152,7 +151,7 @@ $(document).ready(function () {
 
                         if (result == 1) {
                             dialog.init(function () {
-                                dialog.find('.bootbox-body').html('Adicionada com sucesso!');
+                                dialog.find('.bootbox-body').html('Operação realizada com sucesso!');
                             });
                             setTimeout(function () {
                                 dialog.modal('hide');
@@ -169,106 +168,18 @@ $(document).ready(function () {
                         atualizar();
                     }
                 });
-                $('#verAdicionarPublicacoes').modal('hide');
-                $('#adicionarPublicacoes-form').trigger("reset");
+                $('#verPublicacoes').modal('hide');
+                $('#Publicacoes-form').trigger("reset");
                 return false;
             }
         });
-        //alert("entrou");
     });
 });
-
-$(document).ready(function () {
-    $('#btnEditarPublicacao').click(function () {
-      jQuery("#editarPublicacoes-form").validate({
-        focusInvalid: true,
-        errorClass: 'invalid-feedback animated fadeInDown',
-        errorElement: 'div',
-        errorPlacement: (error, e) => {
-          jQuery(e).parents('.form-group > div').append(error);
-        },
-        highlight: e => {
-          jQuery(e).closest('.form-group').removeClass('is-invalid').addClass('is-invalid');
-        },
-        success: e => {
-          jQuery(e).closest('.form-group').removeClass('is-invalid');
-          jQuery(e).remove();
-        },
-        rules: {
-          'descricao': {
-            required: true
-          },
-          'link': {
-            required: false, 
-            url: true
-          },
-          'data': {
-            required: true,
-            date: true
-          }
-        },
-        messages: {
-          'descricao': {
-            required: 'Por favor, preeencha este campo',
-          },
-          'link': {
-            required: 'Por favor, preeencha este campo',
-          },
-          'data': {
-            required: 'Por favor, preeencha este campo',
-          }
-        },
-        submitHandler: function (form) {
-          //alert("enta coletando dados do form");
-          var dados = $('#editarPublicacoes-form').serializeArray();
-
-  
-          dialog = bootbox.dialog({
-            message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
-            closeButton: false
-          });
-  
-          $.ajax({
-            type: 'POST',
-            url: "../controller/ControllerPublicacoes.php",
-            data: dados,
-  
-            success: function (result) {
-              //alert(result);
-  
-              if ((result == 1) || (result == 3)) {
-                dialog.init(function () {
-                  dialog.find('.bootbox-body').html('Editado com sucesso!');
-                });
-                setTimeout(function () {
-                  dialog.modal('hide');
-                }, 3000); //3 segundos depois executa
-              }
-              else {
-                dialog.init(function () {
-                  dialog.find('.bootbox-body').html('Ocorreu um erro no processamento. Tente novamente mais tarde.');
-                });
-                setTimeout(function () {
-                  dialog.modal('hide');
-                }, 3000); //3 segundos depois executa
-              }
-              atualizar();
-            }
-          });
-          $('#verEditarPublicacoes').modal('hide');
-          $('#editarPublicacoes-form').trigger("reset");
-          return false;
-        }
-  
-      });
-      //alert("entrou");
-    });
-  });
 
   $(document).ready(function () {
     $('#btnExcluirPublicacao').click(function () {
       var dados = $('#excluirPublicacoes-form').serializeArray();
-      $('#verEditarPublicacoes').modal('hide');
+      $('#verPublicacoes').modal('hide');
       bootbox.confirm({
         message: "Você realmente deseja excluir essa publicação da lista ?",
         buttons: {

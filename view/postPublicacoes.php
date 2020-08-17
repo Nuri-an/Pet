@@ -5,7 +5,7 @@ $publicacoesDao = new DaoPublicacoes();
 ?>
 
 <?php
-$stmtAnoPublicacoes = $publicacoesDao->runQuery("SELECT DISTINCT Year(dataPublicacao) as ano FROM publicacoes ORDER BY Year(dataPublicacao) DESC");
+$stmtAnoPublicacoes = $publicacoesDao->runQuery("SELECT DISTINCT dataPublicacao as ano FROM publicacoes ORDER BY dataPublicacao DESC");
 $stmtAnoPublicacoes->execute();
 
 $pagina = filter_input(INPUT_POST, 'pagina', FILTER_SANITIZE_NUMBER_INT);
@@ -46,7 +46,7 @@ $totalPg = ceil($rowTotalPublicacoesAno['numResult'] / $quantidadePg);
         ?>
     </div>
 </div>
-
+<table class="table table-striped container" style="margin-top: 30px;">
 <?php
 
 if ($stmtPublicacoes->rowCount() == 0) {
@@ -57,7 +57,7 @@ if ($stmtPublicacoes->rowCount() == 0) {
         </div>';
 } else {
 
-    echo '<table class="table table-striped container" style="margin-top: 30px;">
+    echo '
         <thead>
             <tr>
                 <th scope="col">Ano</th>
@@ -92,8 +92,11 @@ if ($stmtPublicacoes->rowCount() == 0) {
         $i++;
     }
 
-    echo '</tbody>
-        <tfoot>
+    echo '</tbody> ';
+}
+
+?>
+<tfoot>
         <tr>
             <th scope="col" coslpan = "4" >   
                 <div class="editar" style="display: none; margin-top: 20px;">
@@ -103,10 +106,7 @@ if ($stmtPublicacoes->rowCount() == 0) {
                 </div>
             </th> 
         </tfoot>
-    </table>';
-}
-
-?>
+    </table>
 
 <?php
 echo '<nav aria-label="Page navigation" class="container" style="margin-bottom: 100px; margin-top:50px;">

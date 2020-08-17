@@ -15,7 +15,7 @@ $(document).ready(function () {
 });
 
 
-function atualizar() {
+function atualizar() {  
   if ($("#adm").hasClass('paginacao')) {
     classe = 1;
   }
@@ -25,7 +25,7 @@ function atualizar() {
     if (classe == 1) {
       $.get("postSobre.php", function () {
         $('.editar').show();
-
+        $('.slidesVideos').hide();  
         $('#adm').addClass('paginacao');
       });
     }
@@ -70,7 +70,6 @@ function nomeFoto() {
 
   if ($('#video').val()) {
     var midia = $('#video').val();
-    //alert(midia);
     posic = midia.indexOf(letra); //pega a posicao da letra
     while (midia.includes(letra)) {
       midia = midia.substring(posic); //exclui da string todas as letras ate a posicao desejada
@@ -164,9 +163,7 @@ $(document).ready(function () {
         }
       },
       submitHandler: function (form) {
-        //alert("enta coletando dados do form");
         var dados = $('#editarInfo-form').serializeArray();
-        //alert(dados);
         dialog = bootbox.dialog({
           message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
           closeButton: false
@@ -174,7 +171,7 @@ $(document).ready(function () {
 
         $.ajax({
           type: 'POST',
-          url: "../controller/ControllerInicio.php",
+          url: "../controller/ControllerSobre.php",
           data: dados,
 
           success: function (result) {
@@ -205,7 +202,6 @@ $(document).ready(function () {
       }
 
     });
-    //alert("entrou");
   });
 });
 
@@ -236,6 +232,16 @@ $.validator.addMethod("noImage", function () {
     return true
   }
 });
+
+$.validator.addMethod("validUrl", function (value, element) {
+  
+  if (value.includes('watch?')) {
+        return false;
+
+  } else {
+      return true;
+  }
+}, "Link inválido. Por favor, siga estes passos: <br /> vá até o vídeo > clique em 'compartilhar' > copie o link disponível.");
 
 $(document).ready(function () {
   $('#btnAdicionarMidia').click(function () {
@@ -268,6 +274,7 @@ $(document).ready(function () {
         },
         'videoLink': {
           url: true,
+          validUrl: true,
           noLinkORnoVideo: true
         }
       },
@@ -287,7 +294,6 @@ $(document).ready(function () {
         }
       },
       submitHandler: function (form) {
-        //alert("enta coletando dados do form");
         var formdata = new FormData($("form[name='adicionarFoto']")[0]);
 
         dialog = bootbox.dialog({
@@ -297,13 +303,13 @@ $(document).ready(function () {
 
         $.ajax({
           type: 'POST',
-          url: "../controller/ControllerInicio.php",
+          url: "../controller/ControllerSobre.php",
           data: formdata,
           processData: false,
           contentType: false,
 
           success: function (result) {
-            alert(result);
+            //alert(result);
 
             if (result == 1) {
               dialog.init(function () {
@@ -330,7 +336,6 @@ $(document).ready(function () {
       }
 
     });
-    alert($('#idImagem'));
   });
 });
 
@@ -359,7 +364,7 @@ function excluirMidia(id) {
         });
         $.ajax({
           type: "POST",
-          url: "../controller/ControllerInicio.php",
+          url: "../controller/ControllerSobre.php",
           data: {
             acao: "excluir",
             id: id
