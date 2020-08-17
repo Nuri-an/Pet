@@ -28,8 +28,8 @@ $totalPg = ceil($rowTotalPublicacoesAno['numResult'] / $quantidadePg);
 <hr class="bg-danger" style="margin-top: -17px; margin-bottom: 20px;" />
 
 <div class="btn-group" style="margin-bottom: 30px; padding-left: 15px; margin-left: auto; float: right;">
-    <button type="button" class="btn border border-success"  style="color: rgba(0,0,0,.5);">Selecionar ano da publicação</button>
-    <button type="button" class="btn dropdown-toggle dropdown-toggle-split"  style="background-color: #8FBC8F; " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button type="button" class="btn border border-success" style="color: rgba(0,0,0,.5);">Selecionar ano da publicação</button>
+    <button type="button" class="btn dropdown-toggle dropdown-toggle-split" style="background-color: #8FBC8F; " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="sr-only">Toggle Dropdown</span>
     </button>
     <div class="dropdown-menu">
@@ -47,17 +47,17 @@ $totalPg = ceil($rowTotalPublicacoesAno['numResult'] / $quantidadePg);
     </div>
 </div>
 <table class="table table-striped container" style="margin-top: 30px;">
-<?php
+    <?php
 
-if ($stmtPublicacoes->rowCount() == 0) {
-    echo '<div class = "container" style="margin-bottom: 20px;" id="semPubicacoes">
+    if ($stmtPublicacoes->rowCount() == 0) {
+        echo '<div class = "container" style="margin-bottom: 20px;" id="semPubicacoes">
             <small class="text-muted " style="font-size:50; ">
                 <i>Ainda não há publicações no ano de ' . $ano . '</i>
             </small> 
         </div>';
-} else {
+    } else {
 
-    echo '
+        echo '
         <thead>
             <tr>
                 <th scope="col">Ano</th>
@@ -68,45 +68,45 @@ if ($stmtPublicacoes->rowCount() == 0) {
         </thead>
         <tbody>';
 
-        $i=1;
+        $i = 1;
 
-    while ($rowPublicacoes = $stmtPublicacoes->fetch(PDO::FETCH_ASSOC)) {
+        while ($rowPublicacoes = $stmtPublicacoes->fetch(PDO::FETCH_ASSOC)) {
 
-        if ($rowPublicacoes['linkPublicacao'] == '') {
-            $link = 'https://www.google.com/search?sxsrf=ALeKk01hhM_ik3CfUup1Am3OKbwKp1Z_HA%3A1583534324873&ei=9NBiXq-CNYXD5OUPtYOuuAQ&q=' . $rowPublicacoes['descricaoPublicacao'] . '';
-        } else {
-            $link = $rowPublicacoes['linkPublicacao'];
-        }
-        echo '<tr>
+            if ($rowPublicacoes['linkPublicacao'] == '') {
+                $link = 'https://www.google.com/search?sxsrf=ALeKk01hhM_ik3CfUup1Am3OKbwKp1Z_HA%3A1583534324873&ei=9NBiXq-CNYXD5OUPtYOuuAQ&q=' . $rowPublicacoes['descricaoPublicacao'] . '';
+            } else {
+                $link = $rowPublicacoes['linkPublicacao'];
+            }
+            echo '<tr>
             <th scope="row">' . $ano . '</th>
             <td>' . $rowPublicacoes['descricaoPublicacao'] . '</td>
             <td> <a href="' . $link . '" target = _blank> <i class="fa fa-external-link text-danger" aria-hidden="true">  </i> </a> </td>
             <td>
-                <a  class="editar" style="color: #8FBC8F; cursor: pointer; float: left; margin-bottom: 5px; display: none;" title="Editar" id="rowEditarPublicacao_'. $i .'" data-id="'. $rowPublicacoes['codPublicacao'] .'"  data-data="'. $rowPublicacoes['dataPublicacao'] .'" data-descricao="'. $rowPublicacoes['descricaoPublicacao'] .'" data-link="'. $rowPublicacoes['linkPublicacao'] .'" onclick="editar_modal('. $i .')">
+                <a  class="editar" style="color: #8FBC8F; cursor: pointer; float: left; margin-bottom: 5px; display: none;" title="Editar" id="rowEditarPublicacao_' . $i . '" data-id="' . $rowPublicacoes['codPublicacao'] . '"  data-data="' . $rowPublicacoes['dataPublicacao'] . '" data-descricao="' . $rowPublicacoes['descricaoPublicacao'] . '" data-link="' . $rowPublicacoes['linkPublicacao'] . '" onclick="editar_modal(' . $i . ')">
                     <i class="fa fa-pencil"></i>
                 </a>
             </td>
                 
         </tr>';
 
-        $i++;
+            $i++;
+        }
+
+        echo '</tbody> ';
     }
 
-    echo '</tbody> ';
-}
-
-?>
-<tfoot>
+    ?>
+    <tfoot>
         <tr>
-            <th scope="col" coslpan = "4" >   
+            <th scope="col" coslpan="4">
                 <div class="editar" style="display: none; margin-top: 20px;">
                     <button type="button" onclick="adicionar_modal()" class="btn" style="background-color: #8FBC8F; border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
-                        <i class="fa fa-plus" aria-hidden="true" ></i>
+                        <i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                 </div>
-            </th> 
-        </tfoot>
-    </table>
+            </th>
+    </tfoot>
+</table>
 
 <?php
 echo '<nav aria-label="Page navigation" class="container" style="margin-bottom: 100px; margin-top:50px;">

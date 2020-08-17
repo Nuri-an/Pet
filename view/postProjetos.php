@@ -47,57 +47,58 @@ $totalPg = ceil($rowTotalProjetosAno['numResult'] / $quantidadePg);
     </div>
 </div>
 
+<table class="table table-hover container" style="margin-top: 30px;">
 
-<?php
+    <?php
 
-if ($stmtProjetos->rowCount() == 0) {
-    echo '<div class = "container" style="margin-bottom: 20px;" id="semPubicacoes">
+    if ($stmtProjetos->rowCount() == 0) {
+        echo '<div class = "container" style="margin-bottom: 20px;" id="semPubicacoes">
             <small class="text-muted " style="font-size:50; ">
                 <i>Ainda não há projetos em execução no ano de ' . $ano . '</i>
             </small> 
         </div>';
-} else {
+    } else {
 
-    echo '<table class="table table-hover container" style="margin-top: 30px;">
+        echo '
         <thead>
         </thead>
         <tbody>';
 
-    $i = 1;
+        $i = 1;
 
-    while ($rowProjetos = $stmtProjetos->fetch(PDO::FETCH_ASSOC)) {
+        while ($rowProjetos = $stmtProjetos->fetch(PDO::FETCH_ASSOC)) {
 
-        $midia = "../assets/media/projetos/" . $rowProjetos['midiaProjeto'];
+            $midia = "../assets/media/projetos/" . $rowProjetos['midiaProjeto'];
 
-        if (($rowProjetos['midiaProjeto'] != '') && (file_exists($midia))) {
-            $srcMidia = '<img class="card-img-top mx-auto rounded img-fluid d-block" src="' . $midia . '" style="height: 200px; position: center; width: auto;" name="midia">';
-        } else {
-            $srcMidia = "";
-        }
+            if (($rowProjetos['midiaProjeto'] != '') && (file_exists($midia))) {
+                $srcMidia = '<img class="card-img-top mx-auto rounded img-fluid d-block" src="' . $midia . '" style="height: 200px; position: center; width: auto;" name="midia">';
+            } else {
+                $srcMidia = "";
+            }
 
-        if (empty($rowProjetos['publicacaoProjeto'])) {
-            $publicacao = '';
-        } else {
-            $publicacao = ' <footer class="blockquote-footer"> 
+            if (empty($rowProjetos['publicacaoProjeto'])) {
+                $publicacao = '';
+            } else {
+                $publicacao = ' <footer class="blockquote-footer"> 
                                 <p style="font-weight: bold;"> Publicado em: </p>
                                 <p style="margin-left: 15px;  margin-right: 15px;">
                                     ' . $rowProjetos['publicacaoProjeto'] . ' 
                                 </p>
                             </footer>';
-        }
+            }
 
-        if (empty($rowProjetos['parceriaProjeto'])) {
-            $parceria = '';
-        } else {
-            $parceria = '<footer class="blockquote-footer"> 
+            if (empty($rowProjetos['parceriaProjeto'])) {
+                $parceria = '';
+            } else {
+                $parceria = '<footer class="blockquote-footer"> 
                             <p style="font-weight: bold;"> Projeto desenvolvido em parceria com: </p>
                             <p style="margin-left: 15px;  margin-right: 15px;">
                                 ' . $rowProjetos['parceriaProjeto'] . ' 
                             </p>
                         </footer>';
-        }
+            }
 
-        echo '<tr style="border-bottom: 20px solid #f4f4f4;">
+            echo '<tr style="border-bottom: 20px solid #f4f4f4;">
                 <td style="border-top: 0px; background-color: #f9f9f9;">
                     <h3 class="display-5 text-secundary" style="margin-top: 10px;">' . $rowProjetos['tituloProjeto'] . '</h3>
                     <div  class="lead " style="display: none;  margin-left: 15px;  margin-right: 15px;" id="descricao_' . $i . '"
@@ -113,7 +114,7 @@ if ($stmtProjetos->rowCount() == 0) {
                         </footer>
                     </div>
                     <div class="editar" style="cursor: pointer; float: left; margin-top: 10px; margin-left: 10px; display: none;">
-                        <a title="Editar"  id="rowEditarProjetos_'. $i .'" data-id="'. $rowProjetos['codProjeto'] .'"  data-titulo="'. $rowProjetos['tituloProjeto'] .'" data-descricao="'. $rowProjetos['descricaoProjeto'] .'" data-midia="'. $rowProjetos['midiaProjeto'] .'" data-ano="'. $rowProjetos['anoProjeto'] .'" data-publicacao="'. $rowProjetos['publicacaoProjeto'] .'" data-parceria="'. $rowProjetos['parceriaProjeto'] .'" onclick="editar_modal('. $i .')" >
+                        <a title="Editar"  id="rowEditarProjetos_' . $i . '" data-id="' . $rowProjetos['codProjeto'] . '"  data-titulo="' . $rowProjetos['tituloProjeto'] . '" data-descricao="' . $rowProjetos['descricaoProjeto'] . '" data-midia="' . $rowProjetos['midiaProjeto'] . '" data-ano="' . $rowProjetos['anoProjeto'] . '" data-publicacao="' . $rowProjetos['publicacaoProjeto'] . '" data-parceria="' . $rowProjetos['parceriaProjeto'] . '" onclick="editar_modal(' . $i . ')" >
                             <i class="fa fa-pencil" style="color: #8FBC8F;" ></i>
                         </a>
                     </div>
@@ -128,25 +129,26 @@ if ($stmtProjetos->rowCount() == 0) {
                 </td>
             </tr>';
 
-        $i++;
+            $i++;
+        }
+
+        echo '  </tbody>';
     }
 
-    echo '  </tbody>
-            <tfoot>
-                <tr>
-                    <td>   
-                        <div class="editar" style="display: none; margin-top: 20px;">
-                            <button type="button" onclick="adicionar_modal()" class="btn" style="background-color: #8FBC8F; border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
-                                <i class="fa fa-plus" aria-hidden="true" ></i>
-                            </button>
-                        </div>
-                    </td> 
-                </tr>
-            </tfoot>
-        </table>';
-}
+    ?>
 
-?>
+    <tfoot>
+        <tr>
+            <td>
+                <div class="editar" style="display: none; margin-top: 20px;">
+                    <button type="button" onclick="adicionar_modal()" class="btn" style="background-color: #8FBC8F; border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
 
 <?php
 echo '<nav aria-label="Page navigation" class="container" style="margin-bottom: 100px; margin-top:50px;">

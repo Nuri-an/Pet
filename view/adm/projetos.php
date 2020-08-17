@@ -56,7 +56,7 @@ require '../inc/global/config.php';
                                 <label for="data">
                                     <h5> Ano do desenvolvimento: </h5>
                                 </label>
-                                <input type="number" maxlength="4" class="form-control" id="data" name="data"> </input>
+                                <input type="text" maxlength='4' minlength='4' class="form-control" id="data" name="data"> </input>
                             </div>
                         </div>
                     </div>

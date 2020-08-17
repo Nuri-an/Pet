@@ -68,6 +68,8 @@ function adicionar_modal() {
 
   $('.modal .modal-dialog .modal-content #tituloP').text("Adicione novos arquivos para download");
   $('.modal .modal-dialog .modal-content #acao').val(acao);
+  $('.modal .modal-dialog .modal-content .custom-file #midiaA').html('');
+  $('.modal .modal-dialog .modal-content .custom-file #midiaS').html(''); 
 }
 
 function editar_modal(id) {
@@ -184,7 +186,6 @@ $(document).ready(function () {
         }
       },
       submitHandler: function (form) {
-        alert("enta coletando dados do form");
         var formdata = new FormData($("form[name='Downloads-form']")[0]);
 
         dialog = bootbox.dialog({
@@ -200,7 +201,7 @@ $(document).ready(function () {
           contentType: false,
 
           success: function (result) {
-            alert(result);
+            //alert(result);
 
             if (result == 1) {
               dialog.init(function () {
@@ -248,7 +249,6 @@ $(document).ready(function () {
         }
       },
       callback: function (result) {
-        alert('btn excluir');
         if (result) {
           dialog = bootbox.dialog({
             message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
@@ -262,7 +262,7 @@ $(document).ready(function () {
             data: dados,
 
             success: function (resultado) {
-              alert(resultado);
+              //alert(resultado);
               if (resultado == 1) {
                 dialog.init(function () {
                   dialog.find('.bootbox-body').html('Excluído com sucesso!');
