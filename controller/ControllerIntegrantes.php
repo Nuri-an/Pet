@@ -26,7 +26,6 @@ function adicionarInformacoes()
     $Integrante = new ModelIntegrantes();
 
     $nome = filter_var($_POST["nome"], FILTER_SANITIZE_STRING);
-    $cpf = filter_var($_POST["cpf"], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST["email"], FILTER_SANITIZE_STRING);
     $social = filter_var($_POST["social"], FILTER_SANITIZE_STRING);
     $dataInicio = filter_var($_POST["dataInicio"], FILTER_SANITIZE_STRING);
@@ -64,7 +63,6 @@ function adicionarInformacoes()
     $Integrante->setDataInicio($dataInicio);
     $Integrante->setDataFIm($dataFim);
     $Integrante->setSituacao($situacao);
-    $Integrante->setCpf($cpf);
     $Integrante->setTipo($tipo);
     $Integrante->setFoto($newFileName);
     $dao->adicionarInformacoes($Integrante);
@@ -81,7 +79,6 @@ function atualizarInformacoes()
 
     $id = filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT);
     $nome = filter_var($_POST["nome"], FILTER_SANITIZE_STRING);
-    $cpf = filter_var($_POST["cpf"], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST["email"], FILTER_SANITIZE_STRING);
     $social = filter_var($_POST["social"], FILTER_SANITIZE_STRING);
     $dataInicio = filter_var($_POST["dataInicio"], FILTER_SANITIZE_STRING);
@@ -106,11 +103,15 @@ function atualizarInformacoes()
 
         //Pasta onde o arquivo vai ser salvo
         $local = '../assets/media/integrantes/';
+            
+        if(!move_uploaded_file($_FILES['arquivo']['tmp_name'], $local . $newFileName)){
+            $newFileName = '';
+        }
 
-        move_uploaded_file($_FILES['arquivo']['tmp_name'], $local . $newFileName);
     } else {
         $newFileName = '';
     }
+
 
     $Integrante->setId($id);
     $Integrante->setNome($nome);
@@ -119,7 +120,6 @@ function atualizarInformacoes()
     $Integrante->setDataInicio($dataInicio);
     $Integrante->setDataFIm($dataFim);
     $Integrante->setSituacao($situacao);
-    $Integrante->setCpf($cpf);
     $Integrante->setFoto($newFileName);
     $dao->atualizarInformacoes($Integrante);
 }

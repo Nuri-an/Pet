@@ -10,7 +10,6 @@ require '../inc/global/config.php';
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/additional-methods.min.js"></script>
 <script type="text/javascript" src="../assets/js/plugins/jquery-validation/localization/messages_pt_BR.js"></script>
-<script type="text/javascript" src="../assets/js/plugins/jQuery-Mask/jquery.mask.js"></script>
 <script type="text/javascript" src="../assets/js/integrantes.js"></script>
 
 
@@ -52,17 +51,6 @@ require '../inc/global/config.php';
                                     <h5> Email: </h5>
                                 </label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="nome@exemplo.com"> </input>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="form-group row">
-                        <div class="col-md-12">
-                            <div class="form-material">
-                                <label for="cpf">
-                                    <h5> Cpf: </h5>
-                                </label>
-                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="999.999.999-99"> </input>
                             </div>
                         </div>
                     </div>

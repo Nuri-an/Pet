@@ -14,9 +14,6 @@ $(document).ready(function () {
     $('#loader').slideUp(1000);
     $('body').css('overflowY', 'auto');
 
-    $("#cpf").mask("999.999.999-99", {
-        reverse: true
-    });
 });
 
 
@@ -112,9 +109,6 @@ $(document).ready(function () {
                 'social': {
                     url: true
                 },
-                'cpf': {
-                    cpfBR: true
-                },
                 'dataInicio': {
                     required: true,
                     date: true
@@ -135,9 +129,6 @@ $(document).ready(function () {
                 },
                 'social': {
                     url: 'Digite um link válido',
-                },
-                'cpf': {
-                    cpfBR: 'Digite um cpf válido'
                 },
                 'dataInicio': {
                     required: 'Por favor, insira a data de entrada do integrante no grupo',
@@ -173,7 +164,7 @@ $(document).ready(function () {
                                 dialog.modal('hide');
                             }, 3000); //3 segundos depois executa
                         }
-                        if (result == 2) {
+                        else {
                             dialog.init(function () {
                                 dialog.find('.bootbox-body').html('Ocorreu um erro no processamento. Tente novamente mais tarde.');
                             });
@@ -306,7 +297,6 @@ function verInformacoes(id) {
     var idIntegrante = $('#rowEditarInformacoes_' + id).attr("data-id");
     var nome = $('#rowEditarInformacoes_' + id).attr("data-nome");
     var email = $('#rowEditarInformacoes_' + id).attr("data-email");
-    var cpf = $('#rowEditarInformacoes_' + id).attr("data-cpf");
     var dataInicio = $('#rowEditarInformacoes_' + id).attr("data-dataInicio");
     var dataFim = $('#rowEditarInformacoes_' + id).attr("data-dataFim");
     var situacao = $('#rowEditarInformacoes_' + id).attr("data-situacao");
@@ -336,7 +326,6 @@ function verInformacoes(id) {
     $('.modal .modal-dialog .modal-content #id').val(idIntegrante);
     $('.modal .modal-dialog .modal-content #nome').val(nome);
     $('.modal .modal-dialog .modal-content #email').val(email);
-    $('.modal .modal-dialog .modal-content #cpf').val(cpf);
     $('.modal .modal-dialog .modal-content #dataInicio').val(dataInicio);
     $('.modal .modal-dialog .modal-content #dataFim').val(dataFim);
     $('.modal .modal-dialog .modal-content #social').val(social);

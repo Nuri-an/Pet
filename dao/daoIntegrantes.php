@@ -27,7 +27,6 @@ class DaoIntegrantes
 
             $nome = $integrantes->getNome();
             $email = $integrantes->getEmail();
-            $cpf = $integrantes->getCpf();
             $social = $integrantes->getSocial();
             $dataInicio = $integrantes->getDataInicio();
             $dataFim = $integrantes->getDataFim();
@@ -35,12 +34,11 @@ class DaoIntegrantes
             $foto = $integrantes->getFoto();
             $tipo = $integrantes->getTipo();
 
-            $stmt = $this->conn->prepare("INSERT INTO integrantes(nomeIntegrante, emailIntegrante, cpfIntegrante, dataInicioIntegrante, dataFimIntegrante, situacaoIntegrante, fotoIntegrante, socialIntegrante)
-           VALUES (:nome, :email, :cpf, :dataInicio, :dataFim, :situacao, :foto, :social)");
+            $stmt = $this->conn->prepare("INSERT INTO integrantes(nomeIntegrante, emailIntegrante, dataInicioIntegrante, dataFimIntegrante, situacaoIntegrante, fotoIntegrante, socialIntegrante)
+           VALUES (:nome, :email, :dataInicio, :dataFim, :situacao, :foto, :social)");
 
             $stmt->bindparam(":nome", $nome);
             $stmt->bindparam(":email", $email);
-            $stmt->bindparam(":cpf", $cpf);
             $stmt->bindparam(":dataInicio", $dataInicio);
             $stmt->bindparam(":dataFim", $dataFim);
             $stmt->bindparam(":situacao", $situacao);
@@ -79,37 +77,39 @@ class DaoIntegrantes
             $id = $integrantes->getId();
             $nome = $integrantes->getNome();
             $email = $integrantes->getEmail();
-            $cpf = $integrantes->getCpf();
             $social = $integrantes->getSocial();
             $dataInicio = $integrantes->getDataInicio();
             $dataFim = $integrantes->getDataFim();
             $situacao = $integrantes->getSituacao();
             $foto = $integrantes->getFoto();
 
+            $stmtFoto = $this->conn->prepare("SELECT * FROM integrantes WHERE codIntegrante = ?");
+            $stmtFoto->bindparam(1, $id);
+            $stmtFoto->execute();
+            $rowIntegrante = $stmtFoto->fetch(PDO::FETCH_ASSOC);
+
             if ($foto == '') {
-                $stmtFoto = $this->conn->prepare("SELECT * FROM integrantes WHERE codIntegrante = ?");
-                $stmtFoto->bindparam(1, $id);
-                $stmtFoto->execute();
+                $fotoAnte =  $rowIntegrante['fotoIntegrante'];
 
-                while ($rowIntegrante = $stmtFoto->fetch(PDO::FETCH_ASSOC)) {
-
-                    $fotoAnte =  $rowIntegrante['fotoIntegrante'];
-                }
             } else {
                 $fotoAnte =  $foto;
+                $caminho = "../assets/media/integrantes/" . $rowIntegrante['fotoIntegrante'];
+
+                if (file_exists($caminho)) {
+                    unlink($caminho);
+                }
             }
 
-            $stmt = $this->conn->prepare("UPDATE integrantes SET nomeIntegrante = ?, emailIntegrante = ?, cpfIntegrante = ?, dataInicioIntegrante = ?, dataFimIntegrante = ?, situacaoIntegrante = ?, fotoIntegrante = ?, socialIntegrante = ? WHERE codIntegrante = ? ");
+            $stmt = $this->conn->prepare("UPDATE integrantes SET nomeIntegrante = ?, emailIntegrante = ?, dataInicioIntegrante = ?, dataFimIntegrante = ?, situacaoIntegrante = ?, fotoIntegrante = ?, socialIntegrante = ? WHERE codIntegrante = ? ");
 
             $stmt->bindparam(1, $nome);
             $stmt->bindparam(2, $email);
-            $stmt->bindparam(3, $cpf);
-            $stmt->bindparam(4, $dataInicio);
-            $stmt->bindparam(5, $dataFim);
-            $stmt->bindparam(6, $situacao);
-            $stmt->bindparam(7, $fotoAnte);
-            $stmt->bindparam(8, $social);
-            $stmt->bindparam(9, $id);
+            $stmt->bindparam(3, $dataInicio);
+            $stmt->bindparam(4, $dataFim);
+            $stmt->bindparam(5, $situacao);
+            $stmt->bindparam(6, $fotoAnte);
+            $stmt->bindparam(7, $social);
+            $stmt->bindparam(8, $id);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {

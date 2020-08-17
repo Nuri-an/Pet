@@ -5,7 +5,6 @@ class ModelIntegrantes{
     private $foto;
     private $nome;
     private $email;
-    private $cpf;
     private $social;
     private $dataInicio;
     private $dataFim;
@@ -25,9 +24,6 @@ class ModelIntegrantes{
     }
     public function getEmail() {
         return $this->email;
-    }
-    public function getCpf() {
-        return $this->cpf;
     }
     public function getSocial() {
         return $this->social;
@@ -56,9 +52,6 @@ class ModelIntegrantes{
     }
     public function setEmail($email) {
         $this->email = $email;
-    }
-    public function setCpf($cpf) {
-        $this->cpf = $cpf;
     }
     public function setSocial($social) {
         $this->social = $social;
