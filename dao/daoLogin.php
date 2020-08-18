@@ -79,7 +79,7 @@ class DaoLogin
             //$mail->SMTPDebug = 3;                               // Enable verbose debug output
 
             $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = 'smtp-mail.outlook.com; smtp.gmail.com';  // Specify main and backup SMTP servers
+            $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = 'gpca.recovery@gmail.com';                 // SMTP username
             $mail->Password = '*%Zkmq6K2Q';                           // SMTP password
@@ -109,6 +109,7 @@ class DaoLogin
                         </div>';
 
             //echo $mail->send();
+            mail($destino, 'assunto', $headers);
             if ($mail->send() == 1) {
                 echo $id;
             } else {

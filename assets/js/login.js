@@ -193,7 +193,6 @@ $(document).ready(function () {
                 }
             },
             submitHandler: function (form) {
-                //alert("está coletando dados do form");
                 var dados = $('#logar-form').serializeArray();
                 dialog = bootbox.dialog({
                     message: '<p class="text-center mb-0"><i class="fa fa-spin fa-spinner"></i> Carregando...</p>',
@@ -206,7 +205,7 @@ $(document).ready(function () {
                     data: dados,
 
                     success: function (result) {
-                        alert(result);
+                        //alert(result);
 
                         if (result == 2) {
                             dialog.init(function () {

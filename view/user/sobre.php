@@ -4,9 +4,9 @@ require '../inc/global/banner.php';
 require '../inc/global/config.php';
 ?>
 
-<link rel="stylesheet" href="../assets/css/inicio.css">
+<link rel="stylesheet" href="../assets/css/sobre.css">
 
-<script type="text/javascript" src="../assets/js/inicio.js"></script>
+<script type="text/javascript" src="../assets/js/sobre.js"></script>
 
 <div style="margin-top: 20px; margin-bottom: 20px;" id="corpo"> </div>
 

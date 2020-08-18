@@ -38,7 +38,7 @@ $totalPg = ceil($rowTotalProjetosAno['numResult'] / $quantidadePg);
 
         while ($rowAnoProjetos = $stmtAnoProjetos->fetch(PDO::FETCH_ASSOC)) {
 
-            echo '<a class="dropdown-item" href="#corpo" onclick="listarProjetos(' . $pagina . ', ' . $quantidadePg . ', ' . $rowAnoProjetos['ano'] . ')">' . $rowAnoProjetos['ano'] . ' ';
+            echo '<a class="dropdown-item btn-success" href="#corpo" onclick="listarProjetos(' . $pagina . ', ' . $quantidadePg . ', ' . $rowAnoProjetos['ano'] . ')">' . $rowAnoProjetos['ano'] . ' ';
             echo '</a>';
             echo '<div class="dropdown-divider"></div>';
         }
