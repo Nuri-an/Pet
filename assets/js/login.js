@@ -204,8 +204,9 @@ $(document).ready(function () {
                     url: "../controller/ControllerLogin.php",
                     data: dados,
 
+                    //retorna co codigo do usuário
                     success: function (result) {
-                        //alert(result);
+                        alert(result);
 
                         if (result == 2) {
                             dialog.init(function () {
@@ -222,6 +223,14 @@ $(document).ready(function () {
                             setTimeout(function () {
                                 dialog.modal('hide');
                             }, 10000); //3 segundos depois executa
+                        }
+                        else if (result == 0) {
+                            dialog.init(function () {
+                                dialog.find('.bootbox-body').html('Limpe a campo <b> senha </b> e tente novamente.');
+                            });
+                            setTimeout(function () {
+                                dialog.modal('hide');
+                            }, 3000); //3 segundos depois executa
                         }
                         else {
 

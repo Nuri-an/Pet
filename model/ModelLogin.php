@@ -8,6 +8,10 @@ class ModelLogin{
     private $tipo;
     private $senha;
     private $codigo;
+    private $emailFrom;
+    private $senhaFrom;
+    private $nameFrom;
+    private $msg;
 
 
 
@@ -32,6 +36,18 @@ class ModelLogin{
     public function getCodigo() {
         return $this->codigo;
     }
+    public function getEmailFrom() {
+        return $this->emailFrom;
+    }
+    public function getNameFrom() {
+        return $this->nameFrom;
+    }
+    public function getMsg() {
+        return $this->msg;
+    }
+    public function getSenhaFrom() {
+        return $this->senhaFrom;
+    }
     
 
     public function setId($id) {
@@ -54,6 +70,18 @@ class ModelLogin{
     }
     public function setCodigo($codigo) {
         $this->codigo = $codigo;
+    }
+    public function setEmailFrom($emailFrom) {
+        $this->emailFrom = $emailFrom;
+    }
+    public function setNameFrom($nameFrom) {
+        $this->nameFrom = $nameFrom;
+    }
+    public function setMsg($msg) {
+        $this->msg = $msg;
+    }
+    public function setSenhaFrom($senhaFrom) {
+        $this->senhaFrom = $senhaFrom;
     }
 }
 ?>

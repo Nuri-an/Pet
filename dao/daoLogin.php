@@ -60,15 +60,16 @@ class DaoLogin
     {
         try {
             $id = $login->getId();
+            $emailFrom = $login->getEmailFrom();
+            $senhaFrom = $login->getSenhaFrom();
+            $nameFrom = $login->getNameFrom();
+            $msg = $login->getMsg();
 
             $stmt = $this->conn->prepare("SELECT * FROM integrantes WHERE codIntegrante = :id");
             $stmt->execute(array(':id' => $id));
             $admRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $codigo = rand(1000, 9999);
-            session_start();
             $_SESSION['id_redefinir_senha'] = $id;
-            $_SESSION['cod_redefinir_senha'] = $codigo;
             $email = $admRow['emailIntegrante'];
             $nome =  explode(' ', $admRow['nomeIntegrante'])[0];
 
@@ -76,18 +77,24 @@ class DaoLogin
 
             $mail = new PHPMailer;
 
-            //$mail->SMTPDebug = 3;                               // Enable verbose debug output
-
-            $mail->isSMTP();                                      // Set mailer to use SMTP
+            
+            $mail->isSMTP(); 
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );                                     // Set mailer to use SMTP
             $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = 'gpca.recovery@gmail.com';                 // SMTP username
-            $mail->Password = '*%Zkmq6K2Q';                           // SMTP password
+            $mail->Username = $emailFrom;                 // SMTP username
+            $mail->Password = $senhaFrom;                           // SMTP password
             $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 587;                                    // TCP port to connect to
 
             $mail->CharSet = 'UTF-8';
-            $mail->setFrom('gpca.recovery@gmail.com', 'PET - Grupo de Pesquisa em Computação Aplicada');
+            $mail->setFrom($emailFrom, $nameFrom);
             $mail->addAddress($email, $nome);
             $mail->addEmbeddedImage('../assets/media/logo-gpca.png', 'logo');
 
@@ -100,7 +107,7 @@ class DaoLogin
                             </div>
                             <div style="margin-top: 30px;">
                                 <font size=3> 
-                                    Use o código a seguir para redefinir sua senha de acesso ao sistema: <b> ' . $codigo . ' </b> 
+                                    '. $msg .' 
                                 </font>
                             </div>
                         </div>
@@ -109,11 +116,10 @@ class DaoLogin
                         </div>';
 
             //echo $mail->send();
-            mail($destino, 'assunto', $headers);
-            if ($mail->send() == 1) {
+            if ($mail->send()) {
                 echo $id;
             } else {
-                echo 1;
+                echo $mail->ErrorInfo;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();

@@ -152,7 +152,6 @@ function cancelarAdm(id) {
 
 function excluirPerfil(id) {
     var cod = $('#buttonExcluirPerfil').attr("data-id");
-    alert(cod);
     bootbox.confirm({
         message: 'Você realmente deseja excluir seu perfil ?',
         buttons: {
@@ -182,7 +181,6 @@ function excluirPerfil(id) {
                     },
 
                     success: function (resultado) {
-                        alert(resultado);
                         if (resultado == 1)  {
                             dialog.init(function () {
                                 dialog.find('.bootbox-body').html('Seu perfil foi excluído com sucesso!');

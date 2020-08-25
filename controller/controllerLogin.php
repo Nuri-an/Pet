@@ -67,8 +67,16 @@ function codSenha()
     $dao = new DaoLogin();
     $Login = new ModelLogin();
 
-    $id = filter_var($_POST["id"], FILTER_SANITIZE_STRING);
+    session_start();
 
+    $id = filter_var($_POST["id"], FILTER_SANITIZE_STRING);
+    $codigo = rand(1000, 9999);
+    $_SESSION['cod_redefinir_senha'] = $codigo;
+
+    $Login->setMsg('Use o código a seguir para redefinir sua senha de acesso ao sistema: <b> ' . $codigo . ' </b>');
+    $Login->setEmailFrom('gpca.recovery@gmail.com');
+    $Login->setNameFrom('PET - Ciência da Computação');
+    $Login->setSenhaFrom('*%Zkmq6K2Q');
     $Login->setId($id);
     $dao->sendMail($Login);
 }
