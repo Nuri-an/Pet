@@ -1,3 +1,5 @@
+<script type="text/javascript" src="../assets/js/settings.js" defer></script>
+
 <nav class="navbar navbar-expand-lg navbar-light container" id="navbar" style=" background-color: #8FBC8F; width: 100vw;">
   <button class="navbar-toggler" type="button" style="background-color:#E9ECEF;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span> MENU
@@ -37,7 +39,10 @@
     <a href="https://www.instagram.com/pet_computacao/?hl=pt-br">
       <i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #000; cursor: pointer; margin-left:10px;" title="Perfil do grupo"></i>
     </a>
+    <i class="fa fa-cogs fa-2x" aria-hidden="true" style="color: #000; cursor: pointer; margin-left:10px;" onclick="editar_configs()"></i>
   </div>
 </nav>
 
 <div class="jumbotron container" style="background-color: #f4f4f4; display: flow-root; min-height: 100vh;">
+
+<?php require 'postSettings.php'; ?>

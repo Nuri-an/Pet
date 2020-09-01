@@ -144,7 +144,7 @@ class DaoAdministradores
             $mail->CharSet = 'UTF-8';
             $mail->setFrom($emailFrom, $nameFrom);
             $mail->addAddress($emailTo, $nameTo);
-            $mail->addEmbeddedImage('../assets/media/logo-gpca.png', 'logo');
+            $mail->addEmbeddedImage('../assets/media/logo.png', 'logo');
 
             $mail->isHTML(true);                                  // Set email format to HTML
 

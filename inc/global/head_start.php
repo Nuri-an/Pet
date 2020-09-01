@@ -8,9 +8,9 @@
   <!-- As 3 meta tags acima *devem* vir em primeiro lugar dentro do `head`; qualquer outro conteúdo deve vir *após* essas tags -->
 
 
-  <title> PET - Ciência da Computação - GPCA</title>
+  <title> PET - Ciência da Computação</title>
 
-  <link rel="shortcut icon" href="../assets/media/logo-gpca.png" type="image/x-png" />
+  <link rel="shortcut icon" href="../assets/media/logo.png" type="image/x-png" />
 
   <!-- Locais -->
   <link href="../assets/css/plugins/bootstrap/bootstrap.min.css" rel="stylesheet">
