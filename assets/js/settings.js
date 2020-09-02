@@ -19,6 +19,7 @@ function nomeMidia() {
 
 $(document).ready(function () {
     $('#btnSettings').click(function () {
+        $('#rodapeHelp').hide();
         jQuery("#Settings-form").validate({
             focusInvalid: true,
             errorClass: 'invalid-feedback animated fadeInDown',
@@ -36,7 +37,7 @@ $(document).ready(function () {
             rules: {
                 'capa-settings': {
                     required: false,
-                    extension: "jpg|JPG|png|PNG|jpeg|JPEG"
+                    extension: "png|PNG|jpeg|JPEG"
                 },
                 'facebook-settings': {
                     url: false
@@ -51,7 +52,7 @@ $(document).ready(function () {
             messages: {
                 'capa-settings': {
                     required: 'Por favor, preeencha este campo',
-                    extension: 'Por favor, forneça uma imagem válida - .jpg, .png ou .jpeg'
+                    extension: 'Por favor, forneça uma imagem válida - .png ou .jpeg'
                 },
                 'facebook-settings': {
                     url: 'Por favor, forneça uma URL válida',
@@ -80,7 +81,7 @@ $(document).ready(function () {
                     contentType: false,
 
                     success: function (result) {
-                        //alert(result);
+                        alert(result);
                         if (result == 1) {
                             dialog.init(function () {
                                 dialog.find('.bootbox-body').html('Operação realizada com sucesso!');
@@ -88,7 +89,7 @@ $(document).ready(function () {
                             setTimeout(function () {
                                 dialog.modal('hide');
                             }, 3000); //3 segundos depois executa
-                            atualizar();
+                            location.reload();
                         }
                         else {
                             dialog.init(function () {
@@ -97,6 +98,7 @@ $(document).ready(function () {
                             setTimeout(function () {
                                 dialog.modal('hide');
                             }, 3000); //3 segundos depois executa
+                            location.reload();
                         }
                     }
                 });

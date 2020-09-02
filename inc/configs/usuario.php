@@ -25,12 +25,24 @@
     </ul>  
   </div>
   <div style="float:rigth; opacity:1; margin-right: 10px;">
-    <a href="https://www.facebook.com/gpca.if" target="_blank">
-      <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #000; cursor: pointer;" title="Página do grupo"></i>
-    </a>
-    <a href="https://www.instagram.com/pet_computacao/?hl=pt-br">
-      <i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #000; cursor: pointer; margin-left:10px;" title="Perfil do grupo"></i>
-    </a>
+    <?php
+      require_once("../dao/daoSettings.php");
+
+      $settingsDao = new DaoSettings();
+
+      $stmtSettings = $settingsDao->runQuery("SELECT * FROM configuracoes WHERE 1");
+      $stmtSettings->execute();
+      $settingsRow = $stmtSettings->fetch(PDO::FETCH_ASSOC);
+
+      echo '
+        <a href="'. $settingsRow['facebook'] .'" target="_blank">
+          <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #000; cursor: pointer;" title="Página do grupo"></i>
+        </a>
+        <a href="'. $settingsRow['instagram'] .'">
+          <i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #000; cursor: pointer; margin-left:10px;" title="Perfil do grupo"></i>
+        </a>
+      ';
+    ?>
   </div>
 </nav>
 <div class="jumbotron container" style="background-color: #f4f4f4; display: flow-root; min-height: 100vh;">

@@ -14,18 +14,15 @@
                 </a>
             </p>
         </div>
-        <br>
+        <br />
         <div class="text-center text-white">
-            <p>
-                INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DO SUDESTE DE MINAS GERAIS - CAMPUS RIO POMBA
-            </p>
-            <p>
-               Endereço: Av. Dr. José Sebastião da Paixão s/nº - Bairro Lindo Vale - Rio Pomba / MG - CEP: 36180-000
-            </p>
+            <?php
+                echo $settingsRow['rodape'];
+            ?>
         </div>
         <div class="imagem">
             <picture>
-
+            
             </picture>
         </div>
     </div>

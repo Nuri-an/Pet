@@ -1,14 +1,3 @@
-<?php
-require_once("../dao/daoAdministradores.php");
-
-$settingsDao = new DaoAdministradores();
-
-$stmtSettings = $settingsDao->runQuery("SELECT * FROM configuracoes WHERE 1");
-$stmtSettings->execute();
-$settingsRow = $stmtSettings->fetch(PDO::FETCH_ASSOC);
-
-?>
-
 <div class="modal" id="verSettings" role="dialog" data-backdrop="static" aria-labelledby="moda-normal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
@@ -20,7 +9,7 @@ $settingsRow = $stmtSettings->fetch(PDO::FETCH_ASSOC);
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="Settings-form" name="Settings-form" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="acao" id="acao" value="edite">
+                    <input type="hidden" name="acao" id="acao" value="editar">
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material">
@@ -73,6 +62,7 @@ $settingsRow = $stmtSettings->fetch(PDO::FETCH_ASSOC);
                                 <?php
                                     echo'<textarea type="text" class="form-control" rows="5" id="rodape-settings" name="rodape-settings">'. $settingsRow['rodape'] .'</textarea>';
                                 ?>
+                                <small id="rodapeHelp" class="form-text text-muted"> Para adicionar uma nova linha use a tag <i> < p > </i></small>
                             </div>
                         </div>
                     </div>
