@@ -8,6 +8,9 @@ $stmtTutores->execute();
 
 $stmtDiscentes = $integrantesDao->runQuery("SELECT * FROM integrantes i, discentes d WHERE i.codIntegrante = d.codIntegrante ORDER BY nomeIntegrante");
 $stmtDiscentes->execute();
+
+$stmtColaboradores = $integrantesDao->runQuery("SELECT * FROM integrantes i, colaboradores d WHERE i.codIntegrante = d.codIntegrante ORDER BY nomeIntegrante");
+$stmtColaboradores->execute();
 ?>
 
 <!-- 355 - 575 -->
@@ -152,6 +155,82 @@ $stmtDiscentes->execute();
                 <img class="card-img-top" src="../assets/media/integrantes/foto_0.png" alt="" title="Adicionar novo integrante">
                 <div style="margin-top: 5px;">
                     <h5 class="card-title"> &nbsp Adicionar novo discente </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="colaboradores" style="margin-top: 30px; ">
+    <h2 class="display-4" style="text-align: center; color: rgba(0,0,0,.5);"> Colaboradores </h2>
+    <div class="card-deck" style="width: 100%; justify-content: center; align-items: center;">
+        <?php
+        if($stmtColaboradores->rowCount() == 0){
+            echo'<small class="text-muted text-center" style="font-size:50; ">
+                    <i>Não há colaboradores registrados</i>
+                </small>';
+        }
+
+        while ($rowColaboradores = $stmtColaboradores->fetch(PDO::FETCH_ASSOC)) {
+
+            $newDateC = date('d/m/Y', strtotime($rowColaboradores['dataInicioIntegrante']));
+            $midia = "../assets/media/integrantes/" . $rowColaboradores['fotoIntegrante'];
+
+            if (($rowColaboradores['fotoIntegrante'] != '') && (file_exists($midia))) {
+                $srcFotoC = $midia;
+            } else {
+                $srcFotoC = "../assets/media/integrantes/foto_1.jpg";
+            }
+
+            if (empty($rowColaboradores['socialIntegrante'])) {
+                $emailColaborador = '<a class="font-weight-normal" style="cursor: pointer;" title="Sem e-mail disponível"> E-mail</a>';
+            } else {
+                $emailColaborador = '<a target="_blank" class="text-decoration-none text-body"  title="Clique e confira" href="mailto:' . $rowColaboradores['emailIntegrante'] . '"> E-mail </a>';
+            }
+
+            if (empty($rowColaboradores['socialIntegrante'])) {
+                $socialColaborador = '<a  class="font-weight-normal" style="cursor: pointer;"  title="Sem link disponível"> &nbsp Reade Social</a>';
+            } else {
+                $socialColaborador = '<a target="_blank"  class="text-decoration-none text-body text-break"  title="Clique e confira" href="' . $rowColaboradores['socialIntegrante'] . '"> &nbsp Reade Social</a>';
+            }
+
+            echo '
+                <div  class="card-integrante">
+                    <div class="card borda card-foto" onclick="abreC(' . $i . ')">
+                        <div id="fotoC' . $i . '">
+                            <img class="card-img-top mx-auto rounded img-fluid d-block"  src="' . $srcFotoD . '"  >
+                            <a class="editar" style="display: none; cursor:pointer; margin-top: 5px; margin-right: 15px; float: right;" title="Excluir" id="rowExcluirFoto_' . $i . '" data-id="' . $rowColaboradores['codIntegrante'] . '"  data-tipo="colaborador" onclick="excluir(' . $i . ')">
+                                <i class="fa fa-trash fa-2x text-danger"></i> 
+                            </a>
+                            <div style="margin-top: 5px;">
+                                <h5 class="card-title"> &nbsp ' . explode(' ', $rowColaboradores['nomeIntegrante'])[0] . ' </h5>
+                            </div>
+                        </div>
+                        <div class="info container" id="conteudoC' . $i . '"  style="margin-top:70px;">
+                            <h5 class="card-title">' . $rowColaboradores['nomeIntegrante'] . '</h5>
+                            <p>
+                                <i class="fa fa-address-card-o"></i>&nbsp ' . $emailColaborador . '
+                                <br />
+                                <i class="fa fa-share-square-o" aria-hidden="true"></i>' . $socialColaborador . '
+                                <br />
+                                <i class="fa fa-handshake-o" aria-hidden="true"></i> &nbsp ' . $rowColaboradores['situacaoIntegrante'] . '
+                                <a class="editar" style="display: none; cursor: pointer; margin-left:90%; margin-top: 10px; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Editar" id="rowEditarInformacoes_' . $i . '" data-id="' . $rowColaboradores['codIntegrante'] . '" data-nome="' . $rowColaboradores['nomeIntegrante'] . '" data-cpf="' . $rowColaboradores['cpfIntegrante'] . '" data-email="' . $rowColaboradores['emailIntegrante'] . '"  data-social="' . $rowColaboradores['socialIntegrante'] . '" data-dataInicio="' . $rowColaboradores['dataInicioIntegrante'] . '" data-dataFim="' . $rowColaboradores['dataFimIntegrante'] . '" data-situacao="' . $rowColaboradores['situacaoIntegrante'] . '" data-foto="' . $rowColaboradores['fotoIntegrante'] . '" onclick="verInformacoes(' .  $i  . ')">
+                                    <i class="fa fa-pencil fa-2x text-success"></i> 
+                                </a>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">Ativo desde ' . $newDateC . '</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>';
+            $i++;
+        }
+        ?>
+        <div class="card-integrante editar" style= "display: none">
+            <div class="card borda card-foto" onclick="newColaborador()">
+                <img class="card-img-top" src="../assets/media/integrantes/foto_0.png" alt="" title="Adicionar novo integrante">
+                <div style="margin-top: 5px;">
+                    <h5 class="card-title"> &nbsp Adicionar novo colaborador </h5>
                 </div>
             </div>
         </div>

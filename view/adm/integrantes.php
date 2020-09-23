@@ -112,6 +112,10 @@ require '../inc/global/config.php';
                                     <input type="radio" value="Voluntário" id="situacao3" name="situacao" class="custom-control-input">
                                     <label class="custom-control-label" for="situacao3">Voluntário</label>
                                 </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" value="Colaborador(a)" id="situacao4" name="situacao" class="custom-control-input">
+                                    <label class="custom-control-label" for="situacao4">Colaborador(a)</label>
+                                </div>
                             </div>
                         </div>
                     </div>

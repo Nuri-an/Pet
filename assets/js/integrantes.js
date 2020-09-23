@@ -60,6 +60,19 @@ function abreD(indice) {
     }
 }
 
+function abreC(indice) {
+    var conteudo = $('#conteudoC' + indice);
+    var foto = $('#fotoC' + indice);
+    if (conteudo.hasClass('info')) {
+        foto.slideUp();
+        conteudo.removeClass('info');
+    } else {
+        conteudo.slideDown();
+        foto.show();
+        conteudo.addClass('info');
+    }
+}
+
 function nomeFoto() {
     if ($('#arquivo').val()) {
         var foto = $('#arquivo').val();
@@ -315,11 +328,19 @@ function verInformacoes(id) {
         $("input[name='situacao'][value='Bolsista']").prop('disabled', true);
         $("input[name='situacao'][value='Voluntário']").prop('disabled', true);
         $("input[name='situacao'][value='Tutor(a)']").prop('disabled', false);
+        $("input[name='situacao'][value='Colaborador(a)']").prop('disabled', true);
     }
-    else if (situacao != 'Tutor(a)') {
+    else if ((situacao == 'Bolsista') || (situacao == 'Voluntário')) {
         $("input[name='situacao'][value='Bolsista']").prop('disabled', false);
         $("input[name='situacao'][value='Voluntário']").prop('disabled', false);
         $("input[name='situacao'][value='Tutor(a)']").prop('disabled', true);
+        $("input[name='situacao'][value='Colaborador(a)']").prop('disabled', true);
+    }
+    else if (situacao == 'Colaborador(a)') {
+        $("input[name='situacao'][value='Bolsista']").prop('disabled', true);
+        $("input[name='situacao'][value='Voluntário']").prop('disabled', true);
+        $("input[name='situacao'][value='Tutor(a)']").prop('disabled', true);
+        $("input[name='situacao'][value='Colaborador(a)']").prop('disabled', false);
     }
 
     $('.modal .modal-dialog .modal-content #tituloP').text("Edite as informações");
@@ -342,6 +363,7 @@ function newDiscente() {
     $("input[name='situacao'][value='Tutor(a)']").prop('disabled', true);
     $("input[name='situacao'][value='Bolsista']").prop('disabled', false);
     $("input[name='situacao'][value='Voluntário']").prop('disabled', false);
+    $("input[name='situacao'][value='Colaborador(a)']").prop('disabled', true);
 
     $('#atualizar-form').trigger("reset");
     $('#modalAtualizar').modal('show');
@@ -351,6 +373,7 @@ function newDiscente() {
     $('.modal .modal-dialog .modal-content #tipo').val(tipo);
     $('.form-group .col-md-12 .form-material .custom-file #foto').html('');
 }
+
 function newTutores() {
 
     var acao = 'adicionar';
@@ -360,6 +383,7 @@ function newTutores() {
     $("input[name='situacao'][value='Tutor(a)']").prop('disabled', false);
     $("input[name='situacao'][value='Bolsista']").prop('disabled', true);
     $("input[name='situacao'][value='Voluntário']").prop('disabled', true);
+    $("input[name='situacao'][value='Colaborador(a)']").prop('disabled', true);
 
     $('#modalAtualizar').modal('show');
 
@@ -369,6 +393,24 @@ function newTutores() {
     $('.form-group .col-md-12 .form-material .custom-file #foto').html('');
 }
 
+function newColaborador() {
+
+    var acao = 'adicionar';
+    var tipo = 'colaborador';
+
+    $("input[name='situacao'][value='Tutor(a)']").prop('disabled', true);
+    $("input[name='situacao'][value='Bolsista']").prop('disabled', true);
+    $("input[name='situacao'][value='Voluntário']").prop('disabled', true);
+    $("input[name='situacao'][value='Colaborador(a)']").prop('disabled', false);
+
+    $('#atualizar-form').trigger("reset");
+    $('#modalAtualizar').modal('show');
+
+    $('.modal .modal-dialog .modal-content #tituloP').text("Adicione um novo colaborador ao grupo");
+    $('.modal .modal-dialog .modal-content #acao').val(acao);
+    $('.modal .modal-dialog .modal-content #tipo').val(tipo);
+    $('.form-group .col-md-12 .form-material .custom-file #foto').html('');
+}
 
 function openNewModal() {
     //fecha o elemento erro na validação
