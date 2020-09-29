@@ -114,7 +114,7 @@ $totalPg = ceil($rowTotalProjetosAno['numResult'] / $quantidadePg);
                         </footer>
                     </div>
                     <div class="editar" style="cursor: pointer; float: left; margin-top: 10px; margin-left: 10px; display: none;">
-                        <a title="Editar"  id="rowEditarProjetos_' . $i . '" data-id="' . $rowProjetos['codProjeto'] . '"  data-titulo="' . $rowProjetos['tituloProjeto'] . '" data-descricao="' . $rowProjetos['descricaoProjeto'] . '" data-midia="' . $rowProjetos['midiaProjeto'] . '" data-ano="' . $rowProjetos['anoProjeto'] . '" data-publicacao="' . $rowProjetos['publicacaoProjeto'] . '" data-parceria="' . $rowProjetos['parceriaProjeto'] . '" onclick="editar_modal(' . $i . ')" >
+                        <a aria-label="Editar"  id="rowEditarProjetos_' . $i . '" data-id="' . $rowProjetos['codProjeto'] . '"  data-titulo="' . $rowProjetos['tituloProjeto'] . '" data-descricao="' . $rowProjetos['descricaoProjeto'] . '" data-midia="' . $rowProjetos['midiaProjeto'] . '" data-ano="' . $rowProjetos['anoProjeto'] . '" data-publicacao="' . $rowProjetos['publicacaoProjeto'] . '" data-parceria="' . $rowProjetos['parceriaProjeto'] . '" onclick="editar_modal(' . $i . ')" >
                             <i class="fa fa-pencil" style="color: #8FBC8F;" ></i>
                         </a>
                     </div>
@@ -141,7 +141,7 @@ $totalPg = ceil($rowTotalProjetosAno['numResult'] / $quantidadePg);
         <tr>
             <td>
                 <div class="editar" style="display: none; margin-top: 20px;">
-                    <button type="button" onclick="adicionar_modal()" class="btn" style="background-color: #8FBC8F; border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
+                    <button type="button" onclick="adicionar_modal()" class="btn" style="background-color: #8FBC8F; border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" aria-label="adicionar uma publicação">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -151,7 +151,7 @@ $totalPg = ceil($rowTotalProjetosAno['numResult'] / $quantidadePg);
 </table>
 
 <?php
-echo '<nav aria-label="Page navigation" class="container" style="margin-bottom: 100px; margin-top:50px;">
+echo '<nav class="container" style="margin-bottom: 100px; margin-top:50px;">
         <ul class="pagination justify-content-center">';
 if ($pagina == 1) {
     echo '<li class="page-item disabled">

@@ -97,7 +97,7 @@ $totalPg = ceil($rowTotalDownloads['numResult'] / $quantidadePg);
                     echo '<div class="tab-pane active" id="download_' . $i . '" role="tabpanel">
                             <div class="text-center lead"> ' . $rowDownloads['tituloDownload'] . ' </div>
                             <div class="editar" style="display: none; margin-top: 25px;">
-                                <button type="button" class="btn" onclick="editar_modal('. $i .')" id="rowEditarDownloads_'. $i .'" data-id="'. $rowDownloads['codDownload'] .'" data-titulo="'. $rowDownloads['tituloDownload'] .'" data-referencia="'. $rowDownloads['referenciaDownload'] .'" data-slides="'. $rowDownloads['slidesDownload'] .'" data-algoritmo="'. $rowDownloads['algoritmoDownload'] .'" data-link="'. $rowDownloads['linkDownload'] .'" style="border-radius: 50px; position: relative; float: right; background-color: #8FBC8F;" title="Editar">
+                                <button type="button" class="btn" onclick="editar_modal('. $i .')" id="rowEditarDownloads_'. $i .'" data-id="'. $rowDownloads['codDownload'] .'" data-titulo="'. $rowDownloads['tituloDownload'] .'" data-referencia="'. $rowDownloads['referenciaDownload'] .'" data-slides="'. $rowDownloads['slidesDownload'] .'" data-algoritmo="'. $rowDownloads['algoritmoDownload'] .'" data-link="'. $rowDownloads['linkDownload'] .'" style="border-radius: 50px; position: relative; float: right; background-color: #8FBC8F;" aria-label="Editar">
                                     <i class="fa fa-pencil" aria-hidden="true" ></i>
                                 </button>
                             </div>
@@ -113,7 +113,7 @@ $totalPg = ceil($rowTotalDownloads['numResult'] / $quantidadePg);
                     echo '<div class="tab-pane" id="download_' . $i . '" role="tabpanel">
                             <div class="text-center lead"> ' . $rowDownloads['tituloDownload'] . ' </div>
                             <div class="editar" style="display: none; margin-top: 25px;">
-                                <button type="button" onclick="editar_modal('. $i .')" id="rowEditarDownloads_'. $i .'" data-id="'. $rowDownloads['codDownload'] .'" data-titulo="'. $rowDownloads['tituloDownload'] .'" data-referencia="'. $rowDownloads['referenciaDownload'] .'" data-slides="'. $rowDownloads['slidesDownload'] .'" data-algoritmo="'. $rowDownloads['algoritmoDownload'] .'" data-link="'. $rowDownloads['linkDownload'] .'"  class="btn" style="border-radius: 50px; position: relative; float: right; background-color: #8FBC8F;" title="Editar">
+                                <button type="button" onclick="editar_modal('. $i .')" id="rowEditarDownloads_'. $i .'" data-id="'. $rowDownloads['codDownload'] .'" data-titulo="'. $rowDownloads['tituloDownload'] .'" data-referencia="'. $rowDownloads['referenciaDownload'] .'" data-slides="'. $rowDownloads['slidesDownload'] .'" data-algoritmo="'. $rowDownloads['algoritmoDownload'] .'" data-link="'. $rowDownloads['linkDownload'] .'"  class="btn" style="border-radius: 50px; position: relative; float: right; background-color: #8FBC8F;" aria-label="Editar">
                                     <i class="fa fa-pencil" aria-hidden="true" ></i>
                                 </button>
                             </div>
@@ -156,13 +156,13 @@ $totalPg = ceil($rowTotalDownloads['numResult'] / $quantidadePg);
 
     
     <div class="editar" style="display: none;">
-        <button type="button" onclick="adicionar_modal()" class="btn" style="background-color: #8FBC8F; top: 30px; margin-bottom: 20px; border-radius: 50px; position: relative; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Adicionar">
+        <button type="button" onclick="adicionar_modal()" class="btn" style="background-color: #8FBC8F; top: 30px; margin-bottom: 20px; border-radius: 50px; position: relative; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" aria-label="Adicionar">
             <i class="fa fa-plus" aria-hidden="true" ></i>
         </button>
     </div>
 
     <?php
-    echo '<nav aria-label="Page navigation" class="container" style="margin-bottom: 100px; top:50px; position: relative;">
+    echo '<nav class="container" style="margin-bottom: 100px; top:50px; position: relative;">
         <ul class="pagination justify-content-center">';
     if ($pagina == 1) {
         echo '<li class="page-item disabled">

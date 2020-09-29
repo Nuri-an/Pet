@@ -5,3 +5,27 @@ body {
 .menuAtivo {
     border-bottom: 2px solid #000;
 }
+
+[aria-label] {
+    position: relative;
+}
+    
+[aria-label]::after {
+    content: attr(aria-label);
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 0px;
+    z-index: 5000;
+    pointer-events: none;
+    padding: 8px 10px;
+    text-decoration: none;
+    font-size: .9em;
+    width: max-content;
+    color: var(--gray);
+    background-color: var(--light);
+}
+    
+[aria-label]:hover::after {
+    display: block;
+}

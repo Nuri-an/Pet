@@ -317,7 +317,6 @@ function verInformacoes(id) {
     var foto = $('#rowEditarInformacoes_' + id).attr("data-foto");
     var acao = "editar";
 
-
     $('#atualizar-form').trigger("reset");
     $('#modalAtualizar').modal('show');
 

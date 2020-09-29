@@ -82,7 +82,7 @@ $totalPg = ceil($rowTotalPublicacoesAno['numResult'] / $quantidadePg);
             <td>' . $rowPublicacoes['descricaoPublicacao'] . '</td>
             <td> <a href="' . $link . '" target = _blank> <i class="fa fa-external-link text-danger" aria-hidden="true">  </i> </a> </td>
             <td>
-                <a  class="editar" style="color: #8FBC8F; cursor: pointer; float: left; margin-bottom: 5px; display: none;" title="Editar" id="rowEditarPublicacao_' . $i . '" data-id="' . $rowPublicacoes['codPublicacao'] . '"  data-data="' . $rowPublicacoes['dataPublicacao'] . '" data-descricao="' . $rowPublicacoes['descricaoPublicacao'] . '" data-link="' . $rowPublicacoes['linkPublicacao'] . '" onclick="editar_modal(' . $i . ')">
+                <a  class="editar" style="color: #8FBC8F; cursor: pointer; float: left; margin-bottom: 5px; display: none;" aria-label="Editar" id="rowEditarPublicacao_' . $i . '" data-id="' . $rowPublicacoes['codPublicacao'] . '"  data-data="' . $rowPublicacoes['dataPublicacao'] . '" data-descricao="' . $rowPublicacoes['descricaoPublicacao'] . '" data-link="' . $rowPublicacoes['linkPublicacao'] . '" onclick="editar_modal(' . $i . ')">
                     <i class="fa fa-pencil"></i>
                 </a>
             </td>
@@ -100,7 +100,7 @@ $totalPg = ceil($rowTotalPublicacoesAno['numResult'] / $quantidadePg);
         <tr>
             <th scope="col" coslpan="4">
                 <div class="editar" style="display: none; margin-top: 20px;">
-                    <button type="button" onclick="adicionar_modal()" class="btn" style="background-color: #8FBC8F; border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="adicionar uma publicação">
+                    <button type="button" onclick="adicionar_modal()" class="btn" style="background-color: #8FBC8F; border-radius: 50px; position: absolute; left:50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" aria-label="adicionar uma publicação">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -109,7 +109,7 @@ $totalPg = ceil($rowTotalPublicacoesAno['numResult'] / $quantidadePg);
 </table>
 
 <?php
-echo '<nav aria-label="Page navigation" class="container" style="margin-bottom: 100px; margin-top:50px;">
+echo '<nav class="container" style="margin-bottom: 100px; margin-top:50px;">
         <ul class="pagination justify-content-center">';
 if ($pagina == 1) {
     echo '<li class="page-item disabled">

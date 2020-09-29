@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header  sm-primary">
                 <h3 class="modal-title"> Altere as configurações do site </h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="openNewModal()">
+                <button type="button" class="close" data-dismiss="modal" title="Close" onclick="openNewModal()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

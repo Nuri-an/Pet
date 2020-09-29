@@ -58,6 +58,12 @@ class DaoIntegrantes
                 VALUES (:id)");
                 $stmt2->bindparam(":id", $ultimoCod);
                 $stmt2->execute();
+            }else if ($tipo == 'colaborador') {
+                $ultimoCod = $this->conn->lastInsertId();
+                $stmt2 = $this->conn->prepare("INSERT INTO colaboradores(codIntegrante)
+                VALUES (:id)");
+                $stmt2->bindparam(":id", $ultimoCod);
+                $stmt2->execute();
             }
 
             if (($stmt->rowCount() > 0) && ($stmt2->rowCount() > 0)) {
@@ -93,10 +99,13 @@ class DaoIntegrantes
 
             } else {
                 $fotoAnte =  $foto;
-                $caminho = "../assets/media/integrantes/" . $rowIntegrante['fotoIntegrante'];
 
-                if (file_exists($caminho)) {
-                    unlink($caminho);
+                if(!empty($rowIntegrante['fotoIntegrante'])){
+                    $caminho = "../assets/media/integrantes/" . $rowIntegrante['fotoIntegrante'];
+
+                    if (file_exists($caminho)) {
+                        unlink($caminho);
+                    }
                 }
             }
 
@@ -135,9 +144,11 @@ class DaoIntegrantes
 
             while ($rowIntegrante = $stmtNome->fetch(PDO::FETCH_ASSOC)) {
 
-                $caminho = "../assets/media/integrantes/" . $rowIntegrante['fotoIntegrante'];
-                if (file_exists($caminho)) {
-                    unlink($caminho);
+                if(!empty($rowIntegrante['fotoIntegrante'])){
+                    $caminho = "../assets/media/integrantes/" . $rowIntegrante['fotoIntegrante'];
+                    if (file_exists($caminho)) {
+                        unlink($caminho);
+                    }
                 }
             }
 
@@ -171,9 +182,11 @@ class DaoIntegrantes
 
             while ($rowIntegrante = $stmtFoto->fetch(PDO::FETCH_ASSOC)) {
 
-                $caminho = "../assets/media/integrantes/" . $rowIntegrante['fotoIntegrante'];
-                if (file_exists($caminho)) {
-                    unlink($caminho);
+                if(!empty($rowIntegrante['fotoIntegrante'])){
+                    $caminho = "../assets/media/integrantes/" . $rowIntegrante['fotoIntegrante'];
+                    if (file_exists($caminho)) {
+                        unlink($caminho);
+                    }
                 }
             }
 
@@ -195,6 +208,16 @@ class DaoIntegrantes
                     $idAux = $rowAuxiliar['codTutor'];
                 }
                 $stmt2 = $this->conn->prepare("DELETE FROM tutores WHERE codTutor = ?");
+                $stmt2->bindparam(1, $idAux);
+                $stmt2->execute();
+            } else if ($tipo == 'colaborador') {
+                $stmtAux = $this->conn->prepare("SELECT codColaborador FROM colaboradores WHERE codIntegrante = ?");
+                $stmtAux->bindparam(1, $id);
+                $stmtAux->execute();
+                while ($rowAuxiliar = $stmtAux->fetch(PDO::FETCH_ASSOC)) {
+                    $idAux = $rowAuxiliar['codColaborador'];
+                }
+                $stmt2 = $this->conn->prepare("DELETE FROM colaboradores WHERE codColaborador = ?");
                 $stmt2->bindparam(1, $idAux);
                 $stmt2->execute();
             }

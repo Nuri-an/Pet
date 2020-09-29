@@ -61,8 +61,8 @@ if ($stmtAdministradores->rowCount() == 0) {
             <td>' . $rowAdministradores['nomeIntegrante'] . ' </td>
             <td>
                 <div style="cursor: pointer;"> 
-                    <i class="text-warning fa fa-check fa-2x" title="Aceitar solicitação" aria-hidden="true" id="rowAceitarAdm_'. $i .'" data-id="'. $rowAdministradores['codIntegrante'] .'" data-nome="'. explode(' ', $rowAdministradores['nomeIntegrante'])[0] .'" onclick="aceitarAdm('. $i .')"></i>
-                    <i class="text-danger fa fa-times fa-2x" title="Cancelar solicitação" aria-hidden="true" id="rowCancelarAdm_'. $i .'" data-id="'. $rowAdministradores['codIntegrante'] .'" data-nome="'. explode(' ', $rowAdministradores['nomeIntegrante'])[0] .'" onclick="cancelarAdm('. $i .')"></i>
+                    <i class="text-warning fa fa-check fa-2x" aria-label="Aceitar solicitação" aria-hidden="true" id="rowAceitarAdm_'. $i .'" data-id="'. $rowAdministradores['codIntegrante'] .'" data-nome="'. explode(' ', $rowAdministradores['nomeIntegrante'])[0] .'" onclick="aceitarAdm('. $i .')"></i>
+                    <i class="text-danger fa fa-times fa-2x" aria-label="Cancelar solicitação" aria-hidden="true" id="rowCancelarAdm_'. $i .'" data-id="'. $rowAdministradores['codIntegrante'] .'" data-nome="'. explode(' ', $rowAdministradores['nomeIntegrante'])[0] .'" onclick="cancelarAdm('. $i .')"></i>
                 </div>    
             </td>
         </tr>';
@@ -77,7 +77,7 @@ if ($stmtAdministradores->rowCount() == 0) {
 ?>
 
 <?php
-echo '<nav aria-label="Page navigation" class="container" style="margin-bottom: 100px; margin-top:50px;">
+echo '<nav class="container" style="margin-bottom: 100px; margin-top:50px;">
         <ul class="pagination justify-content-center">';
 if ($pagina == 1) {
     echo '<li class="page-item disabled">

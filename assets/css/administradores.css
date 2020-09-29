@@ -10,3 +10,27 @@ body {
 	border: 0;
 	box-shadow: 0 5px 5px -5px #8c8b8b inset;
 }
+
+[aria-label] {
+	position: relative;
+}
+	
+[aria-label]::after {
+	content: attr(aria-label);
+	display: none;
+	position: absolute;
+	top: 110%;
+	left: 0px;
+	z-index: 5000;
+	pointer-events: none;
+	padding: 8px 10px;
+	text-decoration: none;
+	font-size: .9em;
+	width: max-content;
+	color: var(--gray);
+	background-color: var(--light);
+}
+	
+[aria-label]:hover::after {
+	display: block;
+}

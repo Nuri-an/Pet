@@ -38,7 +38,7 @@ $stmtGaleriaVE->execute();
         echo '<br>';
         echo '<br>
         <div class="editar"  style="display: inline; display: none; float: right; margin-bottom: 5px;">
-            <button type="button" class="btn btn-success" data-toggle="tooltip" title="Editar" id="rowEditarInfo" data-id="' . $rowInformacoes['codInfo'] . '" data-tituloP="' . $rowInformacoes['tituloInfo'] . '" data-infoP="' . $rowInformacoes['descricaoInfo'] . '" data-tituloS="' . $rowInformacoes['subTituloInfo'] . '" data-infoS="' . $rowInformacoes['subDescricaoInfo'] . '"  data-extra ="' . $rowInformacoes['extrasInfo'] . '" onclick="editarInfo()" >
+            <button type="button" class="btn btn-success" data-toggle="tooltip" aria-label="Editar" id="rowEditarInfo" data-id="' . $rowInformacoes['codInfo'] . '" data-tituloP="' . $rowInformacoes['tituloInfo'] . '" data-infoP="' . $rowInformacoes['descricaoInfo'] . '" data-tituloS="' . $rowInformacoes['subTituloInfo'] . '" data-infoS="' . $rowInformacoes['subDescricaoInfo'] . '"  data-extra ="' . $rowInformacoes['extrasInfo'] . '" onclick="editarInfo()" >
                 <i class="fa fa-pencil"></i>
             </button>
         </div>';
@@ -49,7 +49,7 @@ $stmtGaleriaVE->execute();
 <hr class="line">
 </hr>
 
-<div class=" text-center" style="margin-top:30px; margin-bottom:30px;" role="group" aria-label="Exemplo básico">
+<div class=" text-center" style="margin-top:30px; margin-bottom:30px;" role="group">
     <button type="button" class="btn btn-outline-success h5" onclick="escolheGaleria('f')">Galeria de Fotos</button>
     <button type="button" class="btn btn-outline-success h5" onclick="escolheGaleria('v')">Galeria de Vídeos</button>
 </div>
@@ -70,14 +70,14 @@ $stmtGaleriaVE->execute();
                 if ($i == 1) {
                     echo '<div class="carousel-item active">
                             <img src="' . $arquivo . '"  style="cursor:pointer;" class="editar rounded mx-auto img-fluid d-block carouselItemFoto" data-toggle="tooltip" alt="' . $titulo . '" title="' . $titulo . '"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" data-titulo="' . $rowGaleria['tituloGaleria'] . '" data-foto="' . $rowGaleria['midiaGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
-                            <button type="button" class="btn btn-danger editar" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir imagem" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
+                            <button type="button" class="btn btn-danger editar" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" aria-label="Excluir imagem" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
                                 <i class="fa fa-trash "></i> 
                             </button>
                         </div> ';
                 } else {
                     echo '<div class="carousel-item">
                             <img src="' . $arquivo . '"  style="cursor:pointer;"  class="editar rounded mx-auto img-fluid d-block carouselItemFoto" data-toggle="tooltip" alt="' . $titulo . '" title="' . $titulo . '"  id="rowEditarFoto_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" data-titulo="' . $rowGaleria['tituloGaleria'] . '" data-foto="' . $rowGaleria['midiaGaleria'] . '" onclick="editarFoto_modal(' . $i . ')">
-                            <button type="button" class="btn btn-danger editar" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" title="Excluir imagem" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
+                            <button type="button" class="btn btn-danger editar" data-toggle="tooltip" style="position:absolute; left:50%; bottom: 0%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);" aria-label="Excluir imagem" id="rowExcluirMidia_' . $i . '" data-id="' . $rowGaleria['codGaleria'] . '" onclick="excluirMidia(' . $i . ')" >
                                 <i class="fa fa-trash "></i> 
                             </button>
                         </div>';
@@ -99,7 +99,7 @@ $stmtGaleriaVE->execute();
 </div>
 
 <div class="editar text-center slidesFotos" style="display: none; margin-top: 50px;">
-    <button type="button" class="btn btn-success" data-toggle="tooltip" alt="Adicione uma foto" title="Adicione uma foto" onclick="adicionarFoto_modal()" style="border-radius: 50px;">
+    <button type="button" class="btn btn-success" data-toggle="tooltip" alt="Adicione uma foto" aria-label="Adicione uma foto" onclick="adicionarFoto_modal()" style="border-radius: 50px;">
         <i class="fa fa-plus "></i>
     </button>
 </div>
@@ -122,14 +122,14 @@ $stmtGaleriaVE->execute();
                                 id="videoG_' . $j . '" align="middle" data-toggle="tooltip" alt="' . $titulo . '" >
                             </video>
                             <div  id="playV_' . $j . '">
-                                <img class="rounded mx-auto img-fluid d-block " src="../assets/media/galeria/player.png" title="Play" onclick=controles("' . $j . '","play") style="cursor: pointer; height: 100px; position:absolute; left:50%; top: 50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
+                                <img class="rounded mx-auto img-fluid d-block " src="../assets/media/galeria/player.png" aria-label="Play" onclick=controles("' . $j . '","play") style="cursor: pointer; height: 100px; position:absolute; left:50%; top: 50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
                             </div>
                             <div style=" text-align:center; padding-bottom: 36px;" class="editar">
                                 <div id="buttons" style="bottom: 0%;">
-                                    <button type="button" class="btn btn-danger" data-toggle="tooltip"  title="Excluir vídeo" id="rowExcluirMidia_' . $j . '" data-id="' . $rowGaleriaV['codGaleria'] . '" onclick="excluirMidia(' . $j . ')" >
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip"  aria-label="Excluir vídeo" id="rowExcluirMidia_' . $j . '" data-id="' . $rowGaleriaV['codGaleria'] . '" onclick="excluirMidia(' . $j . ')" >
                                         <i class="fa fa-trash "></i> 
                                     </button>
-                                    <button type="button" class="btn btn-success" data-toggle="tooltip"  title="Clique para substituir vídeo"  id="rowEditarVideo_' . $j . '" data-id="' . $rowGaleriaV['codGaleria'] . '" data-titulo="' . $rowGaleriaV['tituloGaleria'] . '" data-video="' . $rowGaleriaV['midiaGaleria'] . '" data-link="' . $rowGaleriaV['urlGaleria'] . '" onclick="editarVideo_modal(' . $j . ')" >
+                                    <button type="button" class="btn btn-success" data-toggle="tooltip"  aria-label="Clique para substituir vídeo"  id="rowEditarVideo_' . $j . '" data-id="' . $rowGaleriaV['codGaleria'] . '" data-titulo="' . $rowGaleriaV['tituloGaleria'] . '" data-video="' . $rowGaleriaV['midiaGaleria'] . '" data-link="' . $rowGaleriaV['urlGaleria'] . '" onclick="editarVideo_modal(' . $j . ')" >
                                         <i class="fa fa-pencil "></i> 
                                     </button>
                                 </div>
@@ -141,14 +141,14 @@ $stmtGaleriaVE->execute();
                             id="videoG_' . $j . '" align="middle" data-toggle="tooltip" alt="' . $titulo . '" >
                         </video>
                         <div  id="playV_' . $j . '">
-                            <img class="rounded mx-auto img-fluid d-block " src="../assets/media/galeria/player.png" title="Play" onclick=controles("' . $j . '","play") style="cursor: pointer; height: 100px; position:absolute; left:50%; top: 50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
+                            <img class="rounded mx-auto img-fluid d-block " src="../assets/media/galeria/player.png" aria-label="Play" onclick=controles("' . $j . '","play") style="cursor: pointer; height: 100px; position:absolute; left:50%; top: 50%; -webkit-transform: translate3d(-50%, -50%, 0); -moz-transform:translate3d(-50%, -50%, 0); transform: translate3d(-50%, -50%, 0);">
                         </div>
                         <div style=" text-align:center; padding-bottom: 36px;" class="editar">
                             <div id="buttons">
-                                <button type="button" class="btn btn-danger" data-toggle="tooltip"  title="Excluir vídeo" id="rowExcluirMidia_' . $j . '" data-id="' . $rowGaleriaV['codGaleria'] . '" onclick="excluirMidia(' . $j . ')" >
+                                <button type="button" class="btn btn-danger" data-toggle="tooltip"  aria-label="Excluir vídeo" id="rowExcluirMidia_' . $j . '" data-id="' . $rowGaleriaV['codGaleria'] . '" onclick="excluirMidia(' . $j . ')" >
                                     <i class="fa fa-trash "></i> 
                                 </button>
-                                <button type="button" class="btn btn-success" data-toggle="tooltip"  title="Clique para substituir vídeo"  id="rowEditarVideo_' . $j . '" data-id="' . $rowGaleriaV['codGaleria'] . '" data-titulo="' . $rowGaleriaV['tituloGaleria'] . '" data-video="' . $rowGaleriaV['midiaGaleria'] . '" data-link="' . $rowGaleriaV['urlGaleria'] . '" onclick="editarVideo_modal(' . $j . ')" >
+                                <button type="button" class="btn btn-success" data-toggle="tooltip"  aria-label="Clique para substituir vídeo"  id="rowEditarVideo_' . $j . '" data-id="' . $rowGaleriaV['codGaleria'] . '" data-titulo="' . $rowGaleriaV['tituloGaleria'] . '" data-video="' . $rowGaleriaV['midiaGaleria'] . '" data-link="' . $rowGaleriaV['urlGaleria'] . '" onclick="editarVideo_modal(' . $j . ')" >
                                     <i class="fa fa-pencil "></i> 
                                 </button>
                             </div>
@@ -170,10 +170,10 @@ $stmtGaleriaVE->execute();
                         <div style=" text-align:center;">
                             <h5> Conheça nosso canal no Youtube! </h5>
                             <div id="buttons" class="editar" style="padding-bottom: 50px;">
-                                <button type="button" class="btn btn-danger" data-toggle="tooltip"  title="Excluir vídeo" id="rowExcluirMidia_' . $j . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" onclick="excluirMidia(' . $j . ')" > 
+                                <button type="button" class="btn btn-danger" data-toggle="tooltip"  aria-label="Excluir vídeo" id="rowExcluirMidia_' . $j . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" onclick="excluirMidia(' . $j . ')" > 
                                     <i class="fa fa-trash "></i> 
                                 </button>
-                                <button type="button" class="btn btn-success" data-toggle="tooltip"  title="Clique para substituir vídeo"  id="rowEditarVideo_' . $j . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" data-titulo="' . $rowGaleriaVE['tituloGaleria'] . '" data-link="' . $rowGaleriaVE['urlGaleria'] . '" data-video="' . $rowGaleriaVE['midiaGaleria'] . '" onclick="editarVideo_modal(' . $j . ')" >
+                                <button type="button" class="btn btn-success" data-toggle="tooltip"  aria-label="Clique para substituir vídeo"  id="rowEditarVideo_' . $j . '" data-id="' . $rowGaleriaVE['codGaleria'] . '" data-titulo="' . $rowGaleriaVE['tituloGaleria'] . '" data-link="' . $rowGaleriaVE['urlGaleria'] . '" data-video="' . $rowGaleriaVE['midiaGaleria'] . '" onclick="editarVideo_modal(' . $j . ')" >
                                     <i class="fa fa-pencil "></i> 
                                 </button>
                             </div>
@@ -195,7 +195,7 @@ $stmtGaleriaVE->execute();
 </div>
 
 <div class="text-center slidesVideos" style="margin-top: 0px;">
-    <button type="button" class="editar btn btn-success" data-toggle="tooltip" alt="Adicione um video" title="Adicione um video" onclick="adicionarVideo_modal()" style="border-radius: 50px;">
+    <button type="button" class="editar btn btn-success" data-toggle="tooltip" alt="Adicione um video" aria-label="Adicione um video" onclick="adicionarVideo_modal()" style="border-radius: 50px;">
         <i class="fa fa-plus "></i>
     </button>
 </div>
