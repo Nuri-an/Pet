@@ -1,20 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.4
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 18-Ago-2020 às 21:39
--- Versão do servidor: 5.6.15-log
--- PHP Version: 5.5.8
+-- Generation Time: 06-Out-2020 às 18:59
+-- Versão do servidor: 5.7.17
+-- PHP Version: 7.1.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `bd_pet`
@@ -26,12 +28,10 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `administradores`
 --
 
-CREATE TABLE IF NOT EXISTS `administradores` (
-  `codAdministrador` int(40) NOT NULL AUTO_INCREMENT,
-  `codIntegrante` int(40) NOT NULL,
-  PRIMARY KEY (`codAdministrador`),
-  KEY `codIntegrante` (`codIntegrante`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+CREATE TABLE `administradores` (
+  `codAdministrador` int(40) NOT NULL,
+  `codIntegrante` int(40) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `administradores`
@@ -43,15 +43,45 @@ INSERT INTO `administradores` (`codAdministrador`, `codIntegrante`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `colaboradores`
+--
+
+CREATE TABLE `colaboradores` (
+  `codColaborador` int(11) NOT NULL,
+  `codIntegrante` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `configuracoes`
+--
+
+CREATE TABLE `configuracoes` (
+  `id` int(11) NOT NULL,
+  `capa` varchar(10) NOT NULL,
+  `instagram` varchar(100) DEFAULT NULL,
+  `facebook` varchar(100) DEFAULT NULL,
+  `rodape` longtext NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `configuracoes`
+--
+
+INSERT INTO `configuracoes` (`id`, `capa`, `instagram`, `facebook`, `rodape`) VALUES
+(1, 'capa.png', 'https://www.instagram.com/pet_computacao/?hl=pt-br', 'https://www.facebook.com/gpca.if', '<p> INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DO SUDESTE DE MINAS GERAIS - CAMPUS RIO POMBA </p> <p> Endereço: Av. Dr. José Sebastião da Paixão s/nº - Bairro Lindo Vale - Rio Pomba / MG - CEP: 36180-000 </p>');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `discentes`
 --
 
-CREATE TABLE IF NOT EXISTS `discentes` (
-  `codDiscente` int(11) NOT NULL AUTO_INCREMENT,
-  `codIntegrante` int(11) NOT NULL,
-  PRIMARY KEY (`codDiscente`),
-  KEY `codIntegrante` (`codIntegrante`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+CREATE TABLE `discentes` (
+  `codDiscente` int(11) NOT NULL,
+  `codIntegrante` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `discentes`
@@ -79,15 +109,14 @@ INSERT INTO `discentes` (`codDiscente`, `codIntegrante`) VALUES
 -- Estrutura da tabela `downloads`
 --
 
-CREATE TABLE IF NOT EXISTS `downloads` (
-  `codDownload` int(40) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `downloads` (
+  `codDownload` int(40) NOT NULL,
   `tituloDownload` varchar(100) NOT NULL,
   `referenciaDownload` varchar(100) NOT NULL,
   `slidesDownload` varchar(100) DEFAULT NULL,
   `algoritmoDownload` varchar(100) DEFAULT NULL,
-  `linkDownload` longtext,
-  PRIMARY KEY (`codDownload`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+  `linkDownload` longtext
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `downloads`
@@ -103,13 +132,12 @@ INSERT INTO `downloads` (`codDownload`, `tituloDownload`, `referenciaDownload`, 
 -- Estrutura da tabela `galeria`
 --
 
-CREATE TABLE IF NOT EXISTS `galeria` (
-  `codGaleria` int(40) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `galeria` (
+  `codGaleria` int(40) NOT NULL,
   `tituloGaleria` varchar(100) DEFAULT NULL,
   `midiaGaleria` varchar(40) NOT NULL,
-  `urlGaleria` varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (`codGaleria`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=122 ;
+  `urlGaleria` varchar(1000) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `galeria`
@@ -130,15 +158,14 @@ INSERT INTO `galeria` (`codGaleria`, `tituloGaleria`, `midiaGaleria`, `urlGaleri
 -- Estrutura da tabela `informacoes`
 --
 
-CREATE TABLE IF NOT EXISTS `informacoes` (
+CREATE TABLE `informacoes` (
   `tituloInfo` varchar(1000) NOT NULL,
   `descricaoInfo` longtext NOT NULL,
   `subTituloInfo` varchar(1000) DEFAULT NULL,
   `subDescricaoInfo` longtext,
-  `codInfo` int(10) NOT NULL AUTO_INCREMENT,
-  `extrasInfo` longtext NOT NULL,
-  PRIMARY KEY (`codInfo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `codInfo` int(10) NOT NULL,
+  `extrasInfo` longtext NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `informacoes`
@@ -153,19 +180,18 @@ INSERT INTO `informacoes` (`tituloInfo`, `descricaoInfo`, `subTituloInfo`, `subD
 -- Estrutura da tabela `integrantes`
 --
 
-CREATE TABLE IF NOT EXISTS `integrantes` (
-  `codIntegrante` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `integrantes` (
+  `codIntegrante` int(100) NOT NULL,
   `nomeIntegrante` varchar(100) NOT NULL,
   `emailIntegrante` varchar(100) DEFAULT NULL,
-  `cpfIntegrante` varchar(20) NOT NULL,
-  `dataInicioIntegrante` date NOT NULL,
+  `cpfIntegrante` varchar(20) DEFAULT NULL,
+  `dataInicioIntegrante` date DEFAULT '0000-00-00',
   `dataFimIntegrante` date DEFAULT NULL,
   `situacaoIntegrante` varchar(20) NOT NULL,
   `fotoIntegrante` varchar(100) DEFAULT NULL,
   `socialIntegrante` varchar(100) DEFAULT NULL,
-  `senhaIntegrante` varchar(40) NOT NULL,
-  PRIMARY KEY (`codIntegrante`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+  `senhaIntegrante` varchar(40) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `integrantes`
@@ -185,7 +211,8 @@ INSERT INTO `integrantes` (`codIntegrante`, `nomeIntegrante`, `emailIntegrante`,
 (41, 'Raian Campos Malta', '', '', '2019-07-13', NULL, 'Bolsista', 'foto_1597603772.jpg', '', ''),
 (35, 'Nurian Maria Amâncio Coelho', 'nuriancoelho@hotmail.com', '151.712.956-70', '2020-08-15', NULL, 'Administrador', NULL, NULL, '04a2db8af1724c5f9e669f06572872e2'),
 (42, 'Marcella Linhares Menezes', '', '', '2018-02-21', NULL, 'Bolsista', 'foto_1597603900.jpg', 'https://www.facebook.com/marcella.menezes.3', ''),
-(38, 'Marcus Daniel de Almeida', '', '', '2020-08-11', NULL, 'Bolsista', 'foto_1597602017.jpg', '', '');
+(38, 'Marcus Daniel de Almeida', '', '', '2020-08-11', NULL, 'Bolsista', 'foto_1597602017.jpg', '', ''),
+(55, 'Teste Testando', '', NULL, '2020-09-23', NULL, 'Colaborador(a)', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -193,15 +220,14 @@ INSERT INTO `integrantes` (`codIntegrante`, `nomeIntegrante`, `emailIntegrante`,
 -- Estrutura da tabela `noticias`
 --
 
-CREATE TABLE IF NOT EXISTS `noticias` (
+CREATE TABLE `noticias` (
   `tituloNoticia` varchar(400) NOT NULL,
   `descricaoNoticia` longtext NOT NULL,
   `midiaNoticia` varchar(40) DEFAULT NULL,
-  `codNoticia` int(11) NOT NULL AUTO_INCREMENT,
+  `codNoticia` int(11) NOT NULL,
   `dataNoticia` date NOT NULL,
-  `resumoNoticia` varchar(500) NOT NULL,
-  PRIMARY KEY (`codNoticia`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+  `resumoNoticia` varchar(500) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `noticias`
@@ -225,34 +251,15 @@ INSERT INTO `noticias` (`tituloNoticia`, `descricaoNoticia`, `midiaNoticia`, `co
 -- Estrutura da tabela `projetos`
 --
 
-CREATE TABLE IF NOT EXISTS `projetos` (
-  `codProjeto` int(40) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `projetos` (
+  `codProjeto` int(40) NOT NULL,
   `tituloProjeto` text NOT NULL,
   `descricaoProjeto` longtext,
   `anoProjeto` varchar(4) NOT NULL,
   `midiaProjeto` varchar(100) DEFAULT NULL,
   `publicacaoProjeto` mediumtext,
-  `parceriaProjeto` mediumtext,
-  PRIMARY KEY (`codProjeto`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
-
---
--- Extraindo dados da tabela `projetos`
---
-
-INSERT INTO `projetos` (`codProjeto`, `tituloProjeto`, `descricaoProjeto`, `anoProjeto`, `midiaProjeto`, `publicacaoProjeto`, `parceriaProjeto`) VALUES
-(1, 'Simulador de Natação ', 'Entendendo e preparando atletas de forma divertida: Desenvolvimento de um jogo com a utilização da plataforma Unity para auxiliar estudantes e profissionais a elaborar estratégias de treino e técnicas para desenvolver as habilidades de seus atletas.', '2017', 'midia_1.jpg', '', 'curso de Educação Física'),
-(5, 'Singularidade Tecnológica', '  Os seres humanos serão dominados pelas máquinas? Qual futuro da inteligência artificial? O projeto de singularidade tecnológica do grupo PET-Computação tem como objetivo estudar e desenvolver ferramentas que utilizam conceitos de singularidade tecnológica, como multi-task learning e transductive learning, a fim de desenvolver a área de estudos proposta.', '2016', 'midia_1586641645.jpg', '', ''),
-(34, 'Set Goals', 'desenvolvimento de duas aplicações, uma na plataforma mobile e outra na plataforma Web. A aplicação mobile tem como objetivo mostrar aos alunos as aulas e horários disponíveis para a prática na academia, enquanto a aplicação Web é responsável pela gerência e controle dos clientes e funcionamento da academia, como cadastro de atividades, relatórios de utilização, dentre outros.', '2016', 'midia_1597686949.jpeg', '', 'curso de Educação Física'),
-(32, 'VaiPlaneta', 'desenvolvimento de uma aplicação Web a partir da pesquisa de dissertação desenvolvida durante o Mestrado em Educação Profissional e Tecnológica para auxílio de professores com conteúdo em sala de aula.', '2017', 'midia_1597686375.jpeg', '', 'Mestrado Profissional em Educação Profissional e Tecnológica'),
-(6, 'Interação Real em Mundo Digital: Realidade Virtual + Kinect', '  Este projeto, desenvolvido na plataforma Unity, permite que qualquer pessoa com um dispositivo móvel que possua suporte para Realidade Virtual, Microsoft Kinect e criatividade possa desenvolver suas próprias experiências em Realidade Virtual. Os dados de rastreamento de posição do corpo capitados pelo Kinect são enviados para o jogador, e através do WiFi utilizando um servidor Unet(servidor Multiplayer da Unity Engine), todos os dados são recebidos no dispositivo móvel obtendo, assim, uma maior imersão no mundo virtual.', '2016', 'midia_1597686528.png', '', ''),
-(13, 'Interação Real em Mundo Digital: Realidade Virtual + GPS', '  Algo que não é explorado atualmente é a interação de Realidade Virtual com GPS, ou seja, é a capacidade de você poder andar em um ambiente virtual a medida em que se desloca em um ambiente real. Há inúmeras aplicações que encaixam com esse tema, as opções de desenvolvimento são vastas e ainda não são exploradas , o que faz com que cada pesquisa sobre ele seja de grande importância. Com base nisso, este projeto entra para desenvolver as ferramentas necessárias para a exploração desse tema.', '2016', 'midia_1597686560.png', '', ''),
-(33, 'Atletismo', 'simulação de uma corrida de atletismo baseado na plataforma Unity com o objetivo de verificação do comportamento do jogo para aplicações técnicas na área de atletismo.', '2016', 'midia_1597686881.jpg', '', 'curso de Educação Física'),
-(31, 'PapoJovem!', 'aplicação Web desenvolvida com o intuito de ser um “blog” informativo para os alunos, com notícias, vídeos e artigos selecionados sobre Educação Sexual. Também possui áreas de interação onde os estudantes podem mandar perguntas anônimas e responder questionários afim de conscientizá-los a respeito do assunto.', '2017', 'midia_1597686701.png', '', 'Mestrado Profissional em Educação Profissional e Tecnológica'),
-(27, ' IF 3D', 'desenvolvimento de um ambiente 3D com a plataforma Unity[1] que reflita todo Campus Rio Pomba, incluindo salas de aula, laboratórios, áreas de plantio e criação de animais. O desenvolvimento deste ambiente está dividido em duas partes, a primeira modela o ambiente externo (áreas abertas, prédios, quadras) e a segunda modela a parte interna dos prédios, quadras, laboratórios, dentre outros ambientes.', '2018', '', '', ''),
-(28, 'Frigote', 'Frigote é um jogo desenvolvido na Unity que têm como objetivo simular uma fazenda e suas funções, de modo que alunos da Zootecnia possam aprender sobre sua área de forma divertida. Em primeiro momento, desenvolvemos um cenário para o frango de corte, onde é possível frangos desde a fase inicial como pintinho até a fase adulta, na qual ele já pode ser vendido. O jogo também é composto de um quiz relacionado a criação do frango, para que o jogador possa fixar esses conteúdos.', '2018', 'midia_1597685788.jpeg', '', ''),
-(29, 'Our Time', 'desenvolvimento de uma aplicação Web para o agendamento de eventos semanais dentro de um calendário.', '2018', '', '', ''),
-(30, 'Rolê no IF', 'desenvolvimento de uma aplicação mobile na plataforma Android[2] para apresentação do curso Técnico Integrado de Agropecuária, além de possuir um “quiz” interativo que realiza um ranqueamento e sugere o curso técnico em que o usuário tem maior afinidade. Mostra também todas as matérias presentes nos cursos técnicos, além das salas de aula, depoimentos de alunos e agendamento de visitas;', '2018', 'midia_1597685879.jpeg', '', 'Mestrado Profissional em Educação Profissional e Tecnológica');
+  `parceriaProjeto` mediumtext
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -260,13 +267,12 @@ INSERT INTO `projetos` (`codProjeto`, `tituloProjeto`, `descricaoProjeto`, `anoP
 -- Estrutura da tabela `publicacoes`
 --
 
-CREATE TABLE IF NOT EXISTS `publicacoes` (
-  `codPublicacao` int(40) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `publicacoes` (
+  `codPublicacao` int(40) NOT NULL,
   `descricaoPublicacao` varchar(10000) NOT NULL,
   `dataPublicacao` varchar(4) NOT NULL,
-  `linkPublicacao` varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (`codPublicacao`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+  `linkPublicacao` varchar(1000) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `publicacoes`
@@ -323,12 +329,10 @@ INSERT INTO `publicacoes` (`codPublicacao`, `descricaoPublicacao`, `dataPublicac
 -- Estrutura da tabela `tutores`
 --
 
-CREATE TABLE IF NOT EXISTS `tutores` (
-  `codTutor` int(40) NOT NULL AUTO_INCREMENT,
-  `codIntegrante` int(40) NOT NULL,
-  PRIMARY KEY (`codTutor`),
-  KEY `codIntegrante` (`codIntegrante`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+CREATE TABLE `tutores` (
+  `codTutor` int(40) NOT NULL,
+  `codIntegrante` int(40) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `tutores`
@@ -337,6 +341,151 @@ CREATE TABLE IF NOT EXISTS `tutores` (
 INSERT INTO `tutores` (`codTutor`, `codIntegrante`) VALUES
 (4, 1),
 (5, 15);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `administradores`
+--
+ALTER TABLE `administradores`
+  ADD PRIMARY KEY (`codAdministrador`),
+  ADD KEY `codIntegrante` (`codIntegrante`);
+
+--
+-- Indexes for table `colaboradores`
+--
+ALTER TABLE `colaboradores`
+  ADD PRIMARY KEY (`codColaborador`),
+  ADD KEY `codIntegrante` (`codIntegrante`);
+
+--
+-- Indexes for table `configuracoes`
+--
+ALTER TABLE `configuracoes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `discentes`
+--
+ALTER TABLE `discentes`
+  ADD PRIMARY KEY (`codDiscente`),
+  ADD KEY `codIntegrante` (`codIntegrante`);
+
+--
+-- Indexes for table `downloads`
+--
+ALTER TABLE `downloads`
+  ADD PRIMARY KEY (`codDownload`);
+
+--
+-- Indexes for table `galeria`
+--
+ALTER TABLE `galeria`
+  ADD PRIMARY KEY (`codGaleria`);
+
+--
+-- Indexes for table `informacoes`
+--
+ALTER TABLE `informacoes`
+  ADD PRIMARY KEY (`codInfo`);
+
+--
+-- Indexes for table `integrantes`
+--
+ALTER TABLE `integrantes`
+  ADD PRIMARY KEY (`codIntegrante`);
+
+--
+-- Indexes for table `noticias`
+--
+ALTER TABLE `noticias`
+  ADD PRIMARY KEY (`codNoticia`);
+
+--
+-- Indexes for table `projetos`
+--
+ALTER TABLE `projetos`
+  ADD PRIMARY KEY (`codProjeto`);
+
+--
+-- Indexes for table `publicacoes`
+--
+ALTER TABLE `publicacoes`
+  ADD PRIMARY KEY (`codPublicacao`);
+
+--
+-- Indexes for table `tutores`
+--
+ALTER TABLE `tutores`
+  ADD PRIMARY KEY (`codTutor`),
+  ADD KEY `codIntegrante` (`codIntegrante`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `administradores`
+--
+ALTER TABLE `administradores`
+  MODIFY `codAdministrador` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `colaboradores`
+--
+ALTER TABLE `colaboradores`
+  MODIFY `codColaborador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `configuracoes`
+--
+ALTER TABLE `configuracoes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `discentes`
+--
+ALTER TABLE `discentes`
+  MODIFY `codDiscente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT for table `downloads`
+--
+ALTER TABLE `downloads`
+  MODIFY `codDownload` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `galeria`
+--
+ALTER TABLE `galeria`
+  MODIFY `codGaleria` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+--
+-- AUTO_INCREMENT for table `informacoes`
+--
+ALTER TABLE `informacoes`
+  MODIFY `codInfo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `integrantes`
+--
+ALTER TABLE `integrantes`
+  MODIFY `codIntegrante` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+--
+-- AUTO_INCREMENT for table `noticias`
+--
+ALTER TABLE `noticias`
+  MODIFY `codNoticia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `projetos`
+--
+ALTER TABLE `projetos`
+  MODIFY `codProjeto` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+--
+-- AUTO_INCREMENT for table `publicacoes`
+--
+ALTER TABLE `publicacoes`
+  MODIFY `codPublicacao` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+--
+-- AUTO_INCREMENT for table `tutores`
+--
+ALTER TABLE `tutores`
+  MODIFY `codTutor` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
